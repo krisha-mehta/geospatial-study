@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VSUP Maps</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../../revisitUtilities/revisit-communicate.js"></script>
+    <style>
+      svg {
+        width: 100%;
+        height: auto;
+      }
+      path {
+        cursor: pointer;
+        transition: fill 0.2s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <script>
+      // Receive data from reVISit
+      Revisit.onDataReceive((data) => {
+        const svgFile = data['svgFile']; // Get the SVG filename from config.json
+        const taskID = 'selectedCounty'; // Response ID defined in config
+
+        d3.xml(svgFile).then(svgData => {
+          const svgNode = document.importNode(svgData.documentElement, true);
+          document.getElementById("container").appendChild(svgNode);
+
+          d3.selectAll("#container path")
+            .on("mouseover", function () {
+              d3.select(this).attr("fill", "orange");
+            })
+            .on("mouseout", function () {
+              d3.select(this).attr("fill", null); 
+            })
+            .on("click", function () {
+              const countyId = d3.select(this).attr("id");
+              d3.select(this).attr("fill", "red");
+
+              // Post selected county back to reVISit
+              Revisit.postAnswers({
+                [taskID]: countyId,
+              });
+
+              console.log("Selected County:", countyId);
+            });
+
+        }).catch(err => {
+          console.error("Error loading SVG:", err);
+        });
+      });
+    </script>
+  </body>
+</html>

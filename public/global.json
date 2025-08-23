@@ -1,6 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.1.1/src/parser/GlobalConfigSchema.json",
   "configsList": [
+    "geospatial-dm",
+    "basic-questionnaire-study",
     "tutorial",
     "example-brush-interactions",
     "example-cleveland",
@@ -41,6 +43,12 @@
     },
     "example-brush-interactions": {
       "path": "example-brush-interactions/config.json"
+    },
+    "basic-questionnaire-study": {
+      "path": "basic-questionnaire-study/config.json"
+    },
+    "geospatial-dm":{
+      "path": "geospatial-dm/config.json"
     },
     "example-cleveland": {
       "path": "example-cleveland/config.json"

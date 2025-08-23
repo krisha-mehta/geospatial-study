@@ -1,0 +1,248 @@
+{
+    "$schema": "https://raw.githubusercontent.com/revisit-studies/study/main/src/parser/StudyConfigSchema.json",
+    "studyMetadata": {
+        "title": "Uncertainty Visualizations for Geospatial Decision-Making Study",
+        "version": "pilot",
+        "authors": [
+            "Krisha Mehta",
+            "Julia Koschinsky",
+            "Alex Kale"
+        ],
+        "date": "2025-08-29",
+        "description": "This study investigates how different uncertainty representations influence decision-making",
+        "organizations": [
+            "University of Chicago"
+        ]
+    },
+    "uiConfig": {
+        "contactEmail": "krisha@uchicago.edu",
+        "helpTextPath": "geospatial-dm/assets/help.md",
+        "logoPath": "revisitAssets/dcl_logo.png",
+        "withProgressBar": true,
+        "autoDownloadStudy": false,
+        "sidebar": false,
+        "urlParticipantIdParam": "PROLIFIC_PID",
+        "studyEndMsg": "**Thank you for completing the study. You may click this link and return to Prolific**"
+    },
+    "baseComponents": {
+        "bar-chart": {
+            "type": "website",
+            "response": [
+                {
+                    "id": "barChart",
+                    "prompt": "Your selected answer:",
+                    "required": true,
+                    "location": "belowStimulus",
+                    "type": "reactive"
+                }
+            ],
+            "path": "geospatial-dm/assets/bar-chart.html",
+            "instructionLocation": "aboveStimulus"
+        
+        },
+        "pixel-map": {
+            "type": "website",
+            "response": [
+              {
+                "id": "selectedCounty",
+                "prompt": "Selected County:",
+                "required": true,
+                "location": "belowStimulus",
+                "type": "reactive"
+              }
+            ],
+            "path": "geospatial-dm/assets/pixel.html",
+            "instructionLocation": "aboveStimulus"
+          },
+          "hop-map": {
+            "type": "website",
+            "response": [
+              {
+                "id": "selectedCounty",
+                "prompt": "Selected County:",
+                "required": true,
+                "location": "belowStimulus",
+                "type": "reactive"
+              }
+            ],
+            "path": "geospatial-dm/assets/hop.html",
+            "instructionLocation": "aboveStimulus"
+          }
+    },
+    "components": {
+        "hop-map-1": {
+            "baseComponent": "hop-map",
+            "description": "HOP map showing uncertainty visualization 1",
+            "instruction": "Click a county to select it.",
+            "parameters": {
+              "svgFile": "HOPStimuli/decision_draw_1_with_ids.svg"
+            }
+          },
+          "hop-map-2": {
+            "baseComponent": "hop-map",
+            "description": "HOP map showing uncertainty visualization 1",
+            "instruction": "Click a county to select it.",
+            "parameters": {
+              "svgFile": "HOPStimuli/decision_draw_2_with_ids.svg"
+            }
+          },
+          "hop-map-3": {
+            "baseComponent": "hop-map",
+            "description": "HOP map showing uncertainty visualization 1",
+            "instruction": "Click a county to select it.",
+            "parameters": {
+              "svgFile": "HOPStimuli/decision_draw_3_with_ids.svg"
+            }
+          },
+        "pixel-map-1": {
+            "baseComponent": "pixel-map",
+            "description": "Pixel map showing uncertainty visualization 1",
+            "instruction": "Click a county to select it.",
+            "parameters": {
+              "svgFile": "pixelStimuli/pixel1_with_ids.svg"
+            }
+          },
+          "pixel-map-2": {
+            "baseComponent": "pixel-map",
+            "description": "Pixel map showing uncertainty visualization 2",
+            "instruction": "Click a county to select it.",
+            "parameters": {
+              "svgFile": "pixelStimuli/pixel2_with_ids.svg"
+            }
+          },
+          "pixel-map-3": {
+            "baseComponent": "pixel-map",
+            "description": "Pixel map showing uncertainty visualization 3",
+            "instruction": "Click a county to select it.",
+            "parameters": {
+              "svgFile": "pixelStimuli/pixel3_with_ids.svg"
+            }
+          },
+        "bar-chart-1":{
+            "baseComponent": "bar-chart",
+            "description": "A trial for the user to click the largest bar",
+            "instruction": "Click on the largest bar",
+            "parameters": {
+                "barData": [0.32, 0.01, 1.2, 1.3, 0.82, 0.4, 0.3]
+            }
+        },
+        "bar-chart-2":{
+            "baseComponent": "bar-chart",
+            "description": "A trial for the user to click the smallest bar",
+            "instruction": "Click on the smallest bar",
+            "parameters": {
+                "barData": [1.2, 1.2, 1.2, 1.3, 0.82, 0.4, 0.3]
+            }
+        },
+        "survey": {
+            "type": "questionnaire",
+            "response": [
+            {
+                "id": "q-dropdown",
+                "prompt": "Dropdown example – which chart do you like best?",
+                "secondaryText": "You can specify secondary text to clarify your question.",
+                "location": "aboveStimulus",
+                "type": "dropdown",
+                "required": false,
+                "placeholder": "Enter your preference",
+                "options": [
+                    "Bar",
+                    "Bubble",
+                    "Pie",
+                    "Stacked Bar"
+                ]
+            }
+            ]
+        },
+        "introduction": {
+            "type": "markdown",
+            "path": "geospatial-dm/assets/introduction.md",
+            "response": [
+                {
+                    "id": "prolificId",
+                    "prompt": "Please enter your Prolific ID",
+                    "required": true,
+                    "location": "belowStimulus",
+                    "type": "shortText",
+                    "placeholder": "Prolific ID",
+                    "paramCapture": "PROLIFIC_PID"
+                }
+            ]
+        },
+        "d3-pixel":{
+            "type":"website",
+            "path": "geospatial-dm/assets/d3-pixel.html",
+            "response": []
+        },
+        "pixel":{
+            "type":"markdown",
+            "path": "geospatial-dm/assets/pixel.md",
+            "response": []
+        },
+        "vsup":{
+            "type":"markdown",
+            "path": "geospatial-dm/assets/vsup.md",
+            "response": []
+        },
+        "consent":{
+            "type": "markdown",
+            "path": "geospatial-dm/assets/consent.md",
+            "nextButtonText": "Agree",
+            "response": [
+                {
+                "id": "accept",
+                "prompt": "Do you consent to the study and wish to continue?",
+                "required": true,
+                "requiredValue": "yes",
+                "location": "belowStimulus",
+                "type": "radio",
+                "options": [
+                    {
+                        "label": "Decline",
+                        "value": "no"
+                    },
+                    {
+                        "label": "Accept",
+                        "value": "yes"
+                    }
+                ]
+            }
+
+            ]
+        }
+    },
+    "sequence": {
+        "order": "fixed",
+        "components": [
+            "d3-pixel",
+            "introduction",
+            "consent",
+            "survey",
+            {
+                "order": "latinSquare",
+                "numSamples": 1,
+                "components": [
+                    {
+                        "order": "latinSquare",
+                        "components": [
+                            "pixel-map-1",
+                            "pixel-map-2",
+                            "pixel-map-3"
+                        ]
+                    },
+                    {
+                        "order": "latinSquare",
+                        "components": [
+                            "hop-map-1",
+                            "hop-map-2",
+                            "hop-map-3"
+                        ]
+                    }
+                ]
+            }
+           
+            
+        ]
+
+    }
+}
