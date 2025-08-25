@@ -287,13 +287,13 @@ function renderState(stateFips, csvFile) {
 
 // Receive config from ReVISIT
 Revisit.onDataReceive((data) => {
-  const stateFips = data['stateFips'] || "35"; // default NM
-  const csvFile   = data['csvFile']   || "NMData.csv";
+  const stateFips = data['stateFips']; 
+  const csvFile   = data['csvFile'];
   renderState(stateFips, csvFile);
 });
 
 // Default render (if no config sent)
-renderState("35", "NMData.csv");
+//renderState("35", "NMData.csv");
 </script>
 </body>
 </html>
