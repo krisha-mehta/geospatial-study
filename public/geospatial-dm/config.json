@@ -44,6 +44,7 @@
             "response": [
               {
                 "id": "selectedCounty",
+                "prompt": "Your selected answer:",
                 "required": true,
                 "location": "belowStimulus",
                 "type": "reactive"
