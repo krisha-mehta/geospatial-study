@@ -258,7 +258,7 @@ function renderState(stateFips, csvFile, nameToFipsMap) {
   });
 }
 
-// Example usage for New Mexico (FIPS 35)
+// Example county FIPS mapping for NM
 const nmNameToFips = new Map([
   ["bernalillo","35001"],["catron","35003"],["chaves","35005"],["cibola","35006"],["colfax","35007"],
   ["curry","35009"],["de baca","35011"],["dona ana","35013"],["doña ana","35013"],["eddy","35015"],
@@ -268,6 +268,22 @@ const nmNameToFips = new Map([
   ["san juan","35045"],["san miguel","35047"],["santa fe","35049"],["sierra","35051"],["socorro","35053"],
   ["taos","35055"],["torrance","35057"],["union","35059"],["valencia","35061"]
 ]);
+
+// Listen for config data and render the requested state
+Revisit.onDataReceive((data) => {
+  // Expect config to provide: stateFips, csvFile, and optionally nameToFipsMap
+  const stateFips = data['stateFips'] || "35";
+  const csvFile = data['csvFile'] || "NMData.csv";
+  // For now, only NM mapping is available. You can add more mappings for other states.
+  let nameToFipsMap = nmNameToFips;
+  if (data['nameToFipsMap']) {
+    // If config provides a mapping, use it
+    nameToFipsMap = data['nameToFipsMap'];
+  }
+  renderState(stateFips, csvFile, nameToFipsMap);
+});
+
+// Optionally, render NM by default if no config arrives
 renderState("35", "NMData.csv", nmNameToFips);
 </script>
 </body>
