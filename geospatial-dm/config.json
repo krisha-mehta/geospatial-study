@@ -43,8 +43,6 @@
             "type": "website",
             "response": [
               {
-                "id": "selectedCounty",
-                "prompt": "Selected County:",
                 "required": true,
                 "location": "belowStimulus",
                 "type": "reactive"
