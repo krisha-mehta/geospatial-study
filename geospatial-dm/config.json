@@ -156,7 +156,7 @@
             "path": "geospatial-dm/assets/introduction.md",
             "response": []
         },
-        "d3-pixel":{
+        "d3-pixel-1":{
             "baseComponent": "pixel-map-d3",
             "type":"website",
             "path": "geospatial-dm/assets/d3-pixel.html",
@@ -164,6 +164,16 @@
             "parameters": {
                 "stateFips": "35",
                 "csvFile": "NMData.csv"
+            }
+        },
+        "d3-pixel-2":{
+            "baseComponent": "pixel-map-d3",
+            "type":"website",
+            "path": "geospatial-dm/assets/d3-pixel.html",
+           "instruction": "Click a county to select it.",
+            "parameters": {
+                "stateFips": "04",
+                "csvFile": "AZData.csv"
             }
         },
         "consent":{
@@ -208,7 +218,8 @@
             "introduction",
             "consent",
             "survey",
-            "d3-pixel",
+            "d3-pixel-1",
+            "d3-pixel-2",
             {
                 "order": "latinSquare",
                 "numSamples": 1,
