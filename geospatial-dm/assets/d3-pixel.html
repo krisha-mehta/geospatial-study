@@ -98,7 +98,7 @@ function renderState(stateFips, csvFile) {
     // CSV -> byFips
     const byFips = new Map();
     for (const r of csv) {
-      const rawName = String(r.County ?? r.NAME ?? "");
+      const rawName = String(r.county ?? r.NAME ?? "");
       const key = norm(stripTypeSuffix(rawName));
       const fips = nameToFipsMap.get(key);
       if (fips) {
