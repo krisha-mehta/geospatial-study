@@ -148,11 +148,6 @@
             "path": "geospatial-dm/assets/d3-pixel.html",
             "response": []
         },
-        "pixel":{
-            "type":"markdown",
-            "path": "geospatial-dm/assets/pixel.md",
-            "response": []
-        },
         "consent":{
             "type": "markdown",
             "path": "geospatial-dm/assets/consent.md",
