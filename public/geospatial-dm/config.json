@@ -39,7 +39,20 @@
             "path": "geospatial-dm/assets/bar-chart.html",
             "instructionLocation": "aboveStimulus"
         
-        },
+        },"pixel-map-d3": {
+            "type": "website",
+            "response": [
+              {
+                "id": "selectedCounty",
+                "prompt": "Selected County:",
+                "required": true,
+                "location": "belowStimulus",
+                "type": "reactive"
+              }
+            ],
+            "path": "geospatial-dm/assets/d3-pixel.html",
+            "instructionLocation": "aboveStimulus"
+          },
         "pixel-map": {
             "type": "website",
             "response": [
@@ -144,9 +157,14 @@
             "response": []
         },
         "d3-pixel":{
+            "baseComponent": "pixel-map-d3",
             "type":"website",
             "path": "geospatial-dm/assets/d3-pixel.html",
-            "response": []
+           "instruction": "Click a county to select it.",
+            "parameters": {
+                "stateFips": "35",
+                "csvFile": "NMData.csv"
+            }
         },
         "consent":{
             "type": "markdown",
