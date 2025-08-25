@@ -203,7 +203,7 @@ function renderState(stateFips, csvFile, nameToFipsMap) {
               alreadySelected: false,
               onYes: () => {
                 selectedCounties.push(county);
-                Revisit.postAnswers({ selectedCounties });
+                Revisit.postAnswers({ selectedCounty: selectedCounties });
                 updateSelectedCountiesList();
                 if (selectedCounties.length === maxSelections) {
                   gCounties.selectAll(".county-interactive")
@@ -221,7 +221,7 @@ function renderState(stateFips, csvFile, nameToFipsMap) {
               alreadySelected: true,
               onYes: () => {
                 selectedCounties = selectedCounties.filter(c => c !== county);
-                Revisit.postAnswers({ selectedCounties });
+                Revisit.postAnswers({ selectedCounty: selectedCounties });
                 updateSelectedCountiesList();
                 if (selectedCounties.length < maxSelections) {
                   gCounties.selectAll(".county-interactive")
