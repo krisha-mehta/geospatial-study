@@ -43,6 +43,7 @@
             "type": "website",
             "response": [
               {
+                "id": "selectedCounty",
                 "required": true,
                 "location": "belowStimulus",
                 "type": "reactive"
