@@ -200,11 +200,6 @@ export function ConfigSwitcher({
   const { storageEngine } = useStorageEngine();
   const { configsList } = globalConfig;
 
-  const demos = configsList.filter((configName) => configName.startsWith('demo-'));
-  const tutorials = configsList.filter((configName) => configName.startsWith('tutorial'));
-  const examples = configsList.filter((configName) => configName.startsWith('example-'));
-  const tests = configsList.filter((configName) => configName.startsWith('test-'));
-  const libraries = configsList.filter((configName) => configName.startsWith('library-'));
   const others = useMemo(() => configsList.filter((configName) => !configName.startsWith('demo-') && !configName.startsWith('tutorial') && !configName.startsWith('example-') && !configName.startsWith('test-') && !configName.startsWith('library-')), [configsList]);
 
   const [otherStudyVisibility, setOtherStudyVisibility] = useState<Record<string, boolean>>({});
@@ -259,31 +254,6 @@ export function ConfigSwitcher({
               <StudyCards configNames={othersFiltered} studyConfigs={studyConfigs} />
             </Tabs.Panel>
           )}
-
-          <Tabs.Panel value="Demos">
-            <Text c="dimmed" mt="sm">These studies show off individual features of the reVISit platform.</Text>
-            <StudyCards configNames={demos} studyConfigs={studyConfigs} />
-          </Tabs.Panel>
-
-          <Tabs.Panel value="Examples">
-            <Text c="dimmed" mt="sm">These are full studies that demonstrate the capabilities of the reVISit platform.</Text>
-            <StudyCards configNames={examples} studyConfigs={studyConfigs} />
-          </Tabs.Panel>
-
-          <Tabs.Panel value="Tutorials">
-            <Text c="dimmed" mt="sm">These studies are designed to help you learn how to use the reVISit platform.</Text>
-            <StudyCards configNames={tutorials} studyConfigs={studyConfigs} />
-          </Tabs.Panel>
-
-          <Tabs.Panel value="Tests">
-            <Text c="dimmed" mt="sm">These studies exist for testing purposes.</Text>
-            <StudyCards configNames={tests} studyConfigs={studyConfigs} />
-          </Tabs.Panel>
-
-          <Tabs.Panel value="Libraries">
-            <Text c="dimmed" mt="sm">Here you can see an example of every library that we publish.</Text>
-            <StudyCards configNames={libraries} studyConfigs={studyConfigs} />
-          </Tabs.Panel>
         </Tabs>
       </Container>
     </AppShell.Main>
