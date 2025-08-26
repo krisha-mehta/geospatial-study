@@ -344,7 +344,7 @@ function renderState(stateFips, csvFile) {
     const grad = defsL.append("linearGradient")
       .attr("id", "legendGrad")
       .attr("x1", "0%").attr("x2", "0%")
-      .attr("y1", "0%").attr("y2", "100%");
+      .attr("y1", "100%").attr("y2", "0%");
     for (let i = 0; i <= 100; i++) {
       const t = i / 100;
       grad.append("stop")
