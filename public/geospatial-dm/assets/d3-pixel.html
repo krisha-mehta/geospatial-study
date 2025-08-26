@@ -293,20 +293,51 @@ function renderState(stateFips, csvFile) {
         });
 
     // Legend
-    const legendW = 220, legendH = 10, margin = 20;
-    const lg = svg.append("g")
-      .attr("transform", `translate(${width - legendW - margin}, ${height - 40})`);
+    // Legend to the right of the map
+const legendW = 220, legendH = 10, margin = 20;
 
-    const grad = defs.append("linearGradient")
-      .attr("id","legendGrad").attr("x1","0%").attr("x2","100%").attr("y1","0%").attr("y2","0%");
-    for (let i=0;i<=100;i++){
-      const t = i/100;
-      grad.append("stop").attr("offset", `${i}%`).attr("stop-color", color(VALUE_MIN + t*(VALUE_MAX - VALUE_MIN)));
-    }
-    lg.append("rect").attr("width", legendW).attr("height", legendH).attr("fill", "url(#legendGrad)");
-    const legendScale = d3.scaleLinear().domain([VALUE_MIN, VALUE_MAX]).range([0, legendW]);
-    lg.append("g").attr("transform", `translate(0,${legendH})`).call(d3.axisBottom(legendScale).ticks(5));
-    lg.append("text").attr("x", legendW/2).attr("y", -6).attr("text-anchor","middle").text("Poverty");
+// Compute bounding box of the state feature
+const bounds = path.bounds(stateFeature); // [[x0,y0],[x1,y1]]
+const legendX = bounds[1][0] + margin; // to the right of state
+const legendY = (bounds[0][1] + bounds[1][1]) / 2 - legendH / 2;
+
+// Clamp so it doesn’t overflow SVG
+const clampedX = Math.min(width - legendW - margin, Math.max(margin, legendX));
+const clampedY = Math.max(margin, Math.min(height - legendH - margin, legendY));
+
+const lg = svg.append("g")
+  .attr("transform", `translate(${clampedX}, ${clampedY})`);
+
+const grad = defs.append("linearGradient")
+  .attr("id","legendGrad")
+  .attr("x1","0%").attr("x2","100%")
+  .attr("y1","0%").attr("y2","0%");
+
+for (let i=0;i<=100;i++){
+  const t = i/100;
+  grad.append("stop")
+    .attr("offset", `${i}%`)
+    .attr("stop-color", color(VALUE_MIN + t*(VALUE_MAX - VALUE_MIN)));
+}
+
+lg.append("rect")
+  .attr("width", legendW)
+  .attr("height", legendH)
+  .attr("fill", "url(#legendGrad)");
+
+const legendScale = d3.scaleLinear()
+  .domain([VALUE_MIN, VALUE_MAX])
+  .range([0, legendW]);
+
+lg.append("g")
+  .attr("transform", `translate(0,${legendH})`)
+  .call(d3.axisBottom(legendScale).ticks(5));
+
+lg.append("text")
+  .attr("x", legendW/2)
+  .attr("y", -6)
+  .attr("text-anchor","middle")
+  .text("Poverty");
   })
   .catch(err => {
     console.error(err);
@@ -320,35 +351,6 @@ Revisit.onDataReceive((data) => {
   const csvFile   = data['csvFile'];
   renderState(stateFips, csvFile);
 });
-
-              // Legend: position to the right of the rendered state map
-              const legendW = 220, legendH = 10, margin = 20;
-              // Compute bounding box of the state feature in SVG coordinates
-              let legendX = width - legendW - margin;
-              let legendY = height/2 - legendH;
-              if (stateFeature) {
-                const bounds = path.bounds(stateFeature); // [[x0, y0], [x1, y1]]
-                legendX = bounds[1][0] + margin;
-                legendY = bounds[0][1] + (bounds[1][1] - bounds[0][1])/2 - legendH/2;
-                // Clamp to SVG area
-                legendX = Math.min(width - legendW - margin, Math.max(margin, legendX));
-                legendY = Math.max(margin, Math.min(height - legendH - margin, legendY));
-              }
-              const lg = svg.append("g")
-                .attr("transform", `translate(${legendX}, ${legendY})`);
-
-              const grad = defs.append("linearGradient")
-                .attr("id","legendGrad").attr("x1","0%").attr("x2","100%")
-                .attr("y1","0%").attr("y2","0%");
-              for (let i=0;i<=100;i++){
-                const t = i/100;
-                grad.append("stop").attr("offset", `${i}%`).attr("stop-color", color(VALUE_MIN + t*(VALUE_MAX - VALUE_MIN)));
-              }
-              lg.append("rect").attr("width", legendW).attr("height", legendH).attr("fill", "url(#legendGrad)");
-              const legendScale = d3.scaleLinear().domain([VALUE_MIN, VALUE_MAX]).range([0, legendW]);
-              lg.append("g").attr("transform", `translate(0,${legendH})`).call(d3.axisBottom(legendScale).ticks(5));
-              lg.append("text").attr("x", legendW/2).attr("y", -6).attr("text-anchor","middle").text("Poverty");
-
               </script>
               </body>
 </html>
