@@ -331,7 +331,7 @@ const legendScale = d3.scaleLinear()
 
 lg.append("g")
   .attr("transform", `translate(0,${legendH})`)
-  .call(d3.axisBottom(legendScale).ticks(5));
+  .call(d3.axisRight(legendScale).ticks(5));
 
 lg.append("text")
   .attr("x", legendW/2)
