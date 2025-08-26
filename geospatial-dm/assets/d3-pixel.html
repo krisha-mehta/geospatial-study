@@ -3,14 +3,43 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pixel Map — upright, straight grid, legend</title>
+<title>Pixel Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="../../revisitUtilities/revisit-communicate.js"></script>
 <style>
-  body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-  svg  { width: 100%; height: auto; display: block; background: #fff; margin: 0 auto; max-width: 600px; padding: 0; }
-  .label { font-size: 10px; fill:#111; text-anchor: middle; paint-order: stroke; stroke:#fff; stroke-width:3px; }
+  body {
+    margin:0;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
+  }
+  svg  {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  .label {
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 11px;
+    fill:#111;
+    text-anchor: middle;
+    paint-order: stroke;
+    stroke:#fff;
+    stroke-width:3px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  #county-message-box {
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
 </style>
 </head>
 <body>
@@ -292,8 +321,35 @@ Revisit.onDataReceive((data) => {
   renderState(stateFips, csvFile);
 });
 
-// Default render (if no config sent)
-//renderState("35", "NMData.csv");
-</script>
-</body>
+              // Legend: position below the rendered state map
+              const legendW = 220, legendH = 10, margin = 20;
+              // Compute bounding box of the state feature in SVG coordinates
+              let legendX = width/2 - legendW/2;
+              let legendY = height - legendH - margin;
+              if (stateFeature) {
+                // Get all projected points of the state outline
+                const bounds = path.bounds(stateFeature); // [[x0, y0], [x1, y1]]
+                legendX = bounds[0][0] + (bounds[1][0] - bounds[0][0])/2 - legendW/2;
+                legendY = bounds[1][1] + margin;
+                // Clamp to SVG area
+                legendX = Math.max(margin, Math.min(width - legendW - margin, legendX));
+                legendY = Math.min(height - legendH - margin, legendY);
+              }
+              const lg = svg.append("g")
+                .attr("transform", `translate(${legendX}, ${legendY})`);
+
+              const grad = defs.append("linearGradient")
+                .attr("id","legendGrad").attr("x1","0%").attr("x2","100%")
+                .attr("y1","0%").attr("y2","0%");
+              for (let i=0;i<=100;i++){
+                const t = i/100;
+                grad.append("stop").attr("offset", `${i}%`).attr("stop-color", color(VALUE_MIN + t*(VALUE_MAX - VALUE_MIN)));
+              }
+              lg.append("rect").attr("width", legendW).attr("height", legendH).attr("fill", "url(#legendGrad)");
+              const legendScale = d3.scaleLinear().domain([VALUE_MIN, VALUE_MAX]).range([0, legendW]);
+              lg.append("g").attr("transform", `translate(0,${legendH})`).call(d3.axisBottom(legendScale).ticks(5));
+              lg.append("text").attr("x", legendW/2).attr("y", -6).attr("text-anchor","middle").text("Poverty");
+
+              </script>
+              </body>
 </html>
