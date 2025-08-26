@@ -28,7 +28,7 @@
   }
   .label {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     fill:#111;
     text-anchor: middle;
     paint-order: stroke;
@@ -321,19 +321,18 @@ Revisit.onDataReceive((data) => {
   renderState(stateFips, csvFile);
 });
 
-              // Legend: position below the rendered state map
+              // Legend: position to the right of the rendered state map
               const legendW = 220, legendH = 10, margin = 20;
               // Compute bounding box of the state feature in SVG coordinates
-              let legendX = width/2 - legendW/2;
-              let legendY = height - legendH - margin;
+              let legendX = width - legendW - margin;
+              let legendY = height/2 - legendH;
               if (stateFeature) {
-                // Get all projected points of the state outline
                 const bounds = path.bounds(stateFeature); // [[x0, y0], [x1, y1]]
-                legendX = bounds[0][0] + (bounds[1][0] - bounds[0][0])/2 - legendW/2;
-                legendY = bounds[1][1] + margin;
+                legendX = bounds[1][0] + margin;
+                legendY = bounds[0][1] + (bounds[1][1] - bounds[0][1])/2 - legendH/2;
                 // Clamp to SVG area
-                legendX = Math.max(margin, Math.min(width - legendW - margin, legendX));
-                legendY = Math.min(height - legendH - margin, legendY);
+                legendX = Math.min(width - legendW - margin, Math.max(margin, legendX));
+                legendY = Math.max(margin, Math.min(height - legendH - margin, legendY));
               }
               const lg = svg.append("g")
                 .attr("transform", `translate(${legendX}, ${legendY})`);
