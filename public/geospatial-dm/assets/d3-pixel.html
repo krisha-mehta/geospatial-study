@@ -292,52 +292,65 @@ function renderState(stateFips, csvFile) {
           }
         });
 
-    // Legend
-    // Legend to the right of the map
-const legendW = 220, legendH = 10, margin = 20;
+   // --- Legend (vertical, to the right of the state) ---
+const LEGEND_LONG  = 220;  // length of the gradient (top->bottom)
+const LEGEND_THICK = 12;   // bar thickness (left->right)
+const MARGIN       = 20;
 
-// Compute bounding box of the state feature
+// remove any previous legend from a prior render
+svg.selectAll(".legend-right").remove();
+
+// compute the state bounds to place legend just to the right
 const bounds = path.bounds(stateFeature); // [[x0,y0],[x1,y1]]
-const legendX = bounds[1][0] + margin; // to the right of state
-const legendY = (bounds[0][1] + bounds[1][1]) / 2 - legendH / 2;
+let legendX = bounds[1][0] + MARGIN;      // to the right of the state
+let legendY = bounds[0][1];               // start near top of the state
 
-// Clamp so it doesn’t overflow SVG
-const clampedX = Math.min(width - legendW - margin, Math.max(margin, legendX));
-const clampedY = Math.max(margin, Math.min(height - legendH - margin, legendY));
+// clamp so the legend stays inside the SVG
+legendX = Math.min(width - LEGEND_THICK - MARGIN, Math.max(MARGIN, legendX));
+legendY = Math.max(MARGIN, Math.min(height - LEGEND_LONG - MARGIN, legendY));
 
 const lg = svg.append("g")
-  .attr("transform", `translate(${clampedX}, ${clampedY})`);
+  .attr("class", "legend-right")
+  .attr("transform", `translate(${legendX}, ${legendY})`)
+  .style("pointer-events", "none"); // keep it non-interactive
 
+// vertical gradient (top -> bottom)
 const grad = defs.append("linearGradient")
-  .attr("id","legendGrad")
-  .attr("x1","0%").attr("x2","100%")
-  .attr("y1","0%").attr("y2","0%");
+  .attr("id", "legendGrad")
+  .attr("x1", "0%").attr("x2", "0%")
+  .attr("y1", "0%").attr("y2", "100%");
 
-for (let i=0;i<=100;i++){
-  const t = i/100;
+for (let i = 0; i <= 100; i++) {
+  const t = i / 100;
   grad.append("stop")
     .attr("offset", `${i}%`)
-    .attr("stop-color", color(VALUE_MIN + t*(VALUE_MAX - VALUE_MIN)));
+    .attr("stop-color", color(VALUE_MIN + t * (VALUE_MAX - VALUE_MIN)));
 }
 
+// gradient bar
 lg.append("rect")
-  .attr("width", legendW)
-  .attr("height", legendH)
-  .attr("fill", "url(#legendGrad)");
+  .attr("width",  LEGEND_THICK)
+  .attr("height", LEGEND_LONG)
+  .attr("fill", "url(#legendGrad)")
+  .attr("rx", 3);
 
+// scale: top = max, bottom = min (so higher values appear higher)
 const legendScale = d3.scaleLinear()
-  .domain([VALUE_MIN, VALUE_MAX])
-  .range([0, legendW]);
+  .domain([VALUE_MAX, VALUE_MIN])
+  .range([0, LEGEND_LONG]);
 
+// ticks on the right side of the bar
 lg.append("g")
-  .attr("transform", `translate(0,${legendH})`)
+  .attr("transform", `translate(${LEGEND_THICK}, 0)`)
   .call(d3.axisRight(legendScale).ticks(5));
 
+// title above the bar
 lg.append("text")
-  .attr("x", legendW/2)
-  .attr("y", -6)
-  .attr("text-anchor","middle")
+  .attr("x", 0)
+  .attr("y", -8)
+  .attr("font-weight", 500)
   .text("Poverty");
+
   })
   .catch(err => {
     console.error(err);
