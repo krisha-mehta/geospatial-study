@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pixel Map</title>
-
+<!-- Getting prettier fonts-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -22,13 +22,13 @@
     background: #fff;
   }
 
-  /* Map + Legend side-by-side */
+ 
   .viz-wrap {
     display: flex;
     gap: 16px;
     align-items: flex-start;
     justify-content: center;
-    max-width: 760px; /* ~600 map + 16 gap + ~140 legend */
+    max-width: 760px; 
     margin: 0 auto;
     padding: 0 12px;
   }
@@ -57,9 +57,17 @@
 
   #county-message-box {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    display:none; 
+    margin:0; 
+    padding:18px 22px; 
+    border:2px solid #0077cc; 
+    border-radius:14px;
+    background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
+    max-width:320px; font-size:16px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000;
+    position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;
   }
 
-  /* Optional: stack on narrow screens */
+
   @media (max-width: 700px) {
     .viz-wrap { flex-direction: column; align-items: center; max-width: 600px; }
     #legend { max-width: 600px; }
@@ -72,51 +80,68 @@
   <!-- Map SVG -->
   <svg id="chart" viewBox="0 0 600 600" aria-label="Pixel map of selected state"></svg>
 
-  <!-- Legend SVG (separate) -->
+  <!--- Legend SVG -->
   <svg id="legend" viewBox="0 0 140 600" aria-label="Legend"></svg>
 </div>
 
-<div id="county-message-box"
+<!--<div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
             background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
             max-width:320px; font-size:16px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000;
-            position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;"></div>
+            position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;"></div>-->
 
 <script>
-/* ---------- Setup ---------- */
+
 const svgMap    = d3.select("#chart");
 const svgLegend = d3.select("#legend");
 
-const width = 600, height = 600;   // match viewBox
+const width = 600, height = 600;  
 const PIXEL = 3;
 const MOE_Z = 1.645;
+// Setting a fixed value range for all legends 
 const VALUE_MIN = 0, VALUE_MAX = 50;
 
+// I should think more about the color scheme here
 const longpal = ["#800026","#BD0026","#E31A1C","#FC4E2A","#FD8D3C","#FEB24C","#FED976","#FFE7A8","#FFF2CC","#FFF9E6"].reverse();
 const color = d3.scaleLinear()
   .domain(d3.range(VALUE_MIN, VALUE_MAX + 1, (VALUE_MAX - VALUE_MIN) / (longpal.length - 1)))
   .range(longpal)
   .clamp(true);
 
-// RNG + sampling
-function mulberry32(a){ return function(){ let t=a+=0x6D2B79F5; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; } }
-function randnFactory(rng){ let spare=null; return ()=>{ if(spare!==null){const v=spare; spare=null; return v;}
-  let u=0,v=0,s=0; do{u=rng()*2-1; v=rng()*2-1; s=u*u+v*v;}while(s===0||s>=1);
-  const m=Math.sqrt(-2*Math.log(s)/s); spare=v*m; return u*m; }; }
+
+function mulberry32(a){ 
+  return function(){ 
+    let t=a+=0x6D2B79F5; 
+    t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); 
+    return ((t^t>>>14)>>>0)/4294967296; 
+  } 
+}
+function randnFactory(rng){ 
+  let spare=null; 
+  return ()=>{ if(spare!==null){
+    const v=spare; spare=null; 
+    return v;
+  }
+  let u=0,v=0,s=0; do{
+    u=rng()*2-1; v=rng()*2-1; s=u*u+v*v;
+  }
+  while(s===0||s>=1);
+  const m=Math.sqrt(-2*Math.log(s)/s); spare=v*m; return u*m; 
+  }; 
+}
 function sampleValue(pov, moe, randn){
   const sd = (moe ?? 0)/MOE_Z;
   const x = pov + (sd>0 ? randn()*sd : 0);
   return Math.max(VALUE_MIN, Math.min(VALUE_MAX, x));
 }
 
-// Normalization helpers
+
 const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
 const stripTypeSuffix = (s) =>
   s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "")
    .replace(/\s+/g, " ")
    .trim();
 
-// Groups + defs for the map SVG
 const defsMap   = svgMap.append("defs");
 const gPixels   = svgMap.append("g").attr("class","pixels");
 const gState    = svgMap.append("g").attr("class","state");
@@ -126,14 +151,13 @@ const gLabels   = svgMap.append("g").attr("class","labels");
 const projection = d3.geoEquirectangular();
 const path = d3.geoPath(projection);
 
-/* ---------- Render ---------- */
+
 function renderState(stateFips, csvFile) {
   Promise.all([
     d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
     d3.csv(csvFile, d3.autoType)
   ])
   .then(([usTopo, csv]) => {
-    // Clear previous map layers/defs
     gPixels.selectAll("*").remove();
     gState.selectAll("*").remove();
     gCounties.selectAll("*").remove();
@@ -146,7 +170,6 @@ function renderState(stateFips, csvFile) {
     const stateMesh     = topojson.mesh(usTopo, usTopo.objects.counties,
                           (a,b)=> String(a.id).startsWith(stateFips) && String(b.id).startsWith(stateFips) && a!==b);
 
-    // Build dynamic name -> FIPS map for this state
     const nameToFipsMap = new Map();
     for (const f of stateCounties) {
       const id  = String(f.id);
@@ -154,7 +177,6 @@ function renderState(stateFips, csvFile) {
       const base = norm(stripTypeSuffix(raw));
       nameToFipsMap.set(base, id);
 
-      // Saint/St. alternates
       if (/\bsaint\b/i.test(raw)) {
         nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st"))), id);
         nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st."))), id);
@@ -164,7 +186,6 @@ function renderState(stateFips, csvFile) {
       }
     }
 
-    // CSV -> byFips
     const byFips = new Map();
     for (const r of csv) {
       const rawName = String(r.county ?? r.NAME ?? "");
@@ -177,10 +198,8 @@ function renderState(stateFips, csvFile) {
       }
     }
 
-    // Fit projection
     projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
 
-    // Clip path for pixels
     defsMap.append("clipPath").attr("id","stateClip")
       .append("path").attr("d", path(stateFeature));
 
@@ -200,7 +219,7 @@ function renderState(stateFips, csvFile) {
       .attr("stroke-width",1.2)
       .attr("vector-effect","non-scaling-stroke");
 
-    // Labels (use CSV names if available)
+    // Labels 
     gLabels.selectAll("text")
       .data(stateCounties)
       .join("text")
@@ -220,7 +239,10 @@ function renderState(stateFips, csvFile) {
 
         let rec = null;
         for (const f of stateCounties) {
-          if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
+          if (d3.geoContains(f, lonlat)) { 
+            rec = byFips.get(String(f.id)); 
+            break; 
+          }
         }
         if (!rec) continue;
 
@@ -239,7 +261,7 @@ function renderState(stateFips, csvFile) {
         .attr("height", PIXEL)
         .attr("fill", d => color(d.v));
 
-    // ---------- Interaction & Answer Posting ----------
+    // Interaction & Answer Posting 
     let selectedCounties = [];
     const maxSelections = 3;
 
@@ -255,7 +277,6 @@ function renderState(stateFips, csvFile) {
       box.innerHTML = msg + `<br><br><button id='county-yes-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>Yes</button> <button id='county-no-btn' style='background:#fff;color:#0077cc;border:1.5px solid #0077cc;border-radius:6px;padding:7px 18px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>No</button>`;
       box.style.display = "block";
 
-      // Position near centroid (page coordinates)
       let countyFeature = null;
       for (const f of stateCounties) {
         const name = byFips.get(String(f.id))?.name ?? String(f.id);
@@ -280,7 +301,6 @@ function renderState(stateFips, csvFile) {
       document.getElementById("county-no-btn").onclick  = () => { box.style.display = "none"; onNo();  };
     }
 
-    // Invisible county hit-targets
     gCounties.selectAll(".county-interactive")
       .data(stateCounties)
       .join("path")
@@ -326,21 +346,19 @@ function renderState(stateFips, csvFile) {
           }
         });
 
-    /* -------- Legend in separate SVG (vertical) -------- */
     svgLegend.selectAll("*").remove(); // clear previous legend
     const defsL = svgLegend.append("defs");
 
-    const LEGEND_LEFT  = 40;  // padding from left within legend viewBox
-    const LEGEND_TOP   = 40;  // padding from top
-    const LEGEND_LONG  = 320; // gradient length (top->bottom) inside 600px height viewBox
-    const LEGEND_THICK = 15;  // bar thickness
-
+    const LEGEND_LEFT  = 40;  
+    const LEGEND_TOP   = 40;  
+    const LEGEND_LONG  = 320; 
+    const LEGEND_THICK = 15;  
     const lg = svgLegend.append("g")
       .attr("class", "legend-right")
       .attr("transform", `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
       .style("pointer-events", "none");
 
-    // Vertical gradient (top -> bottom)
+    // Vertical gradient 
     const grad = defsL.append("linearGradient")
       .attr("id", "legendGrad")
       .attr("x1", "0%").attr("x2", "0%")
@@ -364,7 +382,7 @@ function renderState(stateFips, csvFile) {
       .domain([VALUE_MAX, VALUE_MIN])
       .range([0, LEGEND_LONG]);
 
-    // Axis ticks to the right of bar
+    // ticks to the right of bar, should be left?
     lg.append("g")
       .attr("transform", `translate(${LEGEND_THICK}, 0)`)
       .call(d3.axisRight(legendScale).ticks(5));
