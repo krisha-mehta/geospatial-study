@@ -52,6 +52,19 @@
             ],
             "path": "geospatial-dm/assets/d3-pixel.html",
             "instructionLocation": "aboveStimulus"
+          },"hom-map-d3": {
+            "type": "website",
+            "response": [
+              {
+                "id": "selectedCounty",
+                "prompt": "Your selected answer:",
+                "required": true,
+                "location": "belowStimulus",
+                "type": "reactive"
+              }
+            ],
+            "path": "geospatial-dm/assets/d3-hop.html",
+            "instructionLocation": "aboveStimulus"
           },
         "pixel-map": {
             "type": "website",
@@ -156,6 +169,26 @@
                 "csvFile": "AZData.csv"
             }
         },
+        "d3-hom-1":{
+            "baseComponent": "hom-map-d3",
+            "type":"website",
+            "path": "geospatial-dm/assets/d3-hop.html",
+           "instruction": "Click a county to select it.",
+            "parameters": {
+                "stateFips": "35",
+                "csvFile": "NMData.csv"
+            }
+        },
+        "d3-hom-2":{
+            "baseComponent": "hom-map-d3",
+            "type":"website",
+            "path": "geospatial-dm/assets/d3-hop.html",
+           "instruction": "Click a county to select it.",
+            "parameters": {
+                "stateFips": "04",
+                "csvFile": "AZData.csv"
+            }
+        },
         "consent":{
             "type": "markdown",
             "path": "geospatial-dm/assets/consent.md",
@@ -199,6 +232,8 @@
             "consent",
             "d3-pixel-1",
             "d3-pixel-2",
+            "d3-hom-1",
+            "d3-hom-2",
             {
                 "order": "latinSquare",
                 "numSamples": 1,
