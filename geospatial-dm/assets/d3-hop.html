@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hypothetical Outcome Map (HOM) — D3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+
+<script>window.Revisit = window.Revisit || { onDataReceive: (f)=>{ window.__revisitHandler=f; }, postAnswers: (msg)=>console.log("Revisit.postAnswers:", msg) };</script>
+<script src="../../revisitUtilities/revisit-communicate.js"></script>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#fff; }
+
+  header { max-width:960px; margin:14px auto 0; padding:0 14px 10px; }
+  h1 { font-size:18px; margin:10px 0 6px; }
+  p.sub { margin:0; color:#444; font-size:13px; }
+
+  .wrap { max-width:960px; margin:0 auto; padding:10px 14px 28px; display:grid; grid-template-columns:1fr 260px; gap:18px; align-items:start; }
+  @media (max-width: 900px){ .wrap{ grid-template-columns:1fr; } }
+
+  svg { width:100%; height:auto; display:block; background:#fff; }
+  #map { aspect-ratio:1/1; }
+
+  /* county fills for HOM */
+  .county { stroke:#777; stroke-width:0.8; vector-effect:non-scaling-stroke; }
+  .county.on  { fill:#800000; }  /* allocate */
+  .county.off { fill:#e9e9e9; }   /* not allocate */
+  .county.hover { stroke:#111; stroke-width:1.5; }
+
+  .state-outline { fill:none; stroke:#222; stroke-width:1.2; vector-effect:non-scaling-stroke; }
+
+  .panel { border:1px solid #e6e6e6; border-radius:14px; padding:14px; box-shadow:0 2px 10px rgba(0,0,0,0.04); }
+  .panel h2 { font-size:14px; margin:0 0 8px; }
+  .row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin:8px 0; }
+  .row label { font-size:12px; color:#222; flex: 0 0 130px; }
+  .row input[type="number"], .row input[type="text"] { width:100%; padding:6px 8px; border:1px solid #d4d4d4; border-radius:8px; font:inherit; }
+  .row input[type="range"] { width:100%; }
+  .btn { display:inline-flex; align-items:center; gap:8px; border:0; border-radius:10px; padding:8px 12px; font-weight:600; cursor:pointer; }
+  .btn.primary { background:#0d6efd; color:#fff; }
+  .btn.ghost   { background:#f6f7f9; color:#0d6efd; }
+
+  .status { display:flex; align-items:center; gap:10px; margin-top:10px; font-size:12px; color:#333; }
+  .pill { background:#f1f5f9; padding:4px 8px; border-radius:999px; }
+
+  .legend { margin-top:10px; display:flex; align-items:center; gap:10px; font-size:12px; }
+  .chip { width:14px; height:14px; border-radius:3px; display:inline-block; border:1px solid #777; }
+  .chip.on  { background:#800000; border-color:#800000; }
+  .chip.off { background:#e9e9e9; border-color:#aaa; }
+
+ 
+  .sel { margin-top:12px; font-size:12px; color:#222; }
+  .sel strong { font-weight:600; }
+
+
+  .tip { position:fixed; pointer-events:none; transform:translate(8px,8px); background:#fff; border:1px solid #ddd; border-radius:10px; padding:8px 10px; font-size:12px; color:#111; box-shadow:0 4px 16px rgba(0,0,0,0.08); display:none; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Hypothetical Outcome Map (HOM) — County Decisions</h1>
+    <p class="sub">Each frame shows one Binomial draw per county: <em>decision ~ Bernoulli(xprob)</em>, where <code>xprob = 1 - Φ(threshold; mean=pov, sd=moe/MOE_Z)</code>.</p>
+  </header>
+
+  <div class="wrap">
+    <svg id="map" viewBox="0 0 600 600" aria-label="HOM county map"></svg>
+
+    <div class="panel" id="controls">
+      <h2>Controls</h2>
+
+      <div class="row"><label>State FIPS</label><input id="stateFips" type="text" value="35" /></div>
+      <div class="row"><label>CSV file (county,pov,moe)</label><input id="csvFile" type="text" value="NMData.csv" /></div>
+
+      <div class="row"><label>Threshold</label><input id="threshold" type="number" step="0.1" value="35" /></div>
+      <div class="row"><label>MOE_Z</label><input id="moeZ" type="number" step="0.001" value="1.645" /></div>
+
+      <div class="row"><label>Frames (N)</label><input id="nFrames" type="number" min="1" max="1000" value="50" /></div>
+      <div class="row"><label>FPS</label><input id="fps" type="range" min="1" max="30" value="8" /><span id="fpsLabel" class="pill">8 fps</span></div>
+
+      <div class="row" style="justify-content:flex-start; gap:10px;">
+        <button class="btn primary" id="playBtn">▶ Play</button>
+        <button class="btn ghost" id="regenBtn">↻ Regenerate</button>
+        <button class="btn ghost" id="reloadBtn">⟳ Load Data</button>
+      </div>
+
+      <div class="legend">
+        <span class="chip on"></span> Allocate resources
+        <span class="chip off" style="margin-left:12px;"></span> Not allocate
+      </div>
+
+      <div class="status">
+        <span class="pill" id="frameLabel">Frame 0 / 0</span>
+        <span class="pill" id="selCount">Selected: 0 / 3</span>
+      </div>
+
+      <div class="sel" id="selList"><strong>Chosen counties: </strong><span id="selNames">None</span></div>
+    </div>
+  </div>
+
+  <div class="tip" id="tip"></div>
+
+<script>
+
+const svg = d3.select('#map');
+const gFill = svg.append('g');
+const gBorders = svg.append('g');
+const gOutline = svg.append('g');
+
+const projection = d3.geoEquirectangular();
+const path = d3.geoPath(projection);
+
+const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
+const stripTypeSuffix = (s) => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "").replace(/\s+/g, " ").trim();
+
+function mulberry32(a){ return function(){ let t=a+=0x6D2B79F5; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; }; }
+function hashStr(str){ let h=2166136261; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h = Math.imul(h, 16777619); } return h>>>0; }
+
+// Normal CDF
+function normalCdf(x, mean=0, sd=1){ const z=(x-mean)/sd; return 0.5 * (1 + erf(z/Math.SQRT2)); }
+function erf(x){ // Abramowitz-Stegun 7.1.26 approximation
+  const sign = Math.sign(x); const a1=0.254829592, a2=-0.284496736, a3=1.421413741, a4=-1.453152027, a5=1.061405429; const p=0.3275911;
+  const t = 1/(1+p*Math.abs(x)); const y = 1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x); return sign*y;
+}
+
+
+let state = {
+  stateFips: '35',
+  csvFile: 'NMData.csv',
+  threshold: 35,
+  moeZ: 1.645,
+  fps: 8,
+  nFrames: 50,
+  playing: false,
+  frame: 0,
+  selected: [],
+  maxSel: 3,
+  rngSeed: 42,
+  draws: [], 
+  countyList: [], 
+  byFips: new Map(), 
+  outline: null, borders: null
+};
+
+// UI bindings
+const $ = (id)=>document.getElementById(id);
+const fpsInput = $('fps');
+const fpsLabel = $('fpsLabel');
+const playBtn = $('playBtn');
+const regenBtn = $('regenBtn');
+const reloadBtn = $('reloadBtn');
+const frameLabel = $('frameLabel');
+const selCount = $('selCount');
+const selNames = $('selNames');
+const tip = $('tip');
+
+function syncControls(){
+  $('stateFips').value = state.stateFips;
+  $('csvFile').value = state.csvFile;
+  $('threshold').value = state.threshold;
+  $('moeZ').value = state.moeZ;
+  $('nFrames').value = state.nFrames;
+  fpsInput.value = state.fps;
+  fpsLabel.textContent = `${state.fps} fps`;
+  updateSelUI();
+  frameLabel.textContent = `Frame ${state.frame+1} / ${state.nFrames}`;
+  playBtn.textContent = state.playing ? '❚❚ Pause' : '▶ Play';
+}
+
+function updateSelUI(){
+  selCount.textContent = `Selected: ${state.selected.length} / ${state.maxSel}`;
+  selNames.textContent = state.selected.length ? state.selected.join(', ') : 'None';
+}
+
+
+async function loadData(stateFips, csvFile){
+  state.stateFips = String(stateFips);
+  state.csvFile = csvFile;
+  const [usTopo, csv] = await Promise.all([
+    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+    d3.csv(csvFile, d3.autoType)
+  ]);
+
+  const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+  const stateCounties = allCounties.filter(f => String(f.id).startsWith(state.stateFips));
+  const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === state.stateFips);
+  const stateMesh = topojson.mesh(usTopo, usTopo.objects.counties, (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b);
+
+  // name → fips dictionary with St/Saint variants
+  const nameToFips = new Map();
+  for(const f of stateCounties){
+    const raw = f.properties?.name ?? '';
+    const base = norm(stripTypeSuffix(raw));
+    nameToFips.set(base, String(f.id));
+    if (/\bsaint\b/i.test(raw)){
+      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st'))), String(f.id));
+      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st.'))), String(f.id));
+    }
+    if (/\bst[.]?\b/i.test(raw)){
+      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/gi,'saint'))), String(f.id));
+    }
+  }
+
+  // Join data and geo
+  const byFips = new Map();
+  for(const r of csv){
+    const rawName = String(r.county ?? r.NAME ?? '').trim();
+    const key = norm(stripTypeSuffix(rawName));
+    const fips = nameToFips.get(key);
+    if (!fips) { console.warn('No FIPS for', rawName); continue; }
+    byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
+  }
+
+  // Projection & static layers
+  projection.fitSize([600,600], {type:'FeatureCollection', features: stateCounties});
+
+  svg.selectAll('*').interrupt();
+  gFill.selectAll('*').remove();
+  gBorders.selectAll('*').remove();
+  gOutline.selectAll('*').remove();
+
+  gOutline.append('path').attr('class','state-outline').attr('d', path(stateFeature));
+  gBorders.append('path').attr('d', path(stateMesh)).attr('fill','none').attr('stroke','#666').attr('stroke-width',0.8).attr('vector-effect','non-scaling-stroke');
+
+  // County layer — one path per county; we only flip class on each frame
+  const countySel = gFill.selectAll('path.county')
+    .data(stateCounties, d=>String(d.id))
+    .join('path')
+      .attr('class','county off')
+      .attr('d', d=>path(d))
+      .attr('data-fips', d=>String(d.id))
+      .on('mousemove', (event,d)=>{
+        const rec = byFips.get(String(d.id));
+        tip.style.display = 'block';
+        tip.style.left = (event.clientX)+ 'px';
+        tip.style.top  = (event.clientY)+ 'px';
+        const xp = rec?.xprob != null ? rec.xprob : NaN;
+        tip.innerHTML = `<b>${rec?.name ?? 'Unknown'}</b><br/>xprob = ${isFinite(xp)? xp.toFixed(3): 'NA'}`;
+      })
+      .on('mouseleave', ()=>{ tip.style.display='none'; })
+      .on('click', (event,d)=>{
+        const name = byFips.get(String(d.id))?.name ?? String(d.id);
+        const idx = state.selected.indexOf(name);
+        if (idx === -1){
+          if (state.selected.length >= state.maxSel) return; // ignore extra
+          state.selected.push(name);
+        } else {
+          state.selected.splice(idx,1);
+        }
+        updateSelUI();
+        Revisit.postAnswers({ selectedCounty: state.selected });
+      })
+      .on('mouseenter', function(){ d3.select(this).classed('hover', true); })
+      .on('mouseout', function(){ d3.select(this).classed('hover', false); });
+
+  state.countyList = stateCounties;
+  state.byFips = byFips;
+  state.outline = stateFeature; state.borders = stateMesh;
+
+  // If threshold unset or NaN, default to mean pov
+  if (!isFinite(+$('threshold').value)){
+    const vals = Array.from(byFips.values()).map(d=>d.pov).filter(v=>isFinite(v));
+    const mu = d3.mean(vals);
+    state.threshold = +mu.toFixed(2);
+    $('threshold').value = state.threshold;
+  }
+
+  computeXprob();
+  regenerateDraws();
+  renderFrame(0, true);
+  syncControls();
+}
+
+function computeXprob(){
+  const t = +$('threshold').value; state.threshold = t;
+  const z = +$('moeZ').value; state.moeZ = z;
+  for(const [fips, rec] of state.byFips){
+    const sd = (rec.moe ?? 0) / (z || 1.645);
+    if (!isFinite(sd) || sd <= 0){
+      rec.xprob = rec.pov >= t ? 1 : 0; // degenerate if no uncertainty
+    } else {
+      rec.xprob = 1 - normalCdf(t, rec.pov, sd);
+    }
+  }
+}
+
+function regenerateDraws(){
+  state.nFrames = +$('nFrames').value || 50;
+  state.fps = +$('fps').value || 8;
+  const seed = state.rngSeed = Math.abs(((+new Date()) & 0xffffffff) ^ hashStr(state.stateFips + '|' + state.csvFile));
+  const rng0 = mulberry32(seed);
+  const countyIds = state.countyList.map(f=>String(f.id));
+  const byFips = state.byFips;
+  const frames = [];
+  for(let k=0;k<state.nFrames;k++){
+    const frame = new Map();
+    for(const fips of countyIds){
+      const p = byFips.get(fips)?.xprob ?? 0;
+      // deterministic-ish per (frame,fips)
+      const r = rng0();
+      frame.set(fips, r < p ? 1 : 0);
+    }
+    frames.push(frame);
+  }
+  state.draws = frames;
+  state.frame = 0;
+  frameLabel.textContent = `Frame 1 / ${state.nFrames}`;
+}
+
+
+function renderFrame(k, instant=false){
+  state.frame = (k % state.nFrames + state.nFrames) % state.nFrames;
+  const frame = state.draws[state.frame];
+  const sel = gFill.selectAll('path.county');
+  // Only update class (fill) — no geometry redraws
+  sel.classed('on', d => frame.get(String(d.id)) === 1)
+     .classed('off', d => frame.get(String(d.id)) !== 1);
+  if (!instant){ frameLabel.textContent = `Frame ${state.frame+1} / ${state.nFrames}`; }
+}
+
+// Animation loop that never blocks clicks
+let rafId = null; let lastTick = 0;
+function tick(ts){
+  if (!state.playing){ rafId = requestAnimationFrame(tick); return; }
+  const interval = 1000 / (state.fps || 8);
+  if (ts - lastTick >= interval){ lastTick = ts; renderFrame(state.frame+1); }
+  rafId = requestAnimationFrame(tick);
+}
+rafId = requestAnimationFrame(tick);
+
+
+playBtn.addEventListener('click', ()=>{ state.playing = !state.playing; syncControls(); });
+regenBtn.addEventListener('click', ()=>{ computeXprob(); regenerateDraws(); renderFrame(0,true); });
+reloadBtn.addEventListener('click', ()=>{ loadData($('stateFips').value, $('csvFile').value).catch(e=>alert('Load failed: '+e)); });
+
+$('threshold').addEventListener('change', ()=>{ computeXprob(); regenerateDraws(); renderFrame(0,true); });
+$('moeZ').addEventListener('change', ()=>{ computeXprob(); regenerateDraws(); renderFrame(0,true); });
+$('nFrames').addEventListener('change', ()=>{ regenerateDraws(); renderFrame(0,true); });
+$('fps').addEventListener('input', (e)=>{ state.fps = +e.target.value; fpsLabel.textContent = `${state.fps} fps`; });
+
+function initFromURL(){
+  const q = new URLSearchParams(location.search);
+  if (q.has('stateFips')) state.stateFips = q.get('stateFips');
+  if (q.has('csv')) state.csvFile = q.get('csv');
+  if (q.has('threshold')) state.threshold = +q.get('threshold');
+  if (q.has('fps')) state.fps = +q.get('fps');
+  if (q.has('frames')) state.nFrames = +q.get('frames');
+  syncControls();
+}
+
+initFromURL();
+loadData(state.stateFips, state.csvFile).catch(e=>alert('Initial load failed: '+e));
+
+
+Revisit.onDataReceive((data)=>{
+  const stateFips = data['stateFips'] ?? state.stateFips;
+  const csvFile = data['csvFile'] ?? state.csvFile;
+  if (stateFips !== state.stateFips || csvFile !== state.csvFile){
+    loadData(stateFips, csvFile).catch(e=>alert('Data load failed: '+e));
+  }
+});
+</script>
+</body>
+</html>
