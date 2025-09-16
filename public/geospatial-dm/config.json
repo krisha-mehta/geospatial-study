@@ -131,26 +131,6 @@
               "svgFile": "pixelStimuli/pixel3_with_ids.svg"
             }
           },
-        "survey": {
-            "type": "questionnaire",
-            "response": [
-            {
-                "id": "q-dropdown",
-                "prompt": "Dropdown example – which chart do you like best?",
-                "secondaryText": "You can specify secondary text to clarify your question.",
-                "location": "aboveStimulus",
-                "type": "dropdown",
-                "required": false,
-                "placeholder": "Enter your preference",
-                "options": [
-                    "Bar",
-                    "Bubble",
-                    "Pie",
-                    "Stacked Bar"
-                ]
-            }
-            ]
-        },
         "introduction": {
             "type": "markdown",
             "path": "geospatial-dm/assets/introduction.md",
@@ -217,7 +197,6 @@
         "components": [
             "introduction",
             "consent",
-            "survey",
             "d3-pixel-1",
             "d3-pixel-2",
             {
