@@ -120,7 +120,7 @@ const defsMap   = svgMap.append("defs");
 const gPixels   = svgMap.append("g").attr("class","pixels");
 const gState    = svgMap.append("g").attr("class","state");
 const gCounties = svgMap.append("g").attr("class","counties");
-//const gLabels   = svgMap.append("g").attr("class","labels");
+const gLabels   = svgMap.append("g").attr("class","labels");
 
 const projection = d3.geoEquirectangular();
 const path = d3.geoPath(projection);
