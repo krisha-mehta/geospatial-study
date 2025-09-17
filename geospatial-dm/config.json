@@ -143,30 +143,7 @@
             "d3-pixel-1",
             "d3-pixel-2",
             "d3-hom-1",
-            "d3-hom-2",
-            {
-                "order": "latinSquare",
-                "numSamples": 1,
-                "components": [
-                    {
-                        "order": "latinSquare",
-                        "components": [
-                            "pixel-map-1",
-                            "pixel-map-2",
-                            "pixel-map-3"
-                        ]
-                    },
-                    {
-                        "order": "latinSquare",
-                        "components": [
-                            "hop-map-1",
-                            "hop-map-2",
-                            "hop-map-3"
-                        ]
-                    }
-                ]
-            }
-           
+            "d3-hom-2"
             
         ]
 
