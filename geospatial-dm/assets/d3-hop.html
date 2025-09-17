@@ -20,7 +20,7 @@
   * { box-sizing: border-box; }
   body { margin:0; font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#fff; }
 
-  .wrap { max-width:600px; margin:0 auto; padding:10px 14px 28px; }
+  .wrap { max-width:400px; margin:0 auto; padding:10px 14px 28px; }
   svg { width:100%; height:auto; display:block; background:#fff; }
   #map { aspect-ratio:1/1; }
 
@@ -257,11 +257,11 @@ function renderState(stateFips, csvFile){
 }
 
 // 1) Render right away (delete this line if you want ONLY ReVISit control)
-renderState(CONFIG.STATE_FIPS, CONFIG.CSV_FILE);
+//renderState(CONFIG.STATE_FIPS, CONFIG.CSV_FILE);
 
 // 2) If ReVISit sends data later, override (the loop keeps running)
-try {
-  if (typeof Revisit !== 'undefined' && typeof Revisit.onDataReceive === 'function'){
+//try {
+  //if (typeof Revisit !== 'undefined' && typeof Revisit.onDataReceive === 'function'){
     Revisit.onDataReceive((data)=>{
       const fips = data['stateFips'];
       const csv  = data['csvFile'];
@@ -271,10 +271,10 @@ try {
       }
       renderState(fips, csv);
     });
-  }
-} catch(err){
-  console.error(err);
-}
+  //}
+//} catch(err){
+  //console.error(err);
+//}
 </script>
 </body>
 </html>
