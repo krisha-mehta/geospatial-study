@@ -292,11 +292,7 @@
     "order": "fixed",
     "components": [
       "introduction",
-
-  {  "order": "fixed", "components": ["consent"],
-     "skip": [{ "name":"consent", "check":"response", "responseId":"accept", "comparison":"equal", "value":"no", "to":"end" }]
-      },
-
+    "consent",
       {  "order": "latinSquare", "numSamples": 1,
          "components": [
 
