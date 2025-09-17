@@ -56,7 +56,7 @@ const CONFIG = {
   FPS: 8,
   MAX_SELECTIONS: 3,
   RNG_SEED: 42,
-  FALLBACK_FIPS: '35',      // used only if platform never supplies params
+  FALLBACK_FIPS: '35',      
   FALLBACK_CSV: 'NMData.csv'
 };
 
@@ -69,7 +69,6 @@ const gOutline = svg.append('g');
 const projection = d3.geoEquirectangular();
 const path = d3.geoPath(projection);
 
-// tooltip removed
 
 const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
 const stripTypeSuffix = (s) => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "").replace(/\s+/g, " ").trim();
@@ -84,8 +83,8 @@ function erf(x){ const sign = Math.sign(x); const a1=0.254829592, a2=-0.28449673
 
 
 let state = {
-  stateFips: null,          // will be set by ReVISit
-  csvFile: null,            // will be set by ReVISit
+  stateFips: null,          
+  csvFile: null,            
   threshold: CONFIG.THRESHOLD,
   moeZ: CONFIG.MOE_Z,
   fps: CONFIG.FPS,
