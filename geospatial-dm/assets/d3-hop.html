@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="../../revisitUtilities/revisit-communicate.js"></script>
+
 <!-- Minimal ReVISit shim (safe if real ReVISit is present) -->
 <script>
   window.Revisit = window.Revisit || {};
@@ -55,8 +57,7 @@
 <script>
 
 const CONFIG = {
-  // Only threshold / uncertainty / animation params stay fixed here.
-  THRESHOLD: 20,
+  THRESHOLD: 35,
   MOE_Z: 1.645,
   N_FRAMES: 50,
   FPS: 8,
