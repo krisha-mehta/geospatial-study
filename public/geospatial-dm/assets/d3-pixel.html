@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pixel Map</title>
-<!-- Getting prettier fonts-->
+<!-- Get prettier-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -57,14 +57,6 @@
 
   #county-message-box {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    display:none; 
-    margin:0; 
-    padding:18px 22px; 
-    border:2px solid #0077cc; 
-    border-radius:14px;
-    background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
-    max-width:320px; font-size:16px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000;
-    position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;
   }
 
 
@@ -80,15 +72,15 @@
   <!-- Map SVG -->
   <svg id="chart" viewBox="0 0 600 600" aria-label="Pixel map of selected state"></svg>
 
-  <!--- Legend SVG -->
+  <!--- Legend SVG (separate) -->
   <svg id="legend" viewBox="0 0 140 600" aria-label="Legend"></svg>
 </div>
 
-<!--<div id="county-message-box"
+<div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
             background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
             max-width:320px; font-size:16px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000;
-            position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;"></div>-->
+            position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;"></div>
 
 <script>
 
@@ -98,10 +90,8 @@ const svgLegend = d3.select("#legend");
 const width = 600, height = 600;  
 const PIXEL = 3;
 const MOE_Z = 1.645;
-// Setting a fixed value range for all legends 
 const VALUE_MIN = 0, VALUE_MAX = 50;
 
-// I should think more about the color scheme here
 const longpal = ["#800026","#BD0026","#E31A1C","#FC4E2A","#FD8D3C","#FEB24C","#FED976","#FFE7A8","#FFF2CC","#FFF9E6"].reverse();
 const color = d3.scaleLinear()
   .domain(d3.range(VALUE_MIN, VALUE_MAX + 1, (VALUE_MAX - VALUE_MIN) / (longpal.length - 1)))
@@ -109,26 +99,10 @@ const color = d3.scaleLinear()
   .clamp(true);
 
 
-function mulberry32(a){ 
-  return function(){ 
-    let t=a+=0x6D2B79F5; 
-    t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); 
-    return ((t^t>>>14)>>>0)/4294967296; 
-  } 
-}
-function randnFactory(rng){ 
-  let spare=null; 
-  return ()=>{ if(spare!==null){
-    const v=spare; spare=null; 
-    return v;
-  }
-  let u=0,v=0,s=0; do{
-    u=rng()*2-1; v=rng()*2-1; s=u*u+v*v;
-  }
-  while(s===0||s>=1);
-  const m=Math.sqrt(-2*Math.log(s)/s); spare=v*m; return u*m; 
-  }; 
-}
+function mulberry32(a){ return function(){ let t=a+=0x6D2B79F5; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; } }
+function randnFactory(rng){ let spare=null; return ()=>{ if(spare!==null){const v=spare; spare=null; return v;}
+  let u=0,v=0,s=0; do{u=rng()*2-1; v=rng()*2-1; s=u*u+v*v;}while(s===0||s>=1);
+  const m=Math.sqrt(-2*Math.log(s)/s); spare=v*m; return u*m; }; }
 function sampleValue(pov, moe, randn){
   const sd = (moe ?? 0)/MOE_Z;
   const x = pov + (sd>0 ? randn()*sd : 0);
@@ -239,10 +213,7 @@ function renderState(stateFips, csvFile) {
 
         let rec = null;
         for (const f of stateCounties) {
-          if (d3.geoContains(f, lonlat)) { 
-            rec = byFips.get(String(f.id)); 
-            break; 
-          }
+          if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
         }
         if (!rec) continue;
 
@@ -261,7 +232,7 @@ function renderState(stateFips, csvFile) {
         .attr("height", PIXEL)
         .attr("fill", d => color(d.v));
 
-    // Interaction & Answer Posting 
+    // ---------- Interaction & Answer Posting ----------
     let selectedCounties = [];
     const maxSelections = 3;
 
@@ -358,7 +329,7 @@ function renderState(stateFips, csvFile) {
       .attr("transform", `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
       .style("pointer-events", "none");
 
-    // Vertical gradient 
+    // Vertical gradient (top -> bottom)
     const grad = defsL.append("linearGradient")
       .attr("id", "legendGrad")
       .attr("x1", "0%").attr("x2", "0%")
@@ -382,7 +353,7 @@ function renderState(stateFips, csvFile) {
       .domain([VALUE_MAX, VALUE_MIN])
       .range([0, LEGEND_LONG]);
 
-    // ticks to the right of bar, should be left?
+    // Axis ticks to the right of bar
     lg.append("g")
       .attr("transform", `translate(${LEGEND_THICK}, 0)`)
       .call(d3.axisRight(legendScale).ticks(5));
