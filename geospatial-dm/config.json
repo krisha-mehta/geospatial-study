@@ -25,21 +25,7 @@
         "studyEndMsg": "**Thank you for completing the study. You may click this link and return to Prolific**"
     },
     "baseComponents": {
-        "bar-chart": {
-            "type": "website",
-            "response": [
-                {
-                    "id": "barChart",
-                    "prompt": "Your selected answer:",
-                    "required": true,
-                    "location": "belowStimulus",
-                    "type": "reactive"
-                }
-            ],
-            "path": "geospatial-dm/assets/bar-chart.html",
-            "instructionLocation": "aboveStimulus"
-        
-        },"pixel-map-d3": {
+        "pixel-map-d3": {
             "type": "website",
             "response": [
               {
@@ -65,85 +51,9 @@
             ],
             "path": "geospatial-dm/assets/d3-hop.html",
             "instructionLocation": "aboveStimulus"
-          },
-        "pixel-map": {
-            "type": "website",
-            "response": [
-              {
-                "id": "selectedCounty",
-                "prompt": "Selected County:",
-                "required": true,
-                "location": "belowStimulus",
-                "type": "reactive"
-              }
-            ],
-            "path": "geospatial-dm/assets/pixel.html",
-            "instructionLocation": "aboveStimulus"
-          },
-          "hop-map": {
-            "type": "website",
-            "response": [
-              {
-                "id": "selectedCounty",
-                "prompt": "Selected County:",
-                "required": true,
-                "location": "belowStimulus",
-                "type": "reactive"
-              }
-            ],
-            "path": "geospatial-dm/assets/hop.html",
-            "instructionLocation": "aboveStimulus"
           }
     },
     "components": {
-        "hop-map-1": {
-            "baseComponent": "hop-map",
-            "description": "HOP map showing uncertainty visualization 1",
-            "instruction": "Click a county to select it.",
-            "parameters": {
-              "svgFile": "HOPStimuli/decision_draw_1_with_ids.svg"
-            }
-          },
-          "hop-map-2": {
-            "baseComponent": "hop-map",
-            "description": "HOP map showing uncertainty visualization 1",
-            "instruction": "Click a county to select it.",
-            "parameters": {
-              "svgFile": "HOPStimuli/decision_draw_2_with_ids.svg"
-            }
-          },
-          "hop-map-3": {
-            "baseComponent": "hop-map",
-            "description": "HOP map showing uncertainty visualization 1",
-            "instruction": "Click a county to select it.",
-            "parameters": {
-              "svgFile": "HOPStimuli/decision_draw_3_with_ids.svg"
-            }
-          },
-        "pixel-map-1": {
-            "baseComponent": "pixel-map",
-            "description": "Pixel map showing uncertainty visualization 1",
-            "instruction": "Click a county to select it.",
-            "parameters": {
-              "svgFile": "pixelStimuli/pixel1_with_ids.svg"
-            }
-          },
-          "pixel-map-2": {
-            "baseComponent": "pixel-map",
-            "description": "Pixel map showing uncertainty visualization 2",
-            "instruction": "Click a county to select it.",
-            "parameters": {
-              "svgFile": "pixelStimuli/pixel2_with_ids.svg"
-            }
-          },
-          "pixel-map-3": {
-            "baseComponent": "pixel-map",
-            "description": "Pixel map showing uncertainty visualization 3",
-            "instruction": "Click a county to select it.",
-            "parameters": {
-              "svgFile": "pixelStimuli/pixel3_with_ids.svg"
-            }
-          },
         "introduction": {
             "type": "markdown",
             "path": "geospatial-dm/assets/introduction.md",
