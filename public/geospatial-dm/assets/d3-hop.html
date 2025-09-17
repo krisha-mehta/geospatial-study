@@ -55,14 +55,15 @@
 <script>
 
 const CONFIG = {
-  STATE_FIPS: '35',            // New Mexico
-  CSV_FILE: 'NMData.csv',      // columns: county,pov,moe (same units as THRESHOLD)
-  THRESHOLD: 20,               // decision threshold (e.g., percent points)
-  MOE_Z: 1.645,                // sd = moe / MOE_Z (1.645 for 90% MOE)
-  N_FRAMES: 50,                // HOM frames
-  FPS: 8,                      // frames per second
-  MAX_SELECTIONS: 3,           // max counties participant can select
-  RNG_SEED: 42                 // seed basis for draws
+  // Only threshold / uncertainty / animation params stay fixed here.
+  THRESHOLD: 20,
+  MOE_Z: 1.645,
+  N_FRAMES: 50,
+  FPS: 8,
+  MAX_SELECTIONS: 3,
+  RNG_SEED: 42,
+  FALLBACK_FIPS: '35',      // used only if platform never supplies params
+  FALLBACK_CSV: 'NMData.csv'
 };
 
 
@@ -89,8 +90,8 @@ function erf(x){ const sign = Math.sign(x); const a1=0.254829592, a2=-0.28449673
 
 
 let state = {
-  stateFips: CONFIG.STATE_FIPS,
-  csvFile: CONFIG.CSV_FILE,
+  stateFips: null,          // will be set by ReVISit
+  csvFile: null,            // will be set by ReVISit
   threshold: CONFIG.THRESHOLD,
   moeZ: CONFIG.MOE_Z,
   fps: CONFIG.FPS,
@@ -100,8 +101,8 @@ let state = {
   maxSel: CONFIG.MAX_SELECTIONS,
   rngSeed: CONFIG.RNG_SEED,
   draws: [],
-  countyList: [],        // topo features
-  byFips: new Map()      // fips -> { name, pov, moe, xprob }
+  countyList: [],
+  byFips: new Map()
 };
 
 
@@ -256,25 +257,22 @@ function renderState(stateFips, csvFile){
   });
 }
 
-// 1) Render right away (delete this line if you want ONLY ReVISit control)
-//renderState(CONFIG.STATE_FIPS, CONFIG.CSV_FILE);
+Revisit.onDataReceive((data)=>{
+  const fips = data['stateFips'];
+  const csv  = data['csvFile'];
+  if (!fips || !csv){
+    console.warn('ReVISit data missing stateFips or csvFile');
+    return;
+  }
+  renderState(fips, csv);
+});
 
-// 2) If ReVISit sends data later, override (the loop keeps running)
-//try {
-  //if (typeof Revisit !== 'undefined' && typeof Revisit.onDataReceive === 'function'){
-    Revisit.onDataReceive((data)=>{
-      const fips = data['stateFips'];
-      const csv  = data['csvFile'];
-      if (!fips || !csv){
-        console.warn('ReVISit data missing stateFips or csvFile');
-        return;
-      }
-      renderState(fips, csv);
-    });
-  //}
-//} catch(err){
-  //console.error(err);
-//}
+// if platform never sends data within 1s, load defaults.
+setTimeout(()=>{
+  if (!state.stateFips) {
+    renderState(CONFIG.FALLBACK_FIPS, CONFIG.FALLBACK_CSV);
+  }
+}, 1000);
 </script>
 </body>
 </html>
