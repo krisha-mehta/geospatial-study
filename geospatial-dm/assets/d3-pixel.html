@@ -41,7 +41,7 @@
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
 
-  #chart { max-width: 600px; }
+  #chart { max-width: 400px; }
   #legend { max-width: 140px; }
 
   .label {
@@ -60,9 +60,9 @@
   }
 
 
-  @media (max-width: 700px) {
-    .viz-wrap { flex-direction: column; align-items: center; max-width: 600px; }
-    #legend { max-width: 600px; }
+  @media (max-width: 400px) {
+    .viz-wrap { flex-direction: column; align-items: center; max-width: 400px; }
+    #legend { max-width: 400px; }
   }
 </style>
 </head>
@@ -70,10 +70,10 @@
 
 <div class="viz-wrap">
   <!-- Map SVG -->
-  <svg id="chart" viewBox="0 0 600 600" aria-label="Pixel map of selected state"></svg>
+  <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
 
   <!--- Legend SVG (separate) -->
-  <svg id="legend" viewBox="0 0 140 600" aria-label="Legend"></svg>
+  <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
 </div>
 
 <div id="county-message-box"
@@ -87,7 +87,7 @@
 const svgMap    = d3.select("#chart");
 const svgLegend = d3.select("#legend");
 
-const width = 600, height = 600;  
+const width = 400, height = 400;  
 const PIXEL = 3;
 const MOE_Z = 1.645;
 const VALUE_MIN = 0, VALUE_MAX = 50;

@@ -47,19 +47,17 @@
 </head>
 <body>
   <div class="wrap">
-    <svg id="map" viewBox="0 0 500 500" aria-label="HOM county map"></svg>
+    <svg id="map" viewBox="0 0 400 400" aria-label="HOM county map"></svg>
   </div>
   <div class="legend"><span class="chip on"></span> Allocate &nbsp; <span class="chip off"></span> Not allocate</div>
   <div class="tip" id="tip"></div>
 
 <script>
-// =============================================================================
-// CONFIG — fixed parameters (no UI)
-// =============================================================================
+
 const CONFIG = {
-  STATE_FIPS: '35',            // New Mexico
-  CSV_FILE: 'NMData.csv',      // columns: county,pov,moe (same units as THRESHOLD)
-  THRESHOLD: 35,               // decision threshold (e.g., percent points)
+  //STATE_FIPS: '35',            // New Mexico
+  //CSV_FILE: 'NMData.csv',      // columns: county,pov,moe (same units as THRESHOLD)
+  THRESHOLD: 20,               // decision threshold (e.g., percent points)
   MOE_Z: 1.645,                // sd = moe / MOE_Z (1.645 for 90% MOE)
   N_FRAMES: 50,                // HOM frames
   FPS: 8,                      // frames per second
@@ -67,9 +65,7 @@ const CONFIG = {
   RNG_SEED: 42                 // seed basis for draws
 };
 
-// =============================================================================
-// Setup
-// =============================================================================
+
 const svg = d3.select('#map');
 const gFill = svg.append('g');
 const gBorders = svg.append('g');
@@ -91,9 +87,7 @@ function normalCdf(x, mean=0, sd=1){ const z=(x-mean)/(sd||1); return 0.5 * (1 +
 function erf(x){ const sign = Math.sign(x); const a1=0.254829592, a2=-0.284496736, a3=1.421413741, a4=-1.453152027, a5=1.061405429, p=0.3275911;
   const t = 1/(1+p*Math.abs(x)); const y = 1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x); return sign*y; }
 
-// =============================================================================
-// App state
-// =============================================================================
+
 let state = {
   stateFips: CONFIG.STATE_FIPS,
   csvFile: CONFIG.CSV_FILE,
@@ -110,9 +104,7 @@ let state = {
   byFips: new Map()      // fips -> { name, pov, moe, xprob }
 };
 
-// =============================================================================
-// Data loading & prep
-// =============================================================================
+
 async function loadData(){
   const [usTopo, csv] = await Promise.all([
     d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
@@ -153,7 +145,7 @@ async function loadData(){
   }
 
   // Projection & static layers
-  projection.fitSize([500,500], {type:'FeatureCollection', features: stateCounties});
+  projection.fitSize([400,400], {type:'FeatureCollection', features: stateCounties});
 
   svg.selectAll('*').interrupt();
   gFill.selectAll('*').remove();
@@ -234,9 +226,6 @@ function regenerateDraws(){
   state.frame = 0;
 }
 
-// =============================================================================
-// Rendering & animation (always running; no controls)
-// =============================================================================
 function renderFrame(k){
   state.frame = (k % state.nFrames + state.nFrames) % state.nFrames;
   const frame = state.draws[state.frame];
@@ -252,11 +241,10 @@ function loop(ts){
   requestAnimationFrame(loop);
 }
 
-// =============================================================================
-// Boot — render immediately with CONFIG; ReVISit may override later
-// =============================================================================
+
 let loopStarted = false;
 function startLoopOnce(){ if (!loopStarted){ loopStarted = true; requestAnimationFrame(loop); } }
+
 
 function renderState(stateFips, csvFile){
   state.stateFips = String(stateFips);
@@ -269,7 +257,7 @@ function renderState(stateFips, csvFile){
 }
 
 // 1) Render right away (delete this line if you want ONLY ReVISit control)
-renderState(CONFIG.STATE_FIPS, CONFIG.CSV_FILE);
+//renderState(CONFIG.STATE_FIPS, CONFIG.CSV_FILE);
 
 // 2) If ReVISit sends data later, override (the loop keeps running)
 try {
