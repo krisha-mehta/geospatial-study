@@ -282,7 +282,7 @@
     "pix_WE_UT": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{"condition":"pixel","region":"West","state":"UT","stateFips":"49","csvFile":"Data/UTData.csv","difficulty":"random","difficultyLevels":[1,2,3,4]}},
     "pix_WE_WA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"WA","stateFips":"53","csvFile":"Data/WaData.csv","difficulty":"random","difficultyLevels":[1,2,3,4]}},
+  "parameters":{"condition":"pixel","region":"West","state":"WA","stateFips":"53","csvFile":"Data/WAData.csv","difficulty":"random","difficultyLevels":[1,2,3,4]}},
     "pix_WE_WY": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{"condition":"pixel","region":"West","state":"WY","stateFips":"56","csvFile":"Data/WYData.csv","difficulty":"random","difficultyLevels":[1,2,3,4]}}
 
