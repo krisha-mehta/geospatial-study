@@ -293,8 +293,8 @@
     "components": [
       "introduction",
 
-      {  "order": "fixed", "components": ["consent"],
-         "skip": [{ "name":"consent", "check":"response", "responseId":"accept", "value":"no", "to":"end" }]
+  {  "order": "fixed", "components": ["consent"],
+     "skip": [{ "name":"consent", "check":"response", "responseId":"accept", "comparison":"equal", "value":"no", "to":"end" }]
       },
 
       {  "order": "latinSquare", "numSamples": 1,
