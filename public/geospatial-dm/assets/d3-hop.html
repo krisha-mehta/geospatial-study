@@ -45,7 +45,6 @@
     <svg id="map" viewBox="0 0 400 400" aria-label="HOM county map"></svg>
   </div>
   <div class="legend"><span class="chip on"></span> Allocate &nbsp; <span class="chip off"></span> Not allocate</div>
-  <!-- tooltip removed -->
   <div id="county-message-box" style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px; background:linear-gradient(135deg,rgba(247,251,255,0.92) 70%,rgba(227,242,253,0.92) 100%); max-width:320px; font-size:15px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000; position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.95; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif"></div>
 
 <script>
@@ -229,7 +228,7 @@ async function loadData(){
           onNo: () => {}
         });
       })
-  // hover styling removed
+
 
   state.countyList = stateCounties;
   state.byFips = byFips;
