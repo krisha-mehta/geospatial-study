@@ -55,8 +55,8 @@
 <script>
 
 const CONFIG = {
-  //STATE_FIPS: '35',            // New Mexico
-  //CSV_FILE: 'NMData.csv',      // columns: county,pov,moe (same units as THRESHOLD)
+  STATE_FIPS: '35',            // New Mexico
+  CSV_FILE: 'NMData.csv',      // columns: county,pov,moe (same units as THRESHOLD)
   THRESHOLD: 20,               // decision threshold (e.g., percent points)
   MOE_Z: 1.645,                // sd = moe / MOE_Z (1.645 for 90% MOE)
   N_FRAMES: 50,                // HOM frames
@@ -257,7 +257,7 @@ function renderState(stateFips, csvFile){
 }
 
 // 1) Render right away (delete this line if you want ONLY ReVISit control)
-//renderState(CONFIG.STATE_FIPS, CONFIG.CSV_FILE);
+renderState(CONFIG.STATE_FIPS, CONFIG.CSV_FILE);
 
 // 2) If ReVISit sends data later, override (the loop keeps running)
 try {
