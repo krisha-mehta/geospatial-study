@@ -79,6 +79,16 @@
                 "csvFile": "AZData.csv"
             }
         },
+        "d3-pixel-3":{
+            "baseComponent": "pixel-map-d3",
+            "type":"website",
+            "path": "geospatial-dm/assets/d3-pixel.html",
+           "instruction": "Click a county to select it.",
+            "parameters": {
+                "stateFips": "17",
+                "csvFile": "Data/ILData.csv"
+            }
+        },
         "d3-hom-1":{
             "baseComponent": "hom-map-d3",
             "type":"website",
@@ -97,6 +107,16 @@
             "parameters": {
                 "stateFips": "04",
                 "csvFile": "AZData.csv"
+            }
+        },
+        "d3-hom-3":{
+            "baseComponent": "hom-map-d3",
+            "type":"website",
+            "path": "geospatial-dm/assets/d3-hop.html",
+           "instruction": "Click a county to select it.",
+            "parameters": {
+                "stateFips": "17",
+                "csvFile": "Data/ILData.csv"
             }
         },
         "consent":{
@@ -142,8 +162,10 @@
             "consent",
             "d3-pixel-1",
             "d3-pixel-2",
+            "d3-pixel-3",
             "d3-hom-1",
-            "d3-hom-2"
+            "d3-hom-2",
+            "d3-hom-3"
         ]
 
     }
