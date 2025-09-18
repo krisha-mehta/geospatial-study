@@ -291,7 +291,7 @@
   "sequence": {
     "order": "fixed",
     "components": [
-      "introduction",
+    "introduction",
     "consent",
       {  "order": "latinSquare", "numSamples": 1,
          "components": [
