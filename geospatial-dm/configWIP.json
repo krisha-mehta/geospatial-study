@@ -24,7 +24,7 @@
   "baseComponents": {
     "pixel-map-d3": {
       "type": "website",
-      "path": "d3-pixel.html",
+      "path": "geospatial-dm/assets/d3-pixel.html",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -38,7 +38,7 @@
     },
     "hom-map-d3": {
       "type": "website",
-      "path": "d3-hop.html",
+      "path": "geospatial-dm/assets/d3-hop.html",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -55,13 +55,13 @@
   "components": {
     "introduction": {
       "type": "markdown",
-      "path": "introduction.md",
+      "path": "geospatial-dm/assets/introduction.md",
       "response": []
     },
 
     "consent": {
       "type": "markdown",
-      "path": "consent.md",
+      "path": "geospatial-dm/assets/consent.md",
       "nextButtonText": "Agree",
       "response": [
         {
