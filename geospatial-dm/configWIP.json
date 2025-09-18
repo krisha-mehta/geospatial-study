@@ -105,7 +105,6 @@
       "parameters": { "condition":"hops", "region":"Northeast", "state":"NY", "stateFips":"36", "csvFile":"Data/NYData.csv"} },
     "hom_NE_PA": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
       "parameters": { "condition":"hops", "region":"Northeast", "state":"PA", "stateFips":"42", "csvFile":"Data/PAData.csv"} },
-
     "hom_MW_IL": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
       "parameters": { "condition":"hops", "region":"Midwest", "state":"IL", "stateFips":"17", "csvFile":"Data/ILData.csv"} },
     "hom_MW_IN": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
@@ -130,7 +129,6 @@
       "parameters": { "condition":"hops", "region":"Midwest", "state":"SD", "stateFips":"46", "csvFile":"Data/SDData.csv"} },
     "hom_MW_WI": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
       "parameters": { "condition":"hops", "region":"Midwest", "state":"WI", "stateFips":"55", "csvFile":"Data/WIData.csv"} },
-
       "hom_SO_AL": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{"condition":"hops","region":"South","state":"AL","stateFips":"01","csvFile":"Data/ALData.csv"}},
     "hom_SO_AR": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
@@ -161,7 +159,6 @@
       "parameters":{"condition":"hops","region":"South","state":"VA","stateFips":"51","csvFile":"Data/VAData.csv"}},
     "hom_SO_WV": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{"condition":"hops","region":"South","state":"WV","stateFips":"54","csvFile":"Data/WVData.csv"}},
-
     "hom_WE_AK": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{"condition":"hops","region":"West","state":"AK","stateFips":"02","csvFile":"Data/AKData.csv"}},
     "hom_WE_AZ": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
@@ -186,7 +183,6 @@
       "parameters":{"condition":"hops","region":"West","state":"WA","stateFips":"53","csvFile":"Data/WAData.csv"}},
     "hom_WE_WY": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{"condition":"hops","region":"West","state":"WY","stateFips":"56","csvFile":"Data/WYData.csv"}},
-
     "pix_NE_CT": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{ "condition":"pixel","region":"Northeast","state":"CT","stateFips":"09","csvFile":"Data/CTData.csv"}},
     "pix_NE_ME": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
@@ -205,7 +201,6 @@
       "parameters":{ "condition":"pixel","region":"Northeast","state":"NY","stateFips":"36","csvFile":"Data/NYData.csv"}},
     "pix_NE_PA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{ "condition":"pixel","region":"Northeast","state":"PA","stateFips":"42","csvFile":"Data/PAData.csv"}},
-
     "pix_MW_IL": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{ "condition":"pixel","region":"Midwest","state":"IL","stateFips":"17","csvFile":"Data/ILData.csv"}},
     "pix_MW_IN": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
@@ -260,7 +255,6 @@
       "parameters":{"condition":"pixel","region":"South","state":"VA","stateFips":"51","csvFile":"Data/VAData.csv"}},
     "pix_SO_WV": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{"condition":"pixel","region":"South","state":"WV","stateFips":"54","csvFile":"Data/WVData.csv"}},
-
     "pix_WE_AK": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
       "parameters":{"condition":"pixel","region":"West","state":"AK","stateFips":"02","csvFile":"Data/AKData.csv"}},
     "pix_WE_AZ": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
