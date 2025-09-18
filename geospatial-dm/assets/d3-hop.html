@@ -30,21 +30,46 @@
   .county.on  { fill:#800000; }  /* allocate */
   .county.off { fill:#e9e9e9; }  /* not allocate */
 
-  .state-outline { fill:none; stroke:#222; stroke-width:1.2; vector-effect:non-scaling-stroke; }
+  .state-outline { fill:none; 
+    stroke:#222; 
+    stroke-width:1.2; 
+    vector-effect:non-scaling-stroke; 
+}
 
 
-  .legend { position:fixed; right:14px; bottom:14px; background:#fff; border:1px solid #e5e5e5;
-            border-radius:10px; padding:8px 10px; font-size:12px; color:#222; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
-  .chip { width:12px; height:12px; border-radius:3px; display:inline-block; vertical-align:middle; margin-right:6px; border:1px solid #777; }
-  .chip.on  { background:#800000; border-color:#800000; }
-  .chip.off { background:#e9e9e9; border-color:#aaa; }
+  .legend { position:fixed; 
+    right:14px; 
+    bottom:14px; 
+    background:#fff; 
+    border:1px solid #e5e5e5;
+    border-radius:10px; 
+    padding:8px 10px; 
+    font-size:12px; 
+    color:#222; 
+    box-shadow:0 2px 10px rgba(0,0,0,0.05); 
+  }
+  .chip { width:12px; 
+    height:12px; 
+    border-radius:3px; 
+    display:inline-block; 
+    vertical-align:middle; 
+    margin-right:6px; 
+    border:1px solid #777; 
+}
+  .chip.on  { 
+    background:#800000; 
+    border-color:#800000; 
+}
+  .chip.off { 
+    background:#e9e9e9; 
+    border-color:#aaa; }
 </style>
 </head>
 <body>
   <div class="wrap">
     <svg id="map" viewBox="0 0 400 400" aria-label="HOM county map"></svg>
   </div>
-  <div class="legend"><span class="chip on"></span> Allocate &nbsp; <span class="chip off"></span> Not allocate</div>
+  <div class="legend"><span class="chip on"></span> Above Threshold Poverty Rates &nbsp; <span class="chip off"></span> Below Threshold Poverty Rates</div>
   <div id="county-message-box" style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px; background:linear-gradient(135deg,rgba(247,251,255,0.92) 70%,rgba(227,242,253,0.92) 100%); max-width:320px; font-size:15px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000; position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.95; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif"></div>
 
 <script>
@@ -77,9 +102,22 @@ function mulberry32(a){ return function(){ let t=a+=0x6D2B79F5; t=Math.imul(t^t>
 function hashStr(str){ let h=2166136261; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h = Math.imul(h, 16777619); } return h>>>0; }
 
 // Normal CDF via erf approximation
-function normalCdf(x, mean=0, sd=1){ const z=(x-mean)/(sd||1); return 0.5 * (1 + erf(z/Math.SQRT2)); }
-function erf(x){ const sign = Math.sign(x); const a1=0.254829592, a2=-0.284496736, a3=1.421413741, a4=-1.453152027, a5=1.061405429, p=0.3275911;
-  const t = 1/(1+p*Math.abs(x)); const y = 1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x); return sign*y; }
+function normalCdf(x, mean=0, sd=1){ 
+    const z=(x-mean)/(sd||1); 
+    return 0.5 * (1 + erf(z/Math.SQRT2)); 
+}
+function erf(x){ 
+    const sign = Math.sign(x); 
+    const a1=0.254829592, 
+    a2=-0.284496736, 
+    a3=1.421413741, 
+    a4=-1.453152027, 
+    a5=1.061405429, 
+    p=0.3275911;
+  const t = 1/(1+p*Math.abs(x)); 
+  const y = 1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+   return sign*y; 
+}
 
 
 let state = {
@@ -113,7 +151,6 @@ async function loadData(){
     (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b
   );
 
-  // name → fips dictionary with St/Saint variants
   const nameToFips = new Map();
   for(const f of stateCounties){
     const raw = f.properties?.name ?? '';
@@ -128,7 +165,7 @@ async function loadData(){
     }
   }
 
-  // Join CSV → FIPS
+
   const byFips = new Map();
   for(const r of csv){
     const rawName = String(r.county ?? r.NAME ?? '').trim();
@@ -138,7 +175,6 @@ async function loadData(){
     byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
   }
 
-  // Projection & static layers
   projection.fitSize([400,400], {type:'FeatureCollection', features: stateCounties});
 
   svg.selectAll('*').interrupt();
@@ -152,7 +188,7 @@ async function loadData(){
     .attr('fill','none').attr('stroke','#666').attr('stroke-width',0.8)
     .attr('vector-effect','non-scaling-stroke');
 
-  // County paths (we only flip classes per frame)
+  // County paths
   gFill.selectAll('path.county')
     .data(stateCounties, d=>String(d.id))
     .join('path')
