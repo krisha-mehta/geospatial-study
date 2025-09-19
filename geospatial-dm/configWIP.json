@@ -12,7 +12,7 @@
 
   "uiConfig": {
     "contactEmail": "krisha@uchicago.edu",
-    "helpTextPath": "help.md",
+    "helpTextPath": "geospatial-dm/assets/help.md",
     "logoPath": "revisitAssets/dcl_logo.png",
     "withProgressBar": true,
     "autoDownloadStudy": false,
@@ -290,7 +290,7 @@
       {  "order": "latinSquare", "numSamples": 1,
          "components": [
 
-          { "order": "fixed", "components": [
+          { "order": "latinSquare", "components": [
 
             { "order": "latinSquare", "numSamples": 4, "components": [
               "hom_NE_CT","hom_NE_ME","hom_NE_MA","hom_NE_NH","hom_NE_RI","hom_NE_VT","hom_NE_NJ","hom_NE_NY","hom_NE_PA"
@@ -309,7 +309,7 @@
             ]}
           ]},
 
-          { "order": "fixed", "components": [
+          { "order": "latinSquare", "components": [
 
             { "order": "latinSquare", "numSamples": 4, "components": [
               "pix_NE_CT","pix_NE_ME","pix_NE_MA","pix_NE_NH","pix_NE_RI","pix_NE_VT","pix_NE_NJ","pix_NE_NY","pix_NE_PA"
