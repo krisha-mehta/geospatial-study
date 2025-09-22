@@ -32,6 +32,7 @@
           "prompt": "Your selected answer:",
           "required": true,
           "location": "belowStimulus",
+          "hidden": true,
           "type": "reactive"
         }
       ]
@@ -46,7 +47,7 @@
           "prompt": "Your selected answer:",
           "required": true,
           "location": "belowStimulus",
-          "hidden": true,
+          "hidden": false,
           "type": "reactive"
         }
       ]
