@@ -28,6 +28,7 @@
     align-items: flex-start;
     justify-content: center;
     max-width: 760px; 
+    height: 600px;
     margin: 0 auto;
     padding: 0 12px;
   }
@@ -180,8 +181,8 @@ function renderState(stateFips, csvFile) {
     gState.append("path")
       .attr("d", path(stateFeature))
       .attr("fill","none")
-      .attr("stroke","#333")
-      .attr("stroke-width",1.2)
+      .attr("stroke","#595959")
+      .attr("stroke-width",1)
       .attr("vector-effect","non-scaling-stroke");
 
     // County borders
@@ -189,7 +190,7 @@ function renderState(stateFips, csvFile) {
       .attr("d", path(stateMesh))
       .attr("fill","none")
       .attr("stroke","#595959")
-      .attr("stroke-width",1.2)
+      .attr("stroke-width",1)
       .attr("vector-effect","non-scaling-stroke");
 
     // Labels 
