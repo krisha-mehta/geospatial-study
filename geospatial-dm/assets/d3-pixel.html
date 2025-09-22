@@ -28,7 +28,7 @@
     align-items: flex-start;
     justify-content: center;
     max-width: 760px; 
-    height: 600px;
+    height: 450px;
     margin: 0 auto;
     padding: 0 12px;
   }
@@ -59,6 +59,47 @@
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
 
+  /* Selected counties panel */
+  .selected-panel {
+    max-width: 760px;
+    margin: 12px auto 0;
+    padding: 0 12px 8px;
+    font-size: 14px;
+    color: #111;
+  }
+  .selected-panel .chips {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f2f6ff;
+    border: 1px solid #c9ddff;
+    color: #0b3d91;
+    line-height: 1;
+  }
+  .chip button.remove-chip {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #0b3d91;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 2px;
+  }
+  .chip button.remove-chip:focus-visible {
+    outline: 2px solid #0b5cff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
 
   @media (max-width: 400px) {
     .viz-wrap { flex-direction: column; align-items: center; max-width: 400px; }
@@ -75,6 +116,9 @@
   <!--- Legend SVG (separate) -->
   <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
 </div>
+
+<!-- Interactive selected counties list rendered by the page -->
+<div id="selected-list" class="selected-panel" aria-live="polite"></div>
 
 <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
@@ -235,6 +279,41 @@ function renderState(stateFips, csvFile) {
     let selectedCounties = [];
     const maxSelections = 3;
 
+    function renderSelectedList() {
+      const panel = document.getElementById('selected-list');
+      const title = '<strong>Your selected counties:</strong>';
+      if (!selectedCounties.length) {
+        panel.innerHTML = `${title} <span style="color:#666;">None</span>`;
+        return;
+      }
+      const chips = selectedCounties.map(c => (
+        `<span class="chip" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">
+           <span>${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>
+           <button class="remove-chip" type="button" aria-label="Remove ${c}" title="Remove ${c}" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">&times;</button>
+         </span>`
+      )).join('');
+      panel.innerHTML = `${title}<div class="chips">${chips}</div>`;
+    }
+  // initial render
+  renderSelectedList();
+
+    // Delegate click handling for remove buttons
+    document.addEventListener('click', (ev) => {
+      const btn = ev.target;
+      if (!(btn instanceof HTMLElement)) return;
+      if (!btn.classList.contains('remove-chip')) return;
+      const county = btn.getAttribute('data-county');
+      if (!county) return;
+      // Remove without confirmation
+      selectedCounties = selectedCounties.filter(c => c !== county);
+      Revisit.postAnswers({ selectedCounty: selectedCounties });
+      // Re-enable counties if we are below cap
+      if (selectedCounties.length < maxSelections) {
+        gCounties.selectAll('.county-interactive').style('pointer-events', 'auto');
+      }
+      renderSelectedList();
+    });
+
     function showCountyMessageBox({ county, alreadySelected, onYes, onNo }) {
       const box = document.getElementById("county-message-box");
       let msg = "";
@@ -290,6 +369,7 @@ function renderState(stateFips, csvFile) {
               onYes: () => {
                 selectedCounties.push(county);
                 Revisit.postAnswers({ selectedCounty: selectedCounties });
+                renderSelectedList();
                 if (selectedCounties.length === maxSelections) {
                   gCounties.selectAll(".county-interactive")
                     .filter(function() {
@@ -307,6 +387,7 @@ function renderState(stateFips, csvFile) {
               onYes: () => {
                 selectedCounties = selectedCounties.filter(c => c !== county);
                 Revisit.postAnswers({ selectedCounty: selectedCounties });
+                renderSelectedList();
                 if (selectedCounties.length < maxSelections) {
                   gCounties.selectAll(".county-interactive").style("pointer-events", "auto");
                 }
