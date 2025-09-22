@@ -46,6 +46,7 @@
           "prompt": "Your selected answer:",
           "required": true,
           "location": "belowStimulus",
+          "hidden": true,
           "type": "reactive"
         }
       ]
