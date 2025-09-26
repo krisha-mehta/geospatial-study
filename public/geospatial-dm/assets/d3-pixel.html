@@ -398,13 +398,30 @@ function renderState(stateFips, csvFile) {
               onNo: () => {}
             });
           } else {
-            // Remove directly, no confirmation
-            selectedCounties = selectedCounties.filter(c => c !== county);
-            Revisit.postAnswers({ selectedCounty: selectedCounties });
-            renderSelectedList();
-            if (selectedCounties.length < maxSelections) {
-              gCounties.selectAll(".county-interactive").style("pointer-events", "auto");
+            const box = document.getElementById("county-message-box");
+            const msg = `You have already selected this county to allocate resources.<br>To unselect, click on the <b>x</b> next to the county name below.`;
+            box.innerHTML = msg + `<br><br><button id='county-ok-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>OK</button>`;
+            box.style.display = "block";
+            let countyFeature = null;
+            for (const f of stateCounties) {
+              const name = byFips.get(String(f.id))?.name ?? String(f.id);
+              if (name === county) { countyFeature = f; break; }
             }
+            const svgEl = document.getElementById("chart");
+            const svgRect = svgEl.getBoundingClientRect();
+            box.style.position = "absolute";
+            if (countyFeature) {
+              const centroid = path.centroid(countyFeature);
+              box.style.left = (svgRect.left + centroid[0]) + "px";
+              box.style.top  = (svgRect.top  + centroid[1]) + "px";
+              box.style.transform = "translate(-50%, 20px)";
+            } else {
+              box.style.left = (svgRect.left + 20) + "px";
+              box.style.top  = (svgRect.top  + 20) + "px";
+              box.style.transform = "none";
+            }
+            box.style.zIndex = 1000;
+            document.getElementById("county-ok-btn").onclick = () => { box.style.display = "none"; };
           }
         });
 
