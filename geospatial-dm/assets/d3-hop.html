@@ -57,7 +57,7 @@
    #county-message-box {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
-  
+
   .selected-panel {
     max-width: 760px;
     margin: 30px auto 0;
@@ -71,6 +71,33 @@
     flex-wrap: wrap;
     gap: 8px;
   }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f2f6ff;
+    border: 1px solid #c9ddff;
+    color: #0b3d91;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .chip button.remove-chip {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #0b3d91;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 2px;
+  }
+  .chip button.remove-chip:focus-visible {
+    outline: 2px solid #0b5cff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
   .county-interactive.highlight {
     stroke: #000000 !important;
     stroke-width: 1.5 !important;
@@ -78,7 +105,7 @@
     pointer-events: none;
   }
 
-  .chip { width:12px; 
+  .legend_chip { width:12px; 
     height:12px; 
     border-radius:3px; 
     display:inline-block; 
@@ -86,11 +113,11 @@
     margin-right:6px; 
     border:1px solid #777; 
 }
-  .chip.on  { 
+  .legend_chip.on  { 
     background:#800000; 
     border-color:#800000; 
 }
-  .chip.off { 
+  .legend_chip.off { 
     background:#e9e9e9; 
     border-color:#aaa; }
 </style>
@@ -101,7 +128,7 @@
     <svg id="map" viewBox="0 0 400 400" aria-label="HOM county map"></svg>
   </div>
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
-  <div class="legend"><span class="chip on"></span> Above Threshold Poverty Rates &nbsp; <span class="chip off"></span> Below Threshold Poverty Rates</div>
+  <div class="legend"><span class="legend_chip on"></span> Above Threshold Poverty Rates &nbsp; <span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
   <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
             background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
