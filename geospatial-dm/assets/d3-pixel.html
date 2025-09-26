@@ -18,22 +18,12 @@
   body {
     margin: 0;
     width: 650px;
-    height: 650px;
+    height: 550px;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: #fff;
   }
 
- 
-  .viz-wrap {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    justify-content: center;
-    max-width: 760px;
-    height: 400px;
-    margin: 50 auto;
-    padding: 0 12px;
-  }
+  .viz-wrap { max-width:400px; margin:0 auto; padding:10px 14px 28px; }
 
   svg {
     width: 100%;
@@ -177,6 +167,13 @@ const gCounties = svgMap.append("g").attr("class","counties");
 const projection = d3.geoEquirectangular();
 const path = d3.geoPath(projection);
 
+document.addEventListener('click', (event) => {
+  const messageBox = document.getElementById('county-message-box');
+  const map = document.getElementById('map');
+  if (!messageBox.contains(event.target) && !map.contains(event.target) && messageBox.style.display === 'block') {
+    messageBox.style.display = 'none';
+  }
+});
 
 function renderState(stateFips, csvFile) {
   Promise.all([
