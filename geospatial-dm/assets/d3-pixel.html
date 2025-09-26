@@ -305,24 +305,21 @@ function renderState(stateFips, csvFile) {
   // initial render
   renderSelectedList();
 
-    // Delegate click handling for remove buttons
     document.addEventListener('click', (ev) => {
       const btn = ev.target;
       if (!(btn instanceof HTMLElement)) return;
       if (!btn.classList.contains('remove-chip')) return;
       const county = btn.getAttribute('data-county');
       if (!county) return;
-      // Remove without confirmation
       selectedCounties = selectedCounties.filter(c => c !== county);
       Revisit.postAnswers({ selectedCounty: selectedCounties });
-      // Re-enable counties if we are below cap
+      d3.selectAll('.county-interactive').classed('highlight', false);
       if (selectedCounties.length < maxSelections) {
         gCounties.selectAll('.county-interactive').style('pointer-events', 'auto');
       }
       renderSelectedList();
     });
 
-    // Highlight county on chip hover
     document.addEventListener('mouseover', (ev) => {
       const chip = ev.target.closest('.chip');
       if (!chip) return;
