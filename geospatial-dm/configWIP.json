@@ -300,9 +300,9 @@
     "consent",
       {  "order": "latinSquare", "numSamples": 1,
          "components": [
+          { "order": "fixed", "components": [
           "hop-intro",
           { "order": "latinSquare", "components": [
-
             { "order": "latinSquare", "numSamples": 4, "components": [
               "hom_NE_CT","hom_NE_ME","hom_NE_MA","hom_NE_NH","hom_NE_RI","hom_NE_VT","hom_NE_NJ","hom_NE_NY","hom_NE_PA"
             ]},
@@ -318,10 +318,12 @@
             { "order": "latinSquare", "numSamples": 4, "components": [
               "hom_WE_AK","hom_WE_AZ","hom_WE_CA","hom_WE_CO","hom_WE_ID","hom_WE_MT","hom_WE_NV","hom_WE_NM","hom_WE_OR","hom_WE_UT","hom_WE_WA","hom_WE_WY"
             ]}
+          ]}
           ]},
 
-          { "order": "latinSquare", "components": [
+          { "order": "fixed", "components": [
           "pixel-intro",
+          { "order": "latinSquare", "components": [
             { "order": "latinSquare", "numSamples": 4, "components": [
               "pix_NE_CT","pix_NE_ME","pix_NE_MA","pix_NE_NH","pix_NE_RI","pix_NE_VT","pix_NE_NJ","pix_NE_NY","pix_NE_PA"
             ]},
@@ -338,6 +340,7 @@
               "pix_WE_AK","pix_WE_AZ","pix_WE_CA","pix_WE_CO","pix_WE_ID","pix_WE_MT","pix_WE_NV","pix_WE_NM","pix_WE_OR","pix_WE_UT","pix_WE_WA","pix_WE_WY"
             ]}
           ]}
+        ]}
         ]}
     ]
   }
