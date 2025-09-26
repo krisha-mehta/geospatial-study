@@ -60,7 +60,16 @@
       "path": "geospatial-dm/assets/introduction.md",
       "response": []
     },
-
+    "hop-intro": {
+      "type": "markdown",
+      "path": "geospatial-dm/assets/hop-intro.md",
+      "response": []
+    },
+    "pixel-intro": {
+      "type": "markdown",
+      "path": "geospatial-dm/assets/pixel-intro.md",
+      "response": []
+    },
     "consent": {
       "type": "markdown",
       "path": "geospatial-dm/assets/consent.md",
@@ -291,7 +300,7 @@
     "consent",
       {  "order": "latinSquare", "numSamples": 1,
          "components": [
-
+          "hop-intro",
           { "order": "latinSquare", "components": [
 
             { "order": "latinSquare", "numSamples": 4, "components": [
@@ -312,7 +321,7 @@
           ]},
 
           { "order": "latinSquare", "components": [
-
+          "pixel-intro",
             { "order": "latinSquare", "numSamples": 4, "components": [
               "pix_NE_CT","pix_NE_ME","pix_NE_MA","pix_NE_NH","pix_NE_RI","pix_NE_VT","pix_NE_NJ","pix_NE_NY","pix_NE_PA"
             ]},
