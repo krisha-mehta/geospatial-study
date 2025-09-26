@@ -101,7 +101,12 @@
     outline-offset: 2px;
     border-radius: 4px;
   }
-
+  .county-interactive.highlight {
+    stroke: #0077cc !important;
+    stroke-width: 3 !important;
+    fill: rgba(0,119,204,0.08) !important;
+    pointer-events: none;
+  }
 
   @media (max-width: 400px) {
     .viz-wrap { flex-direction: column; align-items: center; max-width: 400px; }
@@ -314,6 +319,22 @@ function renderState(stateFips, csvFile) {
         gCounties.selectAll('.county-interactive').style('pointer-events', 'auto');
       }
       renderSelectedList();
+    });
+
+    // Highlight county on chip hover
+    document.addEventListener('mouseover', (ev) => {
+      const chip = ev.target.closest('.chip');
+      if (!chip) return;
+      const county = chip.getAttribute('data-county');
+      if (!county) return;
+      d3.selectAll('.county-interactive').classed('highlight', function() {
+        return d3.select(this).attr('data-county') === county;
+      });
+    });
+    document.addEventListener('mouseout', (ev) => {
+      const chip = ev.target.closest('.chip');
+      if (!chip) return;
+      d3.selectAll('.county-interactive').classed('highlight', false);
     });
 
     function showCountyMessageBox({ county, alreadySelected, onYes, onNo }) {
