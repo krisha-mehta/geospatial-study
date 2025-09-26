@@ -29,7 +29,8 @@
 
   .wrap { max-width:400px; margin:0 auto; padding:10px 14px 28px; }
   svg { width:100%; height:auto; display:block; background:#fff; }
-  #map { aspect-ratio:1/1; }
+  #map { max-width: 400px; }
+  #legend { max-width: 140px; }
 
   /* county fills for HOM */
   .county { stroke:#777; stroke-width:0.8; vector-effect:non-scaling-stroke; cursor:pointer; }
@@ -125,9 +126,10 @@
 
   <div class="wrap">
     <svg id="map" viewBox="0 0 400 400" aria-label="HOM county map"></svg>
+    <div id="legend"><span class="legend_chip on"></span> Above Threshold Poverty Rates &nbsp; <span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
+
   </div>
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
-  <div class="legend"><span class="legend_chip on"></span> Above Threshold Poverty Rates &nbsp; <span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
   <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
             background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
