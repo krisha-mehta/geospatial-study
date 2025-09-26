@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -329,6 +330,36 @@ function computeXprob(){
       ? (rec.pov >= t ? 1 : 0)
       : (1 - normalCdf(t, rec.pov, sd));
   }
+}
+
+function showCountyMessageBox({ county, onYes, onNo }) {
+  const box = document.getElementById("county-message-box");
+  const msg = `Do you want to allocate your resources to <b>${county}</b>?`;
+  box.innerHTML = msg + `<br><br><button id='county-yes-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>Yes</button> <button id='county-no-btn' style='background:#fff;color:#0077cc;border:1.5px solid #0077cc;border-radius:6px;padding:7px 18px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>No</button>`;
+  box.style.display = "block";
+
+  let countyFeature = null;
+  for (const f of state.countyList) {
+    const name = state.byFips.get(String(f.id))?.name ?? String(f.id);
+    if (name === county) { countyFeature = f; break; }
+  }
+  const svgEl = document.getElementById("map");
+  const svgRect = svgEl.getBoundingClientRect();
+  box.style.position = "absolute";
+  if (countyFeature) {
+    const centroid = path.centroid(countyFeature);
+    box.style.left = (svgRect.left + centroid[0]) + "px";
+    box.style.top  = (svgRect.top  + centroid[1]) + "px";
+    box.style.transform = "translate(-50%, 20px)";
+  } else {
+    box.style.left = (svgRect.left + 20) + "px";
+    box.style.top  = (svgRect.top  + 20) + "px";
+    box.style.transform = "none";
+  }
+  box.style.zIndex = 1000;
+
+  document.getElementById("county-yes-btn").onclick = () => { box.style.display = "none"; onYes(); };
+  document.getElementById("county-no-btn").onclick  = () => { box.style.display = "none"; onNo();  };
 }
 
 function regenerateDraws(){
