@@ -1,1 +1,1 @@
-# this is hops
+Welcome, and thank you for participating in our study.
