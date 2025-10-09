@@ -1,15 +1,19 @@
 {
   "$schema": "https://raw.githubusercontent.com/revisit-studies/study/main/src/parser/StudyConfigSchema.json",
-
   "studyMetadata": {
     "title": "Uncertainty Visualizations for Geospatial Decision-Making Study",
     "version": "pilot",
-    "authors": ["Krisha Mehta", "Julia Koschinsky", "Alex Kale"],
+    "authors": [
+      "Krisha Mehta",
+      "Julia Koschinsky",
+      "Alex Kale"
+    ],
     "date": "2025-08-29",
     "description": "This study investigates how different uncertainty representations influence decision-making",
-    "organizations": ["University of Chicago"]
+    "organizations": [
+      "University of Chicago"
+    ]
   },
-
   "uiConfig": {
     "contactEmail": "krisha@uchicago.edu",
     "helpTextPath": "geospatial-dm/assets/help.md",
@@ -20,7 +24,6 @@
     "urlParticipantIdParam": "PROLIFIC_PID",
     "studyEndMsg": "**Thank you for completing the study. You may click this link and return to Prolific**"
   },
-
   "baseComponents": {
     "pixel-map-d3": {
       "type": "website",
@@ -53,7 +56,6 @@
       ]
     }
   },
-
   "components": {
     "introduction": {
       "type": "markdown",
@@ -92,256 +94,5668 @@
           "location": "belowStimulus",
           "type": "radio",
           "options": [
-            { "label": "Decline", "value": "no" },
-            { "label": "Accept",  "value": "yes" }
+            {
+              "label": "Decline",
+              "value": "no"
+            },
+            {
+              "label": "Accept",
+              "value": "yes"
+            }
           ]
         }
       ]
     },
-    "hom_NE_CT": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"CT", "stateFips":"09", "csvFile":"Data/CTData.csv"} },
-    "hom_NE_ME": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"ME", "stateFips":"23", "csvFile":"Data/MEData.csv"} },
-    "hom_NE_MA": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"MA", "stateFips":"25", "csvFile":"Data/MAData.csv"} },
-    "hom_NE_NH": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"NH", "stateFips":"33", "csvFile":"Data/NHData.csv"} },
-    "hom_NE_RI": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"RI", "stateFips":"44", "csvFile":"Data/RIData.csv"} },
-    "hom_NE_VT": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"VT", "stateFips":"50", "csvFile":"Data/VTData.csv"} },
-    "hom_NE_NJ": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"NJ", "stateFips":"34", "csvFile":"Data/NJData.csv"} },
-    "hom_NE_NY": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"NY", "stateFips":"36", "csvFile":"Data/NYData.csv"} },
-    "hom_NE_PA": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Northeast", "state":"PA", "stateFips":"42", "csvFile":"Data/PAData.csv"} },
-    "hom_MW_IL": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"IL", "stateFips":"17", "csvFile":"Data/ILData.csv"} },
-    "hom_MW_IN": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"IN", "stateFips":"18", "csvFile":"Data/INData.csv"} },
-    "hom_MW_IA": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"IA", "stateFips":"19", "csvFile":"Data/IAData.csv"} },
-    "hom_MW_KS": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"KS", "stateFips":"20", "csvFile":"Data/KSData.csv"} },
-    "hom_MW_MI": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"MI", "stateFips":"26", "csvFile":"Data/MIData.csv"} },
-    "hom_MW_MN": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"MN", "stateFips":"27", "csvFile":"Data/MNData.csv"} },
-    "hom_MW_MO": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"MO", "stateFips":"29", "csvFile":"Data/MOData.csv"} },
-    "hom_MW_NE": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"NE", "stateFips":"31", "csvFile":"Data/NEData.csv"} },
-    "hom_MW_ND": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"ND", "stateFips":"38", "csvFile":"Data/NDData.csv"} },
-    "hom_MW_OH": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"OH", "stateFips":"39", "csvFile":"Data/OHData.csv"} },
-    "hom_MW_SD": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"SD", "stateFips":"46", "csvFile":"Data/SDData.csv"} },
-    "hom_MW_WI": { "baseComponent": "hom-map-d3", "type":"website", "instruction":"Click a county to select it.",
-      "parameters": { "condition":"hops", "region":"Midwest", "state":"WI", "stateFips":"55", "csvFile":"Data/WIData.csv"} },
-      "hom_SO_AL": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"AL","stateFips":"01","csvFile":"Data/ALData.csv"}},
-    "hom_SO_AR": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"AR","stateFips":"05","csvFile":"Data/ARData.csv"}},
-    "hom_SO_FL": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"FL","stateFips":"12","csvFile":"Data/FLData.csv"}},
-    "hom_SO_GA": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"GA","stateFips":"13","csvFile":"Data/GAData.csv"}},
-    "hom_SO_KY": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"KY","stateFips":"21","csvFile":"Data/KYData.csv"}},
-    "hom_SO_LA": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"LA","stateFips":"22","csvFile":"Data/LAData.csv"}},
-    "hom_SO_MD": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"MD","stateFips":"24","csvFile":"Data/MDData.csv"}},
-    "hom_SO_MS": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"MS","stateFips":"28","csvFile":"Data/MSData.csv"}},
-    "hom_SO_NC": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"NC","stateFips":"37","csvFile":"Data/NCData.csv"}},
-    "hom_SO_OK": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"OK","stateFips":"40","csvFile":"Data/OKData.csv"}},
-    "hom_SO_SC": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"SC","stateFips":"45","csvFile":"Data/SCData.csv"}},
-    "hom_SO_TN": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"TN","stateFips":"47","csvFile":"Data/TNData.csv"}},
-    "hom_SO_TX": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"TX","stateFips":"48","csvFile":"Data/TXData.csv"}},
-    "hom_SO_VA": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"VA","stateFips":"51","csvFile":"Data/VAData.csv"}},
-    "hom_SO_WV": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"South","state":"WV","stateFips":"54","csvFile":"Data/WVData.csv"}},
-    "hom_WE_AK": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"AK","stateFips":"02","csvFile":"Data/AKData.csv"}},
-    "hom_WE_AZ": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"AZ","stateFips":"04","csvFile":"Data/AZData.csv"}},
-    "hom_WE_CA": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"CA","stateFips":"06","csvFile":"Data/CAData.csv"}},
-    "hom_WE_CO": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"CO","stateFips":"08","csvFile":"Data/COData.csv"}},
-    "hom_WE_ID": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"ID","stateFips":"16","csvFile":"Data/IDData.csv"}},
-    "hom_WE_MT": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"MT","stateFips":"30","csvFile":"Data/MTData.csv"}},
-    "hom_WE_NV": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"NV","stateFips":"32","csvFile":"Data/NVData.csv"}},
-    "hom_WE_NM": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"NM","stateFips":"35","csvFile":"Data/NMData.csv"}},
-    "hom_WE_OR": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"OR","stateFips":"41","csvFile":"Data/ORData.csv"}},
-    "hom_WE_UT": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"UT","stateFips":"49","csvFile":"Data/UTData.csv"}},
-    "hom_WE_WA": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"WA","stateFips":"53","csvFile":"Data/WAData.csv"}},
-    "hom_WE_WY": { "baseComponent":"hom-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"hops","region":"West","state":"WY","stateFips":"56","csvFile":"Data/WYData.csv"}},
-    "pix_NE_CT": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"CT","stateFips":"09","csvFile":"Data/CTData.csv"}},
-    "pix_NE_ME": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"ME","stateFips":"23","csvFile":"Data/MEData.csv"}},
-    "pix_NE_MA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"MA","stateFips":"25","csvFile":"Data/MAData.csv"}},
-    "pix_NE_NH": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"NH","stateFips":"33","csvFile":"Data/NHData.csv"}},
-    "pix_NE_RI": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"RI","stateFips":"44","csvFile":"Data/RIData.csv"}},
-    "pix_NE_VT": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"VT","stateFips":"50","csvFile":"Data/VTData.csv"}},
-    "pix_NE_NJ": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"NJ","stateFips":"34","csvFile":"Data/NJData.csv"}},
-    "pix_NE_NY": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"NY","stateFips":"36","csvFile":"Data/NYData.csv"}},
-    "pix_NE_PA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Northeast","state":"PA","stateFips":"42","csvFile":"Data/PAData.csv"}},
-    "pix_MW_IL": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"IL","stateFips":"17","csvFile":"Data/ILData.csv"}},
-    "pix_MW_IN": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"IN","stateFips":"18","csvFile":"Data/INData.csv"}},
-    "pix_MW_IA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"IA","stateFips":"19","csvFile":"Data/IAData.csv"}},
-    "pix_MW_KS": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"KS","stateFips":"20","csvFile":"Data/KSData.csv"}},
-    "pix_MW_MI": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"MI","stateFips":"26","csvFile":"Data/MIData.csv"}},
-    "pix_MW_MN": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"MN","stateFips":"27","csvFile":"Data/MNData.csv"}},
-    "pix_MW_MO": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"MO","stateFips":"29","csvFile":"Data/MOData.csv"}},
-    "pix_MW_NE": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"NE","stateFips":"31","csvFile":"Data/NEData.csv"}},
-    "pix_MW_ND": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"ND","stateFips":"38","csvFile":"Data/NDData.csv"}},
-    "pix_MW_OH": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"OH","stateFips":"39","csvFile":"Data/OHData.csv"}},
-    "pix_MW_SD": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"SD","stateFips":"46","csvFile":"Data/SDData.csv"}},
-    "pix_MW_WI": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{ "condition":"pixel","region":"Midwest","state":"WI","stateFips":"55","csvFile":"Data/WIData.csv"}},
-    "pix_SO_AL": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"AL","stateFips":"01","csvFile":"Data/ALData.csv"}},
-    "pix_SO_AR": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"AR","stateFips":"05","csvFile":"Data/ARData.csv"}},
-    "pix_SO_FL": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"FL","stateFips":"12","csvFile":"Data/FLData.csv"}},
-    "pix_SO_GA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"GA","stateFips":"13","csvFile":"Data/GAData.csv"}},
-    "pix_SO_KY": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"KY","stateFips":"21","csvFile":"Data/KYData.csv"}},
-    "pix_SO_LA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"LA","stateFips":"22","csvFile":"Data/LAData.csv"}},
-    "pix_SO_MD": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"MD","stateFips":"24","csvFile":"Data/MDData.csv"}},
-    "pix_SO_MS": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"MS","stateFips":"28","csvFile":"Data/MSData.csv"}},
-    "pix_SO_NC": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"NC","stateFips":"37","csvFile":"Data/NCData.csv"}},
-    "pix_SO_OK": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"OK","stateFips":"40","csvFile":"Data/OKData.csv"}},
-    "pix_SO_SC": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"SC","stateFips":"45","csvFile":"Data/SCData.csv"}},
-    "pix_SO_TN": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"TN","stateFips":"47","csvFile":"Data/TNData.csv"}},
-    "pix_SO_TX": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"TX","stateFips":"48","csvFile":"Data/TXData.csv"}},
-    "pix_SO_VA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"VA","stateFips":"51","csvFile":"Data/VAData.csv"}},
-    "pix_SO_WV": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"South","state":"WV","stateFips":"54","csvFile":"Data/WVData.csv"}},
-    "pix_WE_AK": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"AK","stateFips":"02","csvFile":"Data/AKData.csv"}},
-    "pix_WE_AZ": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"AZ","stateFips":"04","csvFile":"Data/AZData.csv"}},
-    "pix_WE_CA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"CA","stateFips":"06","csvFile":"Data/CAData.csv"}},
-    "pix_WE_CO": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"CO","stateFips":"08","csvFile":"Data/COData.csv"}},
-    "pix_WE_ID": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"ID","stateFips":"16","csvFile":"Data/IDData.csv"}},
-    "pix_WE_MT": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"MT","stateFips":"30","csvFile":"Data/MTData.csv"}},
-    "pix_WE_NV": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"NV","stateFips":"32","csvFile":"Data/NVData.csv"}},
-    "pix_WE_NM": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"NM","stateFips":"35","csvFile":"Data/NMData.csv"}},
-    "pix_WE_OR": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"OR","stateFips":"41","csvFile":"Data/ORData.csv"}},
-    "pix_WE_UT": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"UT","stateFips":"49","csvFile":"Data/UTData.csv"}},
-    "pix_WE_WA": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-  "parameters":{"condition":"pixel","region":"West","state":"WA","stateFips":"53","csvFile":"Data/WAData.csv"}},
-    "pix_WE_WY": { "baseComponent":"pixel-map-d3","type":"website","instruction":"Click a county to select it.",
-      "parameters":{"condition":"pixel","region":"West","state":"WY","stateFips":"56","csvFile":"Data/WYData.csv"}}
-
-  }, 
-
+    "hom_NE_CT_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "Data/CTData1.csv"
+      }
+    },
+    "pix_NE_CT_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "Data/CTData1.csv"
+      }
+    },
+    "hom_NE_CT_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "Data/CTData2.csv"
+      }
+    },
+    "pix_NE_CT_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "Data/CTData2.csv"
+      }
+    },
+    "hom_NE_CT_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "Data/CTData3.csv"
+      }
+    },
+    "pix_NE_CT_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "Data/CTData3.csv"
+      }
+    },
+    "hom_NE_CT_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "Data/CTData4.csv"
+      }
+    },
+    "pix_NE_CT_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "Data/CTData4.csv"
+      }
+    },
+    "hom_NE_ME_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "Data/MEData1.csv"
+      }
+    },
+    "pix_NE_ME_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "Data/MEData1.csv"
+      }
+    },
+    "hom_NE_ME_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "Data/MEData2.csv"
+      }
+    },
+    "pix_NE_ME_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "Data/MEData2.csv"
+      }
+    },
+    "hom_NE_ME_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "Data/MEData3.csv"
+      }
+    },
+    "pix_NE_ME_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "Data/MEData3.csv"
+      }
+    },
+    "hom_NE_ME_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "Data/MEData4.csv"
+      }
+    },
+    "pix_NE_ME_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "Data/MEData4.csv"
+      }
+    },
+    "hom_NE_MA_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "Data/MAData1.csv"
+      }
+    },
+    "pix_NE_MA_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "Data/MAData1.csv"
+      }
+    },
+    "hom_NE_MA_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "Data/MAData2.csv"
+      }
+    },
+    "pix_NE_MA_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "Data/MAData2.csv"
+      }
+    },
+    "hom_NE_MA_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "Data/MAData3.csv"
+      }
+    },
+    "pix_NE_MA_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "Data/MAData3.csv"
+      }
+    },
+    "hom_NE_MA_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "Data/MAData4.csv"
+      }
+    },
+    "pix_NE_MA_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "Data/MAData4.csv"
+      }
+    },
+    "hom_NE_NH_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "Data/NHData1.csv"
+      }
+    },
+    "pix_NE_NH_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "Data/NHData1.csv"
+      }
+    },
+    "hom_NE_NH_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "Data/NHData2.csv"
+      }
+    },
+    "pix_NE_NH_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "Data/NHData2.csv"
+      }
+    },
+    "hom_NE_NH_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "Data/NHData3.csv"
+      }
+    },
+    "pix_NE_NH_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "Data/NHData3.csv"
+      }
+    },
+    "hom_NE_NH_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "Data/NHData4.csv"
+      }
+    },
+    "pix_NE_NH_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "Data/NHData4.csv"
+      }
+    },
+    "hom_NE_RI_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "Data/RIData1.csv"
+      }
+    },
+    "pix_NE_RI_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "Data/RIData1.csv"
+      }
+    },
+    "hom_NE_RI_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "Data/RIData2.csv"
+      }
+    },
+    "pix_NE_RI_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "Data/RIData2.csv"
+      }
+    },
+    "hom_NE_RI_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "Data/RIData3.csv"
+      }
+    },
+    "pix_NE_RI_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "Data/RIData3.csv"
+      }
+    },
+    "hom_NE_RI_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "Data/RIData4.csv"
+      }
+    },
+    "pix_NE_RI_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "Data/RIData4.csv"
+      }
+    },
+    "hom_NE_VT_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "Data/VTData1.csv"
+      }
+    },
+    "pix_NE_VT_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "Data/VTData1.csv"
+      }
+    },
+    "hom_NE_VT_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "Data/VTData2.csv"
+      }
+    },
+    "pix_NE_VT_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "Data/VTData2.csv"
+      }
+    },
+    "hom_NE_VT_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "Data/VTData3.csv"
+      }
+    },
+    "pix_NE_VT_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "Data/VTData3.csv"
+      }
+    },
+    "hom_NE_VT_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "Data/VTData4.csv"
+      }
+    },
+    "pix_NE_VT_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "Data/VTData4.csv"
+      }
+    },
+    "hom_NE_NJ_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "Data/NJData1.csv"
+      }
+    },
+    "pix_NE_NJ_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "Data/NJData1.csv"
+      }
+    },
+    "hom_NE_NJ_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "Data/NJData2.csv"
+      }
+    },
+    "pix_NE_NJ_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "Data/NJData2.csv"
+      }
+    },
+    "hom_NE_NJ_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "Data/NJData3.csv"
+      }
+    },
+    "pix_NE_NJ_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "Data/NJData3.csv"
+      }
+    },
+    "hom_NE_NJ_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "Data/NJData4.csv"
+      }
+    },
+    "pix_NE_NJ_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "Data/NJData4.csv"
+      }
+    },
+    "hom_NE_NY_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "Data/NYData1.csv"
+      }
+    },
+    "pix_NE_NY_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "Data/NYData1.csv"
+      }
+    },
+    "hom_NE_NY_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "Data/NYData2.csv"
+      }
+    },
+    "pix_NE_NY_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "Data/NYData2.csv"
+      }
+    },
+    "hom_NE_NY_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "Data/NYData3.csv"
+      }
+    },
+    "pix_NE_NY_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "Data/NYData3.csv"
+      }
+    },
+    "hom_NE_NY_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "Data/NYData4.csv"
+      }
+    },
+    "pix_NE_NY_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "Data/NYData4.csv"
+      }
+    },
+    "hom_NE_PA_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "Data/PAData1.csv"
+      }
+    },
+    "pix_NE_PA_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "Data/PAData1.csv"
+      }
+    },
+    "hom_NE_PA_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "Data/PAData2.csv"
+      }
+    },
+    "pix_NE_PA_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "Data/PAData2.csv"
+      }
+    },
+    "hom_NE_PA_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "Data/PAData3.csv"
+      }
+    },
+    "pix_NE_PA_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "Data/PAData3.csv"
+      }
+    },
+    "hom_NE_PA_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "Data/PAData4.csv"
+      }
+    },
+    "pix_NE_PA_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "Data/PAData4.csv"
+      }
+    },
+    "hom_MW_IL_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "Data/ILData1.csv"
+      }
+    },
+    "pix_MW_IL_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "Data/ILData1.csv"
+      }
+    },
+    "hom_MW_IL_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "Data/ILData2.csv"
+      }
+    },
+    "pix_MW_IL_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "Data/ILData2.csv"
+      }
+    },
+    "hom_MW_IL_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "Data/ILData3.csv"
+      }
+    },
+    "pix_MW_IL_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "Data/ILData3.csv"
+      }
+    },
+    "hom_MW_IL_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "Data/ILData4.csv"
+      }
+    },
+    "pix_MW_IL_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "Data/ILData4.csv"
+      }
+    },
+    "hom_MW_IN_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "Data/INData1.csv"
+      }
+    },
+    "pix_MW_IN_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "Data/INData1.csv"
+      }
+    },
+    "hom_MW_IN_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "Data/INData2.csv"
+      }
+    },
+    "pix_MW_IN_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "Data/INData2.csv"
+      }
+    },
+    "hom_MW_IN_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "Data/INData3.csv"
+      }
+    },
+    "pix_MW_IN_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "Data/INData3.csv"
+      }
+    },
+    "hom_MW_IN_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "Data/INData4.csv"
+      }
+    },
+    "pix_MW_IN_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "Data/INData4.csv"
+      }
+    },
+    "hom_MW_IA_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "Data/IAData1.csv"
+      }
+    },
+    "pix_MW_IA_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "Data/IAData1.csv"
+      }
+    },
+    "hom_MW_IA_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "Data/IAData2.csv"
+      }
+    },
+    "pix_MW_IA_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "Data/IAData2.csv"
+      }
+    },
+    "hom_MW_IA_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "Data/IAData3.csv"
+      }
+    },
+    "pix_MW_IA_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "Data/IAData3.csv"
+      }
+    },
+    "hom_MW_IA_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "Data/IAData4.csv"
+      }
+    },
+    "pix_MW_IA_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "Data/IAData4.csv"
+      }
+    },
+    "hom_MW_KS_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "Data/KSData1.csv"
+      }
+    },
+    "pix_MW_KS_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "Data/KSData1.csv"
+      }
+    },
+    "hom_MW_KS_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "Data/KSData2.csv"
+      }
+    },
+    "pix_MW_KS_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "Data/KSData2.csv"
+      }
+    },
+    "hom_MW_KS_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "Data/KSData3.csv"
+      }
+    },
+    "pix_MW_KS_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "Data/KSData3.csv"
+      }
+    },
+    "hom_MW_KS_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "Data/KSData4.csv"
+      }
+    },
+    "pix_MW_KS_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "Data/KSData4.csv"
+      }
+    },
+    "hom_MW_MI_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "Data/MIData1.csv"
+      }
+    },
+    "pix_MW_MI_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "Data/MIData1.csv"
+      }
+    },
+    "hom_MW_MI_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "Data/MIData2.csv"
+      }
+    },
+    "pix_MW_MI_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "Data/MIData2.csv"
+      }
+    },
+    "hom_MW_MI_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "Data/MIData3.csv"
+      }
+    },
+    "pix_MW_MI_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "Data/MIData3.csv"
+      }
+    },
+    "hom_MW_MI_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "Data/MIData4.csv"
+      }
+    },
+    "pix_MW_MI_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "Data/MIData4.csv"
+      }
+    },
+    "hom_MW_MN_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "Data/MNData1.csv"
+      }
+    },
+    "pix_MW_MN_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "Data/MNData1.csv"
+      }
+    },
+    "hom_MW_MN_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "Data/MNData2.csv"
+      }
+    },
+    "pix_MW_MN_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "Data/MNData2.csv"
+      }
+    },
+    "hom_MW_MN_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "Data/MNData3.csv"
+      }
+    },
+    "pix_MW_MN_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "Data/MNData3.csv"
+      }
+    },
+    "hom_MW_MN_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "Data/MNData4.csv"
+      }
+    },
+    "pix_MW_MN_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "Data/MNData4.csv"
+      }
+    },
+    "hom_MW_MO_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "Data/MOData1.csv"
+      }
+    },
+    "pix_MW_MO_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "Data/MOData1.csv"
+      }
+    },
+    "hom_MW_MO_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "Data/MOData2.csv"
+      }
+    },
+    "pix_MW_MO_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "Data/MOData2.csv"
+      }
+    },
+    "hom_MW_MO_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "Data/MOData3.csv"
+      }
+    },
+    "pix_MW_MO_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "Data/MOData3.csv"
+      }
+    },
+    "hom_MW_MO_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "Data/MOData4.csv"
+      }
+    },
+    "pix_MW_MO_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "Data/MOData4.csv"
+      }
+    },
+    "hom_MW_NE_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "Data/NEData1.csv"
+      }
+    },
+    "pix_MW_NE_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "Data/NEData1.csv"
+      }
+    },
+    "hom_MW_NE_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "Data/NEData2.csv"
+      }
+    },
+    "pix_MW_NE_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "Data/NEData2.csv"
+      }
+    },
+    "hom_MW_NE_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "Data/NEData3.csv"
+      }
+    },
+    "pix_MW_NE_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "Data/NEData3.csv"
+      }
+    },
+    "hom_MW_NE_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "Data/NEData4.csv"
+      }
+    },
+    "pix_MW_NE_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "Data/NEData4.csv"
+      }
+    },
+    "hom_MW_ND_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "Data/NDData1.csv"
+      }
+    },
+    "pix_MW_ND_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "Data/NDData1.csv"
+      }
+    },
+    "hom_MW_ND_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "Data/NDData2.csv"
+      }
+    },
+    "pix_MW_ND_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "Data/NDData2.csv"
+      }
+    },
+    "hom_MW_ND_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "Data/NDData3.csv"
+      }
+    },
+    "pix_MW_ND_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "Data/NDData3.csv"
+      }
+    },
+    "hom_MW_ND_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "Data/NDData4.csv"
+      }
+    },
+    "pix_MW_ND_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "Data/NDData4.csv"
+      }
+    },
+    "hom_MW_OH_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "Data/OHData1.csv"
+      }
+    },
+    "pix_MW_OH_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "Data/OHData1.csv"
+      }
+    },
+    "hom_MW_OH_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "Data/OHData2.csv"
+      }
+    },
+    "pix_MW_OH_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "Data/OHData2.csv"
+      }
+    },
+    "hom_MW_OH_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "Data/OHData3.csv"
+      }
+    },
+    "pix_MW_OH_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "Data/OHData3.csv"
+      }
+    },
+    "hom_MW_OH_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "Data/OHData4.csv"
+      }
+    },
+    "pix_MW_OH_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "Data/OHData4.csv"
+      }
+    },
+    "hom_MW_SD_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "Data/SDData1.csv"
+      }
+    },
+    "pix_MW_SD_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "Data/SDData1.csv"
+      }
+    },
+    "hom_MW_SD_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "Data/SDData2.csv"
+      }
+    },
+    "pix_MW_SD_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "Data/SDData2.csv"
+      }
+    },
+    "hom_MW_SD_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "Data/SDData3.csv"
+      }
+    },
+    "pix_MW_SD_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "Data/SDData3.csv"
+      }
+    },
+    "hom_MW_SD_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "Data/SDData4.csv"
+      }
+    },
+    "pix_MW_SD_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "Data/SDData4.csv"
+      }
+    },
+    "hom_MW_WI_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "Data/WIData1.csv"
+      }
+    },
+    "pix_MW_WI_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "Data/WIData1.csv"
+      }
+    },
+    "hom_MW_WI_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "Data/WIData2.csv"
+      }
+    },
+    "pix_MW_WI_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "Data/WIData2.csv"
+      }
+    },
+    "hom_MW_WI_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "Data/WIData3.csv"
+      }
+    },
+    "pix_MW_WI_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "Data/WIData3.csv"
+      }
+    },
+    "hom_MW_WI_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "Data/WIData4.csv"
+      }
+    },
+    "pix_MW_WI_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "Data/WIData4.csv"
+      }
+    },
+    "hom_SO_AL_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "Data/ALData1.csv"
+      }
+    },
+    "pix_SO_AL_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "Data/ALData1.csv"
+      }
+    },
+    "hom_SO_AL_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "Data/ALData2.csv"
+      }
+    },
+    "pix_SO_AL_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "Data/ALData2.csv"
+      }
+    },
+    "hom_SO_AL_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "Data/ALData3.csv"
+      }
+    },
+    "pix_SO_AL_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "Data/ALData3.csv"
+      }
+    },
+    "hom_SO_AL_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "Data/ALData4.csv"
+      }
+    },
+    "pix_SO_AL_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "Data/ALData4.csv"
+      }
+    },
+    "hom_SO_AR_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "Data/ARData1.csv"
+      }
+    },
+    "pix_SO_AR_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "Data/ARData1.csv"
+      }
+    },
+    "hom_SO_AR_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "Data/ARData2.csv"
+      }
+    },
+    "pix_SO_AR_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "Data/ARData2.csv"
+      }
+    },
+    "hom_SO_AR_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "Data/ARData3.csv"
+      }
+    },
+    "pix_SO_AR_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "Data/ARData3.csv"
+      }
+    },
+    "hom_SO_AR_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "Data/ARData4.csv"
+      }
+    },
+    "pix_SO_AR_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "Data/ARData4.csv"
+      }
+    },
+    "hom_SO_FL_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "Data/FLData1.csv"
+      }
+    },
+    "pix_SO_FL_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "Data/FLData1.csv"
+      }
+    },
+    "hom_SO_FL_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "Data/FLData2.csv"
+      }
+    },
+    "pix_SO_FL_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "Data/FLData2.csv"
+      }
+    },
+    "hom_SO_FL_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "Data/FLData3.csv"
+      }
+    },
+    "pix_SO_FL_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "Data/FLData3.csv"
+      }
+    },
+    "hom_SO_FL_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "Data/FLData4.csv"
+      }
+    },
+    "pix_SO_FL_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "Data/FLData4.csv"
+      }
+    },
+    "hom_SO_GA_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "Data/GAData1.csv"
+      }
+    },
+    "pix_SO_GA_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "Data/GAData1.csv"
+      }
+    },
+    "hom_SO_GA_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "Data/GAData2.csv"
+      }
+    },
+    "pix_SO_GA_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "Data/GAData2.csv"
+      }
+    },
+    "hom_SO_GA_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "Data/GAData3.csv"
+      }
+    },
+    "pix_SO_GA_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "Data/GAData3.csv"
+      }
+    },
+    "hom_SO_GA_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "Data/GAData4.csv"
+      }
+    },
+    "pix_SO_GA_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "Data/GAData4.csv"
+      }
+    },
+    "hom_SO_KY_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "Data/KYData1.csv"
+      }
+    },
+    "pix_SO_KY_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "Data/KYData1.csv"
+      }
+    },
+    "hom_SO_KY_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "Data/KYData2.csv"
+      }
+    },
+    "pix_SO_KY_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "Data/KYData2.csv"
+      }
+    },
+    "hom_SO_KY_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "Data/KYData3.csv"
+      }
+    },
+    "pix_SO_KY_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "Data/KYData3.csv"
+      }
+    },
+    "hom_SO_KY_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "Data/KYData4.csv"
+      }
+    },
+    "pix_SO_KY_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "Data/KYData4.csv"
+      }
+    },
+    "hom_SO_LA_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "Data/LAData1.csv"
+      }
+    },
+    "pix_SO_LA_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "Data/LAData1.csv"
+      }
+    },
+    "hom_SO_LA_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "Data/LAData2.csv"
+      }
+    },
+    "pix_SO_LA_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "Data/LAData2.csv"
+      }
+    },
+    "hom_SO_LA_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "Data/LAData3.csv"
+      }
+    },
+    "pix_SO_LA_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "Data/LAData3.csv"
+      }
+    },
+    "hom_SO_LA_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "Data/LAData4.csv"
+      }
+    },
+    "pix_SO_LA_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "Data/LAData4.csv"
+      }
+    },
+    "hom_SO_MD_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "Data/MDData1.csv"
+      }
+    },
+    "pix_SO_MD_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "Data/MDData1.csv"
+      }
+    },
+    "hom_SO_MD_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "Data/MDData2.csv"
+      }
+    },
+    "pix_SO_MD_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "Data/MDData2.csv"
+      }
+    },
+    "hom_SO_MD_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "Data/MDData3.csv"
+      }
+    },
+    "pix_SO_MD_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "Data/MDData3.csv"
+      }
+    },
+    "hom_SO_MD_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "Data/MDData4.csv"
+      }
+    },
+    "pix_SO_MD_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "Data/MDData4.csv"
+      }
+    },
+    "hom_SO_MS_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "Data/MSData1.csv"
+      }
+    },
+    "pix_SO_MS_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "Data/MSData1.csv"
+      }
+    },
+    "hom_SO_MS_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "Data/MSData2.csv"
+      }
+    },
+    "pix_SO_MS_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "Data/MSData2.csv"
+      }
+    },
+    "hom_SO_MS_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "Data/MSData3.csv"
+      }
+    },
+    "pix_SO_MS_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "Data/MSData3.csv"
+      }
+    },
+    "hom_SO_MS_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "Data/MSData4.csv"
+      }
+    },
+    "pix_SO_MS_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "Data/MSData4.csv"
+      }
+    },
+    "hom_SO_NC_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "Data/NCData1.csv"
+      }
+    },
+    "pix_SO_NC_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "Data/NCData1.csv"
+      }
+    },
+    "hom_SO_NC_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "Data/NCData2.csv"
+      }
+    },
+    "pix_SO_NC_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "Data/NCData2.csv"
+      }
+    },
+    "hom_SO_NC_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "Data/NCData3.csv"
+      }
+    },
+    "pix_SO_NC_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "Data/NCData3.csv"
+      }
+    },
+    "hom_SO_NC_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "Data/NCData4.csv"
+      }
+    },
+    "pix_SO_NC_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "Data/NCData4.csv"
+      }
+    },
+    "hom_SO_OK_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "Data/OKData1.csv"
+      }
+    },
+    "pix_SO_OK_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "Data/OKData1.csv"
+      }
+    },
+    "hom_SO_OK_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "Data/OKData2.csv"
+      }
+    },
+    "pix_SO_OK_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "Data/OKData2.csv"
+      }
+    },
+    "hom_SO_OK_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "Data/OKData3.csv"
+      }
+    },
+    "pix_SO_OK_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "Data/OKData3.csv"
+      }
+    },
+    "hom_SO_OK_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "Data/OKData4.csv"
+      }
+    },
+    "pix_SO_OK_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "Data/OKData4.csv"
+      }
+    },
+    "hom_SO_SC_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "Data/SCData1.csv"
+      }
+    },
+    "pix_SO_SC_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "Data/SCData1.csv"
+      }
+    },
+    "hom_SO_SC_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "Data/SCData2.csv"
+      }
+    },
+    "pix_SO_SC_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "Data/SCData2.csv"
+      }
+    },
+    "hom_SO_SC_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "Data/SCData3.csv"
+      }
+    },
+    "pix_SO_SC_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "Data/SCData3.csv"
+      }
+    },
+    "hom_SO_SC_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "Data/SCData4.csv"
+      }
+    },
+    "pix_SO_SC_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "Data/SCData4.csv"
+      }
+    },
+    "hom_SO_TN_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "Data/TNData1.csv"
+      }
+    },
+    "pix_SO_TN_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "Data/TNData1.csv"
+      }
+    },
+    "hom_SO_TN_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "Data/TNData2.csv"
+      }
+    },
+    "pix_SO_TN_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "Data/TNData2.csv"
+      }
+    },
+    "hom_SO_TN_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "Data/TNData3.csv"
+      }
+    },
+    "pix_SO_TN_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "Data/TNData3.csv"
+      }
+    },
+    "hom_SO_TN_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "Data/TNData4.csv"
+      }
+    },
+    "pix_SO_TN_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "Data/TNData4.csv"
+      }
+    },
+    "hom_SO_TX_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "Data/TXData1.csv"
+      }
+    },
+    "pix_SO_TX_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "Data/TXData1.csv"
+      }
+    },
+    "hom_SO_TX_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "Data/TXData2.csv"
+      }
+    },
+    "pix_SO_TX_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "Data/TXData2.csv"
+      }
+    },
+    "hom_SO_TX_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "Data/TXData3.csv"
+      }
+    },
+    "pix_SO_TX_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "Data/TXData3.csv"
+      }
+    },
+    "hom_SO_TX_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "Data/TXData4.csv"
+      }
+    },
+    "pix_SO_TX_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "Data/TXData4.csv"
+      }
+    },
+    "hom_SO_VA_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "Data/VAData1.csv"
+      }
+    },
+    "pix_SO_VA_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "Data/VAData1.csv"
+      }
+    },
+    "hom_SO_VA_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "Data/VAData2.csv"
+      }
+    },
+    "pix_SO_VA_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "Data/VAData2.csv"
+      }
+    },
+    "hom_SO_VA_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "Data/VAData3.csv"
+      }
+    },
+    "pix_SO_VA_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "Data/VAData3.csv"
+      }
+    },
+    "hom_SO_VA_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "Data/VAData4.csv"
+      }
+    },
+    "pix_SO_VA_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "Data/VAData4.csv"
+      }
+    },
+    "hom_SO_WV_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "Data/WVData1.csv"
+      }
+    },
+    "pix_SO_WV_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "Data/WVData1.csv"
+      }
+    },
+    "hom_SO_WV_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "Data/WVData2.csv"
+      }
+    },
+    "pix_SO_WV_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "Data/WVData2.csv"
+      }
+    },
+    "hom_SO_WV_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "Data/WVData3.csv"
+      }
+    },
+    "pix_SO_WV_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "Data/WVData3.csv"
+      }
+    },
+    "hom_SO_WV_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "Data/WVData4.csv"
+      }
+    },
+    "pix_SO_WV_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "Data/WVData4.csv"
+      }
+    },
+    "hom_WE_AK_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "AK",
+        "stateFips": "02",
+        "csvFile": "Data/AKData1.csv"
+      }
+    },
+    "pix_WE_AK_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "AK",
+        "stateFips": "02",
+        "csvFile": "Data/AKData1.csv"
+      }
+    },
+    "hom_WE_AK_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "AK",
+        "stateFips": "02",
+        "csvFile": "Data/AKData2.csv"
+      }
+    },
+    "pix_WE_AK_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "AK",
+        "stateFips": "02",
+        "csvFile": "Data/AKData2.csv"
+      }
+    },
+    "hom_WE_AK_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "AK",
+        "stateFips": "02",
+        "csvFile": "Data/AKData3.csv"
+      }
+    },
+    "pix_WE_AK_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "AK",
+        "stateFips": "02",
+        "csvFile": "Data/AKData3.csv"
+      }
+    },
+    "hom_WE_AK_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "AK",
+        "stateFips": "02",
+        "csvFile": "Data/AKData4.csv"
+      }
+    },
+    "pix_WE_AK_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "AK",
+        "stateFips": "02",
+        "csvFile": "Data/AKData4.csv"
+      }
+    },
+    "hom_WE_AZ_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "Data/AZData1.csv"
+      }
+    },
+    "pix_WE_AZ_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "Data/AZData1.csv"
+      }
+    },
+    "hom_WE_AZ_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "Data/AZData2.csv"
+      }
+    },
+    "pix_WE_AZ_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "Data/AZData2.csv"
+      }
+    },
+    "hom_WE_AZ_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "Data/AZData3.csv"
+      }
+    },
+    "pix_WE_AZ_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "Data/AZData3.csv"
+      }
+    },
+    "hom_WE_AZ_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "Data/AZData4.csv"
+      }
+    },
+    "pix_WE_AZ_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "Data/AZData4.csv"
+      }
+    },
+    "hom_WE_CA_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "Data/CAData1.csv"
+      }
+    },
+    "pix_WE_CA_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "Data/CAData1.csv"
+      }
+    },
+    "hom_WE_CA_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "Data/CAData2.csv"
+      }
+    },
+    "pix_WE_CA_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "Data/CAData2.csv"
+      }
+    },
+    "hom_WE_CA_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "Data/CAData3.csv"
+      }
+    },
+    "pix_WE_CA_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "Data/CAData3.csv"
+      }
+    },
+    "hom_WE_CA_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "Data/CAData4.csv"
+      }
+    },
+    "pix_WE_CA_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "Data/CAData4.csv"
+      }
+    },
+    "hom_WE_CO_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "Data/COData1.csv"
+      }
+    },
+    "pix_WE_CO_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "Data/COData1.csv"
+      }
+    },
+    "hom_WE_CO_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "Data/COData2.csv"
+      }
+    },
+    "pix_WE_CO_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "Data/COData2.csv"
+      }
+    },
+    "hom_WE_CO_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "Data/COData3.csv"
+      }
+    },
+    "pix_WE_CO_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "Data/COData3.csv"
+      }
+    },
+    "hom_WE_CO_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "Data/COData4.csv"
+      }
+    },
+    "pix_WE_CO_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "Data/COData4.csv"
+      }
+    },
+    "hom_WE_ID_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "Data/IDData1.csv"
+      }
+    },
+    "pix_WE_ID_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "Data/IDData1.csv"
+      }
+    },
+    "hom_WE_ID_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "Data/IDData2.csv"
+      }
+    },
+    "pix_WE_ID_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "Data/IDData2.csv"
+      }
+    },
+    "hom_WE_ID_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "Data/IDData3.csv"
+      }
+    },
+    "pix_WE_ID_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "Data/IDData3.csv"
+      }
+    },
+    "hom_WE_ID_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "Data/IDData4.csv"
+      }
+    },
+    "pix_WE_ID_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "Data/IDData4.csv"
+      }
+    },
+    "hom_WE_MT_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "Data/MTData1.csv"
+      }
+    },
+    "pix_WE_MT_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "Data/MTData1.csv"
+      }
+    },
+    "hom_WE_MT_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "Data/MTData2.csv"
+      }
+    },
+    "pix_WE_MT_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "Data/MTData2.csv"
+      }
+    },
+    "hom_WE_MT_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "Data/MTData3.csv"
+      }
+    },
+    "pix_WE_MT_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "Data/MTData3.csv"
+      }
+    },
+    "hom_WE_MT_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "Data/MTData4.csv"
+      }
+    },
+    "pix_WE_MT_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "Data/MTData4.csv"
+      }
+    },
+    "hom_WE_NV_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "Data/NVData1.csv"
+      }
+    },
+    "pix_WE_NV_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "Data/NVData1.csv"
+      }
+    },
+    "hom_WE_NV_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "Data/NVData2.csv"
+      }
+    },
+    "pix_WE_NV_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "Data/NVData2.csv"
+      }
+    },
+    "hom_WE_NV_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "Data/NVData3.csv"
+      }
+    },
+    "pix_WE_NV_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "Data/NVData3.csv"
+      }
+    },
+    "hom_WE_NV_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "Data/NVData4.csv"
+      }
+    },
+    "pix_WE_NV_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "Data/NVData4.csv"
+      }
+    },
+    "hom_WE_NM_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "Data/NMData1.csv"
+      }
+    },
+    "pix_WE_NM_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "Data/NMData1.csv"
+      }
+    },
+    "hom_WE_NM_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "Data/NMData2.csv"
+      }
+    },
+    "pix_WE_NM_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "Data/NMData2.csv"
+      }
+    },
+    "hom_WE_NM_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "Data/NMData3.csv"
+      }
+    },
+    "pix_WE_NM_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "Data/NMData3.csv"
+      }
+    },
+    "hom_WE_NM_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "Data/NMData4.csv"
+      }
+    },
+    "pix_WE_NM_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "Data/NMData4.csv"
+      }
+    },
+    "hom_WE_OR_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "Data/ORData1.csv"
+      }
+    },
+    "pix_WE_OR_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "Data/ORData1.csv"
+      }
+    },
+    "hom_WE_OR_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "Data/ORData2.csv"
+      }
+    },
+    "pix_WE_OR_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "Data/ORData2.csv"
+      }
+    },
+    "hom_WE_OR_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "Data/ORData3.csv"
+      }
+    },
+    "pix_WE_OR_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "Data/ORData3.csv"
+      }
+    },
+    "hom_WE_OR_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "Data/ORData4.csv"
+      }
+    },
+    "pix_WE_OR_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "Data/ORData4.csv"
+      }
+    },
+    "hom_WE_UT_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "Data/UTData1.csv"
+      }
+    },
+    "pix_WE_UT_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "Data/UTData1.csv"
+      }
+    },
+    "hom_WE_UT_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "Data/UTData2.csv"
+      }
+    },
+    "pix_WE_UT_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "Data/UTData2.csv"
+      }
+    },
+    "hom_WE_UT_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "Data/UTData3.csv"
+      }
+    },
+    "pix_WE_UT_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "Data/UTData3.csv"
+      }
+    },
+    "hom_WE_UT_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "Data/UTData4.csv"
+      }
+    },
+    "pix_WE_UT_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "Data/UTData4.csv"
+      }
+    },
+    "hom_WE_WA_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "Data/WAData1.csv"
+      }
+    },
+    "pix_WE_WA_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "Data/WAData1.csv"
+      }
+    },
+    "hom_WE_WA_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "Data/WAData2.csv"
+      }
+    },
+    "pix_WE_WA_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "Data/WAData2.csv"
+      }
+    },
+    "hom_WE_WA_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "Data/WAData3.csv"
+      }
+    },
+    "pix_WE_WA_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "Data/WAData3.csv"
+      }
+    },
+    "hom_WE_WA_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "Data/WAData4.csv"
+      }
+    },
+    "pix_WE_WA_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "Data/WAData4.csv"
+      }
+    },
+    "hom_WE_WY_1": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "Data/WYData1.csv"
+      }
+    },
+    "pix_WE_WY_1": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "Data/WYData1.csv"
+      }
+    },
+    "hom_WE_WY_2": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "Data/WYData2.csv"
+      }
+    },
+    "pix_WE_WY_2": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "Data/WYData2.csv"
+      }
+    },
+    "hom_WE_WY_3": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "Data/WYData3.csv"
+      }
+    },
+    "pix_WE_WY_3": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "Data/WYData3.csv"
+      }
+    },
+    "hom_WE_WY_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "Data/WYData4.csv"
+      }
+    },
+    "pix_WE_WY_4": {
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "Click a county to select it.",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "Data/WYData4.csv"
+      }
+    }
+  },
   "sequence": {
     "order": "fixed",
     "components": [
-    "introduction",
-    "consent",
-      {  "order": "latinSquare", "numSamples": 1,
-         "components": [
-          { "order": "fixed", "components": [
-          "hop-intro",
-          { "order": "latinSquare", "components": [
-            { "order": "latinSquare", "numSamples": 4, "components": [
-              "hom_NE_CT","hom_NE_ME","hom_NE_MA","hom_NE_NH","hom_NE_RI","hom_NE_VT","hom_NE_NJ","hom_NE_NY","hom_NE_PA"
-            ]},
-
-            { "order": "latinSquare", "numSamples": 4, "components": [
-              "hom_MW_IL","hom_MW_IN","hom_MW_IA","hom_MW_KS","hom_MW_MI","hom_MW_MN","hom_MW_MO","hom_MW_NE","hom_MW_ND","hom_MW_OH","hom_MW_SD","hom_MW_WI"
-            ]},
-
-            { "order": "latinSquare", "numSamples": 4, "components": [
-              "hom_SO_AL","hom_SO_AR","hom_SO_FL","hom_SO_GA","hom_SO_KY","hom_SO_LA","hom_SO_MD","hom_SO_MS","hom_SO_NC","hom_SO_OK","hom_SO_SC","hom_SO_TN","hom_SO_TX","hom_SO_VA","hom_SO_WV"
-            ]},
-
-            { "order": "latinSquare", "numSamples": 4, "components": [
-              "hom_WE_AK","hom_WE_AZ","hom_WE_CA","hom_WE_CO","hom_WE_ID","hom_WE_MT","hom_WE_NV","hom_WE_NM","hom_WE_OR","hom_WE_UT","hom_WE_WA","hom_WE_WY"
-            ]}
-          ]}
-          ]},
-
-          { "order": "fixed", "components": [
-          "pixel-intro",
-          { "order": "latinSquare", "components": [
-            { "order": "latinSquare", "numSamples": 4, "components": [
-              "pix_NE_CT","pix_NE_ME","pix_NE_MA","pix_NE_NH","pix_NE_RI","pix_NE_VT","pix_NE_NJ","pix_NE_NY","pix_NE_PA"
-            ]},
-
-            { "order": "latinSquare", "numSamples": 4, "components": [
-              "pix_MW_IL","pix_MW_IN","pix_MW_IA","pix_MW_KS","pix_MW_MI","pix_MW_MN","pix_MW_MO","pix_MW_NE","pix_MW_ND","pix_MW_OH","pix_MW_SD","pix_MW_WI"
-            ]},
-
-            { "order": "latinSquare", "numSamples": 4, "components": [
-              "pix_SO_AL","pix_SO_AR","pix_SO_FL","pix_SO_GA","pix_SO_KY","pix_SO_LA","pix_SO_MD","pix_SO_MS","pix_SO_NC","pix_SO_OK","pix_SO_SC","pix_SO_TN","pix_SO_TX","pix_SO_VA","pix_SO_WV"
-            ]},
-
-            { "order": "latinSquare", "numSamples": 4, "components": [
-              "pix_WE_AK","pix_WE_AZ","pix_WE_CA","pix_WE_CO","pix_WE_ID","pix_WE_MT","pix_WE_NV","pix_WE_NM","pix_WE_OR","pix_WE_UT","pix_WE_WA","pix_WE_WY"
-            ]}
-          ]}
-        ]}
-        ]}
+      "introduction",
+      "consent",
+      {
+        "order": "latinSquare",
+        "numSamples": 1,
+        "components": [
+          {
+            "order": "fixed",
+            "components": [
+              "hop-intro",
+              {
+                "order": "latinSquare",
+                "components": [
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_CT_1",
+                          "hom_NE_CT_2",
+                          "hom_NE_CT_3",
+                          "hom_NE_CT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_ME_1",
+                          "hom_NE_ME_2",
+                          "hom_NE_ME_3",
+                          "hom_NE_ME_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_MA_1",
+                          "hom_NE_MA_2",
+                          "hom_NE_MA_3",
+                          "hom_NE_MA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_NH_1",
+                          "hom_NE_NH_2",
+                          "hom_NE_NH_3",
+                          "hom_NE_NH_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_RI_1",
+                          "hom_NE_RI_2",
+                          "hom_NE_RI_3",
+                          "hom_NE_RI_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_VT_1",
+                          "hom_NE_VT_2",
+                          "hom_NE_VT_3",
+                          "hom_NE_VT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_NJ_1",
+                          "hom_NE_NJ_2",
+                          "hom_NE_NJ_3",
+                          "hom_NE_NJ_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_NY_1",
+                          "hom_NE_NY_2",
+                          "hom_NE_NY_3",
+                          "hom_NE_NY_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_NE_PA_1",
+                          "hom_NE_PA_2",
+                          "hom_NE_PA_3",
+                          "hom_NE_PA_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_IL_1",
+                          "hom_MW_IL_2",
+                          "hom_MW_IL_3",
+                          "hom_MW_IL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_IN_1",
+                          "hom_MW_IN_2",
+                          "hom_MW_IN_3",
+                          "hom_MW_IN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_IA_1",
+                          "hom_MW_IA_2",
+                          "hom_MW_IA_3",
+                          "hom_MW_IA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_KS_1",
+                          "hom_MW_KS_2",
+                          "hom_MW_KS_3",
+                          "hom_MW_KS_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_MI_1",
+                          "hom_MW_MI_2",
+                          "hom_MW_MI_3",
+                          "hom_MW_MI_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_MN_1",
+                          "hom_MW_MN_2",
+                          "hom_MW_MN_3",
+                          "hom_MW_MN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_MO_1",
+                          "hom_MW_MO_2",
+                          "hom_MW_MO_3",
+                          "hom_MW_MO_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_NE_1",
+                          "hom_MW_NE_2",
+                          "hom_MW_NE_3",
+                          "hom_MW_NE_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_ND_1",
+                          "hom_MW_ND_2",
+                          "hom_MW_ND_3",
+                          "hom_MW_ND_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_OH_1",
+                          "hom_MW_OH_2",
+                          "hom_MW_OH_3",
+                          "hom_MW_OH_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_SD_1",
+                          "hom_MW_SD_2",
+                          "hom_MW_SD_3",
+                          "hom_MW_SD_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_MW_WI_1",
+                          "hom_MW_WI_2",
+                          "hom_MW_WI_3",
+                          "hom_MW_WI_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_AL_1",
+                          "hom_SO_AL_2",
+                          "hom_SO_AL_3",
+                          "hom_SO_AL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_AR_1",
+                          "hom_SO_AR_2",
+                          "hom_SO_AR_3",
+                          "hom_SO_AR_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_FL_1",
+                          "hom_SO_FL_2",
+                          "hom_SO_FL_3",
+                          "hom_SO_FL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_GA_1",
+                          "hom_SO_GA_2",
+                          "hom_SO_GA_3",
+                          "hom_SO_GA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_KY_1",
+                          "hom_SO_KY_2",
+                          "hom_SO_KY_3",
+                          "hom_SO_KY_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_LA_1",
+                          "hom_SO_LA_2",
+                          "hom_SO_LA_3",
+                          "hom_SO_LA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_MD_1",
+                          "hom_SO_MD_2",
+                          "hom_SO_MD_3",
+                          "hom_SO_MD_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_MS_1",
+                          "hom_SO_MS_2",
+                          "hom_SO_MS_3",
+                          "hom_SO_MS_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_NC_1",
+                          "hom_SO_NC_2",
+                          "hom_SO_NC_3",
+                          "hom_SO_NC_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_OK_1",
+                          "hom_SO_OK_2",
+                          "hom_SO_OK_3",
+                          "hom_SO_OK_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_SC_1",
+                          "hom_SO_SC_2",
+                          "hom_SO_SC_3",
+                          "hom_SO_SC_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_TN_1",
+                          "hom_SO_TN_2",
+                          "hom_SO_TN_3",
+                          "hom_SO_TN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_TX_1",
+                          "hom_SO_TX_2",
+                          "hom_SO_TX_3",
+                          "hom_SO_TX_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_VA_1",
+                          "hom_SO_VA_2",
+                          "hom_SO_VA_3",
+                          "hom_SO_VA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_SO_WV_1",
+                          "hom_SO_WV_2",
+                          "hom_SO_WV_3",
+                          "hom_SO_WV_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_AK_1",
+                          "hom_WE_AK_2",
+                          "hom_WE_AK_3",
+                          "hom_WE_AK_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_AZ_1",
+                          "hom_WE_AZ_2",
+                          "hom_WE_AZ_3",
+                          "hom_WE_AZ_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_CA_1",
+                          "hom_WE_CA_2",
+                          "hom_WE_CA_3",
+                          "hom_WE_CA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_CO_1",
+                          "hom_WE_CO_2",
+                          "hom_WE_CO_3",
+                          "hom_WE_CO_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_ID_1",
+                          "hom_WE_ID_2",
+                          "hom_WE_ID_3",
+                          "hom_WE_ID_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_MT_1",
+                          "hom_WE_MT_2",
+                          "hom_WE_MT_3",
+                          "hom_WE_MT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_NV_1",
+                          "hom_WE_NV_2",
+                          "hom_WE_NV_3",
+                          "hom_WE_NV_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_NM_1",
+                          "hom_WE_NM_2",
+                          "hom_WE_NM_3",
+                          "hom_WE_NM_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_OR_1",
+                          "hom_WE_OR_2",
+                          "hom_WE_OR_3",
+                          "hom_WE_OR_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_UT_1",
+                          "hom_WE_UT_2",
+                          "hom_WE_UT_3",
+                          "hom_WE_UT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_WA_1",
+                          "hom_WE_WA_2",
+                          "hom_WE_WA_3",
+                          "hom_WE_WA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "hom_WE_WY_1",
+                          "hom_WE_WY_2",
+                          "hom_WE_WY_3",
+                          "hom_WE_WY_4"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "order": "fixed",
+            "components": [
+              "pixel-intro",
+              {
+                "order": "latinSquare",
+                "components": [
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_CT_1",
+                          "pix_NE_CT_2",
+                          "pix_NE_CT_3",
+                          "pix_NE_CT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_ME_1",
+                          "pix_NE_ME_2",
+                          "pix_NE_ME_3",
+                          "pix_NE_ME_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_MA_1",
+                          "pix_NE_MA_2",
+                          "pix_NE_MA_3",
+                          "pix_NE_MA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_NH_1",
+                          "pix_NE_NH_2",
+                          "pix_NE_NH_3",
+                          "pix_NE_NH_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_RI_1",
+                          "pix_NE_RI_2",
+                          "pix_NE_RI_3",
+                          "pix_NE_RI_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_VT_1",
+                          "pix_NE_VT_2",
+                          "pix_NE_VT_3",
+                          "pix_NE_VT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_NJ_1",
+                          "pix_NE_NJ_2",
+                          "pix_NE_NJ_3",
+                          "pix_NE_NJ_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_NY_1",
+                          "pix_NE_NY_2",
+                          "pix_NE_NY_3",
+                          "pix_NE_NY_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_NE_PA_1",
+                          "pix_NE_PA_2",
+                          "pix_NE_PA_3",
+                          "pix_NE_PA_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_IL_1",
+                          "pix_MW_IL_2",
+                          "pix_MW_IL_3",
+                          "pix_MW_IL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_IN_1",
+                          "pix_MW_IN_2",
+                          "pix_MW_IN_3",
+                          "pix_MW_IN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_IA_1",
+                          "pix_MW_IA_2",
+                          "pix_MW_IA_3",
+                          "pix_MW_IA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_KS_1",
+                          "pix_MW_KS_2",
+                          "pix_MW_KS_3",
+                          "pix_MW_KS_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_MI_1",
+                          "pix_MW_MI_2",
+                          "pix_MW_MI_3",
+                          "pix_MW_MI_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_MN_1",
+                          "pix_MW_MN_2",
+                          "pix_MW_MN_3",
+                          "pix_MW_MN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_MO_1",
+                          "pix_MW_MO_2",
+                          "pix_MW_MO_3",
+                          "pix_MW_MO_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_NE_1",
+                          "pix_MW_NE_2",
+                          "pix_MW_NE_3",
+                          "pix_MW_NE_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_ND_1",
+                          "pix_MW_ND_2",
+                          "pix_MW_ND_3",
+                          "pix_MW_ND_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_OH_1",
+                          "pix_MW_OH_2",
+                          "pix_MW_OH_3",
+                          "pix_MW_OH_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_SD_1",
+                          "pix_MW_SD_2",
+                          "pix_MW_SD_3",
+                          "pix_MW_SD_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_MW_WI_1",
+                          "pix_MW_WI_2",
+                          "pix_MW_WI_3",
+                          "pix_MW_WI_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_AL_1",
+                          "pix_SO_AL_2",
+                          "pix_SO_AL_3",
+                          "pix_SO_AL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_AR_1",
+                          "pix_SO_AR_2",
+                          "pix_SO_AR_3",
+                          "pix_SO_AR_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_FL_1",
+                          "pix_SO_FL_2",
+                          "pix_SO_FL_3",
+                          "pix_SO_FL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_GA_1",
+                          "pix_SO_GA_2",
+                          "pix_SO_GA_3",
+                          "pix_SO_GA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_KY_1",
+                          "pix_SO_KY_2",
+                          "pix_SO_KY_3",
+                          "pix_SO_KY_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_LA_1",
+                          "pix_SO_LA_2",
+                          "pix_SO_LA_3",
+                          "pix_SO_LA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_MD_1",
+                          "pix_SO_MD_2",
+                          "pix_SO_MD_3",
+                          "pix_SO_MD_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_MS_1",
+                          "pix_SO_MS_2",
+                          "pix_SO_MS_3",
+                          "pix_SO_MS_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_NC_1",
+                          "pix_SO_NC_2",
+                          "pix_SO_NC_3",
+                          "pix_SO_NC_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_OK_1",
+                          "pix_SO_OK_2",
+                          "pix_SO_OK_3",
+                          "pix_SO_OK_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_SC_1",
+                          "pix_SO_SC_2",
+                          "pix_SO_SC_3",
+                          "pix_SO_SC_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_TN_1",
+                          "pix_SO_TN_2",
+                          "pix_SO_TN_3",
+                          "pix_SO_TN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_TX_1",
+                          "pix_SO_TX_2",
+                          "pix_SO_TX_3",
+                          "pix_SO_TX_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_VA_1",
+                          "pix_SO_VA_2",
+                          "pix_SO_VA_3",
+                          "pix_SO_VA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_SO_WV_1",
+                          "pix_SO_WV_2",
+                          "pix_SO_WV_3",
+                          "pix_SO_WV_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_AK_1",
+                          "pix_WE_AK_2",
+                          "pix_WE_AK_3",
+                          "pix_WE_AK_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_AZ_1",
+                          "pix_WE_AZ_2",
+                          "pix_WE_AZ_3",
+                          "pix_WE_AZ_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_CA_1",
+                          "pix_WE_CA_2",
+                          "pix_WE_CA_3",
+                          "pix_WE_CA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_CO_1",
+                          "pix_WE_CO_2",
+                          "pix_WE_CO_3",
+                          "pix_WE_CO_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_ID_1",
+                          "pix_WE_ID_2",
+                          "pix_WE_ID_3",
+                          "pix_WE_ID_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_MT_1",
+                          "pix_WE_MT_2",
+                          "pix_WE_MT_3",
+                          "pix_WE_MT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_NV_1",
+                          "pix_WE_NV_2",
+                          "pix_WE_NV_3",
+                          "pix_WE_NV_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_NM_1",
+                          "pix_WE_NM_2",
+                          "pix_WE_NM_3",
+                          "pix_WE_NM_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_OR_1",
+                          "pix_WE_OR_2",
+                          "pix_WE_OR_3",
+                          "pix_WE_OR_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_UT_1",
+                          "pix_WE_UT_2",
+                          "pix_WE_UT_3",
+                          "pix_WE_UT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_WA_1",
+                          "pix_WE_WA_2",
+                          "pix_WE_WA_3",
+                          "pix_WE_WA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "pix_WE_WY_1",
+                          "pix_WE_WY_2",
+                          "pix_WE_WY_3",
+                          "pix_WE_WY_4"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
 }
