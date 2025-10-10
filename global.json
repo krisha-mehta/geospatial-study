@@ -6,7 +6,7 @@
   ],
   "configs": {
     "geospatial-dm":{
-      "path": "geospatial-dm/configWIP.json"
+      "path": "geospatial-dm/configNoCT.json"
     }
   }
 }
