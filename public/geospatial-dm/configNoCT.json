@@ -4526,7 +4526,6 @@
   "sequence": {
     "order": "fixed",
     "components": [
-      "introduction",
       "consent",
       {
         "order": "latinSquare",
