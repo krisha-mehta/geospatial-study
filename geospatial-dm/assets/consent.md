@@ -10,7 +10,7 @@ ask questions, and take time to understand the study before you make any decisio
 #### Purpose of the Study
 
 #### Tasks
-
+To understand how different representations of uncertainty in choropleth maps influence decision making.
 
 #### Risks to study participants
 Each participant in this study is assigned a random ID for analyses. As such,
@@ -27,7 +27,7 @@ development of future data exploration platforms.
 Records of your participation in this study will be held
 confidential so far as permitted by law. However, the study
 investigators, the sponsor or its designee and, under certain
-circumstances, the University of Utah Institutional
+circumstances, the University of Chicago Institutional
 Review Board (IRB) will be able to inspect and have access to
 this data. Any publication or presentation of the data will not
 identify you. 
