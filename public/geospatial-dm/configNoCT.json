@@ -57,11 +57,6 @@
     }
   },
   "components": {
-    "introduction": {
-      "type": "markdown",
-      "path": "geospatial-dm/assets/introduction.md",
-      "response": []
-    },
     "hop-intro": {
       "type": "markdown",
       "path": "geospatial-dm/assets/hop-intro.md",
