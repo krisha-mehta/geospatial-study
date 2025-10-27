@@ -1,0 +1,1 @@
+Click the county on the map to allocate resources. The list of counties you select will appear at the bottom of the map. To locate a selected county, hover over its name in the list to highlight the matching area on the map. To deselect a county, click on the cross sign next to the name of that county. 
