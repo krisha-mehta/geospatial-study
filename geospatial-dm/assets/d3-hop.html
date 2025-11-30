@@ -151,6 +151,7 @@ const CONFIG = {
   N_FRAMES: 50,
   FPS: 2.5,
   MAX_SELECTIONS: 3,
+  REQUIRED_SELECTIONS: 3,
   RNG_SEED: 42
 };
 
@@ -175,9 +176,10 @@ const maxSelections = CONFIG.MAX_SELECTIONS;
 
 function renderSelectedList() {
   const panel = document.getElementById('selected-list');
+  const requiredSelections = CONFIG.REQUIRED_SELECTIONS;
   const title = '<strong>Your selected counties:</strong>';
   if (!selectedCounties.length) {
-    panel.innerHTML = `${title} <span style="color:#666;">None</span>`;
+    panel.innerHTML = `${title} <span style="color:#666;">None (need to select exactly ${requiredSelections})</span>`;
     return;
   }
   const chips = selectedCounties.map(c => (
@@ -186,7 +188,15 @@ function renderSelectedList() {
        <button class="remove-chip" type="button" aria-label="Remove ${c}" title="Remove ${c}" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">&times;</button>
      </span>`
   )).join('');
-  panel.innerHTML = `${title}<div class="chips">${chips}</div>`;
+  
+  let statusMessage = '';
+  if (selectedCounties.length < requiredSelections) {
+    statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
+  } else if (selectedCounties.length === requiredSelections) {
+    statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can proceed to the next step.</div>`;
+  }
+  
+  panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
 }
 
 document.addEventListener('click', (ev) => {
@@ -197,7 +207,12 @@ document.addEventListener('click', (ev) => {
   if (!county) return;
   selectedCounties = selectedCounties.filter(c => c !== county);
   state.selected = selectedCounties;
-  Revisit.postAnswers({ selectedCounty: selectedCounties });
+  
+  // Only post answers when exactly the required number of counties are selected
+  if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
+    Revisit.postAnswers({ selectedCounty: selectedCounties });
+  }
+  
   d3.selectAll('.county').classed('highlight', false);
   if (selectedCounties.length < maxSelections) {
     gFill.selectAll('.county').style('pointer-events', 'auto');
@@ -259,6 +274,7 @@ let state = {
   frame: 0,
   selected: [],
   maxSel: CONFIG.MAX_SELECTIONS,
+  requiredSel: CONFIG.REQUIRED_SELECTIONS,
   rngSeed: CONFIG.RNG_SEED,
   draws: [],
   countyList: [],
@@ -337,7 +353,12 @@ async function loadData(){
             onYes: () => {
               selectedCounties.push(county);
               state.selected = selectedCounties;
-              Revisit.postAnswers({ selectedCounty: selectedCounties });
+              
+              // Only post answers when exactly the required number of counties are selected
+              if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
+                Revisit.postAnswers({ selectedCounty: selectedCounties });
+              }
+              
               renderSelectedList();
               if (selectedCounties.length === maxSelections) {
                 gFill.selectAll('.county')
