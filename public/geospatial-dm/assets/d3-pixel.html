@@ -141,6 +141,8 @@ const width = 400, height = 400;
 const PIXEL = 3;
 const MOE_Z = 1.645;
 const VALUE_MIN = 0, VALUE_MAX = 50;
+const MAX_SELECTIONS = 3;
+const REQUIRED_SELECTIONS = 3;
 
 const longpal = ["#800026","#BD0026","#E31A1C","#FC4E2A","#FD8D3C","#FEB24C","#FED976","#FFE7A8","#FFF2CC","#FFF9E6"].reverse();
 const color = d3.scaleLinear()
@@ -290,13 +292,14 @@ function renderState(stateFips, csvFile) {
         .attr("fill", d => color(d.v));
 
     let selectedCounties = [];
-    const maxSelections = 3;
+    const maxSelections = MAX_SELECTIONS;
 
     function renderSelectedList() {
       const panel = document.getElementById('selected-list');
+      const requiredSelections = REQUIRED_SELECTIONS;
       const title = '<strong>Your selected counties:</strong>';
       if (!selectedCounties.length) {
-        panel.innerHTML = `${title} <span style="color:#666;">None</span>`;
+        panel.innerHTML = `${title} <span style="color:#666;">None (need to select exactly ${requiredSelections})</span>`;
         return;
       }
       const chips = selectedCounties.map(c => (
@@ -305,7 +308,15 @@ function renderState(stateFips, csvFile) {
            <button class="remove-chip" type="button" aria-label="Remove ${c}" title="Remove ${c}" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">&times;</button>
          </span>`
       )).join('');
-      panel.innerHTML = `${title}<div class="chips">${chips}</div>`;
+      
+      let statusMessage = '';
+      if (selectedCounties.length < requiredSelections) {
+        statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
+      } else if (selectedCounties.length === requiredSelections) {
+        statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can proceed to the next step.</div>`;
+      }
+      
+      panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
     }
   // initial render
   renderSelectedList();
@@ -317,7 +328,12 @@ function renderState(stateFips, csvFile) {
       const county = btn.getAttribute('data-county');
       if (!county) return;
       selectedCounties = selectedCounties.filter(c => c !== county);
-      Revisit.postAnswers({ selectedCounty: selectedCounties });
+      
+      // Only post answers when exactly the required number of counties are selected
+      if (selectedCounties.length === REQUIRED_SELECTIONS) {
+        Revisit.postAnswers({ selectedCounty: selectedCounties });
+      }
+      
       d3.selectAll('.county-interactive').classed('highlight', false);
       if (selectedCounties.length < maxSelections) {
         gCounties.selectAll('.county-interactive').style('pointer-events', 'auto');
@@ -387,7 +403,12 @@ function renderState(stateFips, csvFile) {
               county,
               onYes: () => {
                 selectedCounties.push(county);
-                Revisit.postAnswers({ selectedCounty: selectedCounties });
+                
+                // Only post answers when exactly the required number of counties are selected
+                if (selectedCounties.length === REQUIRED_SELECTIONS) {
+                  Revisit.postAnswers({ selectedCounty: selectedCounties });
+                }
+                
                 renderSelectedList();
                 if (selectedCounties.length === maxSelections) {
                   gCounties.selectAll(".county-interactive")
