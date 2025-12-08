@@ -163,6 +163,12 @@
 
 @media (max-width: 400px) {
     .wrap { flex-direction: column; align-items: center; max-width: 400px; }
+    .progress-container { 
+      left: 10px; 
+      right: 10px; 
+      transform: none; 
+      min-width: auto; 
+    }
     #legend { max-width: 400px; }
     
   }
@@ -174,10 +180,10 @@
     <svg id="map" viewBox="0 0 400 400" aria-label="HOM county map"></svg>
    <!--<div id="legend"><span class="legend_chip on"></span> Above Threshold Poverty Rates &nbsp; <span class="legend_chip off"></span> Below Threshold Poverty Rates</div>-->
 <div id="progress-container" class="progress-container" style="display: none;">
-    <div class="progress-text">
-     <!-- <span>Animation Progress</span>-->
+     <!--<div class="progress-text">
+    <span>Animation Progress</span> 
       <span id="frame-counter">Frame 1 / 50</span>
-    </div>
+    </div>-->
     <div class="progress-bar">
       <div id="progress-fill" class="progress-fill"></div>
     </div>
