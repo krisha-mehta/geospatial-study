@@ -120,9 +120,56 @@
     background:#e9e9e9; 
     border-color:#aaa; }
 
+  /* Progress bar styles */
+  .progress-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #222;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-width: 250px;
+    z-index: 1000;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e9e9e9;
+    border-radius: 4px;
+    margin: 8px 0 4px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #306de7 0%, #0b5cff 100%);
+    border-radius: 4px;
+    transition: width 0.1s ease-out;
+    width: 0%;
+  }
+  
+  .progress-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+  }
+
 @media (max-width: 400px) {
     .wrap { flex-direction: column; align-items: center; max-width: 400px; }
     #legend { max-width: 400px; }
+    .progress-container { 
+      left: 10px; 
+      right: 10px; 
+      transform: none; 
+      min-width: auto; 
+    }
   }
 </style>
 </head>
@@ -137,6 +184,21 @@
   </div>
   </div>
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
+  
+  <div id="progress-container" class="progress-container" style="display: none;">
+    <div class="progress-text">
+      <span>Animation Progress</span>
+      <span id="frame-counter">Frame 1 / 50</span>
+    </div>
+    <div class="progress-bar">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+    <div style="margin-top: 4px; font-size: 11px; color: #666; text-align: center;">
+      <span id="frames-remaining">49 frames remaining in cycle</span>
+      <span style="margin-left: 10px; color: #888;">● Continuous loop</span>
+    </div>
+  </div>
+  
   <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
             background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
@@ -278,7 +340,9 @@ let state = {
   rngSeed: CONFIG.RNG_SEED,
   draws: [],
   countyList: [],
-  byFips: new Map()
+  byFips: new Map(),
+  animationStarted: false,
+  totalFramesShown: 0
 };
 
 
@@ -354,7 +418,6 @@ async function loadData(){
               selectedCounties.push(county);
               state.selected = selectedCounties;
               
-              // Only post answers when exactly the required number of counties are selected
               if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
                 Revisit.postAnswers({ selectedCounty: selectedCounties });
               }
@@ -371,7 +434,7 @@ async function loadData(){
             onNo: () => {}
           });
         } else {
-          // Info modal: instruct to unselect via chip only
+          
           const box = document.getElementById('county-message-box');
           const msg = `You have already selected this county to allocate resources.<br>To unselect, click on the <b>x</b> next to the county name below.`;
           box.innerHTML = msg + `<br><br><button id='county-ok-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>OK</button>`;
@@ -405,7 +468,6 @@ async function loadData(){
 
   state.countyList = stateCounties;
   state.byFips = byFips;
-  // Reset pointer events if under max
   if (selectedCounties.length < maxSelections) {
     gFill.selectAll('.county').style('pointer-events', 'auto');
   }
@@ -475,18 +537,67 @@ function regenerateDraws(){
   state.frame = 0;
 }
 
+function updateProgressBar() {
+  const progressContainer = document.getElementById('progress-container');
+  const progressFill = document.getElementById('progress-fill');
+  const frameCounter = document.getElementById('frame-counter');
+  const framesRemaining = document.getElementById('frames-remaining');
+  
+  if (!state.animationStarted) return;
+  
+  const currentFrame = state.frame + 1; // 1-based for display
+  const totalFrames = state.nFrames;
+  const remaining = totalFrames - currentFrame;
+  const progressPercent = (currentFrame / totalFrames) * 100;
+  
+  progressFill.style.width = progressPercent + '%';
+  frameCounter.textContent = `Frame ${currentFrame} / ${totalFrames}`;
+  
+  if (remaining > 0) {
+    framesRemaining.textContent = `${remaining} frames remaining in cycle`;
+  } else {
+    framesRemaining.textContent = 'Cycle complete - restarting...';
+  }
+  
+  // Show progress bar when animation starts
+  progressContainer.style.display = 'block';
+}
+
 function renderFrame(k){
-  state.frame = (k % state.nFrames + state.nFrames) % state.nFrames;
+  const nextFrame = (k % state.nFrames + state.nFrames) % state.nFrames;
+  
+  // If we've completed a full cycle, briefly show completion message
+  if (state.frame === state.nFrames - 1 && nextFrame === 0) {
+    // Reset progress bar to 0 for the new cycle
+    setTimeout(() => {
+      updateProgressBar();
+    }, 100);
+  }
+  
+  state.frame = nextFrame;
   const frame = state.draws[state.frame];
   gFill.selectAll('path.county')
     .classed('on', d => frame.get(String(d.id)) === 1)
     .classed('off', d => frame.get(String(d.id)) !== 1);
+    
+  
+  updateProgressBar();
 }
 
 let lastTick = 0;
 function loop(ts){
   const interval = 1000 / (state.fps || CONFIG.FPS);
-  if (ts - lastTick >= interval){ lastTick = ts; renderFrame(state.frame+1); }
+  if (ts - lastTick >= interval){ 
+    lastTick = ts; 
+    
+   
+    if (!state.animationStarted) {
+      state.animationStarted = true;
+      updateProgressBar();
+    }
+    
+    renderFrame(state.frame+1); 
+  }
   requestAnimationFrame(loop);
 }
 
@@ -500,6 +611,13 @@ function renderState(stateFips, csvFile){
   state.csvFile = csvFile;
   selectedCounties = [];
   state.selected = selectedCounties;
+  state.animationStarted = false;
+  state.totalFramesShown = 0;
+  
+ 
+  const progressContainer = document.getElementById('progress-container');
+  progressContainer.style.display = 'none';
+  
   loadData().then(startLoopOnce).catch(e=>{
     console.error(e);
     alert('Data load failed. Serve with a local web server and place the CSV next to this HTML file.');
