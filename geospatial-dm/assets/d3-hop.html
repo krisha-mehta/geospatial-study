@@ -193,10 +193,10 @@
     <div class="progress-bar">
       <div id="progress-fill" class="progress-fill"></div>
     </div>
-    <div style="margin-top: 4px; font-size: 11px; color: #666; text-align: center;">
+   <!-- <div style="margin-top: 4px; font-size: 11px; color: #666; text-align: center;">
       <span id="frames-remaining">49 frames remaining in cycle</span>
       <span style="margin-left: 10px; color: #888;">● Continuous loop</span>
-    </div>
+    </div>-->
   </div>
   
   <div id="county-message-box"
@@ -553,11 +553,11 @@ function updateProgressBar() {
   progressFill.style.width = progressPercent + '%';
   frameCounter.textContent = `Frame ${currentFrame} / ${totalFrames}`;
   
-  if (remaining > 0) {
+  /*if (remaining > 0) {
     framesRemaining.textContent = `${remaining} frames remaining in cycle`;
   } else {
     framesRemaining.textContent = 'Cycle complete - restarting...';
-  }
+  } */
   
   // Show progress bar when animation starts
   progressContainer.style.display = 'block';
