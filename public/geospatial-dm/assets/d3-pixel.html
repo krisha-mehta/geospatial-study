@@ -23,7 +23,7 @@
     background: #fff;
   }
 
-.viz-wrap {
+.wrap {
     display: flex;
     gap: 10px;
     align-items: flex-start;
@@ -109,14 +109,14 @@
   }
 
   @media (max-width: 400px) {
-    .viz-wrap { flex-direction: column; align-items: center; max-width: 400px; }
+    .wrap { flex-direction: column; align-items: center; max-width: 400px; }
     #legend { max-width: 400px; }
   }
 </style>
 </head>
 <body>
 
-<div class="viz-wrap">
+<div class="wrap">
   <!-- Map SVG -->
   <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
 
