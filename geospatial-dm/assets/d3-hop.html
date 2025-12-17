@@ -12,22 +12,23 @@
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="../../revisitUtilities/revisit-communicate.js"></script>
 
-<!--<script>
-  window.Revisit = window.Revisit || {};
-  if (!('postAnswers' in window.Revisit)) window.Revisit.postAnswers = (msg)=>console.log("Revisit.postAnswers:", msg);
-  if (!('onDataReceive' in window.Revisit)) window.Revisit.onDataReceive = (f)=>{ window.__revisitHandler = f; };
-</script>-->
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  body { margin: 0 auto;
+  body { 
+    margin: 0 auto;
     font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
     background:#fff; 
     width: 650px;
     height: 550px;
   }
 
-  .wrap { max-width:400px; margin:0 auto; padding:10px 14px 28px; }
+  .wrap { 
+    max-width:760px; 
+    margin:0 auto; 
+    padding:10px 14px 28px; 
+  }
+
   svg { width:100%; height:auto; display:block; background:#fff; }
   #map { max-width: 400px; }
   #legend { max-width: 140px; }
