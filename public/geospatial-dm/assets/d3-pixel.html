@@ -60,7 +60,7 @@
 
   /* Selected counties panel */
   .selected-panel {
-    max-width: 760px;
+    max-width: 400px;
     margin: 30px auto 0;
     padding: 0 12px 8px;
     font-size: 14px;
@@ -94,22 +94,19 @@
     cursor: pointer;
     padding: 0 2px;
   }
-  .chip button.remove-chip:focus-visible {
+  /* .chip button.remove-chip:focus-visible {
     outline: 2px solid #5179c9;
     outline-offset: 2px;
     border-radius: 4px;
-  }
+  } */
+
   .county-interactive.highlight {
     stroke: #306de7 !important;
     stroke-width: 2.5 !important;
     /* fill: rgba(0,119,204,0.08) !important; */
     pointer-events: none;
   }
-
-  @media (max-width: 400px) {
-    .wrap { flex-direction: column; align-items: center; max-width: 400px; }
-    #legend { max-width: 400px; }
-  }
+  
 </style>
 </head>
 <body>
