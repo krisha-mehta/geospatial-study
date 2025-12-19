@@ -106,7 +106,7 @@
     /* fill: rgba(0,119,204,0.08) !important; */
     pointer-events: none;
   }
-  
+
 </style>
 </head>
 <body>
@@ -139,10 +139,16 @@ const VALUE_MIN = 0, VALUE_MAX = 50;
 const MAX_SELECTIONS = 3;
 const REQUIRED_SELECTIONS = 3;
 
-const longpal = ["#800026","#BD0026","#E31A1C","#FC4E2A","#FD8D3C","#FEB24C","#FED976","#FFE7A8","#FFF2CC","#FFF9E6"].reverse();
-const color = d3.scaleLinear()
-  .domain(d3.range(VALUE_MIN, VALUE_MAX + 1, (VALUE_MAX - VALUE_MIN) / (longpal.length - 1)))
-  .range(longpal)
+//const longpal = ["#800026","#BD0026","#E31A1C","#FC4E2A","#FD8D3C","#FEB24C","#FED976","#FFE7A8","#FFF2CC","#FFF9E6"].reverse();
+//const color = d3.scaleLinear()
+  //.domain(d3.range(VALUE_MIN, VALUE_MAX + 1, (VALUE_MAX - VALUE_MIN) / (longpal.length - 1)))
+  //.range(longpal)
+  //.clamp(true);
+
+import { interpolateYlOrRd } from "d3-scale-chromatic";
+
+const color = d3.scaleSequential(interpolateYlOrRd)
+  .domain([VALUE_MIN, VALUE_MAX])
   .clamp(true);
 
 
