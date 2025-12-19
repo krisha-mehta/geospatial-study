@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="../../revisitUtilities/revisit-communicate.js"></script>
 
@@ -144,8 +145,6 @@ const REQUIRED_SELECTIONS = 3;
   //.domain(d3.range(VALUE_MIN, VALUE_MAX + 1, (VALUE_MAX - VALUE_MIN) / (longpal.length - 1)))
   //.range(longpal)
   //.clamp(true);
-
-import { interpolateYlOrRd } from "d3-scale-chromatic";
 
 const color = d3.scaleSequential(interpolateYlOrRd)
   .domain([VALUE_MIN, VALUE_MAX])
