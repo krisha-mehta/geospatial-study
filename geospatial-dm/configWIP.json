@@ -4729,510 +4729,487 @@
             "components": [
               "hop-intro",
               {
-                "order": "latinSquare",
+                "order": "random",
+                "numSamples": 16,
                 "components": [
                   {
                     "order": "latinSquare",
-                    "numSamples": 4,
+                    "numSamples": 1,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_CT_1",
-                          "hom_NE_CT_2",
-                          "hom_NE_CT_3",
-                          "hom_NE_CT_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_ME_1",
-                          "hom_NE_ME_2",
-                          "hom_NE_ME_3",
-                          "hom_NE_ME_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_MA_1",
-                          "hom_NE_MA_2",
-                          "hom_NE_MA_3",
-                          "hom_NE_MA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_NH_1",
-                          "hom_NE_NH_2",
-                          "hom_NE_NH_3",
-                          "hom_NE_NH_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_RI_1",
-                          "hom_NE_RI_2",
-                          "hom_NE_RI_3",
-                          "hom_NE_RI_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_VT_1",
-                          "hom_NE_VT_2",
-                          "hom_NE_VT_3",
-                          "hom_NE_VT_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_NJ_1",
-                          "hom_NE_NJ_2",
-                          "hom_NE_NJ_3",
-                          "hom_NE_NJ_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_NY_1",
-                          "hom_NE_NY_2",
-                          "hom_NE_NY_3",
-                          "hom_NE_NY_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_NE_PA_1",
-                          "hom_NE_PA_2",
-                          "hom_NE_PA_3",
-                          "hom_NE_PA_4"
-                        ]
-                      }
+                      "hom_NE_CT_1",
+                      "hom_NE_CT_2",
+                      "hom_NE_CT_3",
+                      "hom_NE_CT_4"
                     ]
                   },
                   {
                     "order": "latinSquare",
-                    "numSamples": 4,
+                    "numSamples": 1,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_IL_1",
-                          "hom_MW_IL_2",
-                          "hom_MW_IL_3",
-                          "hom_MW_IL_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_IN_1",
-                          "hom_MW_IN_2",
-                          "hom_MW_IN_3",
-                          "hom_MW_IN_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_IA_1",
-                          "hom_MW_IA_2",
-                          "hom_MW_IA_3",
-                          "hom_MW_IA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_KS_1",
-                          "hom_MW_KS_2",
-                          "hom_MW_KS_3",
-                          "hom_MW_KS_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_MI_1",
-                          "hom_MW_MI_2",
-                          "hom_MW_MI_3",
-                          "hom_MW_MI_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_MN_1",
-                          "hom_MW_MN_2",
-                          "hom_MW_MN_3",
-                          "hom_MW_MN_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_MO_1",
-                          "hom_MW_MO_2",
-                          "hom_MW_MO_3",
-                          "hom_MW_MO_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_NE_1",
-                          "hom_MW_NE_2",
-                          "hom_MW_NE_3",
-                          "hom_MW_NE_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_ND_1",
-                          "hom_MW_ND_2",
-                          "hom_MW_ND_3",
-                          "hom_MW_ND_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_OH_1",
-                          "hom_MW_OH_2",
-                          "hom_MW_OH_3",
-                          "hom_MW_OH_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_SD_1",
-                          "hom_MW_SD_2",
-                          "hom_MW_SD_3",
-                          "hom_MW_SD_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_MW_WI_1",
-                          "hom_MW_WI_2",
-                          "hom_MW_WI_3",
-                          "hom_MW_WI_4"
-                        ]
-                      }
+                      "hom_NE_ME_1",
+                      "hom_NE_ME_2",
+                      "hom_NE_ME_3",
+                      "hom_NE_ME_4"
                     ]
                   },
                   {
                     "order": "latinSquare",
-                    "numSamples": 4,
+                    "numSamples": 1,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_AL_1",
-                          "hom_SO_AL_2",
-                          "hom_SO_AL_3",
-                          "hom_SO_AL_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_AR_1",
-                          "hom_SO_AR_2",
-                          "hom_SO_AR_3",
-                          "hom_SO_AR_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_FL_1",
-                          "hom_SO_FL_2",
-                          "hom_SO_FL_3",
-                          "hom_SO_FL_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_GA_1",
-                          "hom_SO_GA_2",
-                          "hom_SO_GA_3",
-                          "hom_SO_GA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_KY_1",
-                          "hom_SO_KY_2",
-                          "hom_SO_KY_3",
-                          "hom_SO_KY_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_LA_1",
-                          "hom_SO_LA_2",
-                          "hom_SO_LA_3",
-                          "hom_SO_LA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_MD_1",
-                          "hom_SO_MD_2",
-                          "hom_SO_MD_3",
-                          "hom_SO_MD_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_MS_1",
-                          "hom_SO_MS_2",
-                          "hom_SO_MS_3",
-                          "hom_SO_MS_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_NC_1",
-                          "hom_SO_NC_2",
-                          "hom_SO_NC_3",
-                          "hom_SO_NC_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_OK_1",
-                          "hom_SO_OK_2",
-                          "hom_SO_OK_3",
-                          "hom_SO_OK_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_SC_1",
-                          "hom_SO_SC_2",
-                          "hom_SO_SC_3",
-                          "hom_SO_SC_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_TN_1",
-                          "hom_SO_TN_2",
-                          "hom_SO_TN_3",
-                          "hom_SO_TN_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_TX_1",
-                          "hom_SO_TX_2",
-                          "hom_SO_TX_3",
-                          "hom_SO_TX_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_VA_1",
-                          "hom_SO_VA_2",
-                          "hom_SO_VA_3",
-                          "hom_SO_VA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_SO_WV_1",
-                          "hom_SO_WV_2",
-                          "hom_SO_WV_3",
-                          "hom_SO_WV_4"
-                        ]
-                      }
+                      "hom_NE_MA_1",
+                      "hom_NE_MA_2",
+                      "hom_NE_MA_3",
+                      "hom_NE_MA_4"
                     ]
                   },
                   {
                     "order": "latinSquare",
-                    "numSamples": 4,
+                    "numSamples": 1,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_AK_1",
-                          "hom_WE_AK_2",
-                          "hom_WE_AK_3",
-                          "hom_WE_AK_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_AZ_1",
-                          "hom_WE_AZ_2",
-                          "hom_WE_AZ_3",
-                          "hom_WE_AZ_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_CA_1",
-                          "hom_WE_CA_2",
-                          "hom_WE_CA_3",
-                          "hom_WE_CA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_CO_1",
-                          "hom_WE_CO_2",
-                          "hom_WE_CO_3",
-                          "hom_WE_CO_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_ID_1",
-                          "hom_WE_ID_2",
-                          "hom_WE_ID_3",
-                          "hom_WE_ID_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_MT_1",
-                          "hom_WE_MT_2",
-                          "hom_WE_MT_3",
-                          "hom_WE_MT_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_NV_1",
-                          "hom_WE_NV_2",
-                          "hom_WE_NV_3",
-                          "hom_WE_NV_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_NM_1",
-                          "hom_WE_NM_2",
-                          "hom_WE_NM_3",
-                          "hom_WE_NM_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_OR_1",
-                          "hom_WE_OR_2",
-                          "hom_WE_OR_3",
-                          "hom_WE_OR_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_UT_1",
-                          "hom_WE_UT_2",
-                          "hom_WE_UT_3",
-                          "hom_WE_UT_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_WA_1",
-                          "hom_WE_WA_2",
-                          "hom_WE_WA_3",
-                          "hom_WE_WA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "hom_WE_WY_1",
-                          "hom_WE_WY_2",
-                          "hom_WE_WY_3",
-                          "hom_WE_WY_4"
-                        ]
-                      }
+                      "hom_NE_NH_1",
+                      "hom_NE_NH_2",
+                      "hom_NE_NH_3",
+                      "hom_NE_NH_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_NE_RI_1",
+                      "hom_NE_RI_2",
+                      "hom_NE_RI_3",
+                      "hom_NE_RI_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_NE_VT_1",
+                      "hom_NE_VT_2",
+                      "hom_NE_VT_3",
+                      "hom_NE_VT_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_NE_NJ_1",
+                      "hom_NE_NJ_2",
+                      "hom_NE_NJ_3",
+                      "hom_NE_NJ_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_NE_NY_1",
+                      "hom_NE_NY_2",
+                      "hom_NE_NY_3",
+                      "hom_NE_NY_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_NE_PA_1",
+                      "hom_NE_PA_2",
+                      "hom_NE_PA_3",
+                      "hom_NE_PA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_IL_1",
+                      "hom_MW_IL_2",
+                      "hom_MW_IL_3",
+                      "hom_MW_IL_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_IN_1",
+                      "hom_MW_IN_2",
+                      "hom_MW_IN_3",
+                      "hom_MW_IN_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_IA_1",
+                      "hom_MW_IA_2",
+                      "hom_MW_IA_3",
+                      "hom_MW_IA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_KS_1",
+                      "hom_MW_KS_2",
+                      "hom_MW_KS_3",
+                      "hom_MW_KS_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_MI_1",
+                      "hom_MW_MI_2",
+                      "hom_MW_MI_3",
+                      "hom_MW_MI_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_MN_1",
+                      "hom_MW_MN_2",
+                      "hom_MW_MN_3",
+                      "hom_MW_MN_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_MO_1",
+                      "hom_MW_MO_2",
+                      "hom_MW_MO_3",
+                      "hom_MW_MO_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_NE_1",
+                      "hom_MW_NE_2",
+                      "hom_MW_NE_3",
+                      "hom_MW_NE_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_ND_1",
+                      "hom_MW_ND_2",
+                      "hom_MW_ND_3",
+                      "hom_MW_ND_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_OH_1",
+                      "hom_MW_OH_2",
+                      "hom_MW_OH_3",
+                      "hom_MW_OH_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_SD_1",
+                      "hom_MW_SD_2",
+                      "hom_MW_SD_3",
+                      "hom_MW_SD_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_MW_WI_1",
+                      "hom_MW_WI_2",
+                      "hom_MW_WI_3",
+                      "hom_MW_WI_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_AL_1",
+                      "hom_SO_AL_2",
+                      "hom_SO_AL_3",
+                      "hom_SO_AL_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_AR_1",
+                      "hom_SO_AR_2",
+                      "hom_SO_AR_3",
+                      "hom_SO_AR_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_FL_1",
+                      "hom_SO_FL_2",
+                      "hom_SO_FL_3",
+                      "hom_SO_FL_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_GA_1",
+                      "hom_SO_GA_2",
+                      "hom_SO_GA_3",
+                      "hom_SO_GA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_KY_1",
+                      "hom_SO_KY_2",
+                      "hom_SO_KY_3",
+                      "hom_SO_KY_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_LA_1",
+                      "hom_SO_LA_2",
+                      "hom_SO_LA_3",
+                      "hom_SO_LA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_MD_1",
+                      "hom_SO_MD_2",
+                      "hom_SO_MD_3",
+                      "hom_SO_MD_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_MS_1",
+                      "hom_SO_MS_2",
+                      "hom_SO_MS_3",
+                      "hom_SO_MS_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_NC_1",
+                      "hom_SO_NC_2",
+                      "hom_SO_NC_3",
+                      "hom_SO_NC_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_OK_1",
+                      "hom_SO_OK_2",
+                      "hom_SO_OK_3",
+                      "hom_SO_OK_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_SC_1",
+                      "hom_SO_SC_2",
+                      "hom_SO_SC_3",
+                      "hom_SO_SC_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_TN_1",
+                      "hom_SO_TN_2",
+                      "hom_SO_TN_3",
+                      "hom_SO_TN_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_TX_1",
+                      "hom_SO_TX_2",
+                      "hom_SO_TX_3",
+                      "hom_SO_TX_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_VA_1",
+                      "hom_SO_VA_2",
+                      "hom_SO_VA_3",
+                      "hom_SO_VA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_SO_WV_1",
+                      "hom_SO_WV_2",
+                      "hom_SO_WV_3",
+                      "hom_SO_WV_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_AK_1",
+                      "hom_WE_AK_2",
+                      "hom_WE_AK_3",
+                      "hom_WE_AK_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_AZ_1",
+                      "hom_WE_AZ_2",
+                      "hom_WE_AZ_3",
+                      "hom_WE_AZ_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_CA_1",
+                      "hom_WE_CA_2",
+                      "hom_WE_CA_3",
+                      "hom_WE_CA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_CO_1",
+                      "hom_WE_CO_2",
+                      "hom_WE_CO_3",
+                      "hom_WE_CO_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_ID_1",
+                      "hom_WE_ID_2",
+                      "hom_WE_ID_3",
+                      "hom_WE_ID_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_MT_1",
+                      "hom_WE_MT_2",
+                      "hom_WE_MT_3",
+                      "hom_WE_MT_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_NV_1",
+                      "hom_WE_NV_2",
+                      "hom_WE_NV_3",
+                      "hom_WE_NV_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_NM_1",
+                      "hom_WE_NM_2",
+                      "hom_WE_NM_3",
+                      "hom_WE_NM_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_OR_1",
+                      "hom_WE_OR_2",
+                      "hom_WE_OR_3",
+                      "hom_WE_OR_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_UT_1",
+                      "hom_WE_UT_2",
+                      "hom_WE_UT_3",
+                      "hom_WE_UT_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_WA_1",
+                      "hom_WE_WA_2",
+                      "hom_WE_WA_3",
+                      "hom_WE_WA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "hom_WE_WY_1",
+                      "hom_WE_WY_2",
+                      "hom_WE_WY_3",
+                      "hom_WE_WY_4"
                     ]
                   }
                 ]
@@ -5244,510 +5221,487 @@
             "components": [
               "pixel-intro",
               {
-                "order": "latinSquare",
+                "order": "random",
+                "numSamples": 16,
                 "components": [
                   {
                     "order": "latinSquare",
-                    "numSamples": 4,
+                    "numSamples": 1,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_CT_1",
-                          "pix_NE_CT_2",
-                          "pix_NE_CT_3",
-                          "pix_NE_CT_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_ME_1",
-                          "pix_NE_ME_2",
-                          "pix_NE_ME_3",
-                          "pix_NE_ME_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_MA_1",
-                          "pix_NE_MA_2",
-                          "pix_NE_MA_3",
-                          "pix_NE_MA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_NH_1",
-                          "pix_NE_NH_2",
-                          "pix_NE_NH_3",
-                          "pix_NE_NH_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_RI_1",
-                          "pix_NE_RI_2",
-                          "pix_NE_RI_3",
-                          "pix_NE_RI_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_VT_1",
-                          "pix_NE_VT_2",
-                          "pix_NE_VT_3",
-                          "pix_NE_VT_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_NJ_1",
-                          "pix_NE_NJ_2",
-                          "pix_NE_NJ_3",
-                          "pix_NE_NJ_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_NY_1",
-                          "pix_NE_NY_2",
-                          "pix_NE_NY_3",
-                          "pix_NE_NY_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_NE_PA_1",
-                          "pix_NE_PA_2",
-                          "pix_NE_PA_3",
-                          "pix_NE_PA_4"
-                        ]
-                      }
+                      "pix_NE_CT_1",
+                      "pix_NE_CT_2",
+                      "pix_NE_CT_3",
+                      "pix_NE_CT_4"
                     ]
                   },
                   {
                     "order": "latinSquare",
-                    "numSamples": 4,
+                    "numSamples": 1,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_IL_1",
-                          "pix_MW_IL_2",
-                          "pix_MW_IL_3",
-                          "pix_MW_IL_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_IN_1",
-                          "pix_MW_IN_2",
-                          "pix_MW_IN_3",
-                          "pix_MW_IN_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_IA_1",
-                          "pix_MW_IA_2",
-                          "pix_MW_IA_3",
-                          "pix_MW_IA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_KS_1",
-                          "pix_MW_KS_2",
-                          "pix_MW_KS_3",
-                          "pix_MW_KS_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_MI_1",
-                          "pix_MW_MI_2",
-                          "pix_MW_MI_3",
-                          "pix_MW_MI_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_MN_1",
-                          "pix_MW_MN_2",
-                          "pix_MW_MN_3",
-                          "pix_MW_MN_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_MO_1",
-                          "pix_MW_MO_2",
-                          "pix_MW_MO_3",
-                          "pix_MW_MO_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_NE_1",
-                          "pix_MW_NE_2",
-                          "pix_MW_NE_3",
-                          "pix_MW_NE_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_ND_1",
-                          "pix_MW_ND_2",
-                          "pix_MW_ND_3",
-                          "pix_MW_ND_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_OH_1",
-                          "pix_MW_OH_2",
-                          "pix_MW_OH_3",
-                          "pix_MW_OH_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_SD_1",
-                          "pix_MW_SD_2",
-                          "pix_MW_SD_3",
-                          "pix_MW_SD_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_MW_WI_1",
-                          "pix_MW_WI_2",
-                          "pix_MW_WI_3",
-                          "pix_MW_WI_4"
-                        ]
-                      }
+                      "pix_NE_ME_1",
+                      "pix_NE_ME_2",
+                      "pix_NE_ME_3",
+                      "pix_NE_ME_4"
                     ]
                   },
                   {
                     "order": "latinSquare",
-                    "numSamples": 4,
+                    "numSamples": 1,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_AL_1",
-                          "pix_SO_AL_2",
-                          "pix_SO_AL_3",
-                          "pix_SO_AL_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_AR_1",
-                          "pix_SO_AR_2",
-                          "pix_SO_AR_3",
-                          "pix_SO_AR_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_FL_1",
-                          "pix_SO_FL_2",
-                          "pix_SO_FL_3",
-                          "pix_SO_FL_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_GA_1",
-                          "pix_SO_GA_2",
-                          "pix_SO_GA_3",
-                          "pix_SO_GA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_KY_1",
-                          "pix_SO_KY_2",
-                          "pix_SO_KY_3",
-                          "pix_SO_KY_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_LA_1",
-                          "pix_SO_LA_2",
-                          "pix_SO_LA_3",
-                          "pix_SO_LA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_MD_1",
-                          "pix_SO_MD_2",
-                          "pix_SO_MD_3",
-                          "pix_SO_MD_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_MS_1",
-                          "pix_SO_MS_2",
-                          "pix_SO_MS_3",
-                          "pix_SO_MS_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_NC_1",
-                          "pix_SO_NC_2",
-                          "pix_SO_NC_3",
-                          "pix_SO_NC_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_OK_1",
-                          "pix_SO_OK_2",
-                          "pix_SO_OK_3",
-                          "pix_SO_OK_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_SC_1",
-                          "pix_SO_SC_2",
-                          "pix_SO_SC_3",
-                          "pix_SO_SC_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_TN_1",
-                          "pix_SO_TN_2",
-                          "pix_SO_TN_3",
-                          "pix_SO_TN_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_TX_1",
-                          "pix_SO_TX_2",
-                          "pix_SO_TX_3",
-                          "pix_SO_TX_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_VA_1",
-                          "pix_SO_VA_2",
-                          "pix_SO_VA_3",
-                          "pix_SO_VA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_SO_WV_1",
-                          "pix_SO_WV_2",
-                          "pix_SO_WV_3",
-                          "pix_SO_WV_4"
-                        ]
-                      }
+                      "pix_NE_MA_1",
+                      "pix_NE_MA_2",
+                      "pix_NE_MA_3",
+                      "pix_NE_MA_4"
                     ]
                   },
                   {
                     "order": "latinSquare",
-                    "numSamples": 4,
+                    "numSamples": 1,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_AK_1",
-                          "pix_WE_AK_2",
-                          "pix_WE_AK_3",
-                          "pix_WE_AK_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_AZ_1",
-                          "pix_WE_AZ_2",
-                          "pix_WE_AZ_3",
-                          "pix_WE_AZ_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_CA_1",
-                          "pix_WE_CA_2",
-                          "pix_WE_CA_3",
-                          "pix_WE_CA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_CO_1",
-                          "pix_WE_CO_2",
-                          "pix_WE_CO_3",
-                          "pix_WE_CO_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_ID_1",
-                          "pix_WE_ID_2",
-                          "pix_WE_ID_3",
-                          "pix_WE_ID_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_MT_1",
-                          "pix_WE_MT_2",
-                          "pix_WE_MT_3",
-                          "pix_WE_MT_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_NV_1",
-                          "pix_WE_NV_2",
-                          "pix_WE_NV_3",
-                          "pix_WE_NV_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_NM_1",
-                          "pix_WE_NM_2",
-                          "pix_WE_NM_3",
-                          "pix_WE_NM_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_OR_1",
-                          "pix_WE_OR_2",
-                          "pix_WE_OR_3",
-                          "pix_WE_OR_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_UT_1",
-                          "pix_WE_UT_2",
-                          "pix_WE_UT_3",
-                          "pix_WE_UT_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_WA_1",
-                          "pix_WE_WA_2",
-                          "pix_WE_WA_3",
-                          "pix_WE_WA_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_WY_1",
-                          "pix_WE_WY_2",
-                          "pix_WE_WY_3",
-                          "pix_WE_WY_4"
-                        ]
-                      }
+                      "pix_NE_NH_1",
+                      "pix_NE_NH_2",
+                      "pix_NE_NH_3",
+                      "pix_NE_NH_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_NE_RI_1",
+                      "pix_NE_RI_2",
+                      "pix_NE_RI_3",
+                      "pix_NE_RI_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_NE_VT_1",
+                      "pix_NE_VT_2",
+                      "pix_NE_VT_3",
+                      "pix_NE_VT_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_NE_NJ_1",
+                      "pix_NE_NJ_2",
+                      "pix_NE_NJ_3",
+                      "pix_NE_NJ_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_NE_NY_1",
+                      "pix_NE_NY_2",
+                      "pix_NE_NY_3",
+                      "pix_NE_NY_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_NE_PA_1",
+                      "pix_NE_PA_2",
+                      "pix_NE_PA_3",
+                      "pix_NE_PA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_IL_1",
+                      "pix_MW_IL_2",
+                      "pix_MW_IL_3",
+                      "pix_MW_IL_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_IN_1",
+                      "pix_MW_IN_2",
+                      "pix_MW_IN_3",
+                      "pix_MW_IN_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_IA_1",
+                      "pix_MW_IA_2",
+                      "pix_MW_IA_3",
+                      "pix_MW_IA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_KS_1",
+                      "pix_MW_KS_2",
+                      "pix_MW_KS_3",
+                      "pix_MW_KS_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_MI_1",
+                      "pix_MW_MI_2",
+                      "pix_MW_MI_3",
+                      "pix_MW_MI_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_MN_1",
+                      "pix_MW_MN_2",
+                      "pix_MW_MN_3",
+                      "pix_MW_MN_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_MO_1",
+                      "pix_MW_MO_2",
+                      "pix_MW_MO_3",
+                      "pix_MW_MO_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_NE_1",
+                      "pix_MW_NE_2",
+                      "pix_MW_NE_3",
+                      "pix_MW_NE_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_ND_1",
+                      "pix_MW_ND_2",
+                      "pix_MW_ND_3",
+                      "pix_MW_ND_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_OH_1",
+                      "pix_MW_OH_2",
+                      "pix_MW_OH_3",
+                      "pix_MW_OH_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_SD_1",
+                      "pix_MW_SD_2",
+                      "pix_MW_SD_3",
+                      "pix_MW_SD_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_MW_WI_1",
+                      "pix_MW_WI_2",
+                      "pix_MW_WI_3",
+                      "pix_MW_WI_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_AL_1",
+                      "pix_SO_AL_2",
+                      "pix_SO_AL_3",
+                      "pix_SO_AL_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_AR_1",
+                      "pix_SO_AR_2",
+                      "pix_SO_AR_3",
+                      "pix_SO_AR_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_FL_1",
+                      "pix_SO_FL_2",
+                      "pix_SO_FL_3",
+                      "pix_SO_FL_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_GA_1",
+                      "pix_SO_GA_2",
+                      "pix_SO_GA_3",
+                      "pix_SO_GA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_KY_1",
+                      "pix_SO_KY_2",
+                      "pix_SO_KY_3",
+                      "pix_SO_KY_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_LA_1",
+                      "pix_SO_LA_2",
+                      "pix_SO_LA_3",
+                      "pix_SO_LA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_MD_1",
+                      "pix_SO_MD_2",
+                      "pix_SO_MD_3",
+                      "pix_SO_MD_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_MS_1",
+                      "pix_SO_MS_2",
+                      "pix_SO_MS_3",
+                      "pix_SO_MS_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_NC_1",
+                      "pix_SO_NC_2",
+                      "pix_SO_NC_3",
+                      "pix_SO_NC_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_OK_1",
+                      "pix_SO_OK_2",
+                      "pix_SO_OK_3",
+                      "pix_SO_OK_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_SC_1",
+                      "pix_SO_SC_2",
+                      "pix_SO_SC_3",
+                      "pix_SO_SC_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_TN_1",
+                      "pix_SO_TN_2",
+                      "pix_SO_TN_3",
+                      "pix_SO_TN_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_TX_1",
+                      "pix_SO_TX_2",
+                      "pix_SO_TX_3",
+                      "pix_SO_TX_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_VA_1",
+                      "pix_SO_VA_2",
+                      "pix_SO_VA_3",
+                      "pix_SO_VA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_SO_WV_1",
+                      "pix_SO_WV_2",
+                      "pix_SO_WV_3",
+                      "pix_SO_WV_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_AK_1",
+                      "pix_WE_AK_2",
+                      "pix_WE_AK_3",
+                      "pix_WE_AK_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_AZ_1",
+                      "pix_WE_AZ_2",
+                      "pix_WE_AZ_3",
+                      "pix_WE_AZ_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_CA_1",
+                      "pix_WE_CA_2",
+                      "pix_WE_CA_3",
+                      "pix_WE_CA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_CO_1",
+                      "pix_WE_CO_2",
+                      "pix_WE_CO_3",
+                      "pix_WE_CO_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_ID_1",
+                      "pix_WE_ID_2",
+                      "pix_WE_ID_3",
+                      "pix_WE_ID_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_MT_1",
+                      "pix_WE_MT_2",
+                      "pix_WE_MT_3",
+                      "pix_WE_MT_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_NV_1",
+                      "pix_WE_NV_2",
+                      "pix_WE_NV_3",
+                      "pix_WE_NV_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_NM_1",
+                      "pix_WE_NM_2",
+                      "pix_WE_NM_3",
+                      "pix_WE_NM_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_OR_1",
+                      "pix_WE_OR_2",
+                      "pix_WE_OR_3",
+                      "pix_WE_OR_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_UT_1",
+                      "pix_WE_UT_2",
+                      "pix_WE_UT_3",
+                      "pix_WE_UT_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_WA_1",
+                      "pix_WE_WA_2",
+                      "pix_WE_WA_3",
+                      "pix_WE_WA_4"
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 1,
+                    "components": [
+                      "pix_WE_WY_1",
+                      "pix_WE_WY_2",
+                      "pix_WE_WY_3",
+                      "pix_WE_WY_4"
                     ]
                   }
                 ]
