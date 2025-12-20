@@ -4729,7 +4729,7 @@
             "components": [
               "hop-intro",
               {
-                "order": "latinSquare",
+                "order": "random",
                 "components": [
                   {
                     "order": "latinSquare",
@@ -5244,7 +5244,7 @@
             "components": [
               "pixel-intro",
               {
-                "order": "latinSquare",
+                "order": "random",
                 "components": [
                   {
                     "order": "latinSquare",
