@@ -239,27 +239,61 @@ function renderState(stateFips, csvFile) {
     const stateFeature  = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === stateFips);
 
     const nameToFipsMap = new Map();
+    
+    // Create a helper to add multiple name variations for CT planning regions
+    const addCTRegionMapping = (id, regPlanOrg, shortName) => {
+      // Add full REGPLANORG name
+      if (regPlanOrg) {
+        nameToFipsMap.set(norm(regPlanOrg), id);
+        // Remove "Council of Governments" suffix
+        const withoutCOG = regPlanOrg.replace(/\s*(Council of Governments|Regional Council of Governments)\s*$/gi, '').trim();
+        nameToFipsMap.set(norm(withoutCOG), id);
+      }
+      if (shortName) {
+        nameToFipsMap.set(norm(shortName), id);
+      }
+      
+      const csvMappings = {
+        'CRCOG': 'Capitol',
+        'CTMetro': 'Greater Bridgeport',
+        'RiverCOG': 'Lower Connecticut River Valley',
+        'Naugatuck Valley': 'Naugatuck Valley',
+        'NECCOG': 'Northeastern Connecticut',
+        'Northwest Hills': 'Northwest Hills',
+        'SCRCOG': 'South Central Connecticut',
+        'SECCOG': 'Southeastern Connecticut',
+        'Western CT': 'Western Connecticut'
+      };
+      
+      if (csvMappings[shortName]) {
+        nameToFipsMap.set(norm(csvMappings[shortName]), id);
+      }
+    };
+    
     for (const f of stateCounties) {
       const id  = String(f.id);
       let raw;
       
       if (isConnecticut && ctPlanningRegions) {
-        raw = f.properties?.REGPLANORG || f.properties?.SHORT_NAME || "";
+        // For CT planning regions, use special mapping
+        const regPlanOrg = f.properties?.REGPLANORG || "";
+        const shortName = f.properties?.SHORT_NAME || "";
+        addCTRegionMapping(id, regPlanOrg, shortName);
+        raw = regPlanOrg || shortName;
       } else {
+        // For counties, use name property
         raw = f.properties?.name ?? "";
-      }
-      
-      const base = isConnecticut ? norm(raw) : norm(stripTypeSuffix(raw));
-      nameToFipsMap.set(base, id);
-
-      if (/\bsaint\b/i.test(raw)) {
-        const stripped = isConnecticut ? raw : stripTypeSuffix(raw);
-        nameToFipsMap.set(norm(stripped.replace(/\bsaint\b/gi, "st")), id);
-        nameToFipsMap.set(norm(stripped.replace(/\bsaint\b/gi, "st.")), id);
-      }
-      if (/\bst[.]?\b/iu.test(raw)) {
-        const stripped = isConnecticut ? raw : stripTypeSuffix(raw);
-        nameToFipsMap.set(norm(stripped.replace(/\bst[.]?\b/giu, "saint")), id);
+        const base = norm(stripTypeSuffix(raw));
+        nameToFipsMap.set(base, id);
+        
+        // Only do saint/st replacements for non-CT counties
+        if (/\bsaint\b/i.test(raw)) {
+          nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st"))), id);
+          nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st."))), id);
+        }
+        if (/\bst[.]?\b/iu.test(raw)) {
+          nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/giu, "saint"))), id);
+        }
       }
     }
 
@@ -271,7 +305,13 @@ function renderState(stateFips, csvFile) {
       if (fips) {
         byFips.set(fips, { pov:+r.pov, moe:+r.moe, name: rawName });
       } else {
-        console.warn(`No FIPS match for county name: "${rawName}" in state FIPS ${stateFips}`);
+        if (isConnecticut) {
+          // Debug: show what keys are available
+          console.warn(`No FIPS match for county name: "${rawName}" (normalized: "${key}") in state FIPS ${stateFips}`);
+          console.warn('Available keys:', Array.from(nameToFipsMap.keys()));
+        } else {
+          console.warn(`No FIPS match for county name: "${rawName}" in state FIPS ${stateFips}`);
+        }
       }
     }
 
