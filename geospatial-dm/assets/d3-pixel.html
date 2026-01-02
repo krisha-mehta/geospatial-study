@@ -186,43 +186,87 @@ document.addEventListener('click', (event) => {
 });
 
 function renderState(stateFips, csvFile) {
-  Promise.all([
-    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
-    d3.csv(csvFile, d3.autoType)
-  ])
-  .then(([usTopo, csv]) => {
+  const isConnecticut = stateFips === '09';
+  
+  const dataPromises = isConnecticut 
+    ? [
+        d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+        d3.csv(csvFile, d3.autoType),
+        d3.json("Connecticut_Planning_Region.geojson")
+      ]
+    : [
+        d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+        d3.csv(csvFile, d3.autoType)
+      ];
+  
+  Promise.all(dataPromises)
+  .then((results) => {
+    const usTopo = results[0];
+    const csv = results[1];
+    const ctPlanningRegions = isConnecticut ? results[2] : null;
+    
     gPixels.selectAll("*").remove();
     gState.selectAll("*").remove();
     gCounties.selectAll("*").remove();
     //gLabels.selectAll("*").remove();
     defsMap.selectAll("*").remove();
 
-    const allCounties   = topojson.feature(usTopo, usTopo.objects.counties).features;
-    const stateCounties = allCounties.filter(f => String(f.id).startsWith(stateFips));
-    const stateFeature  = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === stateFips);
-    const stateMesh     = topojson.mesh(usTopo, usTopo.objects.counties,
+    let stateCounties, stateMesh;
+    
+    if (isConnecticut && ctPlanningRegions) {
+      // For Connecticut, use planning regions
+      stateCounties = ctPlanningRegions.features;
+      const boundaries = [];
+      for (const feature of stateCounties) {
+        if (feature.geometry.type === 'Polygon') {
+          boundaries.push(feature.geometry.coordinates[0]);
+        } else if (feature.geometry.type === 'MultiPolygon') {
+          feature.geometry.coordinates.forEach(poly => boundaries.push(poly[0]));
+        }
+      }
+      stateMesh = {
+        type: "MultiLineString",
+        coordinates: boundaries
+      };
+    } else {
+      // For other states, use counties
+      const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+      stateCounties = allCounties.filter(f => String(f.id).startsWith(stateFips));
+      stateMesh = topojson.mesh(usTopo, usTopo.objects.counties,
                           (a,b)=> String(a.id).startsWith(stateFips) && String(b.id).startsWith(stateFips) && a!==b);
+    }
+    
+    const stateFeature  = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === stateFips);
 
     const nameToFipsMap = new Map();
     for (const f of stateCounties) {
       const id  = String(f.id);
-      const raw = f.properties?.name ?? "";
-      const base = norm(stripTypeSuffix(raw));
+      let raw;
+      
+      if (isConnecticut && ctPlanningRegions) {
+        raw = f.properties?.REGPLANORG || f.properties?.SHORT_NAME || "";
+      } else {
+        raw = f.properties?.name ?? "";
+      }
+      
+      const base = isConnecticut ? norm(raw) : norm(stripTypeSuffix(raw));
       nameToFipsMap.set(base, id);
 
       if (/\bsaint\b/i.test(raw)) {
-        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st"))), id);
-        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st."))), id);
+        const stripped = isConnecticut ? raw : stripTypeSuffix(raw);
+        nameToFipsMap.set(norm(stripped.replace(/\bsaint\b/gi, "st")), id);
+        nameToFipsMap.set(norm(stripped.replace(/\bsaint\b/gi, "st.")), id);
       }
       if (/\bst[.]?\b/iu.test(raw)) {
-        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/giu, "saint"))), id);
+        const stripped = isConnecticut ? raw : stripTypeSuffix(raw);
+        nameToFipsMap.set(norm(stripped.replace(/\bst[.]?\b/giu, "saint")), id);
       }
     }
 
     const byFips = new Map();
     for (const r of csv) {
       const rawName = String(r.county ?? r.NAME ?? "");
-      const key = norm(stripTypeSuffix(rawName));
+      const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
       const fips = nameToFipsMap.get(key);
       if (fips) {
         byFips.set(fips, { pov:+r.pov, moe:+r.moe, name: rawName });
