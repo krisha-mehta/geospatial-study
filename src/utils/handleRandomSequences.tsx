@@ -33,6 +33,27 @@ function _componentBlockToSequence(
 
       return o;
     });
+  } else if (order.order === 'stratifiedRandom' && latinSquareObject) {
+    // Stratified random: process each nested latinSquare block, collect results, then shuffle
+    const collectedComponents: (string | ComponentBlock)[] = [];
+    for (let i = 0; i < order.components.length; i += 1) {
+      const component = order.components[i];
+      if (typeof component !== 'string' && !isDynamicBlock(component)) {
+        // Process the nested latinSquare block
+        const nestedPath = `${path}-${i}`;
+        const nestedSequence = _componentBlockToSequence(component, latinSquareObject, nestedPath);
+        // Collect all components from this nested block (flatten the sequence components)
+        nestedSequence.components.forEach((comp) => {
+          if (typeof comp === 'string') {
+            collectedComponents.push(comp);
+          } else {
+            collectedComponents.push(comp as ComponentBlock);
+          }
+        });
+      }
+    }
+    // Shuffle the collected components randomly
+    computedComponents = collectedComponents.sort(() => 0.5 - Math.random());
   }
 
   computedComponents = computedComponents.slice(0, order.numSamples);
@@ -115,6 +136,7 @@ function _createRandomOrders(order: StudyConfig['sequence'], paths: string[], pa
     return;
   }
 
+  // For stratifiedRandom, we need to traverse nested blocks to register their Latin squares
   order.components.forEach((comp, i) => {
     if (typeof comp !== 'string' && !isDynamicBlock(comp)) {
       _createRandomOrders(comp, paths, newPath, i);

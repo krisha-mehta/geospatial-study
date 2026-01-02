@@ -384,10 +384,11 @@
           "type": "number"
         },
         "order": {
-          "description": "The type of order. This can be random (pure random), latinSquare (random with some guarantees), or fixed.",
+          "description": "The type of order. This can be random (pure random), latinSquare (random with some guarantees), stratifiedRandom (latinSquare selection from nested groups, then random shuffle), or fixed.",
           "enum": [
             "random",
             "latinSquare",
+            "stratifiedRandom",
             "fixed"
           ],
           "type": "string"
