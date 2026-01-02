@@ -1275,8 +1275,8 @@ export interface DynamicBlock {
 export interface ComponentBlock {
   /** The id of the block. This is used to identify the block in the SkipConditions and is only required if you want to refer to the whole block in the condition.to property. */
   id?: string
-  /** The type of order. This can be random (pure random), latinSquare (random with some guarantees), stratifiedRandom (latinSquare selection from nested groups, then random shuffle), or fixed. */
-  order: 'random' | 'latinSquare' | 'stratifiedRandom' | 'fixed';
+  /** The type of order. This can be random (pure random), latinSquare (random with some guarantees), or fixed. */
+  order: 'random' | 'latinSquare' | 'fixed';
   /** The components that are included in the order. */
   components: (string | ComponentBlock | DynamicBlock)[];
   /** The number of samples to use for the random assignments. This means you can randomize across 3 components while only showing a participant 2 at a time. */
