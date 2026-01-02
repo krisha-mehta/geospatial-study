@@ -205,11 +205,11 @@ function renderState(stateFips, csvFile) {
     const csv = results[1];
     const ctPlanningRegions = isConnecticut ? results[2] : null;
     
-    console.log('Connecticut check:', isConnecticut, 'Planning regions loaded:', !!ctPlanningRegions);
-    if (isConnecticut && ctPlanningRegions) {
-      console.log('CT Planning regions features:', ctPlanningRegions.features.length);
-      console.log('First feature:', ctPlanningRegions.features[0]);
-    }
+    //console.log('Connecticut check:', isConnecticut, 'Planning regions loaded:', !!ctPlanningRegions);
+    //if (isConnecticut && ctPlanningRegions) {
+      //console.log('CT Planning regions features:', ctPlanningRegions.features.length);
+      //console.log('First feature:', ctPlanningRegions.features[0]);
+    //}
     
     gPixels.selectAll("*").remove();
     gState.selectAll("*").remove();
