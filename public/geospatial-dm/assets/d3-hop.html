@@ -359,43 +359,119 @@ let state = {
 
 
 async function loadData(){
-  const [usTopo, csv] = await Promise.all([
-    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
-    d3.csv(state.csvFile, d3.autoType)
-  ]);
+  // Check if this is Connecticut (FIPS = 09)
+  const isConnecticut = state.stateFips === '09';
+  
+  const dataPromises = isConnecticut 
+    ? [
+        d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+        d3.csv(state.csvFile, d3.autoType),
+        d3.json('Connecticut_Planning_Region_WGS84_fast.geojson')
+      ]
+    : [
+        d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+        d3.csv(state.csvFile, d3.autoType)
+      ];
+  
+  const results = await Promise.all(dataPromises);
+  const usTopo = results[0];
+  const csv = results[1];
+  const ctPlanningRegions = isConnecticut ? results[2] : null;
 
-  const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
-  const stateCounties = allCounties.filter(f => String(f.id).startsWith(state.stateFips));
+  let stateCounties, stateMesh;
+  
+  if (isConnecticut && ctPlanningRegions) {
+    // For Connecticut, use planning regions
+    stateCounties = ctPlanningRegions.features;
+    const boundaries = [];
+    for (const feature of stateCounties) {
+      if (feature.geometry.type === 'Polygon') {
+        boundaries.push(feature.geometry.coordinates[0]);
+      } else if (feature.geometry.type === 'MultiPolygon') {
+        feature.geometry.coordinates.forEach(poly => boundaries.push(poly[0]));
+      }
+    }
+    stateMesh = {
+      type: "MultiLineString",
+      coordinates: boundaries
+    };
+  } else {
+    // For other states, use counties
+    const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+    stateCounties = allCounties.filter(f => String(f.id).startsWith(state.stateFips));
+    stateMesh = topojson.mesh(
+      usTopo, usTopo.objects.counties,
+      (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b
+    );
+  }
+  
   const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === state.stateFips);
-  const stateMesh = topojson.mesh(
-    usTopo, usTopo.objects.counties,
-    (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b
-  );
+
+  // Create a helper to add multiple name variations for CT planning regions
+  const addCTRegionMapping = (nameToFips, id, regPlanOrg, shortName) => {
+    // Add full REGPLANORG name
+    if (regPlanOrg) {
+      nameToFips.set(norm(regPlanOrg), id);
+      // Remove "Council of Governments" suffix
+      const withoutCOG = regPlanOrg.replace(/\s*(Council of Governments|Regional Council of Governments)\s*$/gi, '').trim();
+      nameToFips.set(norm(withoutCOG), id);
+    }
+    // Add SHORT_NAME
+    if (shortName) {
+      nameToFips.set(norm(shortName), id);
+    }
+    
+    // Add specific CSV name mappings for CT planning regions
+    const csvMappings = {
+      'CRCOG': 'Capitol',
+      'CTMetro': 'Greater Bridgeport',
+      'RiverCOG': 'Lower Connecticut River Valley',
+      'Naugatuck Valley': 'Naugatuck Valley',
+      'NECCOG': 'Northeastern Connecticut',
+      'Northwest Hills': 'Northwest Hills',
+      'SCRCOG': 'South Central Connecticut',
+      'SECCOG': 'Southeastern Connecticut',
+      'Western CT': 'Western Connecticut'
+    };
+    
+    if (csvMappings[shortName]) {
+      nameToFips.set(norm(csvMappings[shortName]), id);
+    }
+  };
 
   const nameToFips = new Map();
   for(const f of stateCounties){
-    const raw = f.properties?.name ?? '';
-    const base = norm(stripTypeSuffix(raw));
-    nameToFips.set(base, String(f.id));
-    if (/\bsaint\b/i.test(raw)){
-      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st'))), String(f.id));
-      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st.'))), String(f.id));
-    }
-    if (/\bst[.]?\b/i.test(raw)){
-      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/gi,'saint'))), String(f.id));
+    const id = String(f.id);
+    
+    if (isConnecticut && ctPlanningRegions) {
+      // For CT planning regions, use special mapping
+      const regPlanOrg = f.properties?.REGPLANORG || "";
+      const shortName = f.properties?.SHORT_NAME || "";
+      addCTRegionMapping(nameToFips, id, regPlanOrg, shortName);
+    } else {
+      // For counties, use name property
+      const raw = f.properties?.name ?? '';
+      const base = norm(stripTypeSuffix(raw));
+      nameToFips.set(base, id);
+      
+      if (/\bsaint\b/i.test(raw)){
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st'))), id);
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st.'))), id);
+      }
+      if (/\bst[.]?\b/i.test(raw)){
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/gi,'saint'))), id);
+      }
     }
   }
-
 
   const byFips = new Map();
   for(const r of csv){
     const rawName = String(r.county ?? r.NAME ?? '').trim();
-    const key = norm(stripTypeSuffix(rawName));
+    const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
     const fips = nameToFips.get(key);
     if (!fips) { console.warn('No FIPS for', rawName); continue; }
     byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
   }
-
 
   projection.fitSize([400,400], {type:'FeatureCollection', features: stateCounties});
 
