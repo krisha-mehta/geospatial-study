@@ -192,7 +192,7 @@ function renderState(stateFips, csvFile) {
     ? [
         d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
         d3.csv(csvFile, d3.autoType),
-        d3.json("Connecticut_Planning_Region_WGS84.geojson")
+        d3.json("Connecticut_Planning_Region_WGS84_fast.geojson")
       ]
     : [
         d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
