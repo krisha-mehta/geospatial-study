@@ -174,8 +174,8 @@ const gState    = svgMap.append("g").attr("class","state");
 const gCounties = svgMap.append("g").attr("class","counties");
 //const gLabels   = svgMap.append("g").attr("class","labels");
 
-const projection = d3.geoEquirectangular();
-const path = d3.geoPath(projection);
+let projection = d3.geoEquirectangular();
+let path = d3.geoPath(projection);
 
 document.addEventListener('click', (event) => {
   const messageBox = document.getElementById('county-message-box');
@@ -192,7 +192,7 @@ function renderState(stateFips, csvFile) {
     ? [
         d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
         d3.csv(csvFile, d3.autoType),
-        d3.json("Connecticut_Planning_Region.geojson")
+        d3.json("Connecticut_Planning_Region_WGS84.geojson")
       ]
     : [
         d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
@@ -204,6 +204,12 @@ function renderState(stateFips, csvFile) {
     const usTopo = results[0];
     const csv = results[1];
     const ctPlanningRegions = isConnecticut ? results[2] : null;
+    
+    console.log('Connecticut check:', isConnecticut, 'Planning regions loaded:', !!ctPlanningRegions);
+    if (isConnecticut && ctPlanningRegions) {
+      console.log('CT Planning regions features:', ctPlanningRegions.features.length);
+      console.log('First feature:', ctPlanningRegions.features[0]);
+    }
     
     gPixels.selectAll("*").remove();
     gState.selectAll("*").remove();
@@ -315,18 +321,48 @@ function renderState(stateFips, csvFile) {
       }
     }
 
-    projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
+    // For Connecticut with projected coordinates, use identity projection
+    if (isConnecticut && ctPlanningRegions) {
+      // The GeoJSON uses EPSG:2234 (Connecticut State Plane) with coordinates in feet
+      // We need to use an identity projection and fit it to the SVG
+      projection = d3.geoIdentity().reflectY(true);
+      path = d3.geoPath(projection);
+      projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
+      
+      // For state outline, we can't use the TopoJSON state feature because coordinates don't match
+      // Create a merged boundary from all planning regions instead
+      const mergedBoundary = {
+        type: "FeatureCollection",
+        features: stateCounties
+      };
+      
+      defsMap.append("clipPath").attr("id","stateClip")
+        .append("path").attr("d", path(mergedBoundary));
+        
+      // State outline - use the union of all planning regions
+      gState.append("path")
+        .attr("d", path(mergedBoundary))
+        .attr("fill","none")
+        .attr("stroke","#595959")
+        .attr("stroke-width",1)
+        .attr("vector-effect","non-scaling-stroke");
+    } else {
+      // For other states, use the standard geographic projection
+      projection = d3.geoEquirectangular();
+      path = d3.geoPath(projection);
+      projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
+      
+      defsMap.append("clipPath").attr("id","stateClip")
+        .append("path").attr("d", path(stateFeature));
 
-    defsMap.append("clipPath").attr("id","stateClip")
-      .append("path").attr("d", path(stateFeature));
-
-    // State outline
-    gState.append("path")
-      .attr("d", path(stateFeature))
-      .attr("fill","none")
-      .attr("stroke","#595959")
-      .attr("stroke-width",1)
-      .attr("vector-effect","non-scaling-stroke");
+      // State outline
+      gState.append("path")
+        .attr("d", path(stateFeature))
+        .attr("fill","none")
+        .attr("stroke","#595959")
+        .attr("stroke-width",1)
+        .attr("vector-effect","non-scaling-stroke");
+    }
 
     // County borders
     gCounties.append("path")
@@ -581,8 +617,10 @@ function renderState(stateFips, csvFile) {
       .text("Poverty");
   })
   .catch(err => {
-    console.error(err);
-    alert("Data load failed. Serve the folder with a local web server and keep the CSV next to this HTML file.");
+    console.error('Error loading data:', err);
+    console.error('Error stack:', err.stack);
+    console.error('State FIPS:', stateFips, 'CSV file:', csvFile);
+    alert("Data load failed: " + err.message + ". Check console for details.");
   });
 }
 
