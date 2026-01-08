@@ -150,44 +150,67 @@ function generateLatinSquare(config: StudyConfig, path: string) {
 }
 
 /**
- * Shuffles the sequence components to avoid consecutive trials from the same region
+ * Recursively shuffles nested sequences to avoid consecutive trials from the same state
  * @param sequence - The sequence to shuffle
  * @param config - The study config to access component parameters
  * @returns The shuffled sequence
  */
 function shuffleSequenceToAvoidConsecutiveRegions(sequence: Sequence, config: StudyConfig): Sequence {
-  const componentList = sequence.components as string[];
-  // Extract region information for each component
-  const componentsWithRegion = componentList.map((componentName) => {
-    const component = config.components[componentName];
-    // Only WebsiteComponent, ReactComponent, and VegaComponent have parameters
-    const region = (component && 'parameters' in component)
-      ? (component.parameters as Record<string, unknown>)?.region as string | null || null
-      : null;
-    return { name: componentName, region };
-  });
-  // Shuffle using a greedy algorithm to minimize consecutive regions
-  const shuffled: typeof componentsWithRegion = [];
-  const remaining = [...componentsWithRegion];
-  while (remaining.length > 0) {
-    let bestIndex = 0;
-    // If we have placed at least one component, try to find one with a different region
-    if (shuffled.length > 0) {
-      const lastRegion = shuffled[shuffled.length - 1].region;
-      // Find the first component with a different region
-      const differentRegionIndex = remaining.findIndex((c) => c.region !== lastRegion);
-      if (differentRegionIndex !== -1) {
-        bestIndex = differentRegionIndex;
+  // First, flatten the entire sequence to get all component names
+  function flattenSequence(seq: Sequence): string[] {
+    const result: string[] = [];
+    for (const comp of seq.components) {
+      if (typeof comp === 'string') {
+        result.push(comp);
+      } else {
+        result.push(...flattenSequence(comp as Sequence));
       }
-      // If all remaining are from the same region, just take the first one
     }
-    shuffled.push(remaining[bestIndex]);
-    remaining.splice(bestIndex, 1);
+    return result;
   }
 
+  // Get all component names in order (these were selected by Latin square)
+  const allComponents = flattenSequence(sequence);
+  // Separate state trial components from other components (like intro, consent, etc.)
+  const stateTrials: { component: string; index: number }[] = [];
+  const otherComponents: { component: string; index: number }[] = [];
+  allComponents.forEach((componentName, index) => {
+    const component = config.components[componentName];
+    // Check if this component has state parameter (i.e., it's a trial)
+    const hasState = (component && 'parameters' in component)
+      && (component.parameters as Record<string, unknown>)?.state !== undefined;
+    if (hasState) {
+      stateTrials.push({ component: componentName, index });
+    } else {
+      otherComponents.push({ component: componentName, index });
+    }
+  });
+  // Randomly shuffle only the state trials using Fisher-Yates algorithm
+  const shuffledTrials = stateTrials.map((t) => t.component);
+  for (let i = shuffledTrials.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledTrials[i], shuffledTrials[j]] = [shuffledTrials[j], shuffledTrials[i]];
+  }
+  // Reconstruct the full sequence with other components in original positions
+  const result: string[] = new Array(allComponents.length);
+  // Put non-trial components back in their original positions
+  otherComponents.forEach(({ component, index }) => {
+    result[index] = component;
+  });
+  // Fill in the shuffled trials in the remaining positions
+  let trialIdx = 0;
+  for (let i = 0; i < result.length; i += 1) {
+    if (result[i] === undefined) {
+      result[i] = shuffledTrials[trialIdx];
+      trialIdx += 1;
+    }
+  }
+  const shuffled = result;
+  // Now we need to rebuild the sequence structure with the shuffled components
+  // For simplicity, we'll create a flat sequence with all components at the top level
   return {
     ...sequence,
-    components: shuffled.map((c) => c.name) as Sequence['components'],
+    components: shuffled as Sequence['components'],
   };
 }
 

@@ -8,14 +8,13 @@ We are inviting you to take part in a research study. Please read the entire con
 ask questions, and take time to understand the study before you make any decision.
 
 #### Purpose of the Study
+This study aims to investigate how visualization can support reasoning about uncertainty in data presented on maps. You will be shown fictional data in a realistic scenario and asked to make resource allocation decisions. We compare performance across different display conditions to learn about how to best design visualizations to support decision-making.
 
-#### Tasks
-To understand how different representations of uncertainty in choropleth maps influence decision making.
 
 #### Risks to study participants
 Each participant in this study is assigned a random ID for analyses. As such,
 your participation will remain anonymous and your responses will
-not be used to identify you.
+not be used to identify you. In the unlikely event of a security breach, your responses and participation in the study could be uncovered, however, we are not collecting data on any sensitive topics. We use data encryption and password protection to minimize this risk.
 
 #### Benefits to research participants and others
 There may be no direct benefit to reserach participants.
