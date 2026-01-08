@@ -149,6 +149,48 @@ function generateLatinSquare(config: StudyConfig, path: string) {
   return newSquare;
 }
 
+/**
+ * Shuffles the sequence components to avoid consecutive trials from the same region
+ * @param sequence - The sequence to shuffle
+ * @param config - The study config to access component parameters
+ * @returns The shuffled sequence
+ */
+function shuffleSequenceToAvoidConsecutiveRegions(sequence: Sequence, config: StudyConfig): Sequence {
+  const componentList = sequence.components as string[];
+  // Extract region information for each component
+  const componentsWithRegion = componentList.map((componentName) => {
+    const component = config.components[componentName];
+    // Only WebsiteComponent, ReactComponent, and VegaComponent have parameters
+    const region = (component && 'parameters' in component)
+      ? (component.parameters as Record<string, unknown>)?.region as string | null || null
+      : null;
+    return { name: componentName, region };
+  });
+  // Shuffle using a greedy algorithm to minimize consecutive regions
+  const shuffled: typeof componentsWithRegion = [];
+  const remaining = [...componentsWithRegion];
+  while (remaining.length > 0) {
+    let bestIndex = 0;
+    // If we have placed at least one component, try to find one with a different region
+    if (shuffled.length > 0) {
+      const lastRegion = shuffled[shuffled.length - 1].region;
+      // Find the first component with a different region
+      const differentRegionIndex = remaining.findIndex((c) => c.region !== lastRegion);
+      if (differentRegionIndex !== -1) {
+        bestIndex = differentRegionIndex;
+      }
+      // If all remaining are from the same region, just take the first one
+    }
+    shuffled.push(remaining[bestIndex]);
+    remaining.splice(bestIndex, 1);
+  }
+
+  return {
+    ...sequence,
+    components: shuffled.map((c) => c.name) as Sequence['components'],
+  };
+}
+
 export function generateSequenceArray(config: StudyConfig): Sequence[] {
   const paths = createRandomOrders(config.sequence);
   const latinSquareObject: Record<string, string[][]> = paths
@@ -163,8 +205,11 @@ export function generateSequenceArray(config: StudyConfig): Sequence[] {
     const sequence = componentBlockToSequence(config.sequence, latinSquareObject);
     sequence.components.push('end');
 
+    // Shuffle to avoid consecutive regions
+    const shuffledSequence = shuffleSequenceToAvoidConsecutiveRegions(sequence, config);
+
     // Add the sequence to the array
-    sequenceArray.push(sequence);
+    sequenceArray.push(shuffledSequence);
 
     // Refill the latin square if it is empty
     Object.entries(latinSquareObject).forEach(([key, value]) => {
