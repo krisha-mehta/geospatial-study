@@ -150,10 +150,10 @@ function generateLatinSquare(config: StudyConfig, path: string) {
 }
 
 /**
- * Recursively shuffles nested sequences to avoid consecutive trials from the same state
+ * Randomly shuffles state trial components while preserving Latin square selection
  * @param sequence - The sequence to shuffle
  * @param config - The study config to access component parameters
- * @returns The shuffled sequence
+ * @returns The shuffled sequence with trials in random order
  */
 function shuffleSequenceToAvoidConsecutiveRegions(sequence: Sequence, config: StudyConfig): Sequence {
   // First, flatten the entire sequence to get all component names
