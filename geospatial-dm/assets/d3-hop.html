@@ -26,6 +26,7 @@
   .wrap {
     display: flex;
     gap: 10px;
+    margin-top: 20px;
     align-items: flex-start;
     justify-content: center;
     max-width: 760px;
@@ -54,8 +55,10 @@ svg {
 }
 
 
-  .legend { position:fixed; 
-    right:14px; 
+  .legend { 
+    position: relative;
+    margin-left: auto;
+    margin-top: 10px;
     background:#fff; 
     border:1px solid #e5e5e5;
     border-radius:10px; 
@@ -63,6 +66,7 @@ svg {
     font-size:12px; 
     color:#222; 
     box-shadow:0 2px 10px rgba(0,0,0,0.05); 
+    width: fit-content;
   }
    #county-message-box {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -132,23 +136,16 @@ svg {
 
   /* Progress bar styles */
   .progress-container {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    padding: 12px 16px;
+    position: relative;
+    margin: 20px auto 10px auto;
     font-size: 12px;
     color: #222;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    min-width: 250px;
-    z-index: 1000;
+    max-width: 400px;
+    text-align: left;
   }
   
   .progress-bar {
-    width: 100%;
+    width: 50%;
     height: 8px;
     background: #e9e9e9;
     border-radius: 4px;
@@ -185,11 +182,15 @@ svg {
 </style>
 </head>
 <body>
-
   <div class="wrap">
     <svg id="map" viewBox="0 0 400 400" aria-label="HOM county map"></svg>
    <!--<div id="legend"><span class="legend_chip on"></span> Above Threshold Poverty Rates &nbsp; <span class="legend_chip off"></span> Below Threshold Poverty Rates</div>-->
-<div id="progress-container" class="progress-container" style="display: none;">
+   <div class="legend">
+    <div><span class="legend_chip on"></span> Above Threshold Poverty Rates</div>
+    <div style="margin-top:6px"><span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
+  </div>
+  </div>
+  <div id="progress-container" class="progress-container" style="display: none;">
      <div class="progress-text">
     <!--<span>Animation Progress</span> -->
       <span id="frame-counter">Frame 1 / 50</span>
@@ -201,11 +202,6 @@ svg {
       <span id="frames-remaining">49 frames remaining in cycle</span>
       <span style="margin-left: 10px; color: #888;">● Continuous loop</span>
     </div>-->
-  </div>
-   <div class="legend">
-    <div><span class="legend_chip on"></span> Above Threshold Poverty Rates</div>
-    <div style="margin-top:6px"><span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
-  </div>
   </div>
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
   
