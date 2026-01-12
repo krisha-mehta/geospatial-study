@@ -3562,102 +3562,6 @@
         "csvFile": "Data/WVData4.csv"
       }
     },
-    "hom_WE_AK_1": {
-      "baseComponent": "hom-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on</p>",
-      "parameters": {
-        "condition": "hops",
-        "region": "West",
-        "state": "AK",
-        "stateFips": "02",
-        "csvFile": "Data/AKData1.csv"
-      }
-    },
-    "pix_WE_AK_1": {
-      "baseComponent": "pixel-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on</p>",
-      "parameters": {
-        "condition": "pixel",
-        "region": "West",
-        "state": "AK",
-        "stateFips": "02",
-        "csvFile": "Data/AKData1.csv"
-      }
-    },
-    "hom_WE_AK_2": {
-      "baseComponent": "hom-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on</p>",
-      "parameters": {
-        "condition": "hops",
-        "region": "West",
-        "state": "AK",
-        "stateFips": "02",
-        "csvFile": "Data/AKData2.csv"
-      }
-    },
-    "pix_WE_AK_2": {
-      "baseComponent": "pixel-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on</p>",
-      "parameters": {
-        "condition": "pixel",
-        "region": "West",
-        "state": "AK",
-        "stateFips": "02",
-        "csvFile": "Data/AKData2.csv"
-      }
-    },
-    "hom_WE_AK_3": {
-      "baseComponent": "hom-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on</p>",
-      "parameters": {
-        "condition": "hops",
-        "region": "West",
-        "state": "AK",
-        "stateFips": "02",
-        "csvFile": "Data/AKData3.csv"
-      }
-    },
-    "pix_WE_AK_3": {
-      "baseComponent": "pixel-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on</p>",
-      "parameters": {
-        "condition": "pixel",
-        "region": "West",
-        "state": "AK",
-        "stateFips": "02",
-        "csvFile": "Data/AKData3.csv"
-      }
-    },
-    "hom_WE_AK_4": {
-      "baseComponent": "hom-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on</p>",
-      "parameters": {
-        "condition": "hops",
-        "region": "West",
-        "state": "AK",
-        "stateFips": "02",
-        "csvFile": "Data/AKData4.csv"
-      }
-    },
-    "pix_WE_AK_4": {
-      "baseComponent": "pixel-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on</p>",
-      "parameters": {
-        "condition": "pixel",
-        "region": "West",
-        "state": "AK",
-        "stateFips": "02",
-        "csvFile": "Data/AKData4.csv"
-      }
-    },
     "hom_WE_AZ_1": {
       "baseComponent": "hom-map-d3",
       "type": "website",
@@ -5117,16 +5021,6 @@
                         "order": "latinSquare",
                         "numSamples": 1,
                         "components": [
-                          "hom_WE_AK_1",
-                          "hom_WE_AK_2",
-                          "hom_WE_AK_3",
-                          "hom_WE_AK_4"
-                        ]
-                      },
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
                           "hom_WE_AZ_1",
                           "hom_WE_AZ_2",
                           "hom_WE_AZ_3",
@@ -5628,16 +5522,6 @@
                     "order": "latinSquare",
                     "numSamples": 4,
                     "components": [
-                      {
-                        "order": "latinSquare",
-                        "numSamples": 1,
-                        "components": [
-                          "pix_WE_AK_1",
-                          "pix_WE_AK_2",
-                          "pix_WE_AK_3",
-                          "pix_WE_AK_4"
-                        ]
-                      },
                       {
                         "order": "latinSquare",
                         "numSamples": 1,
