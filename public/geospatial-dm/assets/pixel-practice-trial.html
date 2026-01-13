@@ -19,7 +19,7 @@
   body {
     margin: 0 auto;
     width: 650px;
-    height: 550px;
+    height: 700px;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: #fff;
   }
@@ -61,7 +61,7 @@
 
   /* Selected counties panel */
   .selected-panel {
-    max-width: 400px;
+    max-width: 1000px;
     margin: 30px auto 0;
     padding: 0 12px 8px;
     font-size: 14px;
@@ -108,6 +108,53 @@
     pointer-events: none;
   }
 
+  .county-interactive.submitted {
+    stroke: #2563eb !important;
+    stroke-width: 3 !important;
+  }
+
+  .county-interactive.correct-answer {
+    fill: rgba(16, 185, 129, 0.3) !important;
+    /*stroke: #059669 !important;
+    stroke-width: 2 !important;*/
+  }
+
+  .button-container {
+    max-width: 400px;
+    margin: 20px auto;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .submit-button {
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+
+  .submit-button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  }
+
+  .submit-button:hover:not(:disabled) {
+    background: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  }
+
+  .submit-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
 </style>
 </head>
 <body>
@@ -121,6 +168,14 @@
 </div>
 
 <div id="selected-list" class="selected-panel" aria-live="polite"></div>
+
+<div class="button-container">
+  <button id="submit-button" class="submit-button" disabled>Submit Answers</button>
+</div>
+
+<div id="submission-message" style="display: none; max-width: 600px; margin: 10px auto; font-size: 14px; text-align: justify; color: #374151;">
+The counties you selected are now highlighted in blue. The top three counties that need financial aid are <b>Kusilvak Census Area, Bethel Census Area and Yukon-Koyukuk Census Area</b>. They are highlighted in green. After you finish reviewing the answers, click on the Next button to start the experiment.
+</div>
 
 <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
@@ -237,7 +292,8 @@ function renderState(stateFips, csvFile) {
       }
     }
 
-    projection = d3.geoEquirectangular();
+    // Use Albers projection which properly handles Alaska's Aleutian Islands crossing the antimeridian
+    projection = d3.geoAlbers();
     path = d3.geoPath(projection);
     projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
     
@@ -301,6 +357,16 @@ function renderState(stateFips, csvFile) {
 
     let selectedCounties = [];
     const maxSelections = MAX_SELECTIONS;
+    let isSubmitted = false;
+
+    function updateSubmitButton() {
+      const submitBtn = document.getElementById('submit-button');
+      if (selectedCounties.length === REQUIRED_SELECTIONS && !isSubmitted) {
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.disabled = true;
+      }
+    }
 
     function renderSelectedList() {
       const panel = document.getElementById('selected-list');
@@ -321,10 +387,11 @@ function renderState(stateFips, csvFile) {
       if (selectedCounties.length < requiredSelections) {
         statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
       } else if (selectedCounties.length === requiredSelections) {
-        statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can proceed to the next step.</div>`;
+        statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can submit your selected counties and find the correct answer.</div>`;
       }
       
       panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
+      updateSubmitButton();
     }
   // initial render
   renderSelectedList();
@@ -337,9 +404,12 @@ function renderState(stateFips, csvFile) {
       if (!county) return;
       selectedCounties = selectedCounties.filter(c => c !== county);
       
-      // Only post answers when exactly the required number of counties are selected
-      if (selectedCounties.length === REQUIRED_SELECTIONS) {
-        Revisit.postAnswers({ selectedCounty: selectedCounties });
+      // Reset submitted state when removing a county
+      if (isSubmitted) {
+        isSubmitted = false;
+        d3.selectAll('.county-interactive').classed('submitted', false);
+        d3.selectAll('.county-interactive').classed('correct-answer', false);
+        document.getElementById('submission-message').style.display = 'none';
       }
       
       d3.selectAll('.county-interactive').classed('highlight', false);
@@ -362,6 +432,30 @@ function renderState(stateFips, csvFile) {
       const chip = ev.target.closest('.chip');
       if (!chip) return;
       d3.selectAll('.county-interactive').classed('highlight', false);
+    });
+
+    document.getElementById('submit-button').addEventListener('click', () => {
+      if (selectedCounties.length === REQUIRED_SELECTIONS && !isSubmitted) {
+        isSubmitted = true;
+        
+        d3.selectAll('.county-interactive').classed('submitted', function() {
+          const countyName = d3.select(this).attr('data-county');
+          return selectedCounties.includes(countyName);
+        });
+        
+        const correctAnswers = ['Kusilvak Census Area', 'Bethel Census Area', 'Yukon-Koyukuk Census Area'];
+        d3.selectAll('.county-interactive').classed('correct-answer', function() {
+          const countyName = d3.select(this).attr('data-county');
+          return correctAnswers.includes(countyName);
+        });
+        
+        // Post answers to Revisit
+        Revisit.postAnswers({ selectedCounty: selectedCounties });
+        
+        document.getElementById('submission-message').style.display = 'block';
+        
+        updateSubmitButton();
+      }
     });
 
     function showCountyMessageBox({ county, onYes, onNo }) {
@@ -412,10 +506,7 @@ function renderState(stateFips, csvFile) {
               onYes: () => {
                 selectedCounties.push(county);
                 
-                // Only post answers when exactly the required number of counties are selected
-                if (selectedCounties.length === REQUIRED_SELECTIONS) {
-                  Revisit.postAnswers({ selectedCounty: selectedCounties });
-                }
+                // Don't auto-post answers - wait for submit button
                 
                 renderSelectedList();
                 if (selectedCounties.length === maxSelections) {
@@ -468,7 +559,6 @@ function renderState(stateFips, csvFile) {
       .attr("transform", `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
       .style("pointer-events", "none");
 
-    // Vertical gradient (top -> bottom)
     const grad = defsL.append("linearGradient")
       .attr("id", "legendGrad")
       .attr("x1", "0%").attr("x2", "0%")
@@ -480,24 +570,20 @@ function renderState(stateFips, csvFile) {
         .attr("stop-color", color(VALUE_MIN + t * (VALUE_MAX - VALUE_MIN)));
     }
 
-    // Gradient bar
     lg.append("rect")
       .attr("width",  LEGEND_THICK)
       .attr("height", LEGEND_LONG)
       .attr("fill", "url(#legendGrad)")
       .attr("rx", 3);
 
-    // Scale: top = max, bottom = min
     const legendScale = d3.scaleLinear()
       .domain([VALUE_MAX, VALUE_MIN])
       .range([0, LEGEND_LONG]);
 
-    // Axis ticks to the right of bar
     lg.append("g")
       .attr("transform", `translate(${LEGEND_THICK}, 0)`)
       .call(d3.axisRight(legendScale).ticks(5));
 
-    // Title
     lg.append("text")
       .attr("x", 0)
       .attr("y", -12)
@@ -515,7 +601,7 @@ function renderState(stateFips, csvFile) {
 
 // Only Alaska for the trial
 const stateFips = '02';  
-const csvFile = 'AKData.csv'; 
+const csvFile = 'Data/AKData4.csv'; 
 renderState(stateFips, csvFile);
 </script>
 </body>
