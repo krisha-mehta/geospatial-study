@@ -88,6 +88,36 @@
         }
       ]
     },
+    "pixel-survey":{
+      "type": "website",
+      "path": "geospatial-dm/assets/pixel-survey.html",
+      "response": [
+        {
+          "id": "pixelSurveyResponse",
+          "prompt": "Your response:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
+    "hop-trial":{
+      "type": "website",
+      "path": "geospatial-dm/assets/hop-practice-trial.html",
+      "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instructionLocation": "aboveStimulus",
+      "response": [
+        {
+          "id": "selectedCounty",
+          "prompt": "Your selected answer:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
     "consent": {
       "type": "markdown",
       "path": "geospatial-dm/assets/consent.md",
@@ -4648,6 +4678,7 @@
             "order": "fixed",
             "components": [
               "hop-intro",
+              "hop-trial",
               {
                 "order": "latinSquare",
                 "components": [
@@ -5652,7 +5683,8 @@
                     ]
                   }
                 ]
-              }
+              },
+              "pixel-survey"
             ]
           }
         ]
