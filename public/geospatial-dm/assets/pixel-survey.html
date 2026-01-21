@@ -331,8 +331,10 @@ const responseTextarea = document.getElementById('response-text');
 
 responseTextarea.addEventListener('input', () => {
   const responseText = responseTextarea.value;
-  Revisit.postAnswers({ openResponse: responseText });
+  Revisit.postAnswers({ pixelSurveyResponse: responseText });
 });
+
+Revisit.postAnswers({ pixelSurveyResponse: '' });
 </script>
 </body>
 </html>

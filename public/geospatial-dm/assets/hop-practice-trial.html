@@ -118,15 +118,19 @@ svg {
     pointer-events: none;
   }
 
-  .county.submitted {
-    stroke: #2563eb !important;
+  .county.got-right {
+    stroke: #10b981 !important;
     stroke-width: 3 !important;
   }
 
-  .county.correct-answer {
-fill: rgba(16, 185, 129, 0.2) !important;
-    /*stroke: #059669 !important;
-    stroke-width: 2 !important;*/
+  .county.got-wrong {
+    stroke: #f97316 !important;
+    stroke-width: 3 !important;
+  }
+
+  .county.missed {
+    stroke: #a855f7 !important;
+    stroke-width: 3 !important;
   }
 
   .button-container {
@@ -253,8 +257,7 @@ fill: rgba(16, 185, 129, 0.2) !important;
     <button id="submit-button" class="submit-button" disabled>Submit Answers</button>
   </div>
 
-  <div id="submission-message" style="display: none; max-width: 600px; margin: 10px auto; font-size: 14px; text-align: center; color: #374151;">
-The counties you selected are now highlighted in blue. The top three counties that need financial aid are <b>Kusilvak Census Area, Bethel Census Area and Yukon-Koyukuk Census Area</b>. They are highlighted in green. After you finish reviewing the answers, click on the Next button to start the experiment.
+  <div id="submission-message" style="display: none; max-width: 800px; margin: 20px auto; padding: 20px; font-size: 15px; line-height: 1.6; color: #1f2937; background: #ffffff; border: 2px solid #000000; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
   </div>
   
   
@@ -324,7 +327,7 @@ function renderSelectedList() {
   if (selectedCounties.length < requiredSelections) {
     statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
   } else if (selectedCounties.length === requiredSelections) {
-    statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can proceed to the next step.</div>`;
+    statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can submit your selected counties and see the solution.</div>`;
   }
   
   panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
@@ -343,8 +346,9 @@ document.addEventListener('click', (ev) => {
   // Reset submitted state when removing a county
   if (isSubmitted) {
     isSubmitted = false;
-    d3.selectAll('.county').classed('submitted', false);
-    d3.selectAll('.county').classed('correct-answer', false);
+    d3.selectAll('.county').classed('got-right', false);
+    d3.selectAll('.county').classed('got-wrong', false);
+    d3.selectAll('.county').classed('missed', false);
     document.getElementById('submission-message').style.display = 'none';
   }
   
@@ -370,29 +374,54 @@ document.addEventListener('mouseout', (ev) => {
   d3.selectAll('.county').classed('highlight', false);
 });
 
-// Submit button handler
 document.getElementById('submit-button').addEventListener('click', () => {
   if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS && !isSubmitted) {
     isSubmitted = true;
     
-    // Highlight selected counties with blue stroke
-    d3.selectAll('.county').classed('submitted', function() {
+    const correctAnswers = ['Kusilvak Census Area', 'Bethel Census Area', 'Yukon-Koyukuk Census Area'];
+    
+    const gotRight = selectedCounties.filter(c => correctAnswers.includes(c));
+    const gotWrong = selectedCounties.filter(c => !correctAnswers.includes(c));
+    const missed = correctAnswers.filter(c => !selectedCounties.includes(c));
+    
+    d3.selectAll('.county').classed('got-right', function() {
       const countyName = d3.select(this).attr('data-county');
-      return selectedCounties.includes(countyName);
+      return gotRight.includes(countyName);
     });
     
-    // Fill correct answers in green
-    const correctAnswers = ['Kusilvak Census Area', 'Bethel Census Area', 'Yukon-Koyukuk Census Area'];
-    d3.selectAll('.county').classed('correct-answer', function() {
+    d3.selectAll('.county').classed('got-wrong', function() {
       const countyName = d3.select(this).attr('data-county');
-      return correctAnswers.includes(countyName);
+      return gotWrong.includes(countyName);
     });
+    
+    d3.selectAll('.county').classed('missed', function() {
+      const countyName = d3.select(this).attr('data-county');
+      return missed.includes(countyName);
+    });
+    
+    // Build the message
+    let messageHTML = '<div style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #065f46;">Solution</div>';
+    
+    if (gotRight.length > 0) {
+      messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #10b981;">Counties you got right (shown in green strokes):</strong> ${gotRight.join(', ')}</div>`;
+    }
+    
+    if (gotWrong.length > 0) {
+      messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #f97316;">Counties you got wrong (shown in orange strokes):</strong> ${gotWrong.join(', ')}</div>`;
+    }
+    
+    if (missed.length > 0) {
+      messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #a855f7;">Counties you missed (shown in purple strokes):</strong> ${missed.join(', ')}</div>`;
+    }
+    messageHTML += '<div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #d1d5db;"><strong>Important:</strong> This was a practice trial. In the actual experiment, you will not receive feedback on your answers.</div>';
+
+    messageHTML += '<div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #d1d5db;">After you finish reviewing the answers, click on the Next button to start the experiment.</div>';
+    
+    document.getElementById('submission-message').innerHTML = messageHTML;
+    document.getElementById('submission-message').style.display = 'block';
     
     // Post answers to Revisit
     Revisit.postAnswers({ selectedCounty: selectedCounties });
-    
-    // Show submission message
-    document.getElementById('submission-message').style.display = 'block';
     
     // Update submit button
     updateSubmitButton();
