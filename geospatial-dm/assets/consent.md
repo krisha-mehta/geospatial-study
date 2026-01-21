@@ -33,7 +33,8 @@ identify you.
 The data collected in this study is only being used for the present study and not for future research.
 
 #### Cost/Payment
-You will be compensated $X.00 for participating via Prolific. Additionally, based on the accuracy of your answers, you can earn upto $X.00.
+You will be compensated **$5.00 for completing this study via Prolific.** You can also earn a performance bonus of **$0.25 per correct answer**, up to a maximum bonus of $12.00.
+**Total possible earnings: up to $17.00.**
 
 #### Contact
 For more information about this research or about the rights of

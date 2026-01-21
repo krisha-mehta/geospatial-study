@@ -102,6 +102,20 @@
         }
       ]
     },
+    "hop-survey":{
+      "type": "website",
+      "path": "geospatial-dm/assets/hop-survey.html",
+      "response": [
+        {
+          "id": "hopSurveyResponse",
+          "prompt": "Your response:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
     "hop-trial":{
       "type": "website",
       "path": "geospatial-dm/assets/hop-practice-trial.html",
@@ -5177,7 +5191,8 @@
                     ]
                   }
                 ]
-              }
+              },
+              "hop-survey"
             ]
           },
           {
