@@ -164,10 +164,8 @@
 <body>
 
 <div class="wrap">
-  <!-- Map SVG -->
   <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
 
-  <!--- Legend SVG (separate) -->
   <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
 </div>
 
@@ -327,20 +325,41 @@ function renderState(stateFips, csvFile) {
         .attr("transform", d => `translate(${path.centroid(d)})`)
         .text(d => byFips.get(String(d.id))?.name ?? String(d.id)); */
 
-    // Pixel field
+    // Pixel field — fast county lookup via offscreen canvas
     const rng = mulberry32(42);
     const randn = randnFactory(rng);
     const pixels = [];
 
-    for (let y = PIXEL/2; y < height; y += PIXEL) {
-      for (let x = PIXEL/2; x < width; x += PIXEL) {
-        const lonlat = projection.invert([x,y]);
-        if (!lonlat) continue;
+    // Build an offscreen canvas where each county is painted a unique index color.
+    // This turns the O(pixels × counties) geoContains loop into O(counties + pixels).
+    const offCanvas = document.createElement("canvas");
+    offCanvas.width = width;
+    offCanvas.height = height;
+    const offCtx = offCanvas.getContext("2d");
+    const offPath = d3.geoPath(projection, offCtx);
 
-        let rec = null;
-        for (const f of stateCounties) {
-          if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
-        }
+    // Paint each county with a unique opaque color encoding its index (1-based so 0 = outside)
+    for (let i = 0; i < stateCounties.length; i++) {
+      const r = (i + 1) & 0xff;
+      const g = ((i + 1) >> 8) & 0xff;
+      offCtx.beginPath();
+      offPath(stateCounties[i]);
+      offCtx.fillStyle = `rgb(${r},${g},0)`;
+      offCtx.fill();
+    }
+
+    // Read the whole canvas image once
+    const imgData = offCtx.getImageData(0, 0, width, height).data;
+
+    for (let y = Math.floor(PIXEL / 2); y < height; y += PIXEL) {
+      for (let x = Math.floor(PIXEL / 2); x < width; x += PIXEL) {
+        const px = (y * width + x) * 4;
+        const r = imgData[px], g = imgData[px + 1];
+        const idx = (g << 8 | r) - 1;   // decode county index
+        if (idx < 0 || idx >= stateCounties.length) continue;
+
+        const fips = String(stateCounties[idx].id);
+        const rec = byFips.get(fips);
         if (!rec) continue;
 
         const v = sampleValue(rec.pov, rec.moe, randn);
