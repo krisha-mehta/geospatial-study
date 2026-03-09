@@ -488,15 +488,15 @@ function renderState(stateFips, csvFile) {
         let messageHTML = '<div style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #065f46;">Solution</div>';
         
         if (gotRight.length > 0) {
-          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #10b981;">Counties you got right (shown in green strokes):</strong> ${gotRight.join(', ')}</div>`;
+          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #4daf4a;">Counties you got right (shown in green strokes):</strong> ${gotRight.join(', ')}</div>`;
         }
         
         if (gotWrong.length > 0) {
-          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #f97316;">Counties you got wrong (shown in orange strokes):</strong> ${gotWrong.join(', ')}</div>`;
+          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #377eb8;">Counties you got wrong (shown in blue strokes):</strong> ${gotWrong.join(', ')}</div>`;
         }
         
         if (missed.length > 0) {
-          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #a855f7;">Counties you missed (shown in purple strokes):</strong> ${missed.join(', ')}</div>`;
+          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #984ea3;">Counties you missed (shown in purple strokes):</strong> ${missed.join(', ')}</div>`;
         }
 
         messageHTML += '<div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #d1d5db;">Please note that the actual trials of the experiment will not show you the correct answers.</div>';
