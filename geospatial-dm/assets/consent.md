@@ -42,7 +42,7 @@ research participants, or in case of research-related injury,
 contact:  Krisha Mehta (krisha@uchicago.edu). 
 Contact the Institutional Review Board (IRB) if you have questions regarding your rights as a research participant. Also, contact the IRB if you have questions, complaints or concerns which you do not feel you can discuss with the investigator. 
 
-Your participation in this research is voluntary
+Your participation in this research is voluntary.
 Your refusal to participate will not result in any penalty to you
 or any loss of benefits to which you may otherwise be entitled.
 You may decide to stop participating in the research at any time
