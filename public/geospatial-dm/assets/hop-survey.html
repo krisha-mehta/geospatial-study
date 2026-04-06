@@ -18,7 +18,7 @@
   body {
     margin: 0 auto;
     width: 650px;
-    height: 550px;
+    height: 850px;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: #fff;
   }
@@ -133,6 +133,84 @@
     color: #9ca3af;
   }
 
+  .states-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 12px;
+  }
+
+  .states-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .states-select {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .states-select:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .states-select:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+  }
+
+  .selected-states {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .state-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #e0e7ff;
+    color: #3730a3;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .state-tag button {
+    background: none;
+    border: none;
+    color: #3730a3;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .state-tag button:hover {
+    color: #1e1b4b;
+  }
+
+  .selection-info {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 8px;
+  }
+
 </style>
 </head>
 <body>
@@ -153,6 +231,16 @@ You have seen many example maps like the one above. How did you use the map to r
     class="response-textarea"
     placeholder="Type your response here..."
     aria-label="Open response text box"></textarea>
+</div>
+
+<div class="states-container">
+  <label for="states-select" class="states-label">
+Which states are you familiar with or have lived in? (Select up to 5 states)</label>
+  <select id="states-select" class="states-select" aria-label="Select states you are familiar with">
+    <option value="">-- Select a state --</option>
+  </select>
+  <div id="selected-states" class="selected-states"></div>
+  <div id="selection-info" class="selection-info">0 of 5 states selected</div>
 </div>
 
 <script>
@@ -285,7 +373,6 @@ Revisit.onDataReceive((data) => {
   renderState(fips, csv);
 });
 
-// Handle open response text
 const responseTextarea = document.getElementById('response-text');
 
 responseTextarea.addEventListener('input', () => {
@@ -294,6 +381,98 @@ responseTextarea.addEventListener('input', () => {
 });
 
 Revisit.postAnswers({ hopSurveyResponse: '' });
+
+// States selection functionality
+const US_STATES = [
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+  "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
+  "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
+  "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
+  "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
+  "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
+  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
+  "Wisconsin", "Wyoming"
+];
+
+const MAX_STATE_SELECTIONS = 5;
+let selectedStates = [];
+
+const statesSelect = document.getElementById('states-select');
+const selectedStatesContainer = document.getElementById('selected-states');
+const selectionInfo = document.getElementById('selection-info');
+
+function populateStatesDropdown() {
+  statesSelect.innerHTML = '<option value="">-- Select a state --</option>';
+  
+  US_STATES.forEach(state => {
+    if (!selectedStates.includes(state)) {
+      const option = document.createElement('option');
+      option.value = state;
+      option.textContent = state;
+      statesSelect.appendChild(option);
+    }
+  });
+  
+  statesSelect.disabled = selectedStates.length >= MAX_STATE_SELECTIONS;
+}
+
+function renderSelectedStates() {
+  selectedStatesContainer.innerHTML = '';
+  
+  selectedStates.forEach(state => {
+    const tag = document.createElement('span');
+    tag.className = 'state-tag';
+    tag.innerHTML = `
+      ${state}
+      <button type="button" aria-label="Remove ${state}" data-state="${state}">&times;</button>
+    `;
+    selectedStatesContainer.appendChild(tag);
+  });
+  
+  // Add click listeners to remove buttons
+  selectedStatesContainer.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const stateToRemove = btn.dataset.state;
+      removeState(stateToRemove);
+    });
+  });
+}
+
+function updateSelectionInfo() {
+  selectionInfo.textContent = `${selectedStates.length} of ${MAX_STATE_SELECTIONS} states selected`;
+}
+
+function addState(state) {
+  if (state && !selectedStates.includes(state) && selectedStates.length < MAX_STATE_SELECTIONS) {
+    selectedStates.push(state);
+    populateStatesDropdown();
+    renderSelectedStates();
+    updateSelectionInfo();
+    postStatesAnswer();
+  }
+  statesSelect.value = ''; // Reset dropdown
+}
+
+function removeState(state) {
+  selectedStates = selectedStates.filter(s => s !== state);
+  populateStatesDropdown();
+  renderSelectedStates();
+  updateSelectionInfo();
+  postStatesAnswer();
+}
+
+function postStatesAnswer() {
+  Revisit.postAnswers({ familiarStates: selectedStates });
+}
+
+statesSelect.addEventListener('change', (e) => {
+  addState(e.target.value);
+});
+
+// Initialize
+populateStatesDropdown();
+updateSelectionInfo();
+Revisit.postAnswers({ familiarStates: [] });
 </script>
 </body>
 </html>
