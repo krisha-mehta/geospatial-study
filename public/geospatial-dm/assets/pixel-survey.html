@@ -157,9 +157,19 @@
     margin-top: 8px;
   }
 
+  .survey-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    margin: 20px 0 10px 0;
+  }
+
 </style>
 </head>
 <body>
+
+<h1 class="survey-title">Survey Questionnaire</h1>
 
 <div class="wrap">
   <!-- Map SVG -->
@@ -181,12 +191,12 @@ You have seen many example maps like the one above. How did you use the map to r
 
 <div class="states-container">
   <label for="states-select" class="states-label">
-Which states are you familiar with or have lived in? (Select up to 5 states)</label>
+Which states are you familiar with or have lived in?</label>
   <select id="states-select" class="states-select" aria-label="Select states you are familiar with">
     <option value="">-- Select a state --</option>
   </select>
   <div id="selected-states" class="selected-states"></div>
-  <div id="selection-info" class="selection-info">0 of 5 states selected</div>
+  <div id="selection-info" class="selection-info">0 states selected</div>
 </div>
 
 <script>
@@ -436,7 +446,6 @@ const US_STATES = [
   "Wisconsin", "Wyoming"
 ];
 
-const MAX_STATE_SELECTIONS = 5;
 let selectedStates = [];
 
 const statesSelect = document.getElementById('states-select');
@@ -456,9 +465,6 @@ function populateStatesDropdown() {
       statesSelect.appendChild(option);
     }
   });
-  
-  // Disable dropdown if max selections reached
-  statesSelect.disabled = selectedStates.length >= MAX_STATE_SELECTIONS;
 }
 
 function renderSelectedStates() {
@@ -484,11 +490,11 @@ function renderSelectedStates() {
 }
 
 function updateSelectionInfo() {
-  selectionInfo.textContent = `${selectedStates.length} of ${MAX_STATE_SELECTIONS} states selected`;
+  selectionInfo.textContent = `${selectedStates.length} state${selectedStates.length !== 1 ? 's' : ''} selected`;
 }
 
 function addState(state) {
-  if (state && !selectedStates.includes(state) && selectedStates.length < MAX_STATE_SELECTIONS) {
+  if (state && !selectedStates.includes(state)) {
     selectedStates.push(state);
     populateStatesDropdown();
     renderSelectedStates();
