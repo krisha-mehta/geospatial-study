@@ -399,14 +399,23 @@ setTimeout(() => {
 
 const responseTextarea = document.getElementById('response-text');
 
+function checkStepCompletion() {
+  const hasResponse = responseTextarea.value.trim().length > 0;
+  const hasStates = selectedStates.length > 0;
+  
+  if (hasResponse && hasStates) {
+    Revisit.postStudyAnswers({ completed: true });
+  }
+}
+
 responseTextarea.addEventListener('input', () => {
   const responseText = responseTextarea.value;
   Revisit.postAnswers({ hopSurveyResponse: responseText });
+  checkStepCompletion();
 });
 
 Revisit.postAnswers({ hopSurveyResponse: '' });
 
-// States selection functionality
 const US_STATES = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
   "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
@@ -484,6 +493,7 @@ function removeState(state) {
 
 function postStatesAnswer() {
   Revisit.postAnswers({ familiarStates: selectedStates });
+  checkStepCompletion();
 }
 
 statesSelect.addEventListener('change', (e) => {

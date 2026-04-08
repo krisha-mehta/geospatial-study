@@ -427,9 +427,19 @@ renderState(stateFips, csvFile);
 
 const responseTextarea = document.getElementById('response-text');
 
+function checkStepCompletion() {
+  const hasResponse = responseTextarea.value.trim().length > 0;
+  const hasStates = selectedStates.length > 0;
+  
+  if (hasResponse && hasStates) {
+    Revisit.postStudyAnswers({ completed: true });
+  }
+}
+
 responseTextarea.addEventListener('input', () => {
   const responseText = responseTextarea.value;
   Revisit.postAnswers({ pixelSurveyResponse: responseText });
+  checkStepCompletion();
 });
 
 Revisit.postAnswers({ pixelSurveyResponse: '' });
@@ -514,6 +524,7 @@ function removeState(state) {
 
 function postStatesAnswer() {
   Revisit.postAnswers({ familiarStates: selectedStates });
+  checkStepCompletion();
 }
 
 statesSelect.addEventListener('change', (e) => {
