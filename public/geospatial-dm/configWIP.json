@@ -23,7 +23,7 @@
     "sidebar": false,
     "urlParticipantIdParam": "PROLIFIC_PID",
     "studyEndMsg": "**Thank you for completing the study. You may click this link and return to Prolific**",
-    "numSequences": 20
+    "numSequences": 1000
   },
   "baseComponents": {
     "pixel-map-d3": {
