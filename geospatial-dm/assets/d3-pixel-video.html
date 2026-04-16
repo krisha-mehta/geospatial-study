@@ -19,7 +19,7 @@
   body {
     margin: 0 auto;
     width: 650px;
-    height: 600px;
+    height: 550px;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: #fff;
   }
@@ -625,11 +625,8 @@ function renderState(stateFips, csvFile) {
 }
 
 
-Revisit.onDataReceive((data) => {
-  const stateFips = data['stateFips'];
-  const csvFile   = data['csvFile'];
-  renderState(stateFips, csvFile);
-});
+renderState("15", "HIData.csv");
+
 </script>
 </body>
 </html>
