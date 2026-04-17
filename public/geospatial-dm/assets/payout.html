@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Bonus Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="../../revisitUtilities/revisit-communicate.js"></script>
+
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 32px 20px 48px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
+    color: #111;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .scoring-note {
+    background: #f0f6ff;
+    border: 1px solid #c7deff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #1a3a6b;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  #loading {
+    text-align: center;
+    color: #666;
+    font-size: 15px;
+    margin-top: 60px;
+  }
+
+  #error-box {
+    display: none;
+    background: #fff5f5;
+    border: 1px solid #fca5a5;
+    border-radius: 10px;
+    padding: 16px 20px;
+    color: #7f1d1d;
+    font-size: 14px;
+    margin-top: 20px;
+  }
+
+  #results-section { display: none; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead th {
+    background: #1e3a5f;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 16px;
+    text-align: left;
+    letter-spacing: 0.02em;
+  }
+
+  thead th:first-child { border-radius: 8px 0 0 0; }
+  thead th:last-child  { border-radius: 0 8px 0 0; text-align: right; }
+
+  tbody tr:nth-child(even) { background: #f8fafd; }
+  tbody tr:nth-child(odd)  { background: #fff; }
+  tbody tr:hover { background: #eef4ff; }
+
+  tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #e8ecf2;
+    color: #222;
+  }
+
+  tbody td:last-child { text-align: right; }
+  .correct-cell { font-weight: 600; }
+
+  .bonus-positive { color: #15803d; font-weight: 600; }
+  .bonus-zero     { color: #666; }
+  .bonus-negative { color: #b91c1c; font-weight: 600; }
+
+  tfoot td {
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    background: #1e3a5f;
+    color: #fff;
+  }
+
+  tfoot td:first-child { border-radius: 0 0 0 8px; }
+  tfoot td:last-child  { border-radius: 0 0 8px 0; text-align: right; }
+
+  .table-wrap {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .summary-box {
+    margin-top: 24px;
+    background: #f0faf4;
+    border: 1px solid #86efac;
+    border-radius: 10px;
+    padding: 18px 22px;
+    text-align: center;
+  }
+
+  .summary-box .label {
+    font-size: 13px;
+    color: #166534;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .summary-box .amount {
+    font-size: 32px;
+    font-weight: 700;
+    color: #15803d;
+  }
+
+  .summary-box.negative { background: #fff5f5; border-color: #fca5a5; }
+  .summary-box.negative .label  { color: #7f1d1d; }
+  .summary-box.negative .amount { color: #b91c1c; }
+  .summary-box.zero { background: #f9f9f9; border-color: #d1d5db; }
+  .summary-box.zero .label  { color: #374151; }
+  .summary-box.zero .amount { color: #374151; }
+</style>
+</head>
+<body>
+
+<h1>Your Bonus Results</h1>
+<p class="subtitle">
+  Here is a summary of your performance across all trials.<br>
+  Correct counties are those that appear in the top 3 highest-poverty counties for each state.
+</p>
+
+<div class="scoring-note">
+  <strong>Scoring:</strong> For each trial, you earn <strong>$0.10</strong> for each correct county selected
+  and are deducted <strong>$0.05</strong> for each incorrect selection.
+  Bonus per trial = ($0.10 &times; correct) &minus; ($0.05 &times; incorrect).
+</div>
+
+<div id="loading">Loading your results&hellip;</div>
+<div id="error-box"></div>
+
+<div id="results-section">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Trial</th>
+          <th>State</th>
+          <th>Correct Answers</th>
+          <th>Bonus Earned</th>
+        </tr>
+      </thead>
+      <tbody id="results-body"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Total Bonus</td>
+          <td id="total-bonus-cell"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div id="summary-box" class="summary-box">
+    <div class="label">Your Total Bonus</div>
+    <div id="summary-amount" class="amount"></div>
+    <div id="summary-note" class="note"></div>
+  </div>
+</div>
+
+<script>
+const STATE_NAMES = {
+  AK:'Alaska', AL:'Alabama', AR:'Arkansas', AZ:'Arizona',
+  CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware',
+  FL:'Florida', GA:'Georgia', HI:'Hawaii', IA:'Iowa',
+  ID:'Idaho', IL:'Illinois', IN:'Indiana', KS:'Kansas',
+  KY:'Kentucky', LA:'Louisiana', MA:'Massachusetts', MD:'Maryland',
+  ME:'Maine', MI:'Michigan', MN:'Minnesota', MO:'Missouri',
+  MS:'Mississippi', MT:'Montana', NC:'North Carolina', ND:'North Dakota',
+  NE:'Nebraska', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico',
+  NV:'Nevada', NY:'New York', OH:'Ohio', OK:'Oklahoma',
+  OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina',
+  SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah',
+  VA:'Virginia', VT:'Vermont', WA:'Washington', WI:'Wisconsin',
+  WV:'West Virginia', WY:'Wyoming'
+};
+
+const norm = s => (s||'').normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase().trim();
+const stripType = s => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi,'').replace(/\s+/g,' ').trim();
+const normCounty = s => norm(stripType(s));
+
+
+function parseTrialId(id) {
+  const m = id.match(/^(pix|hom)_[A-Z]{2}_([A-Z]{2})_(\d+)$/);
+  if (!m) return null;
+  return { stateAbbr: m[2], trialVersion: m[3] };
+}
+
+
+function formatBonus(val) {
+  const sign = val >= 0 ? '' : '-';
+  return `${sign}$${Math.abs(val).toFixed(2)}`;
+}
+
+
+function showError(msg) {
+  document.getElementById('loading').style.display = 'none';
+  const box = document.getElementById('error-box');
+  box.textContent = msg;
+  box.style.display = 'block';
+}
+
+
+async function renderResults() {
+  let trialOrder;
+  try {
+    trialOrder = JSON.parse(sessionStorage.getItem('trial_order') || '[]');
+  } catch (e) {
+    trialOrder = [];
+  }
+
+  if (trialOrder.length === 0) {
+    showError('No trial data found. If you completed the study please contact the study team.');
+    return;
+  }
+
+  let top3Map;
+  try {
+    const rows = await d3.csv('top3_counties.csv');
+    top3Map = {};
+    for (const row of rows) {
+      const key = (row.state_file || '').trim();
+      if (!top3Map[key]) top3Map[key] = new Set();
+      top3Map[key].add(normCounty(row.county || ''));
+    }
+  } catch (e) {
+    showError('Failed to load scoring data: ' + e.message);
+    return;
+  }
+
+  const tbody = document.getElementById('results-body');
+  let totalBonus = 0;
+
+  trialOrder.forEach((compId, idx) => {
+    const parsed = parseTrialId(compId);
+    if (!parsed) return;
+
+    const { stateAbbr, trialVersion } = parsed;
+    const stateFile = `${stateAbbr}Data${trialVersion}`;
+    const correctSet = top3Map[stateFile] || new Set();
+
+    let selected = [];
+    try {
+      selected = JSON.parse(sessionStorage.getItem('trial_' + compId) || '[]');
+    } catch (e) { selected = []; }
+
+    let correctCount = 0;
+    for (const county of selected) {
+      if (correctSet.has(normCounty(county))) correctCount++;
+    }
+
+    const incorrectCount = 3 - correctCount;
+    const bonus = correctCount * 0.10 - incorrectCount * 0.05;
+    totalBonus += bonus;
+
+    const bonusClass = bonus > 0 ? 'bonus-positive' : (bonus < 0 ? 'bonus-negative' : 'bonus-zero');
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${idx + 1}</td>
+      <td>${STATE_NAMES[stateAbbr] || stateAbbr}</td>
+      <td class="correct-cell">${correctCount} / 3</td>
+      <td class="${bonusClass}">${formatBonus(bonus)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('total-bonus-cell').textContent = formatBonus(totalBonus);
+
+  const summaryBox = document.getElementById('summary-box');
+  const summaryAmount = document.getElementById('summary-amount');
+  const summaryNote = document.getElementById('summary-note');
+  if (totalBonus < 0) {
+    summaryAmount.textContent = '$0.00';
+    summaryNote.textContent = 'Since your bonus cannot be negative, the total bonus is $0.';
+    summaryBox.classList.add('zero');
+  } else {
+    summaryAmount.textContent = formatBonus(totalBonus);
+    if (totalBonus === 0) summaryBox.classList.add('zero');
+  }
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('results-section').style.display = 'block';
+
+  Revisit.postReady();
+}
+
+renderResults();
+</script>
+</body>
+</html>

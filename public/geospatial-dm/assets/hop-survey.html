@@ -380,8 +380,8 @@ let mapInitialized = false;
 Revisit.onDataReceive((data) => {
   if (mapInitialized) return;
   mapInitialized = true;
-  const fips = "04";
-  const csv = "Data/AZData4.csv";
+  const fips = "08";
+  const csv = "Data/COData4.csv";
   if (!fips || !csv) {
     console.warn('ReVISit data missing stateFips or csvFile');
     return;
@@ -393,28 +393,27 @@ Revisit.onDataReceive((data) => {
 setTimeout(() => {
   if (!mapInitialized) {
     mapInitialized = true;
-    renderState("04", "Data/AZData4.csv");
+    renderState("08", "Data/COData4.csv");
   }
 }, 100);
 
 const responseTextarea = document.getElementById('response-text');
 
-function checkStepCompletion() {
+function postAllAnswers() {
   const hasResponse = responseTextarea.value.trim().length > 0;
   const hasStates = selectedStates.length > 0;
-  
-  if (hasResponse && hasStates) {
-    Revisit.postStudyAnswers({ completed: true });
-  }
+  Revisit.postAnswers({
+    // Only mark the required field as filled when both questions are answered
+    hopSurveyResponse: (hasResponse && hasStates) ? responseTextarea.value : '',
+    familiarStates: selectedStates,
+  });
 }
 
 responseTextarea.addEventListener('input', () => {
-  const responseText = responseTextarea.value;
-  Revisit.postAnswers({ hopSurveyResponse: responseText });
-  checkStepCompletion();
+  postAllAnswers();
 });
 
-Revisit.postAnswers({ hopSurveyResponse: '' });
+Revisit.postAnswers({ hopSurveyResponse: '', familiarStates: [] });
 
 const US_STATES = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
@@ -492,8 +491,7 @@ function removeState(state) {
 }
 
 function postStatesAnswer() {
-  Revisit.postAnswers({ familiarStates: selectedStates });
-  checkStepCompletion();
+  postAllAnswers();
 }
 
 statesSelect.addEventListener('change', (e) => {
@@ -503,7 +501,6 @@ statesSelect.addEventListener('change', (e) => {
 // Initialize
 populateStatesDropdown();
 updateSelectionInfo();
-Revisit.postAnswers({ familiarStates: [] });
 </script>
 </body>
 </html>

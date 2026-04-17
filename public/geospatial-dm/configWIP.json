@@ -103,6 +103,34 @@
         }
       ]
     },
+    "pixel-survey-uncertainty":{
+      "type": "website",
+      "path": "geospatial-dm/assets/pixel-survey-uncertainty.html",
+      "response": [
+        {
+          "id": "pixelUncertaintySurveyResponse",
+          "prompt": "Your response:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
+    "hop-survey-uncertainty":{
+      "type": "website",
+      "path": "geospatial-dm/assets/hop-survey-uncertainty.html",
+      "response": [
+        {
+          "id": "hopUncertaintySurveyResponse",
+          "prompt": "Your response:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
     "hop-survey":{
       "type": "website",
       "path": "geospatial-dm/assets/hop-survey.html",
@@ -166,6 +194,11 @@
           ]
         }
       ]
+    },
+    "payout": {
+      "type": "website",
+      "path": "geospatial-dm/assets/payout.html",
+      "response": []
     },
     "hom_NE_CT_1": {
       "baseComponent": "hom-map-d3",
@@ -5193,7 +5226,8 @@
                   }
                 ]
               },
-              "hop-survey"
+              "hop-survey",
+              "hop-survey-uncertainty"
             ]
           },
           {
@@ -5700,11 +5734,13 @@
                   }
                 ]
               },
-              "pixel-survey"
+              "pixel-survey",
+              "pixel-survey-uncertainty"
             ]
           }
         ]
-      }
+      },
+      "payout"
     ]
   }
 }

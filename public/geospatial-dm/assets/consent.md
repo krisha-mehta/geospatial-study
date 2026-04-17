@@ -34,8 +34,9 @@ The data collected in this study is only being used for the present study and no
 
 #### Cost/Payment
 You will be compensated **$4.00 for completing this study via Prolific.** In addition, you can earn a performance-based bonus. You will **receive $0.10 for each correct answer** and **lose $0.05 for each incorrect answer**. 
+
 Bonus = $0.10 × correct answers − $0.05 × incorrect answers
-You can earn a maximum bonus of $4.8.
+
 #### Contact
 For more information about this research or about the rights of
 research participants, or in case of research-related injury,

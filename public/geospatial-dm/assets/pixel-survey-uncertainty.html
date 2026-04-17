@@ -18,19 +18,35 @@
   * { box-sizing: border-box; }
   body {
     margin: 0 auto;
-    width: 650px;
-    height: 850px;
+    width: 900px;
+    height: 600px;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: #fff;
   }
 
-.wrap {
+  .wrap {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: flex-start;
     justify-content: center;
-    max-width: 760px;
-    height: 400px;
+    width: 100%;
+  }
+
+  .map-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    gap: 2px;
+  }
+
+  .map-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0;
+    text-align: center;
   }
 
   svg {
@@ -41,8 +57,7 @@
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
 
-  #chart { max-width: 400px; }
-  #legend { max-width: 140px; }
+  #legend { width: 60px; flex-shrink: 0; align-self: center; }
 
   .response-container {
     max-width: 600px;
@@ -172,16 +187,20 @@
 <h1 class="survey-title">Survey Questionnaire</h1>
 
 <div class="wrap">
-  <!-- Map SVG -->
-  <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
-
-  <!--- Legend SVG (separate) -->
+  <div class="map-col">
+    <div class="map-label">Pixel Map</div>
+    <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
+  </div>
+  <div class="map-col">
+    <div class="map-label">Choropleth Map</div>
+    <svg id="choropleth" viewBox="0 0 400 400" aria-label="Choropleth map of selected state"></svg>
+  </div>
   <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
 </div>
 
 <div class="response-container">
   <label for="response-text" class="response-label">
-You have seen many example maps like the one above. How did you use the map to recommend counties that should receive financial assistance? Please describe your thought process in as much detail as possible.</label>
+Do you like the uncertainty you see here?</label>
   <textarea
     id="response-text"
     class="response-textarea"
@@ -189,20 +208,11 @@ You have seen many example maps like the one above. How did you use the map to r
     aria-label="Open response text box"></textarea>
 </div>
 
-<div class="states-container">
-  <label for="states-select" class="states-label">
-Which states are you familiar with or have lived in?</label>
-  <select id="states-select" class="states-select" aria-label="Select states you are familiar with">
-    <option value="">-- Select a state --</option>
-  </select>
-  <div id="selected-states" class="selected-states"></div>
-  <div id="selection-info" class="selection-info">0 states selected</div>
-</div>
-
 <script>
 
-const svgMap    = d3.select("#chart");
-const svgLegend = d3.select("#legend");
+const svgMap        = d3.select("#chart");
+const svgChoropleth = d3.select("#choropleth");
+const svgLegend     = d3.select("#legend");
 
 const width = 400, height = 400;  
 const PIXEL = 3;
@@ -317,6 +327,28 @@ projection.fitSize([width, height], {type:"FeatureCollection", features: stateCo
       .attr("stroke-width",1)
       .attr("vector-effect","non-scaling-stroke");
 
+    // --- Choropleth map (pov values only) ---
+    svgChoropleth.selectAll("*").remove();
+    svgChoropleth.selectAll(".county-choro")
+      .data(stateCounties)
+      .join("path")
+        .attr("class", "county-choro")
+        .attr("d", path)
+        .attr("fill", d => {
+          const rec = byFips.get(String(d.id));
+          return rec ? color(rec.pov) : "#ccc";
+        })
+        .attr("stroke", "#595959")
+        .attr("stroke-width", 0.8)
+        .attr("vector-effect", "non-scaling-stroke");
+    svgChoropleth.append("path")
+      .datum(stateFeature)
+      .attr("fill", "none")
+      .attr("stroke", "#595959")
+      .attr("stroke-width", 1)
+      .attr("vector-effect", "non-scaling-stroke")
+      .attr("d", path);
+
     // Labels 
     /*gLabels.selectAll("text")
       .data(stateCounties)
@@ -421,111 +453,11 @@ renderState(stateFips, csvFile);
 
 const responseTextarea = document.getElementById('response-text');
 
-function postAllAnswers() {
-  const hasResponse = responseTextarea.value.trim().length > 0;
-  const hasStates = selectedStates.length > 0;
-  Revisit.postAnswers({
-    // Only mark the required field as filled when both questions are answered
-    pixelSurveyResponse: (hasResponse && hasStates) ? responseTextarea.value : '',
-    familiarStates: selectedStates,
-  });
-}
+Revisit.postAnswers({ pixelUncertaintySurveyResponse: '' });
 
 responseTextarea.addEventListener('input', () => {
-  postAllAnswers();
+  Revisit.postAnswers({ pixelUncertaintySurveyResponse: responseTextarea.value });
 });
-
-Revisit.postAnswers({ pixelSurveyResponse: '', familiarStates: [] });
-
-// States selection functionality
-const US_STATES = [
-  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
-  "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
-  "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
-  "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
-  "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
-  "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
-  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
-  "Wisconsin", "Wyoming"
-];
-
-let selectedStates = [];
-
-const statesSelect = document.getElementById('states-select');
-const selectedStatesContainer = document.getElementById('selected-states');
-const selectionInfo = document.getElementById('selection-info');
-
-function populateStatesDropdown() {
-  // Clear existing options except the placeholder
-  statesSelect.innerHTML = '<option value="">-- Select a state --</option>';
-  
-  // Add states that haven't been selected yet
-  US_STATES.forEach(state => {
-    if (!selectedStates.includes(state)) {
-      const option = document.createElement('option');
-      option.value = state;
-      option.textContent = state;
-      statesSelect.appendChild(option);
-    }
-  });
-}
-
-function renderSelectedStates() {
-  selectedStatesContainer.innerHTML = '';
-  
-  selectedStates.forEach(state => {
-    const tag = document.createElement('span');
-    tag.className = 'state-tag';
-    tag.innerHTML = `
-      ${state}
-      <button type="button" aria-label="Remove ${state}" data-state="${state}">&times;</button>
-    `;
-    selectedStatesContainer.appendChild(tag);
-  });
-  
-  // Add click listeners to remove buttons
-  selectedStatesContainer.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const stateToRemove = btn.dataset.state;
-      removeState(stateToRemove);
-    });
-  });
-}
-
-function updateSelectionInfo() {
-  selectionInfo.textContent = `${selectedStates.length} state${selectedStates.length !== 1 ? 's' : ''} selected`;
-}
-
-function addState(state) {
-  if (state && !selectedStates.includes(state)) {
-    selectedStates.push(state);
-    populateStatesDropdown();
-    renderSelectedStates();
-    updateSelectionInfo();
-    postStatesAnswer();
-  }
-  statesSelect.value = ''; // Reset dropdown
-}
-
-function removeState(state) {
-  selectedStates = selectedStates.filter(s => s !== state);
-  populateStatesDropdown();
-  renderSelectedStates();
-  updateSelectionInfo();
-  postStatesAnswer();
-}
-
-function postStatesAnswer() {
-  postAllAnswers();
-}
-
-statesSelect.addEventListener('change', (e) => {
-  addState(e.target.value);
-});
-
-
-populateStatesDropdown();
-updateSelectionInfo();
 </script>
 </body>
 </html>
