@@ -452,6 +452,7 @@ function renderState(stateFips, csvFile) {
       // Only post answers when exactly the required number of counties are selected
       if (selectedCounties.length === REQUIRED_SELECTIONS) {
         Revisit.postAnswers({ selectedCounty: selectedCounties });
+        saveTrialToSession(selectedCounties);
       }
       
       d3.selectAll('.county-interactive').classed('highlight', false);
@@ -624,6 +625,19 @@ function renderState(stateFips, csvFile) {
   });
 }
 
+
+function saveTrialToSession(counties) {
+  try {
+    const trialId = new URLSearchParams(window.location.search).get('trialid');
+    if (!trialId) return;
+    sessionStorage.setItem('trial_' + trialId, JSON.stringify(counties));
+    const order = JSON.parse(sessionStorage.getItem('trial_order') || '[]');
+    if (!order.includes(trialId)) {
+      order.push(trialId);
+      sessionStorage.setItem('trial_order', JSON.stringify(order));
+    }
+  } catch (e) { /* sessionStorage unavailable */ }
+}
 
 Revisit.onDataReceive((data) => {
   const stateFips = data['stateFips'];

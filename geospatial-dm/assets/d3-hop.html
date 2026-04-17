@@ -280,8 +280,9 @@ document.addEventListener('click', (ev) => {
   // Only post answers when exactly the required number of counties are selected
   if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
     Revisit.postAnswers({ selectedCounty: selectedCounties });
+    saveTrialToSession(selectedCounties);
   }
-  
+
   d3.selectAll('.county').classed('highlight', false);
   if (selectedCounties.length < maxSelections) {
     gFill.selectAll('.county').style('pointer-events', 'auto');
@@ -391,7 +392,6 @@ async function loadData(){
       coordinates: boundaries
     };
   } else {
-    // For other states, use counties
     const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
     stateCounties = allCounties.filter(f => String(f.id).startsWith(state.stateFips));
     stateMesh = topojson.mesh(
@@ -503,6 +503,7 @@ async function loadData(){
               
               if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
                 Revisit.postAnswers({ selectedCounty: selectedCounties });
+                saveTrialToSession(selectedCounties);
               }
               
               renderSelectedList();
@@ -705,6 +706,19 @@ function renderState(stateFips, csvFile){
     console.error(e);
     alert('Data load failed. Serve with a local web server and place the CSV next to this HTML file.');
   });
+}
+
+function saveTrialToSession(counties) {
+  try {
+    const trialId = new URLSearchParams(window.location.search).get('trialid');
+    if (!trialId) return;
+    sessionStorage.setItem('trial_' + trialId, JSON.stringify(counties));
+    const order = JSON.parse(sessionStorage.getItem('trial_order') || '[]');
+    if (!order.includes(trialId)) {
+      order.push(trialId);
+      sessionStorage.setItem('trial_order', JSON.stringify(order));
+    }
+  } catch (e) { /* sessionStorage unavailable */ }
 }
 
 Revisit.onDataReceive((data)=>{
