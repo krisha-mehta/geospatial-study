@@ -64,13 +64,13 @@
       "response": []
     },
     "hop-intro": {
-      "type": "markdown",
-      "path": "geospatial-dm/assets/hop-intro.md",
+      "type": "website",
+      "path": "geospatial-dm/assets/hop-intro.html",
       "response": []
     },
     "pixel-intro": {
-      "type": "markdown",
-      "path": "geospatial-dm/assets/pixel-intro.md",
+      "type": "website",
+      "path": "geospatial-dm/assets/pixel-intro.html",
       "response": []
     },
     "pixel-trial":{
