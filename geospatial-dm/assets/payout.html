@@ -252,7 +252,7 @@ async function renderResults() {
 
   let top3Map;
   try {
-    const rows = await d3.csv('geospatial-dm/assets/top3_counties.csv');
+    const rows = await d3.csv('top3_counties.csv');
     top3Map = {};
     for (const row of rows) {
       const key = (row.state_file || '').trim();
