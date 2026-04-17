@@ -460,7 +460,6 @@ function renderState(stateFips, csvFile) {
     document.getElementById('submit-button').addEventListener('click', () => {
       if (selectedCounties.length === REQUIRED_SELECTIONS && !isSubmitted) {
         isSubmitted = true;
-        
         const correctAnswers = ['Kusilvak Census Area', 'Bethel Census Area', 'Yukon-Koyukuk Census Area'];
         
         // Determine which counties the participant got right, wrong, and missed

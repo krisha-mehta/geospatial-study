@@ -7,7 +7,7 @@ In this study, you will play the role of a consultant for different states in th
 
 To make your recommendations, you will review maps showing the estimated poverty rate for children under 18 in each county. Because these data are estimates from a survey, they are inherently uncertain. Estimates in some counties are more reliable than others. The maps provide information about the poverty estimate for each county and its uncertainty.
 
-States must decide carefully which counties should receive support. **Counties are only considered eligible for aid if there is a 90% chance that the poverty rate exceeds a threshold of 15%.** Participants will receive an additional bonus of $0.10 for each correct county they recommend that meets these criteria and lose $0.05 for every county they recommend that does not meet the criteria. You can maximize your bonus by only recommending counties that qualify. ## Compensation
+States must decide carefully which counties should receive support. **Counties are only considered eligible for aid if there is a 90% chance that the poverty rate exceeds a threshold of 15%.** Participants will receive an additional bonus of $0.10 for each correct county they recommend that meets these criteria and lose $0.05 for every county they recommend that does not meet the criteria. You can maximize your bonus by only recommending counties that qualify. 
 
 Your bonus will be calculated as:
 
