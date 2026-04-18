@@ -213,7 +213,9 @@ svg {
             max-width:320px; font-size:16px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000;
             position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;"></div>
 
+</body>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
 
 const CONFIG = {
   THRESHOLD: 15,
@@ -730,6 +732,6 @@ Revisit.onDataReceive((data)=>{
   }
   renderState(fips, csv);
 });
+});
 </script>
-</body>
 </html>
