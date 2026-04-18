@@ -128,7 +128,9 @@
             max-width:320px; font-size:16px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000;
             position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;"></div>
 
+</body>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
 
 const svgMap    = d3.select("#chart");
 const svgLegend = d3.select("#legend");
@@ -644,6 +646,6 @@ Revisit.onDataReceive((data) => {
   const csvFile   = data['csvFile'];
   renderState(stateFips, csvFile);
 });
+});
 </script>
-</body>
 </html>
