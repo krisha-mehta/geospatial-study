@@ -181,7 +181,7 @@ let path = d3.geoPath(projection);
 
 document.addEventListener('click', (event) => {
   const messageBox = document.getElementById('county-message-box');
-  const map = document.getElementById('map');
+  const map = document.getElementById('chart');
   if (!messageBox.contains(event.target) && !map.contains(event.target) && messageBox.style.display === 'block') {
     messageBox.style.display = 'none';
   }
