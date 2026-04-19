@@ -530,6 +530,7 @@ function renderState(stateFips, csvFile) {
                 // Only post answers when exactly the required number of counties are selected
                 if (selectedCounties.length === REQUIRED_SELECTIONS) {
                   Revisit.postAnswers({ selectedCounty: selectedCounties });
+                  saveTrialToSession(selectedCounties);
                 }
                 
                 renderSelectedList();
