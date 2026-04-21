@@ -318,6 +318,27 @@ async function renderResults() {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('results-section').style.display = 'block';
 
+  const trialResults = [];
+  trialOrder.forEach((compId, idx) => {
+    const parsed = parseTrialId(compId);
+    if (!parsed) return;
+    const { stateAbbr, trialVersion } = parsed;
+    const stateFile = `${stateAbbr}Data${trialVersion}`;
+    const correctSet = top3Map[stateFile] || new Set();
+    let selected = [];
+    try { selected = JSON.parse(sessionStorage.getItem('trial_' + compId) || '[]'); } catch (e) { selected = []; }
+    let correctCount = 0;
+    for (const county of selected) {
+      if (correctSet.has(normCounty(county))) correctCount++;
+    }
+    const incorrectCount = 3 - correctCount;
+    const bonus = correctCount * 0.10 - incorrectCount * 0.05;
+    trialResults.push({ trial: idx + 1, componentId: compId, state: stateAbbr, correctCount, incorrectCount, bonus });
+  });
+
+  const finalPayout = Math.max(0, totalBonus);
+  Revisit.postAnswers({ totalBonus, finalPayout, trialResults });
+
   Revisit.postReady();
 }
 
