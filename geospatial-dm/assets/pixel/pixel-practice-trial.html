@@ -19,7 +19,7 @@
   body {
     margin: 0 auto;
     width: 650px;
-    height: 600px;
+    height: 700px;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: #fff;
   }
@@ -61,7 +61,7 @@
 
   /* Selected counties panel */
   .selected-panel {
-    max-width: 400px;
+    max-width: 1000px;
     margin: 30px auto 0;
     padding: 0 12px 8px;
     font-size: 14px;
@@ -108,19 +108,75 @@
     pointer-events: none;
   }
 
+  .county-interactive.got-right {
+    stroke: #4daf4a !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .county-interactive.got-wrong {
+    stroke: #377eb8 !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .county-interactive.missed {
+    stroke: #984ea3 !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .button-container {
+    max-width: 400px;
+    margin: 20px auto;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .submit-button {
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+
+  .submit-button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  }
+
+  .submit-button:hover:not(:disabled) {
+    background: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  }
+
+  .submit-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <!-- Map SVG -->
   <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
 
-  <!--- Legend SVG (separate) -->
   <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
 </div>
 
 <div id="selected-list" class="selected-panel" aria-live="polite"></div>
+
+<div class="button-container">
+  <button id="submit-button" class="submit-button" disabled>Submit Answers</button>
+</div>
+
+<div id="submission-message" style="display: none; max-width: 800px; margin: 20px auto; padding: 20px; font-size: 15px; line-height: 1.6; color: #1f2937; background: #ffffff; border: 2px solid #000000; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+</div>
 
 <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
@@ -176,8 +232,8 @@ const gState    = svgMap.append("g").attr("class","state");
 const gCounties = svgMap.append("g").attr("class","counties");
 //const gLabels   = svgMap.append("g").attr("class","labels");
 
-let projection = d3.geoEquirectangular();
-let path = d3.geoPath(projection);
+let projection;
+let path;
 
 document.addEventListener('click', (event) => {
   const messageBox = document.getElementById('county-message-box');
@@ -188,30 +244,14 @@ document.addEventListener('click', (event) => {
 });
 
 function renderState(stateFips, csvFile) {
-  const isConnecticut = stateFips === '09';
   
-  const dataPromises = isConnecticut 
-    ? [
-        d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
-        d3.csv(csvFile, d3.autoType),
-        d3.json("Connecticut_Planning_Region_WGS84_fast.geojson")
-      ]
-    : [
-        d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
-        d3.csv(csvFile, d3.autoType)
-      ];
-  
-  Promise.all(dataPromises)
+  Promise.all([
+    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+    d3.csv(csvFile, d3.autoType)
+  ])
   .then((results) => {
     const usTopo = results[0];
     const csv = results[1];
-    const ctPlanningRegions = isConnecticut ? results[2] : null;
-    
-    //console.log('Connecticut check:', isConnecticut, 'Planning regions loaded:', !!ctPlanningRegions);
-    //if (isConnecticut && ctPlanningRegions) {
-      //console.log('CT Planning regions features:', ctPlanningRegions.features.length);
-      //console.log('First feature:', ctPlanningRegions.features[0]);
-    //}
     
     gPixels.selectAll("*").remove();
     gState.selectAll("*").remove();
@@ -219,152 +259,57 @@ function renderState(stateFips, csvFile) {
     //gLabels.selectAll("*").remove();
     defsMap.selectAll("*").remove();
 
-    let stateCounties, stateMesh;
-    
-    if (isConnecticut && ctPlanningRegions) {
-      // For Connecticut, use planning regions
-      stateCounties = ctPlanningRegions.features;
-      const boundaries = [];
-      for (const feature of stateCounties) {
-        if (feature.geometry.type === 'Polygon') {
-          boundaries.push(feature.geometry.coordinates[0]);
-        } else if (feature.geometry.type === 'MultiPolygon') {
-          feature.geometry.coordinates.forEach(poly => boundaries.push(poly[0]));
-        }
-      }
-      stateMesh = {
-        type: "MultiLineString",
-        coordinates: boundaries
-      };
-    } else {
-      // For other states, use counties
-      const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
-      stateCounties = allCounties.filter(f => String(f.id).startsWith(stateFips));
-      stateMesh = topojson.mesh(usTopo, usTopo.objects.counties,
-                          (a,b)=> String(a.id).startsWith(stateFips) && String(b.id).startsWith(stateFips) && a!==b);
-    }
+    const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+    const stateCounties = allCounties.filter(f => String(f.id).startsWith(stateFips));
+    const stateMesh = topojson.mesh(usTopo, usTopo.objects.counties,
+                        (a,b)=> String(a.id).startsWith(stateFips) && String(b.id).startsWith(stateFips) && a!==b);
     
     const stateFeature  = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === stateFips);
 
     const nameToFipsMap = new Map();
     
-    // Create a helper to add multiple name variations for CT planning regions
-    const addCTRegionMapping = (id, regPlanOrg, shortName) => {
-      // Add full REGPLANORG name
-      if (regPlanOrg) {
-        nameToFipsMap.set(norm(regPlanOrg), id);
-        // Remove "Council of Governments" suffix
-        const withoutCOG = regPlanOrg.replace(/\s*(Council of Governments|Regional Council of Governments)\s*$/gi, '').trim();
-        nameToFipsMap.set(norm(withoutCOG), id);
-      }
-      if (shortName) {
-        nameToFipsMap.set(norm(shortName), id);
-      }
-      
-      const csvMappings = {
-        'CRCOG': 'Capitol',
-        'CTMetro': 'Greater Bridgeport',
-        'RiverCOG': 'Lower Connecticut River Valley',
-        'Naugatuck Valley': 'Naugatuck Valley',
-        'NECCOG': 'Northeastern Connecticut',
-        'Northwest Hills': 'Northwest Hills',
-        'SCRCOG': 'South Central Connecticut',
-        'SECCOG': 'Southeastern Connecticut',
-        'Western CT': 'Western Connecticut'
-      };
-      
-      if (csvMappings[shortName]) {
-        nameToFipsMap.set(norm(csvMappings[shortName]), id);
-      }
-    };
-    
     for (const f of stateCounties) {
       const id  = String(f.id);
-      let raw;
+      const raw = f.properties?.name ?? "";
+      const base = norm(stripTypeSuffix(raw));
+      nameToFipsMap.set(base, id);
       
-      if (isConnecticut && ctPlanningRegions) {
-        // For CT planning regions, use special mapping
-        const regPlanOrg = f.properties?.REGPLANORG || "";
-        const shortName = f.properties?.SHORT_NAME || "";
-        addCTRegionMapping(id, regPlanOrg, shortName);
-        raw = regPlanOrg || shortName;
-      } else {
-        // For counties, use name property
-        raw = f.properties?.name ?? "";
-        const base = norm(stripTypeSuffix(raw));
-        nameToFipsMap.set(base, id);
-        
-        // Only do saint/st replacements for non-CT counties
-        if (/\bsaint\b/i.test(raw)) {
-          nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st"))), id);
-          nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st."))), id);
-        }
-        if (/\bst[.]?\b/iu.test(raw)) {
-          nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/giu, "saint"))), id);
-        }
+      if (/\bsaint\b/i.test(raw)) {
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st"))), id);
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st."))), id);
+      }
+      if (/\bst[.]?\b/iu.test(raw)) {
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/giu, "saint"))), id);
       }
     }
 
     const byFips = new Map();
     for (const r of csv) {
       const rawName = String(r.county ?? r.NAME ?? "");
-      const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
+      const key = norm(stripTypeSuffix(rawName));
       const fips = nameToFipsMap.get(key);
       if (fips) {
         byFips.set(fips, { pov:+r.pov, moe:+r.moe, name: rawName });
       } else {
-        if (isConnecticut) {
-          // Debug: show what keys are available
-          console.warn(`No FIPS match for county name: "${rawName}" (normalized: "${key}") in state FIPS ${stateFips}`);
-          console.warn('Available keys:', Array.from(nameToFipsMap.keys()));
-        } else {
-          console.warn(`No FIPS match for county name: "${rawName}" in state FIPS ${stateFips}`);
-        }
+        console.warn(`No FIPS match for county name: "${rawName}" in state FIPS ${stateFips}`);
       }
     }
 
-    // For Connecticut with projected coordinates, use identity projection
-    if (isConnecticut && ctPlanningRegions) {
-      // The GeoJSON uses EPSG:2234 (Connecticut State Plane) with coordinates in feet
-      // We need to use an identity projection and fit it to the SVG
-      projection = d3.geoIdentity().reflectY(true);
-      path = d3.geoPath(projection);
-      projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
-      
-      // For state outline, we can't use the TopoJSON state feature because coordinates don't match
-      // Create a merged boundary from all planning regions instead
-      const mergedBoundary = {
-        type: "FeatureCollection",
-        features: stateCounties
-      };
-      
-      defsMap.append("clipPath").attr("id","stateClip")
-        .append("path").attr("d", path(mergedBoundary));
-        
-      // State outline - use the union of all planning regions
-      gState.append("path")
-        .attr("d", path(mergedBoundary))
-        .attr("fill","none")
-        .attr("stroke","#595959")
-        .attr("stroke-width",1)
-        .attr("vector-effect","non-scaling-stroke");
-    } else {
-      // For other states, use the standard geographic projection
-      projection = d3.geoEquirectangular();
-      path = d3.geoPath(projection);
-      projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
-      
-      defsMap.append("clipPath").attr("id","stateClip")
-        .append("path").attr("d", path(stateFeature));
+    // Use Albers projection which properly handles Alaska's Aleutian Islands crossing the antimeridian
+    projection = d3.geoAlbers();
+    path = d3.geoPath(projection);
+    projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
+    
+    defsMap.append("clipPath").attr("id","stateClip")
+      .append("path").attr("d", path(stateFeature));
 
-      // State outline
-      gState.append("path")
-        .attr("d", path(stateFeature))
-        .attr("fill","none")
-        .attr("stroke","#595959")
-        .attr("stroke-width",1)
-        .attr("vector-effect","non-scaling-stroke");
-    }
+    // State outline
+    gState.append("path")
+      .attr("d", path(stateFeature))
+      .attr("fill","none")
+      .attr("stroke","#595959")
+      .attr("stroke-width",1)
+      .attr("vector-effect","non-scaling-stroke");
 
     // County borders
     gCounties.append("path")
@@ -382,20 +327,41 @@ function renderState(stateFips, csvFile) {
         .attr("transform", d => `translate(${path.centroid(d)})`)
         .text(d => byFips.get(String(d.id))?.name ?? String(d.id)); */
 
-    // Pixel field
+    // Pixel field — fast county lookup via offscreen canvas
     const rng = mulberry32(42);
     const randn = randnFactory(rng);
     const pixels = [];
 
-    for (let y = PIXEL/2; y < height; y += PIXEL) {
-      for (let x = PIXEL/2; x < width; x += PIXEL) {
-        const lonlat = projection.invert([x,y]);
-        if (!lonlat) continue;
+    // Build an offscreen canvas where each county is painted a unique index color.
+    // This turns the O(pixels × counties) geoContains loop into O(counties + pixels).
+    const offCanvas = document.createElement("canvas");
+    offCanvas.width = width;
+    offCanvas.height = height;
+    const offCtx = offCanvas.getContext("2d");
+    const offPath = d3.geoPath(projection, offCtx);
 
-        let rec = null;
-        for (const f of stateCounties) {
-          if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
-        }
+    // Paint each county with a unique opaque color encoding its index (1-based so 0 = outside)
+    for (let i = 0; i < stateCounties.length; i++) {
+      const r = (i + 1) & 0xff;
+      const g = ((i + 1) >> 8) & 0xff;
+      offCtx.beginPath();
+      offPath(stateCounties[i]);
+      offCtx.fillStyle = `rgb(${r},${g},0)`;
+      offCtx.fill();
+    }
+
+    // Read the whole canvas image once
+    const imgData = offCtx.getImageData(0, 0, width, height).data;
+
+    for (let y = Math.floor(PIXEL / 2); y < height; y += PIXEL) {
+      for (let x = Math.floor(PIXEL / 2); x < width; x += PIXEL) {
+        const px = (y * width + x) * 4;
+        const r = imgData[px], g = imgData[px + 1];
+        const idx = (g << 8 | r) - 1;   // decode county index
+        if (idx < 0 || idx >= stateCounties.length) continue;
+
+        const fips = String(stateCounties[idx].id);
+        const rec = byFips.get(fips);
         if (!rec) continue;
 
         const v = sampleValue(rec.pov, rec.moe, randn);
@@ -415,6 +381,16 @@ function renderState(stateFips, csvFile) {
 
     let selectedCounties = [];
     const maxSelections = MAX_SELECTIONS;
+    let isSubmitted = false;
+
+    function updateSubmitButton() {
+      const submitBtn = document.getElementById('submit-button');
+      if (selectedCounties.length === REQUIRED_SELECTIONS && !isSubmitted) {
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.disabled = true;
+      }
+    }
 
     function renderSelectedList() {
       const panel = document.getElementById('selected-list');
@@ -435,10 +411,11 @@ function renderState(stateFips, csvFile) {
       if (selectedCounties.length < requiredSelections) {
         statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
       } else if (selectedCounties.length === requiredSelections) {
-        statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can proceed to the next step.</div>`;
+        statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can submit your selected counties and see the solution.</div>`;
       }
       
       panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
+      updateSubmitButton();
     }
   // initial render
   renderSelectedList();
@@ -451,10 +428,13 @@ function renderState(stateFips, csvFile) {
       if (!county) return;
       selectedCounties = selectedCounties.filter(c => c !== county);
       
-      // Only post answers when exactly the required number of counties are selected
-      if (selectedCounties.length === REQUIRED_SELECTIONS) {
-        Revisit.postAnswers({ selectedCounty: selectedCounties });
-        saveTrialToSession(selectedCounties);
+      // Reset submitted state when removing a county
+      if (isSubmitted) {
+        isSubmitted = false;
+        d3.selectAll('.county-interactive').classed('got-right', false);
+        d3.selectAll('.county-interactive').classed('got-wrong', false);
+        d3.selectAll('.county-interactive').classed('missed', false);
+        document.getElementById('submission-message').style.display = 'none';
       }
       
       d3.selectAll('.county-interactive').classed('highlight', false);
@@ -477,6 +457,62 @@ function renderState(stateFips, csvFile) {
       const chip = ev.target.closest('.chip');
       if (!chip) return;
       d3.selectAll('.county-interactive').classed('highlight', false);
+    });
+
+    document.getElementById('submit-button').addEventListener('click', () => {
+      if (selectedCounties.length === REQUIRED_SELECTIONS && !isSubmitted) {
+        isSubmitted = true;
+        const correctAnswers = ['Kusilvak Census Area', 'Bethel Census Area', 'Yukon-Koyukuk Census Area'];
+        
+        // Determine which counties the participant got right, wrong, and missed
+        const gotRight = selectedCounties.filter(c => correctAnswers.includes(c));
+        const gotWrong = selectedCounties.filter(c => !correctAnswers.includes(c));
+        const missed = correctAnswers.filter(c => !selectedCounties.includes(c));
+        
+        // Apply styling classes
+        d3.selectAll('.county-interactive').classed('got-right', function() {
+          const countyName = d3.select(this).attr('data-county');
+          return gotRight.includes(countyName);
+        });
+        
+        d3.selectAll('.county-interactive').classed('got-wrong', function() {
+          const countyName = d3.select(this).attr('data-county');
+          return gotWrong.includes(countyName);
+        });
+        
+        d3.selectAll('.county-interactive').classed('missed', function() {
+          const countyName = d3.select(this).attr('data-county');
+          return missed.includes(countyName);
+        });
+        
+        // Build the message
+        let messageHTML = '<div style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #065f46;">Solution</div>';
+        
+        if (gotRight.length > 0) {
+          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #4daf4a;">Counties you got right (shown in green strokes):</strong> ${gotRight.join(', ')}</div>`;
+        }
+        
+        if (gotWrong.length > 0) {
+          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #377eb8;">Counties you got wrong (shown in blue strokes):</strong> ${gotWrong.join(', ')}</div>`;
+        }
+        
+        if (missed.length > 0) {
+          messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #984ea3;">Counties you missed (shown in purple strokes):</strong> ${missed.join(', ')}</div>`;
+        }
+
+        messageHTML += '<div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #d1d5db;">Please note that the actual trials of the experiment will not show you the correct answers.</div>';
+
+
+        messageHTML += '<div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #d1d5db;">After you finish reviewing the answers, click on the Next button to start the experiment.</div>';
+        
+        document.getElementById('submission-message').innerHTML = messageHTML;
+        document.getElementById('submission-message').style.display = 'block';
+        
+        // Post answers to Revisit
+        Revisit.postAnswers({ selectedCounty: selectedCounties });
+        
+        updateSubmitButton();
+      }
     });
 
     function showCountyMessageBox({ county, onYes, onNo }) {
@@ -527,11 +563,7 @@ function renderState(stateFips, csvFile) {
               onYes: () => {
                 selectedCounties.push(county);
                 
-                // Only post answers when exactly the required number of counties are selected
-                if (selectedCounties.length === REQUIRED_SELECTIONS) {
-                  Revisit.postAnswers({ selectedCounty: selectedCounties });
-                  saveTrialToSession(selectedCounties);
-                }
+                // Don't auto-post answers - wait for submit button
                 
                 renderSelectedList();
                 if (selectedCounties.length === maxSelections) {
@@ -584,7 +616,6 @@ function renderState(stateFips, csvFile) {
       .attr("transform", `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
       .style("pointer-events", "none");
 
-    // Vertical gradient (top -> bottom)
     const grad = defsL.append("linearGradient")
       .attr("id", "legendGrad")
       .attr("x1", "0%").attr("x2", "0%")
@@ -596,24 +627,20 @@ function renderState(stateFips, csvFile) {
         .attr("stop-color", color(VALUE_MIN + t * (VALUE_MAX - VALUE_MIN)));
     }
 
-    // Gradient bar
     lg.append("rect")
       .attr("width",  LEGEND_THICK)
       .attr("height", LEGEND_LONG)
       .attr("fill", "url(#legendGrad)")
       .attr("rx", 3);
 
-    // Scale: top = max, bottom = min
     const legendScale = d3.scaleLinear()
       .domain([VALUE_MAX, VALUE_MIN])
       .range([0, LEGEND_LONG]);
 
-    // Axis ticks to the right of bar
     lg.append("g")
       .attr("transform", `translate(${LEGEND_THICK}, 0)`)
       .call(d3.axisRight(legendScale).ticks(5));
 
-    // Title
     lg.append("text")
       .attr("x", 0)
       .attr("y", -12)
@@ -629,24 +656,10 @@ function renderState(stateFips, csvFile) {
 }
 
 
-function saveTrialToSession(counties) {
-  try {
-    const trialId = new URLSearchParams(window.location.search).get('trialid');
-    if (!trialId) return;
-    sessionStorage.setItem('trial_' + trialId, JSON.stringify(counties));
-    const order = JSON.parse(sessionStorage.getItem('trial_order') || '[]');
-    if (!order.includes(trialId)) {
-      order.push(trialId);
-      sessionStorage.setItem('trial_order', JSON.stringify(order));
-    }
-  } catch (e) { /* sessionStorage unavailable */ }
-}
-
-Revisit.onDataReceive((data) => {
-  const stateFips = data['stateFips'];
-  const csvFile   = data['csvFile'];
-  renderState(stateFips, csvFile);
-});
+// Only Alaska for the trial
+const stateFips = '02';  
+const csvFile = '../Data/AKData4.csv'; 
+renderState(stateFips, csvFile);
 });
 </script>
 </html>

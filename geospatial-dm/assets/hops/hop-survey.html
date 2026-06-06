@@ -381,7 +381,7 @@ Revisit.onDataReceive((data) => {
   if (mapInitialized) return;
   mapInitialized = true;
   const fips = "08";
-  const csv = "Data/COData4.csv";
+  const csv = "../Data/COData4.csv";
   if (!fips || !csv) {
     console.warn('ReVISit data missing stateFips or csvFile');
     return;
@@ -393,7 +393,7 @@ Revisit.onDataReceive((data) => {
 setTimeout(() => {
   if (!mapInitialized) {
     mapInitialized = true;
-    renderState("08", "Data/COData4.csv");
+    renderState("08", "../Data/COData4.csv");
   }
 }, 100);
 

@@ -28,7 +28,7 @@
   "baseComponents": {
     "pixel-map-d3": {
       "type": "website",
-      "path": "geospatial-dm/assets/d3-pixel.html",
+      "path": "geospatial-dm/assets/pixel/d3-pixel.html",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -43,7 +43,22 @@
     },
     "hom-map-d3": {
       "type": "website",
-      "path": "geospatial-dm/assets/d3-hop.html",
+      "path": "geospatial-dm/assets/hops/d3-hop.html",
+      "instructionLocation": "aboveStimulus",
+      "response": [
+        {
+          "id": "selectedCounty",
+          "prompt": "Your selected answer:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
+    "animated-pixel-map-d3": {
+      "type": "website",
+      "path": "geospatial-dm/assets/animatedPixel/d3-animated-pixel-map.html",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -65,17 +80,22 @@
     },
     "hop-intro": {
       "type": "website",
-      "path": "geospatial-dm/assets/hop-intro.html",
+      "path": "geospatial-dm/assets/hops/hop-intro.html",
       "response": []
     },
     "pixel-intro": {
       "type": "website",
-      "path": "geospatial-dm/assets/pixel-intro.html",
+      "path": "geospatial-dm/assets/pixel/pixel-intro.html",
+      "response": []
+    },
+    "animated-pixel-intro": {
+      "type": "website",
+      "path": "geospatial-dm/assets/animatedPixel/animated-pixel-intro.html",
       "response": []
     },
     "pixel-trial":{
       "type": "website",
-      "path": "geospatial-dm/assets/pixel-practice-trial.html",
+      "path": "geospatial-dm/assets/pixel/pixel-practice-trial.html",
       "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
@@ -91,7 +111,21 @@
     },
     "pixel-survey":{
       "type": "website",
-      "path": "geospatial-dm/assets/pixel-survey.html",
+      "path": "geospatial-dm/assets/pixel/pixel-survey.html",
+      "response": [
+        {
+          "id": "pixelSurveyResponse",
+          "prompt": "Your response:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
+    "animated-pixel-survey":{
+      "type": "website",
+      "path": "geospatial-dm/assets/animatedPixel/animated-pixel-survey.html",
       "response": [
         {
           "id": "pixelSurveyResponse",
@@ -105,7 +139,21 @@
     },
     "pixel-survey-uncertainty":{
       "type": "website",
-      "path": "geospatial-dm/assets/pixel-survey-uncertainty.html",
+      "path": "geospatial-dm/assets/pixel/pixel-survey-uncertainty.html",
+      "response": [
+        {
+          "id": "pixelUncertaintySurveyResponse",
+          "prompt": "Your response:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
+    "animated-pixel-survey-uncertainty":{
+      "type": "website",
+      "path": "geospatial-dm/assets/animatedPixel/animated-pixel-survey-uncertainty.html",
       "response": [
         {
           "id": "pixelUncertaintySurveyResponse",
@@ -119,7 +167,7 @@
     },
     "hop-survey-uncertainty":{
       "type": "website",
-      "path": "geospatial-dm/assets/hop-survey-uncertainty.html",
+      "path": "geospatial-dm/assets/hops/hop-survey-uncertainty.html",
       "response": [
         {
           "id": "hopUncertaintySurveyResponse",
@@ -133,7 +181,7 @@
     },
     "hop-survey":{
       "type": "website",
-      "path": "geospatial-dm/assets/hop-survey.html",
+      "path": "geospatial-dm/assets/hops/hop-survey.html",
       "response": [
         {
           "id": "hopSurveyResponse",
@@ -147,7 +195,7 @@
     },
     "hop-trial":{
       "type": "website",
-      "path": "geospatial-dm/assets/hop-practice-trial.html",
+      "path": "geospatial-dm/assets/hops/hop-practice-trial.html",
       "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
