@@ -342,14 +342,14 @@ Revisit.onDataReceive((data) => {
   if (mapInitialized) return;
   mapInitialized = true;
   const fips = data['stateFips'] || "08";
-  const csv  = data['csvFile']   || "Data/COData4.csv";
+  const csv  = data['csvFile']   || "../Data/COData4.csv";
   renderState(fips, csv);
 });
 
 setTimeout(() => {
   if (!mapInitialized) {
     mapInitialized = true;
-    renderState("08", "Data/COData4.csv");
+    renderState("08", "../Data/COData4.csv");
   }
 }, 100);
 
