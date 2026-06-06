@@ -77,7 +77,7 @@ The **full study design** — 5,708 lines, the largest file in the project (~355
 
 ---
 
-### `assets/d3-pixel.html`
+### `assets/pixel/d3-pixel.html`
 The primary **pixel map** stimulus. Renders a county-level choropleth using a pixel/grain technique to encode uncertainty.
 
 **How it works:**
@@ -105,7 +105,7 @@ The primary **pixel map** stimulus. Renders a county-level choropleth using a pi
 
 ---
 
-### `assets/d3-hop.html`
+### `assets/hops/d3-hop.html`
 The primary **HOP (Hypothetical Outcome Plot) map** stimulus. Renders an animated binary county map where each frame is a plausible realization drawn from the uncertainty distribution.
 
 **How it works:**
@@ -134,7 +134,7 @@ The primary **HOP (Hypothetical Outcome Plot) map** stimulus. Renders an animate
 
 ---
 
-### `assets/pixel-practice-trial.html`
+### `assets/pixel/pixel-practice-trial.html`
 Interactive practice trial for the pixel condition with immediate correctness feedback. Hardcoded to Alaska (FIPS `02`, `Data/AKData4.csv`). After participants select 3 counties, it compares to a hardcoded answer key (`['Kusilvak Census Area', 'Bethel Census Area', 'Yukon-Koyukuk Census Area']`) and shows color-coded feedback.
 
 **Issue:** Uses `d3.geoAlbers()` projection — different from the `d3.geoEquirectangular()` used in the main `d3-pixel.html`. See the [Viewing Conditions Comparison](#stimuli-viewing-conditions-d3-pixelhtml-vs-d3-hophtml) section for implications.
@@ -143,7 +143,7 @@ Interactive practice trial for the pixel condition with immediate correctness fe
 
 ---
 
-### `assets/hop-practice-trial.html`
+### `assets/hops/hop-practice-trial.html`
 Interactive practice trial for the HOP condition, analogous to `pixel-practice-trial.html`. Same hardcoded Alaska data and answer key. Renders the animated HOP visualization with feedback after selection.
 
 **Issue:** Same `d3.geoAlbers()` projection inconsistency as `pixel-practice-trial.html`.
@@ -152,12 +152,12 @@ Interactive practice trial for the HOP condition, analogous to `pixel-practice-t
 
 ---
 
-### `assets/pixel-survey.html`
+### `assets/pixel/pixel-survey.html`
 Post-task survey for participants in the pixel condition. Contains a mix of Likert-scale questions about confidence and task difficulty, plus a static pixel map for reference. Uses `d3.geoEquirectangular()` (consistent with main trial).
 
 ---
 
-### `assets/hop-survey.html`
+### `assets/hops/hop-survey.html`
 Post-task survey for the HOP condition. Same structure as `pixel-survey.html`. Uses `d3.geoEquirectangular()` (consistent with main trial).
 
 ---
@@ -264,15 +264,15 @@ Alaska (used for practice) is particularly sensitive to this: Albers places Alas
 
 | Issue | Files Affected |
 |-------|---------------|
-| **No input validation** before `renderState()` — crashes silently on bad params | [d3-pixel.html](assets/d3-pixel.html#L628) |
-| **Animation loop never stops** — `requestAnimationFrame(loop)` runs forever; no cleanup on state change | [d3-hop.html](assets/d3-hop.html#L685), [hop-practice-trial.html](assets/hop-practice-trial.html) |
-| **Inconsistent projection** — practice trials use `geoAlbers`, main trials use `geoEquirectangular` | [pixel-practice-trial.html](assets/pixel-practice-trial.html#L297), [hop-practice-trial.html](assets/hop-practice-trial.html#L431) |
+| **No input validation** before `renderState()` — crashes silently on bad params | [d3-pixel.html](assets/pixel/d3-pixel.html#L628) |
+| **Animation loop never stops** — `requestAnimationFrame(loop)` runs forever; no cleanup on state change | [d3-hop.html](assets/hops/d3-hop.html#L685), [hop-practice-trial.html](assets/hops/hop-practice-trial.html) |
+| **Inconsistent projection** — practice trials use `geoAlbers`, main trials use `geoEquirectangular` | [pixel-practice-trial.html](assets/pixel/pixel-practice-trial.html#L297), [hop-practice-trial.html](assets/hops/hop-practice-trial.html#L431) |
 | **Inconsistent CSV path prefixes** — some configs pass `NMData.csv`, others `Data/ILData.csv` | [config.json](config.json#L69), [config.json](config.json#L89) |
 | **Inconsistent naming** — `hom-map-d3` / HOM used in configs, `d3-hop.html` / HOP used in filenames | [config.json](config.json#L41), all configs |
-| **Constants not grouped** — pixel uses bare `const` globals; HOP uses a `CONFIG` object | [d3-pixel.html](assets/d3-pixel.html#L136) |
+| **Constants not grouped** — pixel uses bare `const` globals; HOP uses a `CONFIG` object | [d3-pixel.html](assets/pixel/d3-pixel.html#L136) |
 | **Duplicate utility functions** — `mulberry32`, `randnFactory`, `norm`, `stripTypeSuffix` defined in every file | All HTML files |
-| **Map top margin differs** — HOP `.wrap` has `margin-top: 20px`, pixel has none | [d3-hop.html](assets/d3-hop.html#L29) |
-| **State outline style differs** — stroke color `#595959` vs `#222`, width 1 vs 1.2 | [d3-pixel.html](assets/d3-pixel.html), [d3-hop.html](assets/d3-hop.html) |
+| **Map top margin differs** — HOP `.wrap` has `margin-top: 20px`, pixel has none | [d3-hop.html](assets/hops/d3-hop.html#L29) |
+| **State outline style differs** — stroke color `#595959` vs `#222`, width 1 vs 1.2 | [d3-pixel.html](assets/pixel/d3-pixel.html), [d3-hop.html](assets/hops/d3-hop.html) |
 | **`OldData/` directory** — superseded CSV files still present alongside `Data/` | [assets/OldData/](assets/OldData/) |
 | **Three GeoJSON variants** for Connecticut but only `_fast` is used | [assets/](assets/) |
 | **`bar-chart.html`** not referenced in any config | [assets/bar-chart.html](assets/bar-chart.html) |
