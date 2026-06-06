@@ -281,7 +281,7 @@
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
-        "csvFile": "Data/CTData2.csv"
+        "csvFile": "../Data/CTData2.csv"
       }
     },
     "pix_NE_CT_2": {
@@ -293,7 +293,7 @@
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
-        "csvFile": "Data/CTData2.csv"
+        "csvFile": "../Data/CTData2.csv"
       }
     },
     "hom_NE_CT_3": {
