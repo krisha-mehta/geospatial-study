@@ -257,7 +257,7 @@
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
-        "csvFile": "Data/CTData1.csv"
+        "csvFile": "../Data/CTData1.csv"
       }
     },
     "pix_NE_CT_1": {
@@ -269,7 +269,7 @@
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
-        "csvFile": "Data/CTData1.csv"
+        "csvFile": "../Data/CTData1.csv"
       }
     },
     "hom_NE_CT_2": {
@@ -305,7 +305,7 @@
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
-        "csvFile": "Data/CTData3.csv"
+        "csvFile": "../Data/CTData3.csv"
       }
     },
     "pix_NE_CT_3": {
@@ -317,7 +317,7 @@
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
-        "csvFile": "Data/CTData3.csv"
+        "csvFile": "../Data/CTData3.csv"
       }
     },
     "hom_NE_CT_4": {
@@ -329,7 +329,7 @@
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
-        "csvFile": "Data/CTData4.csv"
+        "csvFile": "../Data/CTData4.csv"
       }
     },
     "pix_NE_CT_4": {
@@ -341,7 +341,7 @@
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
-        "csvFile": "Data/CTData4.csv"
+        "csvFile": "../Data/CTData4.csv"
       }
     },
     "hom_NE_ME_1": {
@@ -353,7 +353,7 @@
         "region": "Northeast",
         "state": "ME",
         "stateFips": "23",
-        "csvFile": "Data/MEData1.csv"
+        "csvFile": "../Data/MEData1.csv"
       }
     },
     "pix_NE_ME_1": {
@@ -365,7 +365,7 @@
         "region": "Northeast",
         "state": "ME",
         "stateFips": "23",
-        "csvFile": "Data/MEData1.csv"
+        "csvFile": "../Data/MEData1.csv"
       }
     },
     "hom_NE_ME_2": {
@@ -377,7 +377,7 @@
         "region": "Northeast",
         "state": "ME",
         "stateFips": "23",
-        "csvFile": "Data/MEData2.csv"
+        "csvFile": "../Data/MEData2.csv"
       }
     },
     "pix_NE_ME_2": {
@@ -389,7 +389,7 @@
         "region": "Northeast",
         "state": "ME",
         "stateFips": "23",
-        "csvFile": "Data/MEData2.csv"
+        "csvFile": "../Data/MEData2.csv"
       }
     },
     "hom_NE_ME_3": {
@@ -401,7 +401,7 @@
         "region": "Northeast",
         "state": "ME",
         "stateFips": "23",
-        "csvFile": "Data/MEData3.csv"
+        "csvFile": "../Data/MEData3.csv"
       }
     },
     "pix_NE_ME_3": {
@@ -413,7 +413,7 @@
         "region": "Northeast",
         "state": "ME",
         "stateFips": "23",
-        "csvFile": "Data/MEData3.csv"
+        "csvFile": "../Data/MEData3.csv"
       }
     },
     "hom_NE_ME_4": {
@@ -425,7 +425,7 @@
         "region": "Northeast",
         "state": "ME",
         "stateFips": "23",
-        "csvFile": "Data/MEData4.csv"
+        "csvFile": "../Data/MEData4.csv"
       }
     },
     "pix_NE_ME_4": {
@@ -437,7 +437,7 @@
         "region": "Northeast",
         "state": "ME",
         "stateFips": "23",
-        "csvFile": "Data/MEData4.csv"
+        "csvFile": "../Data/MEData4.csv"
       }
     },
     "hom_NE_MA_1": {
@@ -449,7 +449,7 @@
         "region": "Northeast",
         "state": "MA",
         "stateFips": "25",
-        "csvFile": "Data/MAData1.csv"
+        "csvFile": "../Data/MAData1.csv"
       }
     },
     "pix_NE_MA_1": {
@@ -461,7 +461,7 @@
         "region": "Northeast",
         "state": "MA",
         "stateFips": "25",
-        "csvFile": "Data/MAData1.csv"
+        "csvFile": "../Data/MAData1.csv"
       }
     },
     "hom_NE_MA_2": {
@@ -473,7 +473,7 @@
         "region": "Northeast",
         "state": "MA",
         "stateFips": "25",
-        "csvFile": "Data/MAData2.csv"
+        "csvFile": "../Data/MAData2.csv"
       }
     },
     "pix_NE_MA_2": {
@@ -485,7 +485,7 @@
         "region": "Northeast",
         "state": "MA",
         "stateFips": "25",
-        "csvFile": "Data/MAData2.csv"
+        "csvFile": "../Data/MAData2.csv"
       }
     },
     "hom_NE_MA_3": {
@@ -497,7 +497,7 @@
         "region": "Northeast",
         "state": "MA",
         "stateFips": "25",
-        "csvFile": "Data/MAData3.csv"
+        "csvFile": "../Data/MAData3.csv"
       }
     },
     "pix_NE_MA_3": {
@@ -509,7 +509,7 @@
         "region": "Northeast",
         "state": "MA",
         "stateFips": "25",
-        "csvFile": "Data/MAData3.csv"
+        "csvFile": "../Data/MAData3.csv"
       }
     },
     "hom_NE_MA_4": {
@@ -521,7 +521,7 @@
         "region": "Northeast",
         "state": "MA",
         "stateFips": "25",
-        "csvFile": "Data/MAData4.csv"
+        "csvFile": "../Data/MAData4.csv"
       }
     },
     "pix_NE_MA_4": {
@@ -533,7 +533,7 @@
         "region": "Northeast",
         "state": "MA",
         "stateFips": "25",
-        "csvFile": "Data/MAData4.csv"
+        "csvFile": "../Data/MAData4.csv"
       }
     },
     "hom_NE_NH_1": {
@@ -545,7 +545,7 @@
         "region": "Northeast",
         "state": "NH",
         "stateFips": "33",
-        "csvFile": "Data/NHData1.csv"
+        "csvFile": "../Data/NHData1.csv"
       }
     },
     "pix_NE_NH_1": {
@@ -557,7 +557,7 @@
         "region": "Northeast",
         "state": "NH",
         "stateFips": "33",
-        "csvFile": "Data/NHData1.csv"
+        "csvFile": "../Data/NHData1.csv"
       }
     },
     "hom_NE_NH_2": {
@@ -569,7 +569,7 @@
         "region": "Northeast",
         "state": "NH",
         "stateFips": "33",
-        "csvFile": "Data/NHData2.csv"
+        "csvFile": "../Data/NHData2.csv"
       }
     },
     "pix_NE_NH_2": {
@@ -581,7 +581,7 @@
         "region": "Northeast",
         "state": "NH",
         "stateFips": "33",
-        "csvFile": "Data/NHData2.csv"
+        "csvFile": "../Data/NHData2.csv"
       }
     },
     "hom_NE_NH_3": {
@@ -593,7 +593,7 @@
         "region": "Northeast",
         "state": "NH",
         "stateFips": "33",
-        "csvFile": "Data/NHData3.csv"
+        "csvFile": "../Data/NHData3.csv"
       }
     },
     "pix_NE_NH_3": {
@@ -605,7 +605,7 @@
         "region": "Northeast",
         "state": "NH",
         "stateFips": "33",
-        "csvFile": "Data/NHData3.csv"
+        "csvFile": "../Data/NHData3.csv"
       }
     },
     "hom_NE_NH_4": {
@@ -617,7 +617,7 @@
         "region": "Northeast",
         "state": "NH",
         "stateFips": "33",
-        "csvFile": "Data/NHData4.csv"
+        "csvFile": "../Data/NHData4.csv"
       }
     },
     "pix_NE_NH_4": {
@@ -629,7 +629,7 @@
         "region": "Northeast",
         "state": "NH",
         "stateFips": "33",
-        "csvFile": "Data/NHData4.csv"
+        "csvFile": "../Data/NHData4.csv"
       }
     },
     "hom_NE_RI_1": {
@@ -641,7 +641,7 @@
         "region": "Northeast",
         "state": "RI",
         "stateFips": "44",
-        "csvFile": "Data/RIData1.csv"
+        "csvFile": "../Data/RIData1.csv"
       }
     },
     "pix_NE_RI_1": {
@@ -653,7 +653,7 @@
         "region": "Northeast",
         "state": "RI",
         "stateFips": "44",
-        "csvFile": "Data/RIData1.csv"
+        "csvFile": "../Data/RIData1.csv"
       }
     },
     "hom_NE_RI_2": {
@@ -665,7 +665,7 @@
         "region": "Northeast",
         "state": "RI",
         "stateFips": "44",
-        "csvFile": "Data/RIData2.csv"
+        "csvFile": "../Data/RIData2.csv"
       }
     },
     "pix_NE_RI_2": {
@@ -677,7 +677,7 @@
         "region": "Northeast",
         "state": "RI",
         "stateFips": "44",
-        "csvFile": "Data/RIData2.csv"
+        "csvFile": "../Data/RIData2.csv"
       }
     },
     "hom_NE_RI_3": {
@@ -689,7 +689,7 @@
         "region": "Northeast",
         "state": "RI",
         "stateFips": "44",
-        "csvFile": "Data/RIData3.csv"
+        "csvFile": "../Data/RIData3.csv"
       }
     },
     "pix_NE_RI_3": {
@@ -701,7 +701,7 @@
         "region": "Northeast",
         "state": "RI",
         "stateFips": "44",
-        "csvFile": "Data/RIData3.csv"
+        "csvFile": "../Data/RIData3.csv"
       }
     },
     "hom_NE_RI_4": {
@@ -713,7 +713,7 @@
         "region": "Northeast",
         "state": "RI",
         "stateFips": "44",
-        "csvFile": "Data/RIData4.csv"
+        "csvFile": "../Data/RIData4.csv"
       }
     },
     "pix_NE_RI_4": {
@@ -725,7 +725,7 @@
         "region": "Northeast",
         "state": "RI",
         "stateFips": "44",
-        "csvFile": "Data/RIData4.csv"
+        "csvFile": "../Data/RIData4.csv"
       }
     },
     "hom_NE_VT_1": {
@@ -737,7 +737,7 @@
         "region": "Northeast",
         "state": "VT",
         "stateFips": "50",
-        "csvFile": "Data/VTData1.csv"
+        "csvFile": "../Data/VTData1.csv"
       }
     },
     "pix_NE_VT_1": {
@@ -749,7 +749,7 @@
         "region": "Northeast",
         "state": "VT",
         "stateFips": "50",
-        "csvFile": "Data/VTData1.csv"
+        "csvFile": "../Data/VTData1.csv"
       }
     },
     "hom_NE_VT_2": {
@@ -761,7 +761,7 @@
         "region": "Northeast",
         "state": "VT",
         "stateFips": "50",
-        "csvFile": "Data/VTData2.csv"
+        "csvFile": "../Data/VTData2.csv"
       }
     },
     "pix_NE_VT_2": {
@@ -773,7 +773,7 @@
         "region": "Northeast",
         "state": "VT",
         "stateFips": "50",
-        "csvFile": "Data/VTData2.csv"
+        "csvFile": "../Data/VTData2.csv"
       }
     },
     "hom_NE_VT_3": {
@@ -785,7 +785,7 @@
         "region": "Northeast",
         "state": "VT",
         "stateFips": "50",
-        "csvFile": "Data/VTData3.csv"
+        "csvFile": "../Data/VTData3.csv"
       }
     },
     "pix_NE_VT_3": {
@@ -797,7 +797,7 @@
         "region": "Northeast",
         "state": "VT",
         "stateFips": "50",
-        "csvFile": "Data/VTData3.csv"
+        "csvFile": "../Data/VTData3.csv"
       }
     },
     "hom_NE_VT_4": {
@@ -809,7 +809,7 @@
         "region": "Northeast",
         "state": "VT",
         "stateFips": "50",
-        "csvFile": "Data/VTData4.csv"
+        "csvFile": "../Data/VTData4.csv"
       }
     },
     "pix_NE_VT_4": {
@@ -821,7 +821,7 @@
         "region": "Northeast",
         "state": "VT",
         "stateFips": "50",
-        "csvFile": "Data/VTData4.csv"
+        "csvFile": "../Data/VTData4.csv"
       }
     },
     "hom_NE_NJ_1": {
@@ -833,7 +833,7 @@
         "region": "Northeast",
         "state": "NJ",
         "stateFips": "34",
-        "csvFile": "Data/NJData1.csv"
+        "csvFile": "../Data/NJData1.csv"
       }
     },
     "pix_NE_NJ_1": {
@@ -845,7 +845,7 @@
         "region": "Northeast",
         "state": "NJ",
         "stateFips": "34",
-        "csvFile": "Data/NJData1.csv"
+        "csvFile": "../Data/NJData1.csv"
       }
     },
     "hom_NE_NJ_2": {
@@ -857,7 +857,7 @@
         "region": "Northeast",
         "state": "NJ",
         "stateFips": "34",
-        "csvFile": "Data/NJData2.csv"
+        "csvFile": "../Data/NJData2.csv"
       }
     },
     "pix_NE_NJ_2": {
@@ -869,7 +869,7 @@
         "region": "Northeast",
         "state": "NJ",
         "stateFips": "34",
-        "csvFile": "Data/NJData2.csv"
+        "csvFile": "../Data/NJData2.csv"
       }
     },
     "hom_NE_NJ_3": {
@@ -881,7 +881,7 @@
         "region": "Northeast",
         "state": "NJ",
         "stateFips": "34",
-        "csvFile": "Data/NJData3.csv"
+        "csvFile": "../Data/NJData3.csv"
       }
     },
     "pix_NE_NJ_3": {
@@ -893,7 +893,7 @@
         "region": "Northeast",
         "state": "NJ",
         "stateFips": "34",
-        "csvFile": "Data/NJData3.csv"
+        "csvFile": "../Data/NJData3.csv"
       }
     },
     "hom_NE_NJ_4": {
@@ -905,7 +905,7 @@
         "region": "Northeast",
         "state": "NJ",
         "stateFips": "34",
-        "csvFile": "Data/NJData4.csv"
+        "csvFile": "../Data/NJData4.csv"
       }
     },
     "pix_NE_NJ_4": {
@@ -917,7 +917,7 @@
         "region": "Northeast",
         "state": "NJ",
         "stateFips": "34",
-        "csvFile": "Data/NJData4.csv"
+        "csvFile": "../Data/NJData4.csv"
       }
     },
     "hom_NE_NY_1": {
@@ -929,7 +929,7 @@
         "region": "Northeast",
         "state": "NY",
         "stateFips": "36",
-        "csvFile": "Data/NYData1.csv"
+        "csvFile": "../Data/NYData1.csv"
       }
     },
     "pix_NE_NY_1": {
@@ -941,7 +941,7 @@
         "region": "Northeast",
         "state": "NY",
         "stateFips": "36",
-        "csvFile": "Data/NYData1.csv"
+        "csvFile": "../Data/NYData1.csv"
       }
     },
     "hom_NE_NY_2": {
@@ -953,7 +953,7 @@
         "region": "Northeast",
         "state": "NY",
         "stateFips": "36",
-        "csvFile": "Data/NYData2.csv"
+        "csvFile": "../Data/NYData2.csv"
       }
     },
     "pix_NE_NY_2": {
@@ -965,7 +965,7 @@
         "region": "Northeast",
         "state": "NY",
         "stateFips": "36",
-        "csvFile": "Data/NYData2.csv"
+        "csvFile": "../Data/NYData2.csv"
       }
     },
     "hom_NE_NY_3": {
@@ -977,7 +977,7 @@
         "region": "Northeast",
         "state": "NY",
         "stateFips": "36",
-        "csvFile": "Data/NYData3.csv"
+        "csvFile": "../Data/NYData3.csv"
       }
     },
     "pix_NE_NY_3": {
@@ -989,7 +989,7 @@
         "region": "Northeast",
         "state": "NY",
         "stateFips": "36",
-        "csvFile": "Data/NYData3.csv"
+        "csvFile": "../Data/NYData3.csv"
       }
     },
     "hom_NE_NY_4": {
@@ -1001,7 +1001,7 @@
         "region": "Northeast",
         "state": "NY",
         "stateFips": "36",
-        "csvFile": "Data/NYData4.csv"
+        "csvFile": "../Data/NYData4.csv"
       }
     },
     "pix_NE_NY_4": {
@@ -1013,7 +1013,7 @@
         "region": "Northeast",
         "state": "NY",
         "stateFips": "36",
-        "csvFile": "Data/NYData4.csv"
+        "csvFile": "../Data/NYData4.csv"
       }
     },
     "hom_NE_PA_1": {
@@ -1025,7 +1025,7 @@
         "region": "Northeast",
         "state": "PA",
         "stateFips": "42",
-        "csvFile": "Data/PAData1.csv"
+        "csvFile": "../Data/PAData1.csv"
       }
     },
     "pix_NE_PA_1": {
@@ -1037,7 +1037,7 @@
         "region": "Northeast",
         "state": "PA",
         "stateFips": "42",
-        "csvFile": "Data/PAData1.csv"
+        "csvFile": "../Data/PAData1.csv"
       }
     },
     "hom_NE_PA_2": {
@@ -1049,7 +1049,7 @@
         "region": "Northeast",
         "state": "PA",
         "stateFips": "42",
-        "csvFile": "Data/PAData2.csv"
+        "csvFile": "../Data/PAData2.csv"
       }
     },
     "pix_NE_PA_2": {
@@ -1061,7 +1061,7 @@
         "region": "Northeast",
         "state": "PA",
         "stateFips": "42",
-        "csvFile": "Data/PAData2.csv"
+        "csvFile": "../Data/PAData2.csv"
       }
     },
     "hom_NE_PA_3": {
@@ -1073,7 +1073,7 @@
         "region": "Northeast",
         "state": "PA",
         "stateFips": "42",
-        "csvFile": "Data/PAData3.csv"
+        "csvFile": "../Data/PAData3.csv"
       }
     },
     "pix_NE_PA_3": {
@@ -1085,7 +1085,7 @@
         "region": "Northeast",
         "state": "PA",
         "stateFips": "42",
-        "csvFile": "Data/PAData3.csv"
+        "csvFile": "../Data/PAData3.csv"
       }
     },
     "hom_NE_PA_4": {
@@ -1097,7 +1097,7 @@
         "region": "Northeast",
         "state": "PA",
         "stateFips": "42",
-        "csvFile": "Data/PAData4.csv"
+        "csvFile": "../Data/PAData4.csv"
       }
     },
     "pix_NE_PA_4": {
@@ -1109,7 +1109,7 @@
         "region": "Northeast",
         "state": "PA",
         "stateFips": "42",
-        "csvFile": "Data/PAData4.csv"
+        "csvFile": "../Data/PAData4.csv"
       }
     },
     "hom_MW_IL_1": {
@@ -1121,7 +1121,7 @@
         "region": "Midwest",
         "state": "IL",
         "stateFips": "17",
-        "csvFile": "Data/ILData1.csv"
+        "csvFile": "../Data/ILData1.csv"
       }
     },
     "pix_MW_IL_1": {
@@ -1133,7 +1133,7 @@
         "region": "Midwest",
         "state": "IL",
         "stateFips": "17",
-        "csvFile": "Data/ILData1.csv"
+        "csvFile": "../Data/ILData1.csv"
       }
     },
     "hom_MW_IL_2": {
@@ -1145,7 +1145,7 @@
         "region": "Midwest",
         "state": "IL",
         "stateFips": "17",
-        "csvFile": "Data/ILData2.csv"
+        "csvFile": "../Data/ILData2.csv"
       }
     },
     "pix_MW_IL_2": {
@@ -1157,7 +1157,7 @@
         "region": "Midwest",
         "state": "IL",
         "stateFips": "17",
-        "csvFile": "Data/ILData2.csv"
+        "csvFile": "../Data/ILData2.csv"
       }
     },
     "hom_MW_IL_3": {
@@ -1169,7 +1169,7 @@
         "region": "Midwest",
         "state": "IL",
         "stateFips": "17",
-        "csvFile": "Data/ILData3.csv"
+        "csvFile": "../Data/ILData3.csv"
       }
     },
     "pix_MW_IL_3": {
@@ -1181,7 +1181,7 @@
         "region": "Midwest",
         "state": "IL",
         "stateFips": "17",
-        "csvFile": "Data/ILData3.csv"
+        "csvFile": "../Data/ILData3.csv"
       }
     },
     "hom_MW_IL_4": {
@@ -1193,7 +1193,7 @@
         "region": "Midwest",
         "state": "IL",
         "stateFips": "17",
-        "csvFile": "Data/ILData4.csv"
+        "csvFile": "../Data/ILData4.csv"
       }
     },
     "pix_MW_IL_4": {
@@ -1205,7 +1205,7 @@
         "region": "Midwest",
         "state": "IL",
         "stateFips": "17",
-        "csvFile": "Data/ILData4.csv"
+        "csvFile": "../Data/ILData4.csv"
       }
     },
     "hom_MW_IN_1": {
@@ -1217,7 +1217,7 @@
         "region": "Midwest",
         "state": "IN",
         "stateFips": "18",
-        "csvFile": "Data/INData1.csv"
+        "csvFile": "../Data/INData1.csv"
       }
     },
     "pix_MW_IN_1": {
@@ -1229,7 +1229,7 @@
         "region": "Midwest",
         "state": "IN",
         "stateFips": "18",
-        "csvFile": "Data/INData1.csv"
+        "csvFile": "../Data/INData1.csv"
       }
     },
     "hom_MW_IN_2": {
@@ -1241,7 +1241,7 @@
         "region": "Midwest",
         "state": "IN",
         "stateFips": "18",
-        "csvFile": "Data/INData2.csv"
+        "csvFile": "../Data/INData2.csv"
       }
     },
     "pix_MW_IN_2": {
@@ -1253,7 +1253,7 @@
         "region": "Midwest",
         "state": "IN",
         "stateFips": "18",
-        "csvFile": "Data/INData2.csv"
+        "csvFile": "../Data/INData2.csv"
       }
     },
     "hom_MW_IN_3": {
@@ -1265,7 +1265,7 @@
         "region": "Midwest",
         "state": "IN",
         "stateFips": "18",
-        "csvFile": "Data/INData3.csv"
+        "csvFile": "../Data/INData3.csv"
       }
     },
     "pix_MW_IN_3": {
@@ -1277,7 +1277,7 @@
         "region": "Midwest",
         "state": "IN",
         "stateFips": "18",
-        "csvFile": "Data/INData3.csv"
+        "csvFile": "../Data/INData3.csv"
       }
     },
     "hom_MW_IN_4": {
@@ -1289,7 +1289,7 @@
         "region": "Midwest",
         "state": "IN",
         "stateFips": "18",
-        "csvFile": "Data/INData4.csv"
+        "csvFile": "../Data/INData4.csv"
       }
     },
     "pix_MW_IN_4": {
@@ -1301,7 +1301,7 @@
         "region": "Midwest",
         "state": "IN",
         "stateFips": "18",
-        "csvFile": "Data/INData4.csv"
+        "csvFile": "../Data/INData4.csv"
       }
     },
     "hom_MW_IA_1": {
@@ -1313,7 +1313,7 @@
         "region": "Midwest",
         "state": "IA",
         "stateFips": "19",
-        "csvFile": "Data/IAData1.csv"
+        "csvFile": "../Data/IAData1.csv"
       }
     },
     "pix_MW_IA_1": {
@@ -1325,7 +1325,7 @@
         "region": "Midwest",
         "state": "IA",
         "stateFips": "19",
-        "csvFile": "Data/IAData1.csv"
+        "csvFile": "../Data/IAData1.csv"
       }
     },
     "hom_MW_IA_2": {
@@ -1337,7 +1337,7 @@
         "region": "Midwest",
         "state": "IA",
         "stateFips": "19",
-        "csvFile": "Data/IAData2.csv"
+        "csvFile": "../Data/IAData2.csv"
       }
     },
     "pix_MW_IA_2": {
@@ -1349,7 +1349,7 @@
         "region": "Midwest",
         "state": "IA",
         "stateFips": "19",
-        "csvFile": "Data/IAData2.csv"
+        "csvFile": "../Data/IAData2.csv"
       }
     },
     "hom_MW_IA_3": {
@@ -1361,7 +1361,7 @@
         "region": "Midwest",
         "state": "IA",
         "stateFips": "19",
-        "csvFile": "Data/IAData3.csv"
+        "csvFile": "../Data/IAData3.csv"
       }
     },
     "pix_MW_IA_3": {
@@ -1373,7 +1373,7 @@
         "region": "Midwest",
         "state": "IA",
         "stateFips": "19",
-        "csvFile": "Data/IAData3.csv"
+        "csvFile": "../Data/IAData3.csv"
       }
     },
     "hom_MW_IA_4": {
@@ -1385,7 +1385,7 @@
         "region": "Midwest",
         "state": "IA",
         "stateFips": "19",
-        "csvFile": "Data/IAData4.csv"
+        "csvFile": "../Data/IAData4.csv"
       }
     },
     "pix_MW_IA_4": {
@@ -1397,7 +1397,7 @@
         "region": "Midwest",
         "state": "IA",
         "stateFips": "19",
-        "csvFile": "Data/IAData4.csv"
+        "csvFile": "../Data/IAData4.csv"
       }
     },
     "hom_MW_KS_1": {
@@ -1409,7 +1409,7 @@
         "region": "Midwest",
         "state": "KS",
         "stateFips": "20",
-        "csvFile": "Data/KSData1.csv"
+        "csvFile": "../Data/KSData1.csv"
       }
     },
     "pix_MW_KS_1": {
@@ -1421,7 +1421,7 @@
         "region": "Midwest",
         "state": "KS",
         "stateFips": "20",
-        "csvFile": "Data/KSData1.csv"
+        "csvFile": "../Data/KSData1.csv"
       }
     },
     "hom_MW_KS_2": {
@@ -1433,7 +1433,7 @@
         "region": "Midwest",
         "state": "KS",
         "stateFips": "20",
-        "csvFile": "Data/KSData2.csv"
+        "csvFile": "../Data/KSData2.csv"
       }
     },
     "pix_MW_KS_2": {
@@ -1445,7 +1445,7 @@
         "region": "Midwest",
         "state": "KS",
         "stateFips": "20",
-        "csvFile": "Data/KSData2.csv"
+        "csvFile": "../Data/KSData2.csv"
       }
     },
     "hom_MW_KS_3": {
@@ -1457,7 +1457,7 @@
         "region": "Midwest",
         "state": "KS",
         "stateFips": "20",
-        "csvFile": "Data/KSData3.csv"
+        "csvFile": "../Data/KSData3.csv"
       }
     },
     "pix_MW_KS_3": {
@@ -1469,7 +1469,7 @@
         "region": "Midwest",
         "state": "KS",
         "stateFips": "20",
-        "csvFile": "Data/KSData3.csv"
+        "csvFile": "../Data/KSData3.csv"
       }
     },
     "hom_MW_KS_4": {
@@ -1481,7 +1481,7 @@
         "region": "Midwest",
         "state": "KS",
         "stateFips": "20",
-        "csvFile": "Data/KSData4.csv"
+        "csvFile": "../Data/KSData4.csv"
       }
     },
     "pix_MW_KS_4": {
@@ -1493,7 +1493,7 @@
         "region": "Midwest",
         "state": "KS",
         "stateFips": "20",
-        "csvFile": "Data/KSData4.csv"
+        "csvFile": "../Data/KSData4.csv"
       }
     },
     "hom_MW_MI_1": {
@@ -1505,7 +1505,7 @@
         "region": "Midwest",
         "state": "MI",
         "stateFips": "26",
-        "csvFile": "Data/MIData1.csv"
+        "csvFile": "../Data/MIData1.csv"
       }
     },
     "pix_MW_MI_1": {
@@ -1517,7 +1517,7 @@
         "region": "Midwest",
         "state": "MI",
         "stateFips": "26",
-        "csvFile": "Data/MIData1.csv"
+        "csvFile": "../Data/MIData1.csv"
       }
     },
     "hom_MW_MI_2": {
@@ -1529,7 +1529,7 @@
         "region": "Midwest",
         "state": "MI",
         "stateFips": "26",
-        "csvFile": "Data/MIData2.csv"
+        "csvFile": "../Data/MIData2.csv"
       }
     },
     "pix_MW_MI_2": {
@@ -1541,7 +1541,7 @@
         "region": "Midwest",
         "state": "MI",
         "stateFips": "26",
-        "csvFile": "Data/MIData2.csv"
+        "csvFile": "../Data/MIData2.csv"
       }
     },
     "hom_MW_MI_3": {
@@ -1553,7 +1553,7 @@
         "region": "Midwest",
         "state": "MI",
         "stateFips": "26",
-        "csvFile": "Data/MIData3.csv"
+        "csvFile": "../Data/MIData3.csv"
       }
     },
     "pix_MW_MI_3": {
@@ -1565,7 +1565,7 @@
         "region": "Midwest",
         "state": "MI",
         "stateFips": "26",
-        "csvFile": "Data/MIData3.csv"
+        "csvFile": "../Data/MIData3.csv"
       }
     },
     "hom_MW_MI_4": {
@@ -1577,7 +1577,7 @@
         "region": "Midwest",
         "state": "MI",
         "stateFips": "26",
-        "csvFile": "Data/MIData4.csv"
+        "csvFile": "../Data/MIData4.csv"
       }
     },
     "pix_MW_MI_4": {
@@ -1589,7 +1589,7 @@
         "region": "Midwest",
         "state": "MI",
         "stateFips": "26",
-        "csvFile": "Data/MIData4.csv"
+        "csvFile": "../Data/MIData4.csv"
       }
     },
     "hom_MW_MN_1": {
@@ -1601,7 +1601,7 @@
         "region": "Midwest",
         "state": "MN",
         "stateFips": "27",
-        "csvFile": "Data/MNData1.csv"
+        "csvFile": "../Data/MNData1.csv"
       }
     },
     "pix_MW_MN_1": {
@@ -1613,7 +1613,7 @@
         "region": "Midwest",
         "state": "MN",
         "stateFips": "27",
-        "csvFile": "Data/MNData1.csv"
+        "csvFile": "../Data/MNData1.csv"
       }
     },
     "hom_MW_MN_2": {
@@ -1625,7 +1625,7 @@
         "region": "Midwest",
         "state": "MN",
         "stateFips": "27",
-        "csvFile": "Data/MNData2.csv"
+        "csvFile": "../Data/MNData2.csv"
       }
     },
     "pix_MW_MN_2": {
@@ -1637,7 +1637,7 @@
         "region": "Midwest",
         "state": "MN",
         "stateFips": "27",
-        "csvFile": "Data/MNData2.csv"
+        "csvFile": "../Data/MNData2.csv"
       }
     },
     "hom_MW_MN_3": {
@@ -1649,7 +1649,7 @@
         "region": "Midwest",
         "state": "MN",
         "stateFips": "27",
-        "csvFile": "Data/MNData3.csv"
+        "csvFile": "../Data/MNData3.csv"
       }
     },
     "pix_MW_MN_3": {
@@ -1661,7 +1661,7 @@
         "region": "Midwest",
         "state": "MN",
         "stateFips": "27",
-        "csvFile": "Data/MNData3.csv"
+        "csvFile": "../Data/MNData3.csv"
       }
     },
     "hom_MW_MN_4": {
@@ -1673,7 +1673,7 @@
         "region": "Midwest",
         "state": "MN",
         "stateFips": "27",
-        "csvFile": "Data/MNData4.csv"
+        "csvFile": "../Data/MNData4.csv"
       }
     },
     "pix_MW_MN_4": {
@@ -1685,7 +1685,7 @@
         "region": "Midwest",
         "state": "MN",
         "stateFips": "27",
-        "csvFile": "Data/MNData4.csv"
+        "csvFile": "../Data/MNData4.csv"
       }
     },
     "hom_MW_MO_1": {
@@ -1697,7 +1697,7 @@
         "region": "Midwest",
         "state": "MO",
         "stateFips": "29",
-        "csvFile": "Data/MOData1.csv"
+        "csvFile": "../Data/MOData1.csv"
       }
     },
     "pix_MW_MO_1": {
@@ -1709,7 +1709,7 @@
         "region": "Midwest",
         "state": "MO",
         "stateFips": "29",
-        "csvFile": "Data/MOData1.csv"
+        "csvFile": "../Data/MOData1.csv"
       }
     },
     "hom_MW_MO_2": {
@@ -1721,7 +1721,7 @@
         "region": "Midwest",
         "state": "MO",
         "stateFips": "29",
-        "csvFile": "Data/MOData2.csv"
+        "csvFile": "../Data/MOData2.csv"
       }
     },
     "pix_MW_MO_2": {
@@ -1733,7 +1733,7 @@
         "region": "Midwest",
         "state": "MO",
         "stateFips": "29",
-        "csvFile": "Data/MOData2.csv"
+        "csvFile": "../Data/MOData2.csv"
       }
     },
     "hom_MW_MO_3": {
@@ -1745,7 +1745,7 @@
         "region": "Midwest",
         "state": "MO",
         "stateFips": "29",
-        "csvFile": "Data/MOData3.csv"
+        "csvFile": "../Data/MOData3.csv"
       }
     },
     "pix_MW_MO_3": {
@@ -1757,7 +1757,7 @@
         "region": "Midwest",
         "state": "MO",
         "stateFips": "29",
-        "csvFile": "Data/MOData3.csv"
+        "csvFile": "../Data/MOData3.csv"
       }
     },
     "hom_MW_MO_4": {
@@ -1769,7 +1769,7 @@
         "region": "Midwest",
         "state": "MO",
         "stateFips": "29",
-        "csvFile": "Data/MOData4.csv"
+        "csvFile": "../Data/MOData4.csv"
       }
     },
     "pix_MW_MO_4": {
@@ -1781,7 +1781,7 @@
         "region": "Midwest",
         "state": "MO",
         "stateFips": "29",
-        "csvFile": "Data/MOData4.csv"
+        "csvFile": "../Data/MOData4.csv"
       }
     },
     "hom_MW_NE_1": {
@@ -1793,7 +1793,7 @@
         "region": "Midwest",
         "state": "NE",
         "stateFips": "31",
-        "csvFile": "Data/NEData1.csv"
+        "csvFile": "../Data/NEData1.csv"
       }
     },
     "pix_MW_NE_1": {
@@ -1805,7 +1805,7 @@
         "region": "Midwest",
         "state": "NE",
         "stateFips": "31",
-        "csvFile": "Data/NEData1.csv"
+        "csvFile": "../Data/NEData1.csv"
       }
     },
     "hom_MW_NE_2": {
@@ -1817,7 +1817,7 @@
         "region": "Midwest",
         "state": "NE",
         "stateFips": "31",
-        "csvFile": "Data/NEData2.csv"
+        "csvFile": "../Data/NEData2.csv"
       }
     },
     "pix_MW_NE_2": {
@@ -1829,7 +1829,7 @@
         "region": "Midwest",
         "state": "NE",
         "stateFips": "31",
-        "csvFile": "Data/NEData2.csv"
+        "csvFile": "../Data/NEData2.csv"
       }
     },
     "hom_MW_NE_3": {
@@ -1841,7 +1841,7 @@
         "region": "Midwest",
         "state": "NE",
         "stateFips": "31",
-        "csvFile": "Data/NEData3.csv"
+        "csvFile": "../Data/NEData3.csv"
       }
     },
     "pix_MW_NE_3": {
@@ -1853,7 +1853,7 @@
         "region": "Midwest",
         "state": "NE",
         "stateFips": "31",
-        "csvFile": "Data/NEData3.csv"
+        "csvFile": "../Data/NEData3.csv"
       }
     },
     "hom_MW_NE_4": {
@@ -1865,7 +1865,7 @@
         "region": "Midwest",
         "state": "NE",
         "stateFips": "31",
-        "csvFile": "Data/NEData4.csv"
+        "csvFile": "../Data/NEData4.csv"
       }
     },
     "pix_MW_NE_4": {
@@ -1877,7 +1877,7 @@
         "region": "Midwest",
         "state": "NE",
         "stateFips": "31",
-        "csvFile": "Data/NEData4.csv"
+        "csvFile": "../Data/NEData4.csv"
       }
     },
     "hom_MW_ND_1": {
@@ -1889,7 +1889,7 @@
         "region": "Midwest",
         "state": "ND",
         "stateFips": "38",
-        "csvFile": "Data/NDData1.csv"
+        "csvFile": "../Data/NDData1.csv"
       }
     },
     "pix_MW_ND_1": {
@@ -1901,7 +1901,7 @@
         "region": "Midwest",
         "state": "ND",
         "stateFips": "38",
-        "csvFile": "Data/NDData1.csv"
+        "csvFile": "../Data/NDData1.csv"
       }
     },
     "hom_MW_ND_2": {
@@ -1913,7 +1913,7 @@
         "region": "Midwest",
         "state": "ND",
         "stateFips": "38",
-        "csvFile": "Data/NDData2.csv"
+        "csvFile": "../Data/NDData2.csv"
       }
     },
     "pix_MW_ND_2": {
@@ -1925,7 +1925,7 @@
         "region": "Midwest",
         "state": "ND",
         "stateFips": "38",
-        "csvFile": "Data/NDData2.csv"
+        "csvFile": "../Data/NDData2.csv"
       }
     },
     "hom_MW_ND_3": {
@@ -1937,7 +1937,7 @@
         "region": "Midwest",
         "state": "ND",
         "stateFips": "38",
-        "csvFile": "Data/NDData3.csv"
+        "csvFile": "../Data/NDData3.csv"
       }
     },
     "pix_MW_ND_3": {
@@ -1949,7 +1949,7 @@
         "region": "Midwest",
         "state": "ND",
         "stateFips": "38",
-        "csvFile": "Data/NDData3.csv"
+        "csvFile": "../Data/NDData3.csv"
       }
     },
     "hom_MW_ND_4": {
@@ -1961,7 +1961,7 @@
         "region": "Midwest",
         "state": "ND",
         "stateFips": "38",
-        "csvFile": "Data/NDData4.csv"
+        "csvFile": "../Data/NDData4.csv"
       }
     },
     "pix_MW_ND_4": {
@@ -1973,7 +1973,7 @@
         "region": "Midwest",
         "state": "ND",
         "stateFips": "38",
-        "csvFile": "Data/NDData4.csv"
+        "csvFile": "../Data/NDData4.csv"
       }
     },
     "hom_MW_OH_1": {
@@ -1985,7 +1985,7 @@
         "region": "Midwest",
         "state": "OH",
         "stateFips": "39",
-        "csvFile": "Data/OHData1.csv"
+        "csvFile": "../Data/OHData1.csv"
       }
     },
     "pix_MW_OH_1": {
@@ -1997,7 +1997,7 @@
         "region": "Midwest",
         "state": "OH",
         "stateFips": "39",
-        "csvFile": "Data/OHData1.csv"
+        "csvFile": "../Data/OHData1.csv"
       }
     },
     "hom_MW_OH_2": {
@@ -2009,7 +2009,7 @@
         "region": "Midwest",
         "state": "OH",
         "stateFips": "39",
-        "csvFile": "Data/OHData2.csv"
+        "csvFile": "../Data/OHData2.csv"
       }
     },
     "pix_MW_OH_2": {
@@ -2021,7 +2021,7 @@
         "region": "Midwest",
         "state": "OH",
         "stateFips": "39",
-        "csvFile": "Data/OHData2.csv"
+        "csvFile": "../Data/OHData2.csv"
       }
     },
     "hom_MW_OH_3": {
@@ -2033,7 +2033,7 @@
         "region": "Midwest",
         "state": "OH",
         "stateFips": "39",
-        "csvFile": "Data/OHData3.csv"
+        "csvFile": "../Data/OHData3.csv"
       }
     },
     "pix_MW_OH_3": {
@@ -2045,7 +2045,7 @@
         "region": "Midwest",
         "state": "OH",
         "stateFips": "39",
-        "csvFile": "Data/OHData3.csv"
+        "csvFile": "../Data/OHData3.csv"
       }
     },
     "hom_MW_OH_4": {
@@ -2057,7 +2057,7 @@
         "region": "Midwest",
         "state": "OH",
         "stateFips": "39",
-        "csvFile": "Data/OHData4.csv"
+        "csvFile": "../Data/OHData4.csv"
       }
     },
     "pix_MW_OH_4": {
@@ -2069,7 +2069,7 @@
         "region": "Midwest",
         "state": "OH",
         "stateFips": "39",
-        "csvFile": "Data/OHData4.csv"
+        "csvFile": "../Data/OHData4.csv"
       }
     },
     "hom_MW_SD_1": {
@@ -2081,7 +2081,7 @@
         "region": "Midwest",
         "state": "SD",
         "stateFips": "46",
-        "csvFile": "Data/SDData1.csv"
+        "csvFile": "../Data/SDData1.csv"
       }
     },
     "pix_MW_SD_1": {
@@ -2093,7 +2093,7 @@
         "region": "Midwest",
         "state": "SD",
         "stateFips": "46",
-        "csvFile": "Data/SDData1.csv"
+        "csvFile": "../Data/SDData1.csv"
       }
     },
     "hom_MW_SD_2": {
@@ -2105,7 +2105,7 @@
         "region": "Midwest",
         "state": "SD",
         "stateFips": "46",
-        "csvFile": "Data/SDData2.csv"
+        "csvFile": "../Data/SDData2.csv"
       }
     },
     "pix_MW_SD_2": {
@@ -2117,7 +2117,7 @@
         "region": "Midwest",
         "state": "SD",
         "stateFips": "46",
-        "csvFile": "Data/SDData2.csv"
+        "csvFile": "../Data/SDData2.csv"
       }
     },
     "hom_MW_SD_3": {
@@ -2129,7 +2129,7 @@
         "region": "Midwest",
         "state": "SD",
         "stateFips": "46",
-        "csvFile": "Data/SDData3.csv"
+        "csvFile": "../Data/SDData3.csv"
       }
     },
     "pix_MW_SD_3": {
@@ -2141,7 +2141,7 @@
         "region": "Midwest",
         "state": "SD",
         "stateFips": "46",
-        "csvFile": "Data/SDData3.csv"
+        "csvFile": "../Data/SDData3.csv"
       }
     },
     "hom_MW_SD_4": {
@@ -2153,7 +2153,7 @@
         "region": "Midwest",
         "state": "SD",
         "stateFips": "46",
-        "csvFile": "Data/SDData4.csv"
+        "csvFile": "../Data/SDData4.csv"
       }
     },
     "pix_MW_SD_4": {
@@ -2165,7 +2165,7 @@
         "region": "Midwest",
         "state": "SD",
         "stateFips": "46",
-        "csvFile": "Data/SDData4.csv"
+        "csvFile": "../Data/SDData4.csv"
       }
     },
     "hom_MW_WI_1": {
@@ -2177,7 +2177,7 @@
         "region": "Midwest",
         "state": "WI",
         "stateFips": "55",
-        "csvFile": "Data/WIData1.csv"
+        "csvFile": "../Data/WIData1.csv"
       }
     },
     "pix_MW_WI_1": {
@@ -2189,7 +2189,7 @@
         "region": "Midwest",
         "state": "WI",
         "stateFips": "55",
-        "csvFile": "Data/WIData1.csv"
+        "csvFile": "../Data/WIData1.csv"
       }
     },
     "hom_MW_WI_2": {
@@ -2201,7 +2201,7 @@
         "region": "Midwest",
         "state": "WI",
         "stateFips": "55",
-        "csvFile": "Data/WIData2.csv"
+        "csvFile": "../Data/WIData2.csv"
       }
     },
     "pix_MW_WI_2": {
@@ -2213,7 +2213,7 @@
         "region": "Midwest",
         "state": "WI",
         "stateFips": "55",
-        "csvFile": "Data/WIData2.csv"
+        "csvFile": "../Data/WIData2.csv"
       }
     },
     "hom_MW_WI_3": {
@@ -2225,7 +2225,7 @@
         "region": "Midwest",
         "state": "WI",
         "stateFips": "55",
-        "csvFile": "Data/WIData3.csv"
+        "csvFile": "../Data/WIData3.csv"
       }
     },
     "pix_MW_WI_3": {
@@ -2237,7 +2237,7 @@
         "region": "Midwest",
         "state": "WI",
         "stateFips": "55",
-        "csvFile": "Data/WIData3.csv"
+        "csvFile": "../Data/WIData3.csv"
       }
     },
     "hom_MW_WI_4": {
@@ -2249,7 +2249,7 @@
         "region": "Midwest",
         "state": "WI",
         "stateFips": "55",
-        "csvFile": "Data/WIData4.csv"
+        "csvFile": "../Data/WIData4.csv"
       }
     },
     "pix_MW_WI_4": {
@@ -2261,7 +2261,7 @@
         "region": "Midwest",
         "state": "WI",
         "stateFips": "55",
-        "csvFile": "Data/WIData4.csv"
+        "csvFile": "../Data/WIData4.csv"
       }
     },
     "hom_SO_AL_1": {
@@ -2273,7 +2273,7 @@
         "region": "South",
         "state": "AL",
         "stateFips": "01",
-        "csvFile": "Data/ALData1.csv"
+        "csvFile": "../Data/ALData1.csv"
       }
     },
     "pix_SO_AL_1": {
@@ -2285,7 +2285,7 @@
         "region": "South",
         "state": "AL",
         "stateFips": "01",
-        "csvFile": "Data/ALData1.csv"
+        "csvFile": "../Data/ALData1.csv"
       }
     },
     "hom_SO_AL_2": {
@@ -2297,7 +2297,7 @@
         "region": "South",
         "state": "AL",
         "stateFips": "01",
-        "csvFile": "Data/ALData2.csv"
+        "csvFile": "../Data/ALData2.csv"
       }
     },
     "pix_SO_AL_2": {
@@ -2309,7 +2309,7 @@
         "region": "South",
         "state": "AL",
         "stateFips": "01",
-        "csvFile": "Data/ALData2.csv"
+        "csvFile": "../Data/ALData2.csv"
       }
     },
     "hom_SO_AL_3": {
@@ -2321,7 +2321,7 @@
         "region": "South",
         "state": "AL",
         "stateFips": "01",
-        "csvFile": "Data/ALData3.csv"
+        "csvFile": "../Data/ALData3.csv"
       }
     },
     "pix_SO_AL_3": {
@@ -2333,7 +2333,7 @@
         "region": "South",
         "state": "AL",
         "stateFips": "01",
-        "csvFile": "Data/ALData3.csv"
+        "csvFile": "../Data/ALData3.csv"
       }
     },
     "hom_SO_AL_4": {
@@ -2345,7 +2345,7 @@
         "region": "South",
         "state": "AL",
         "stateFips": "01",
-        "csvFile": "Data/ALData4.csv"
+        "csvFile": "../Data/ALData4.csv"
       }
     },
     "pix_SO_AL_4": {
@@ -2357,7 +2357,7 @@
         "region": "South",
         "state": "AL",
         "stateFips": "01",
-        "csvFile": "Data/ALData4.csv"
+        "csvFile": "../Data/ALData4.csv"
       }
     },
     "hom_SO_AR_1": {
@@ -2369,7 +2369,7 @@
         "region": "South",
         "state": "AR",
         "stateFips": "05",
-        "csvFile": "Data/ARData1.csv"
+        "csvFile": "../Data/ARData1.csv"
       }
     },
     "pix_SO_AR_1": {
@@ -2381,7 +2381,7 @@
         "region": "South",
         "state": "AR",
         "stateFips": "05",
-        "csvFile": "Data/ARData1.csv"
+        "csvFile": "../Data/ARData1.csv"
       }
     },
     "hom_SO_AR_2": {
@@ -2393,7 +2393,7 @@
         "region": "South",
         "state": "AR",
         "stateFips": "05",
-        "csvFile": "Data/ARData2.csv"
+        "csvFile": "../Data/ARData2.csv"
       }
     },
     "pix_SO_AR_2": {
@@ -2405,7 +2405,7 @@
         "region": "South",
         "state": "AR",
         "stateFips": "05",
-        "csvFile": "Data/ARData2.csv"
+        "csvFile": "../Data/ARData2.csv"
       }
     },
     "hom_SO_AR_3": {
@@ -2417,7 +2417,7 @@
         "region": "South",
         "state": "AR",
         "stateFips": "05",
-        "csvFile": "Data/ARData3.csv"
+        "csvFile": "../Data/ARData3.csv"
       }
     },
     "pix_SO_AR_3": {
@@ -2429,7 +2429,7 @@
         "region": "South",
         "state": "AR",
         "stateFips": "05",
-        "csvFile": "Data/ARData3.csv"
+        "csvFile": "../Data/ARData3.csv"
       }
     },
     "hom_SO_AR_4": {
@@ -2441,7 +2441,7 @@
         "region": "South",
         "state": "AR",
         "stateFips": "05",
-        "csvFile": "Data/ARData4.csv"
+        "csvFile": "../Data/ARData4.csv"
       }
     },
     "pix_SO_AR_4": {
@@ -2453,7 +2453,7 @@
         "region": "South",
         "state": "AR",
         "stateFips": "05",
-        "csvFile": "Data/ARData4.csv"
+        "csvFile": "../Data/ARData4.csv"
       }
     },
     "hom_SO_FL_1": {
@@ -2465,7 +2465,7 @@
         "region": "South",
         "state": "FL",
         "stateFips": "12",
-        "csvFile": "Data/FLData1.csv"
+        "csvFile": "../Data/FLData1.csv"
       }
     },
     "pix_SO_FL_1": {
@@ -2477,7 +2477,7 @@
         "region": "South",
         "state": "FL",
         "stateFips": "12",
-        "csvFile": "Data/FLData1.csv"
+        "csvFile": "../Data/FLData1.csv"
       }
     },
     "hom_SO_FL_2": {
@@ -2489,7 +2489,7 @@
         "region": "South",
         "state": "FL",
         "stateFips": "12",
-        "csvFile": "Data/FLData2.csv"
+        "csvFile": "../Data/FLData2.csv"
       }
     },
     "pix_SO_FL_2": {
@@ -2501,7 +2501,7 @@
         "region": "South",
         "state": "FL",
         "stateFips": "12",
-        "csvFile": "Data/FLData2.csv"
+        "csvFile": "../Data/FLData2.csv"
       }
     },
     "hom_SO_FL_3": {
@@ -2513,7 +2513,7 @@
         "region": "South",
         "state": "FL",
         "stateFips": "12",
-        "csvFile": "Data/FLData3.csv"
+        "csvFile": "../Data/FLData3.csv"
       }
     },
     "pix_SO_FL_3": {
@@ -2525,7 +2525,7 @@
         "region": "South",
         "state": "FL",
         "stateFips": "12",
-        "csvFile": "Data/FLData3.csv"
+        "csvFile": "../Data/FLData3.csv"
       }
     },
     "hom_SO_FL_4": {
@@ -2537,7 +2537,7 @@
         "region": "South",
         "state": "FL",
         "stateFips": "12",
-        "csvFile": "Data/FLData4.csv"
+        "csvFile": "../Data/FLData4.csv"
       }
     },
     "pix_SO_FL_4": {
@@ -2549,7 +2549,7 @@
         "region": "South",
         "state": "FL",
         "stateFips": "12",
-        "csvFile": "Data/FLData4.csv"
+        "csvFile": "../Data/FLData4.csv"
       }
     },
     "hom_SO_GA_1": {
@@ -2561,7 +2561,7 @@
         "region": "South",
         "state": "GA",
         "stateFips": "13",
-        "csvFile": "Data/GAData1.csv"
+        "csvFile": "../Data/GAData1.csv"
       }
     },
     "pix_SO_GA_1": {
@@ -2573,7 +2573,7 @@
         "region": "South",
         "state": "GA",
         "stateFips": "13",
-        "csvFile": "Data/GAData1.csv"
+        "csvFile": "../Data/GAData1.csv"
       }
     },
     "hom_SO_GA_2": {
@@ -2585,7 +2585,7 @@
         "region": "South",
         "state": "GA",
         "stateFips": "13",
-        "csvFile": "Data/GAData2.csv"
+        "csvFile": "../Data/GAData2.csv"
       }
     },
     "pix_SO_GA_2": {
@@ -2597,7 +2597,7 @@
         "region": "South",
         "state": "GA",
         "stateFips": "13",
-        "csvFile": "Data/GAData2.csv"
+        "csvFile": "../Data/GAData2.csv"
       }
     },
     "hom_SO_GA_3": {
@@ -2609,7 +2609,7 @@
         "region": "South",
         "state": "GA",
         "stateFips": "13",
-        "csvFile": "Data/GAData3.csv"
+        "csvFile": "../Data/GAData3.csv"
       }
     },
     "pix_SO_GA_3": {
@@ -2621,7 +2621,7 @@
         "region": "South",
         "state": "GA",
         "stateFips": "13",
-        "csvFile": "Data/GAData3.csv"
+        "csvFile": "../Data/GAData3.csv"
       }
     },
     "hom_SO_GA_4": {
@@ -2633,7 +2633,7 @@
         "region": "South",
         "state": "GA",
         "stateFips": "13",
-        "csvFile": "Data/GAData4.csv"
+        "csvFile": "../Data/GAData4.csv"
       }
     },
     "pix_SO_GA_4": {
@@ -2645,7 +2645,7 @@
         "region": "South",
         "state": "GA",
         "stateFips": "13",
-        "csvFile": "Data/GAData4.csv"
+        "csvFile": "../Data/GAData4.csv"
       }
     },
     "hom_SO_KY_1": {
@@ -2657,7 +2657,7 @@
         "region": "South",
         "state": "KY",
         "stateFips": "21",
-        "csvFile": "Data/KYData1.csv"
+        "csvFile": "../Data/KYData1.csv"
       }
     },
     "pix_SO_KY_1": {
@@ -2669,7 +2669,7 @@
         "region": "South",
         "state": "KY",
         "stateFips": "21",
-        "csvFile": "Data/KYData1.csv"
+        "csvFile": "../Data/KYData1.csv"
       }
     },
     "hom_SO_KY_2": {
@@ -2681,7 +2681,7 @@
         "region": "South",
         "state": "KY",
         "stateFips": "21",
-        "csvFile": "Data/KYData2.csv"
+        "csvFile": "../Data/KYData2.csv"
       }
     },
     "pix_SO_KY_2": {
@@ -2693,7 +2693,7 @@
         "region": "South",
         "state": "KY",
         "stateFips": "21",
-        "csvFile": "Data/KYData2.csv"
+        "csvFile": "../Data/KYData2.csv"
       }
     },
     "hom_SO_KY_3": {
@@ -2705,7 +2705,7 @@
         "region": "South",
         "state": "KY",
         "stateFips": "21",
-        "csvFile": "Data/KYData3.csv"
+        "csvFile": "../Data/KYData3.csv"
       }
     },
     "pix_SO_KY_3": {
@@ -2717,7 +2717,7 @@
         "region": "South",
         "state": "KY",
         "stateFips": "21",
-        "csvFile": "Data/KYData3.csv"
+        "csvFile": "../Data/KYData3.csv"
       }
     },
     "hom_SO_KY_4": {
@@ -2729,7 +2729,7 @@
         "region": "South",
         "state": "KY",
         "stateFips": "21",
-        "csvFile": "Data/KYData4.csv"
+        "csvFile": "../Data/KYData4.csv"
       }
     },
     "pix_SO_KY_4": {
@@ -2741,7 +2741,7 @@
         "region": "South",
         "state": "KY",
         "stateFips": "21",
-        "csvFile": "Data/KYData4.csv"
+        "csvFile": "../Data/KYData4.csv"
       }
     },
     "hom_SO_LA_1": {
@@ -2753,7 +2753,7 @@
         "region": "South",
         "state": "LA",
         "stateFips": "22",
-        "csvFile": "Data/LAData1.csv"
+        "csvFile": "../Data/LAData1.csv"
       }
     },
     "pix_SO_LA_1": {
@@ -2765,7 +2765,7 @@
         "region": "South",
         "state": "LA",
         "stateFips": "22",
-        "csvFile": "Data/LAData1.csv"
+        "csvFile": "../Data/LAData1.csv"
       }
     },
     "hom_SO_LA_2": {
@@ -2777,7 +2777,7 @@
         "region": "South",
         "state": "LA",
         "stateFips": "22",
-        "csvFile": "Data/LAData2.csv"
+        "csvFile": "../Data/LAData2.csv"
       }
     },
     "pix_SO_LA_2": {
@@ -2789,7 +2789,7 @@
         "region": "South",
         "state": "LA",
         "stateFips": "22",
-        "csvFile": "Data/LAData2.csv"
+        "csvFile": "../Data/LAData2.csv"
       }
     },
     "hom_SO_LA_3": {
@@ -2801,7 +2801,7 @@
         "region": "South",
         "state": "LA",
         "stateFips": "22",
-        "csvFile": "Data/LAData3.csv"
+        "csvFile": "../Data/LAData3.csv"
       }
     },
     "pix_SO_LA_3": {
@@ -2813,7 +2813,7 @@
         "region": "South",
         "state": "LA",
         "stateFips": "22",
-        "csvFile": "Data/LAData3.csv"
+        "csvFile": "../Data/LAData3.csv"
       }
     },
     "hom_SO_LA_4": {
@@ -2825,7 +2825,7 @@
         "region": "South",
         "state": "LA",
         "stateFips": "22",
-        "csvFile": "Data/LAData4.csv"
+        "csvFile": "../Data/LAData4.csv"
       }
     },
     "pix_SO_LA_4": {
@@ -2837,7 +2837,7 @@
         "region": "South",
         "state": "LA",
         "stateFips": "22",
-        "csvFile": "Data/LAData4.csv"
+        "csvFile": "../Data/LAData4.csv"
       }
     },
     "hom_SO_MD_1": {
@@ -2849,7 +2849,7 @@
         "region": "South",
         "state": "MD",
         "stateFips": "24",
-        "csvFile": "Data/MDData1.csv"
+        "csvFile": "../Data/MDData1.csv"
       }
     },
     "pix_SO_MD_1": {
@@ -2861,7 +2861,7 @@
         "region": "South",
         "state": "MD",
         "stateFips": "24",
-        "csvFile": "Data/MDData1.csv"
+        "csvFile": "../Data/MDData1.csv"
       }
     },
     "hom_SO_MD_2": {
@@ -2873,7 +2873,7 @@
         "region": "South",
         "state": "MD",
         "stateFips": "24",
-        "csvFile": "Data/MDData2.csv"
+        "csvFile": "../Data/MDData2.csv"
       }
     },
     "pix_SO_MD_2": {
@@ -2885,7 +2885,7 @@
         "region": "South",
         "state": "MD",
         "stateFips": "24",
-        "csvFile": "Data/MDData2.csv"
+        "csvFile": "../Data/MDData2.csv"
       }
     },
     "hom_SO_MD_3": {
@@ -2897,7 +2897,7 @@
         "region": "South",
         "state": "MD",
         "stateFips": "24",
-        "csvFile": "Data/MDData3.csv"
+        "csvFile": "../Data/MDData3.csv"
       }
     },
     "pix_SO_MD_3": {
@@ -2909,7 +2909,7 @@
         "region": "South",
         "state": "MD",
         "stateFips": "24",
-        "csvFile": "Data/MDData3.csv"
+        "csvFile": "../Data/MDData3.csv"
       }
     },
     "hom_SO_MD_4": {
@@ -2921,7 +2921,7 @@
         "region": "South",
         "state": "MD",
         "stateFips": "24",
-        "csvFile": "Data/MDData4.csv"
+        "csvFile": "../Data/MDData4.csv"
       }
     },
     "pix_SO_MD_4": {
@@ -2933,7 +2933,7 @@
         "region": "South",
         "state": "MD",
         "stateFips": "24",
-        "csvFile": "Data/MDData4.csv"
+        "csvFile": "../Data/MDData4.csv"
       }
     },
     "hom_SO_MS_1": {
@@ -2945,7 +2945,7 @@
         "region": "South",
         "state": "MS",
         "stateFips": "28",
-        "csvFile": "Data/MSData1.csv"
+        "csvFile": "../Data/MSData1.csv"
       }
     },
     "pix_SO_MS_1": {
@@ -2957,7 +2957,7 @@
         "region": "South",
         "state": "MS",
         "stateFips": "28",
-        "csvFile": "Data/MSData1.csv"
+        "csvFile": "../Data/MSData1.csv"
       }
     },
     "hom_SO_MS_2": {
@@ -2969,7 +2969,7 @@
         "region": "South",
         "state": "MS",
         "stateFips": "28",
-        "csvFile": "Data/MSData2.csv"
+        "csvFile": "../Data/MSData2.csv"
       }
     },
     "pix_SO_MS_2": {
@@ -2981,7 +2981,7 @@
         "region": "South",
         "state": "MS",
         "stateFips": "28",
-        "csvFile": "Data/MSData2.csv"
+        "csvFile": "../Data/MSData2.csv"
       }
     },
     "hom_SO_MS_3": {
@@ -2993,7 +2993,7 @@
         "region": "South",
         "state": "MS",
         "stateFips": "28",
-        "csvFile": "Data/MSData3.csv"
+        "csvFile": "../Data/MSData3.csv"
       }
     },
     "pix_SO_MS_3": {
@@ -3005,7 +3005,7 @@
         "region": "South",
         "state": "MS",
         "stateFips": "28",
-        "csvFile": "Data/MSData3.csv"
+        "csvFile": "../Data/MSData3.csv"
       }
     },
     "hom_SO_MS_4": {
@@ -3017,7 +3017,7 @@
         "region": "South",
         "state": "MS",
         "stateFips": "28",
-        "csvFile": "Data/MSData4.csv"
+        "csvFile": "../Data/MSData4.csv"
       }
     },
     "pix_SO_MS_4": {
@@ -3029,7 +3029,7 @@
         "region": "South",
         "state": "MS",
         "stateFips": "28",
-        "csvFile": "Data/MSData4.csv"
+        "csvFile": "../Data/MSData4.csv"
       }
     },
     "hom_SO_NC_1": {
@@ -3041,7 +3041,7 @@
         "region": "South",
         "state": "NC",
         "stateFips": "37",
-        "csvFile": "Data/NCData1.csv"
+        "csvFile": "../Data/NCData1.csv"
       }
     },
     "pix_SO_NC_1": {
@@ -3053,7 +3053,7 @@
         "region": "South",
         "state": "NC",
         "stateFips": "37",
-        "csvFile": "Data/NCData1.csv"
+        "csvFile": "../Data/NCData1.csv"
       }
     },
     "hom_SO_NC_2": {
@@ -3065,7 +3065,7 @@
         "region": "South",
         "state": "NC",
         "stateFips": "37",
-        "csvFile": "Data/NCData2.csv"
+        "csvFile": "../Data/NCData2.csv"
       }
     },
     "pix_SO_NC_2": {
@@ -3077,7 +3077,7 @@
         "region": "South",
         "state": "NC",
         "stateFips": "37",
-        "csvFile": "Data/NCData2.csv"
+        "csvFile": "../Data/NCData2.csv"
       }
     },
     "hom_SO_NC_3": {
@@ -3089,7 +3089,7 @@
         "region": "South",
         "state": "NC",
         "stateFips": "37",
-        "csvFile": "Data/NCData3.csv"
+        "csvFile": "../Data/NCData3.csv"
       }
     },
     "pix_SO_NC_3": {
@@ -3101,7 +3101,7 @@
         "region": "South",
         "state": "NC",
         "stateFips": "37",
-        "csvFile": "Data/NCData3.csv"
+        "csvFile": "../Data/NCData3.csv"
       }
     },
     "hom_SO_NC_4": {
@@ -3113,7 +3113,7 @@
         "region": "South",
         "state": "NC",
         "stateFips": "37",
-        "csvFile": "Data/NCData4.csv"
+        "csvFile": "../Data/NCData4.csv"
       }
     },
     "pix_SO_NC_4": {
@@ -3125,7 +3125,7 @@
         "region": "South",
         "state": "NC",
         "stateFips": "37",
-        "csvFile": "Data/NCData4.csv"
+        "csvFile": "../Data/NCData4.csv"
       }
     },
     "hom_SO_OK_1": {
@@ -3137,7 +3137,7 @@
         "region": "South",
         "state": "OK",
         "stateFips": "40",
-        "csvFile": "Data/OKData1.csv"
+        "csvFile": "../Data/OKData1.csv"
       }
     },
     "pix_SO_OK_1": {
@@ -3149,7 +3149,7 @@
         "region": "South",
         "state": "OK",
         "stateFips": "40",
-        "csvFile": "Data/OKData1.csv"
+        "csvFile": "../Data/OKData1.csv"
       }
     },
     "hom_SO_OK_2": {
@@ -3161,7 +3161,7 @@
         "region": "South",
         "state": "OK",
         "stateFips": "40",
-        "csvFile": "Data/OKData2.csv"
+        "csvFile": "../Data/OKData2.csv"
       }
     },
     "pix_SO_OK_2": {
@@ -3173,7 +3173,7 @@
         "region": "South",
         "state": "OK",
         "stateFips": "40",
-        "csvFile": "Data/OKData2.csv"
+        "csvFile": "../Data/OKData2.csv"
       }
     },
     "hom_SO_OK_3": {
@@ -3185,7 +3185,7 @@
         "region": "South",
         "state": "OK",
         "stateFips": "40",
-        "csvFile": "Data/OKData3.csv"
+        "csvFile": "../Data/OKData3.csv"
       }
     },
     "pix_SO_OK_3": {
@@ -3197,7 +3197,7 @@
         "region": "South",
         "state": "OK",
         "stateFips": "40",
-        "csvFile": "Data/OKData3.csv"
+        "csvFile": "../Data/OKData3.csv"
       }
     },
     "hom_SO_OK_4": {
@@ -3209,7 +3209,7 @@
         "region": "South",
         "state": "OK",
         "stateFips": "40",
-        "csvFile": "Data/OKData4.csv"
+        "csvFile": "../Data/OKData4.csv"
       }
     },
     "pix_SO_OK_4": {
@@ -3221,7 +3221,7 @@
         "region": "South",
         "state": "OK",
         "stateFips": "40",
-        "csvFile": "Data/OKData4.csv"
+        "csvFile": "../Data/OKData4.csv"
       }
     },
     "hom_SO_SC_1": {
@@ -3233,7 +3233,7 @@
         "region": "South",
         "state": "SC",
         "stateFips": "45",
-        "csvFile": "Data/SCData1.csv"
+        "csvFile": "../Data/SCData1.csv"
       }
     },
     "pix_SO_SC_1": {
@@ -3245,7 +3245,7 @@
         "region": "South",
         "state": "SC",
         "stateFips": "45",
-        "csvFile": "Data/SCData1.csv"
+        "csvFile": "../Data/SCData1.csv"
       }
     },
     "hom_SO_SC_2": {
@@ -3257,7 +3257,7 @@
         "region": "South",
         "state": "SC",
         "stateFips": "45",
-        "csvFile": "Data/SCData2.csv"
+        "csvFile": "../Data/SCData2.csv"
       }
     },
     "pix_SO_SC_2": {
@@ -3269,7 +3269,7 @@
         "region": "South",
         "state": "SC",
         "stateFips": "45",
-        "csvFile": "Data/SCData2.csv"
+        "csvFile": "../Data/SCData2.csv"
       }
     },
     "hom_SO_SC_3": {
@@ -3281,7 +3281,7 @@
         "region": "South",
         "state": "SC",
         "stateFips": "45",
-        "csvFile": "Data/SCData3.csv"
+        "csvFile": "../Data/SCData3.csv"
       }
     },
     "pix_SO_SC_3": {
@@ -3293,7 +3293,7 @@
         "region": "South",
         "state": "SC",
         "stateFips": "45",
-        "csvFile": "Data/SCData3.csv"
+        "csvFile": "../Data/SCData3.csv"
       }
     },
     "hom_SO_SC_4": {
@@ -3305,7 +3305,7 @@
         "region": "South",
         "state": "SC",
         "stateFips": "45",
-        "csvFile": "Data/SCData4.csv"
+        "csvFile": "../Data/SCData4.csv"
       }
     },
     "pix_SO_SC_4": {
@@ -3317,7 +3317,7 @@
         "region": "South",
         "state": "SC",
         "stateFips": "45",
-        "csvFile": "Data/SCData4.csv"
+        "csvFile": "../Data/SCData4.csv"
       }
     },
     "hom_SO_TN_1": {
@@ -3329,7 +3329,7 @@
         "region": "South",
         "state": "TN",
         "stateFips": "47",
-        "csvFile": "Data/TNData1.csv"
+        "csvFile": "../Data/TNData1.csv"
       }
     },
     "pix_SO_TN_1": {
@@ -3341,7 +3341,7 @@
         "region": "South",
         "state": "TN",
         "stateFips": "47",
-        "csvFile": "Data/TNData1.csv"
+        "csvFile": "../Data/TNData1.csv"
       }
     },
     "hom_SO_TN_2": {
@@ -3353,7 +3353,7 @@
         "region": "South",
         "state": "TN",
         "stateFips": "47",
-        "csvFile": "Data/TNData2.csv"
+        "csvFile": "../Data/TNData2.csv"
       }
     },
     "pix_SO_TN_2": {
@@ -3365,7 +3365,7 @@
         "region": "South",
         "state": "TN",
         "stateFips": "47",
-        "csvFile": "Data/TNData2.csv"
+        "csvFile": "../Data/TNData2.csv"
       }
     },
     "hom_SO_TN_3": {
@@ -3377,7 +3377,7 @@
         "region": "South",
         "state": "TN",
         "stateFips": "47",
-        "csvFile": "Data/TNData3.csv"
+        "csvFile": "../Data/TNData3.csv"
       }
     },
     "pix_SO_TN_3": {
@@ -3389,7 +3389,7 @@
         "region": "South",
         "state": "TN",
         "stateFips": "47",
-        "csvFile": "Data/TNData3.csv"
+        "csvFile": "../Data/TNData3.csv"
       }
     },
     "hom_SO_TN_4": {
@@ -3401,7 +3401,7 @@
         "region": "South",
         "state": "TN",
         "stateFips": "47",
-        "csvFile": "Data/TNData4.csv"
+        "csvFile": "../Data/TNData4.csv"
       }
     },
     "pix_SO_TN_4": {
@@ -3413,7 +3413,7 @@
         "region": "South",
         "state": "TN",
         "stateFips": "47",
-        "csvFile": "Data/TNData4.csv"
+        "csvFile": "../Data/TNData4.csv"
       }
     },
     "hom_SO_TX_1": {
@@ -3425,7 +3425,7 @@
         "region": "South",
         "state": "TX",
         "stateFips": "48",
-        "csvFile": "Data/TXData1.csv"
+        "csvFile": "../Data/TXData1.csv"
       }
     },
     "pix_SO_TX_1": {
@@ -3437,7 +3437,7 @@
         "region": "South",
         "state": "TX",
         "stateFips": "48",
-        "csvFile": "Data/TXData1.csv"
+        "csvFile": "../Data/TXData1.csv"
       }
     },
     "hom_SO_TX_2": {
@@ -3449,7 +3449,7 @@
         "region": "South",
         "state": "TX",
         "stateFips": "48",
-        "csvFile": "Data/TXData2.csv"
+        "csvFile": "../Data/TXData2.csv"
       }
     },
     "pix_SO_TX_2": {
@@ -3461,7 +3461,7 @@
         "region": "South",
         "state": "TX",
         "stateFips": "48",
-        "csvFile": "Data/TXData2.csv"
+        "csvFile": "../Data/TXData2.csv"
       }
     },
     "hom_SO_TX_3": {
@@ -3473,7 +3473,7 @@
         "region": "South",
         "state": "TX",
         "stateFips": "48",
-        "csvFile": "Data/TXData3.csv"
+        "csvFile": "../Data/TXData3.csv"
       }
     },
     "pix_SO_TX_3": {
@@ -3485,7 +3485,7 @@
         "region": "South",
         "state": "TX",
         "stateFips": "48",
-        "csvFile": "Data/TXData3.csv"
+        "csvFile": "../Data/TXData3.csv"
       }
     },
     "hom_SO_TX_4": {
@@ -3497,7 +3497,7 @@
         "region": "South",
         "state": "TX",
         "stateFips": "48",
-        "csvFile": "Data/TXData4.csv"
+        "csvFile": "../Data/TXData4.csv"
       }
     },
     "pix_SO_TX_4": {
@@ -3509,7 +3509,7 @@
         "region": "South",
         "state": "TX",
         "stateFips": "48",
-        "csvFile": "Data/TXData4.csv"
+        "csvFile": "../Data/TXData4.csv"
       }
     },
     "hom_SO_VA_1": {
@@ -3521,7 +3521,7 @@
         "region": "South",
         "state": "VA",
         "stateFips": "51",
-        "csvFile": "Data/VAData1.csv"
+        "csvFile": "../Data/VAData1.csv"
       }
     },
     "pix_SO_VA_1": {
@@ -3533,7 +3533,7 @@
         "region": "South",
         "state": "VA",
         "stateFips": "51",
-        "csvFile": "Data/VAData1.csv"
+        "csvFile": "../Data/VAData1.csv"
       }
     },
     "hom_SO_VA_2": {
@@ -3545,7 +3545,7 @@
         "region": "South",
         "state": "VA",
         "stateFips": "51",
-        "csvFile": "Data/VAData2.csv"
+        "csvFile": "../Data/VAData2.csv"
       }
     },
     "pix_SO_VA_2": {
@@ -3557,7 +3557,7 @@
         "region": "South",
         "state": "VA",
         "stateFips": "51",
-        "csvFile": "Data/VAData2.csv"
+        "csvFile": "../Data/VAData2.csv"
       }
     },
     "hom_SO_VA_3": {
@@ -3569,7 +3569,7 @@
         "region": "South",
         "state": "VA",
         "stateFips": "51",
-        "csvFile": "Data/VAData3.csv"
+        "csvFile": "../Data/VAData3.csv"
       }
     },
     "pix_SO_VA_3": {
@@ -3581,7 +3581,7 @@
         "region": "South",
         "state": "VA",
         "stateFips": "51",
-        "csvFile": "Data/VAData3.csv"
+        "csvFile": "../Data/VAData3.csv"
       }
     },
     "hom_SO_VA_4": {
@@ -3593,7 +3593,7 @@
         "region": "South",
         "state": "VA",
         "stateFips": "51",
-        "csvFile": "Data/VAData4.csv"
+        "csvFile": "../Data/VAData4.csv"
       }
     },
     "pix_SO_VA_4": {
@@ -3605,7 +3605,7 @@
         "region": "South",
         "state": "VA",
         "stateFips": "51",
-        "csvFile": "Data/VAData4.csv"
+        "csvFile": "../Data/VAData4.csv"
       }
     },
     "hom_SO_WV_1": {
@@ -3617,7 +3617,7 @@
         "region": "South",
         "state": "WV",
         "stateFips": "54",
-        "csvFile": "Data/WVData1.csv"
+        "csvFile": "../Data/WVData1.csv"
       }
     },
     "pix_SO_WV_1": {
@@ -3629,7 +3629,7 @@
         "region": "South",
         "state": "WV",
         "stateFips": "54",
-        "csvFile": "Data/WVData1.csv"
+        "csvFile": "../Data/WVData1.csv"
       }
     },
     "hom_SO_WV_2": {
@@ -3641,7 +3641,7 @@
         "region": "South",
         "state": "WV",
         "stateFips": "54",
-        "csvFile": "Data/WVData2.csv"
+        "csvFile": "../Data/WVData2.csv"
       }
     },
     "pix_SO_WV_2": {
@@ -3653,7 +3653,7 @@
         "region": "South",
         "state": "WV",
         "stateFips": "54",
-        "csvFile": "Data/WVData2.csv"
+        "csvFile": "../Data/WVData2.csv"
       }
     },
     "hom_SO_WV_3": {
@@ -3665,7 +3665,7 @@
         "region": "South",
         "state": "WV",
         "stateFips": "54",
-        "csvFile": "Data/WVData3.csv"
+        "csvFile": "../Data/WVData3.csv"
       }
     },
     "pix_SO_WV_3": {
@@ -3677,7 +3677,7 @@
         "region": "South",
         "state": "WV",
         "stateFips": "54",
-        "csvFile": "Data/WVData3.csv"
+        "csvFile": "../Data/WVData3.csv"
       }
     },
     "hom_SO_WV_4": {
@@ -3689,7 +3689,7 @@
         "region": "South",
         "state": "WV",
         "stateFips": "54",
-        "csvFile": "Data/WVData4.csv"
+        "csvFile": "../Data/WVData4.csv"
       }
     },
     "pix_SO_WV_4": {
@@ -3701,7 +3701,7 @@
         "region": "South",
         "state": "WV",
         "stateFips": "54",
-        "csvFile": "Data/WVData4.csv"
+        "csvFile": "../Data/WVData4.csv"
       }
     },
     "hom_WE_AZ_1": {
@@ -3713,7 +3713,7 @@
         "region": "West",
         "state": "AZ",
         "stateFips": "04",
-        "csvFile": "Data/AZData1.csv"
+        "csvFile": "../Data/AZData1.csv"
       }
     },
     "pix_WE_AZ_1": {
@@ -3725,7 +3725,7 @@
         "region": "West",
         "state": "AZ",
         "stateFips": "04",
-        "csvFile": "Data/AZData1.csv"
+        "csvFile": "../Data/AZData1.csv"
       }
     },
     "hom_WE_AZ_2": {
@@ -3737,7 +3737,7 @@
         "region": "West",
         "state": "AZ",
         "stateFips": "04",
-        "csvFile": "Data/AZData2.csv"
+        "csvFile": "../Data/AZData2.csv"
       }
     },
     "pix_WE_AZ_2": {
@@ -3749,7 +3749,7 @@
         "region": "West",
         "state": "AZ",
         "stateFips": "04",
-        "csvFile": "Data/AZData2.csv"
+        "csvFile": "../Data/AZData2.csv"
       }
     },
     "hom_WE_AZ_3": {
@@ -3761,7 +3761,7 @@
         "region": "West",
         "state": "AZ",
         "stateFips": "04",
-        "csvFile": "Data/AZData3.csv"
+        "csvFile": "../Data/AZData3.csv"
       }
     },
     "pix_WE_AZ_3": {
@@ -3773,7 +3773,7 @@
         "region": "West",
         "state": "AZ",
         "stateFips": "04",
-        "csvFile": "Data/AZData3.csv"
+        "csvFile": "../Data/AZData3.csv"
       }
     },
     "hom_WE_AZ_4": {
@@ -3785,7 +3785,7 @@
         "region": "West",
         "state": "AZ",
         "stateFips": "04",
-        "csvFile": "Data/AZData4.csv"
+        "csvFile": "../Data/AZData4.csv"
       }
     },
     "pix_WE_AZ_4": {
@@ -3797,7 +3797,7 @@
         "region": "West",
         "state": "AZ",
         "stateFips": "04",
-        "csvFile": "Data/AZData4.csv"
+        "csvFile": "../Data/AZData4.csv"
       }
     },
     "hom_WE_CA_1": {
@@ -3809,7 +3809,7 @@
         "region": "West",
         "state": "CA",
         "stateFips": "06",
-        "csvFile": "Data/CAData1.csv"
+        "csvFile": "../Data/CAData1.csv"
       }
     },
     "pix_WE_CA_1": {
@@ -3821,7 +3821,7 @@
         "region": "West",
         "state": "CA",
         "stateFips": "06",
-        "csvFile": "Data/CAData1.csv"
+        "csvFile": "../Data/CAData1.csv"
       }
     },
     "hom_WE_CA_2": {
@@ -3833,7 +3833,7 @@
         "region": "West",
         "state": "CA",
         "stateFips": "06",
-        "csvFile": "Data/CAData2.csv"
+        "csvFile": "../Data/CAData2.csv"
       }
     },
     "pix_WE_CA_2": {
@@ -3845,7 +3845,7 @@
         "region": "West",
         "state": "CA",
         "stateFips": "06",
-        "csvFile": "Data/CAData2.csv"
+        "csvFile": "../Data/CAData2.csv"
       }
     },
     "hom_WE_CA_3": {
@@ -3857,7 +3857,7 @@
         "region": "West",
         "state": "CA",
         "stateFips": "06",
-        "csvFile": "Data/CAData3.csv"
+        "csvFile": "../Data/CAData3.csv"
       }
     },
     "pix_WE_CA_3": {
@@ -3869,7 +3869,7 @@
         "region": "West",
         "state": "CA",
         "stateFips": "06",
-        "csvFile": "Data/CAData3.csv"
+        "csvFile": "../Data/CAData3.csv"
       }
     },
     "hom_WE_CA_4": {
@@ -3881,7 +3881,7 @@
         "region": "West",
         "state": "CA",
         "stateFips": "06",
-        "csvFile": "Data/CAData4.csv"
+        "csvFile": "../Data/CAData4.csv"
       }
     },
     "pix_WE_CA_4": {
@@ -3893,7 +3893,7 @@
         "region": "West",
         "state": "CA",
         "stateFips": "06",
-        "csvFile": "Data/CAData4.csv"
+        "csvFile": "../Data/CAData4.csv"
       }
     },
     "hom_WE_CO_1": {
@@ -3905,7 +3905,7 @@
         "region": "West",
         "state": "CO",
         "stateFips": "08",
-        "csvFile": "Data/COData1.csv"
+        "csvFile": "../Data/COData1.csv"
       }
     },
     "pix_WE_CO_1": {
@@ -3917,7 +3917,7 @@
         "region": "West",
         "state": "CO",
         "stateFips": "08",
-        "csvFile": "Data/COData1.csv"
+        "csvFile": "../Data/COData1.csv"
       }
     },
     "hom_WE_CO_2": {
@@ -3929,7 +3929,7 @@
         "region": "West",
         "state": "CO",
         "stateFips": "08",
-        "csvFile": "Data/COData2.csv"
+        "csvFile": "../Data/COData2.csv"
       }
     },
     "pix_WE_CO_2": {
@@ -3941,7 +3941,7 @@
         "region": "West",
         "state": "CO",
         "stateFips": "08",
-        "csvFile": "Data/COData2.csv"
+        "csvFile": "../Data/COData2.csv"
       }
     },
     "hom_WE_CO_3": {
@@ -3953,7 +3953,7 @@
         "region": "West",
         "state": "CO",
         "stateFips": "08",
-        "csvFile": "Data/COData3.csv"
+        "csvFile": "../Data/COData3.csv"
       }
     },
     "pix_WE_CO_3": {
@@ -3965,7 +3965,7 @@
         "region": "West",
         "state": "CO",
         "stateFips": "08",
-        "csvFile": "Data/COData3.csv"
+        "csvFile": "../Data/COData3.csv"
       }
     },
     "hom_WE_CO_4": {
@@ -3977,7 +3977,7 @@
         "region": "West",
         "state": "CO",
         "stateFips": "08",
-        "csvFile": "Data/COData4.csv"
+        "csvFile": "../Data/COData4.csv"
       }
     },
     "pix_WE_CO_4": {
@@ -3989,7 +3989,7 @@
         "region": "West",
         "state": "CO",
         "stateFips": "08",
-        "csvFile": "Data/COData4.csv"
+        "csvFile": "../Data/COData4.csv"
       }
     },
     "hom_WE_ID_1": {
@@ -4001,7 +4001,7 @@
         "region": "West",
         "state": "ID",
         "stateFips": "16",
-        "csvFile": "Data/IDData1.csv"
+        "csvFile": "../Data/IDData1.csv"
       }
     },
     "pix_WE_ID_1": {
@@ -4013,7 +4013,7 @@
         "region": "West",
         "state": "ID",
         "stateFips": "16",
-        "csvFile": "Data/IDData1.csv"
+        "csvFile": "../Data/IDData1.csv"
       }
     },
     "hom_WE_ID_2": {
@@ -4025,7 +4025,7 @@
         "region": "West",
         "state": "ID",
         "stateFips": "16",
-        "csvFile": "Data/IDData2.csv"
+        "csvFile": "../Data/IDData2.csv"
       }
     },
     "pix_WE_ID_2": {
@@ -4037,7 +4037,7 @@
         "region": "West",
         "state": "ID",
         "stateFips": "16",
-        "csvFile": "Data/IDData2.csv"
+        "csvFile": "../Data/IDData2.csv"
       }
     },
     "hom_WE_ID_3": {
@@ -4049,7 +4049,7 @@
         "region": "West",
         "state": "ID",
         "stateFips": "16",
-        "csvFile": "Data/IDData3.csv"
+        "csvFile": "../Data/IDData3.csv"
       }
     },
     "pix_WE_ID_3": {
@@ -4061,7 +4061,7 @@
         "region": "West",
         "state": "ID",
         "stateFips": "16",
-        "csvFile": "Data/IDData3.csv"
+        "csvFile": "../Data/IDData3.csv"
       }
     },
     "hom_WE_ID_4": {
@@ -4073,7 +4073,7 @@
         "region": "West",
         "state": "ID",
         "stateFips": "16",
-        "csvFile": "Data/IDData4.csv"
+        "csvFile": "../Data/IDData4.csv"
       }
     },
     "pix_WE_ID_4": {
@@ -4085,7 +4085,7 @@
         "region": "West",
         "state": "ID",
         "stateFips": "16",
-        "csvFile": "Data/IDData4.csv"
+        "csvFile": "../Data/IDData4.csv"
       }
     },
     "hom_WE_MT_1": {
@@ -4097,7 +4097,7 @@
         "region": "West",
         "state": "MT",
         "stateFips": "30",
-        "csvFile": "Data/MTData1.csv"
+        "csvFile": "../Data/MTData1.csv"
       }
     },
     "pix_WE_MT_1": {
@@ -4109,7 +4109,7 @@
         "region": "West",
         "state": "MT",
         "stateFips": "30",
-        "csvFile": "Data/MTData1.csv"
+        "csvFile": "../Data/MTData1.csv"
       }
     },
     "hom_WE_MT_2": {
@@ -4121,7 +4121,7 @@
         "region": "West",
         "state": "MT",
         "stateFips": "30",
-        "csvFile": "Data/MTData2.csv"
+        "csvFile": "../Data/MTData2.csv"
       }
     },
     "pix_WE_MT_2": {
@@ -4133,7 +4133,7 @@
         "region": "West",
         "state": "MT",
         "stateFips": "30",
-        "csvFile": "Data/MTData2.csv"
+        "csvFile": "../Data/MTData2.csv"
       }
     },
     "hom_WE_MT_3": {
@@ -4145,7 +4145,7 @@
         "region": "West",
         "state": "MT",
         "stateFips": "30",
-        "csvFile": "Data/MTData3.csv"
+        "csvFile": "../Data/MTData3.csv"
       }
     },
     "pix_WE_MT_3": {
@@ -4157,7 +4157,7 @@
         "region": "West",
         "state": "MT",
         "stateFips": "30",
-        "csvFile": "Data/MTData3.csv"
+        "csvFile": "../Data/MTData3.csv"
       }
     },
     "hom_WE_MT_4": {
@@ -4169,7 +4169,7 @@
         "region": "West",
         "state": "MT",
         "stateFips": "30",
-        "csvFile": "Data/MTData4.csv"
+        "csvFile": "../Data/MTData4.csv"
       }
     },
     "pix_WE_MT_4": {
@@ -4181,7 +4181,7 @@
         "region": "West",
         "state": "MT",
         "stateFips": "30",
-        "csvFile": "Data/MTData4.csv"
+        "csvFile": "../Data/MTData4.csv"
       }
     },
     "hom_WE_NV_1": {
@@ -4193,7 +4193,7 @@
         "region": "West",
         "state": "NV",
         "stateFips": "32",
-        "csvFile": "Data/NVData1.csv"
+        "csvFile": "../Data/NVData1.csv"
       }
     },
     "pix_WE_NV_1": {
@@ -4205,7 +4205,7 @@
         "region": "West",
         "state": "NV",
         "stateFips": "32",
-        "csvFile": "Data/NVData1.csv"
+        "csvFile": "../Data/NVData1.csv"
       }
     },
     "hom_WE_NV_2": {
@@ -4217,7 +4217,7 @@
         "region": "West",
         "state": "NV",
         "stateFips": "32",
-        "csvFile": "Data/NVData2.csv"
+        "csvFile": "../Data/NVData2.csv"
       }
     },
     "pix_WE_NV_2": {
@@ -4229,7 +4229,7 @@
         "region": "West",
         "state": "NV",
         "stateFips": "32",
-        "csvFile": "Data/NVData2.csv"
+        "csvFile": "../Data/NVData2.csv"
       }
     },
     "hom_WE_NV_3": {
@@ -4241,7 +4241,7 @@
         "region": "West",
         "state": "NV",
         "stateFips": "32",
-        "csvFile": "Data/NVData3.csv"
+        "csvFile": "../Data/NVData3.csv"
       }
     },
     "pix_WE_NV_3": {
@@ -4253,7 +4253,7 @@
         "region": "West",
         "state": "NV",
         "stateFips": "32",
-        "csvFile": "Data/NVData3.csv"
+        "csvFile": "../Data/NVData3.csv"
       }
     },
     "hom_WE_NV_4": {
@@ -4265,7 +4265,7 @@
         "region": "West",
         "state": "NV",
         "stateFips": "32",
-        "csvFile": "Data/NVData4.csv"
+        "csvFile": "../Data/NVData4.csv"
       }
     },
     "pix_WE_NV_4": {
@@ -4277,7 +4277,7 @@
         "region": "West",
         "state": "NV",
         "stateFips": "32",
-        "csvFile": "Data/NVData4.csv"
+        "csvFile": "../Data/NVData4.csv"
       }
     },
     "hom_WE_NM_1": {
@@ -4289,7 +4289,7 @@
         "region": "West",
         "state": "NM",
         "stateFips": "35",
-        "csvFile": "Data/NMData1.csv"
+        "csvFile": "../Data/NMData1.csv"
       }
     },
     "pix_WE_NM_1": {
@@ -4301,7 +4301,7 @@
         "region": "West",
         "state": "NM",
         "stateFips": "35",
-        "csvFile": "Data/NMData1.csv"
+        "csvFile": "../Data/NMData1.csv"
       }
     },
     "hom_WE_NM_2": {
@@ -4313,7 +4313,7 @@
         "region": "West",
         "state": "NM",
         "stateFips": "35",
-        "csvFile": "Data/NMData2.csv"
+        "csvFile": "../Data/NMData2.csv"
       }
     },
     "pix_WE_NM_2": {
@@ -4325,7 +4325,7 @@
         "region": "West",
         "state": "NM",
         "stateFips": "35",
-        "csvFile": "Data/NMData2.csv"
+        "csvFile": "../Data/NMData2.csv"
       }
     },
     "hom_WE_NM_3": {
@@ -4337,7 +4337,7 @@
         "region": "West",
         "state": "NM",
         "stateFips": "35",
-        "csvFile": "Data/NMData3.csv"
+        "csvFile": "../Data/NMData3.csv"
       }
     },
     "pix_WE_NM_3": {
@@ -4349,7 +4349,7 @@
         "region": "West",
         "state": "NM",
         "stateFips": "35",
-        "csvFile": "Data/NMData3.csv"
+        "csvFile": "../Data/NMData3.csv"
       }
     },
     "hom_WE_NM_4": {
@@ -4361,7 +4361,7 @@
         "region": "West",
         "state": "NM",
         "stateFips": "35",
-        "csvFile": "Data/NMData4.csv"
+        "csvFile": "../Data/NMData4.csv"
       }
     },
     "pix_WE_NM_4": {
@@ -4373,7 +4373,7 @@
         "region": "West",
         "state": "NM",
         "stateFips": "35",
-        "csvFile": "Data/NMData4.csv"
+        "csvFile": "../Data/NMData4.csv"
       }
     },
     "hom_WE_OR_1": {
@@ -4385,7 +4385,7 @@
         "region": "West",
         "state": "OR",
         "stateFips": "41",
-        "csvFile": "Data/ORData1.csv"
+        "csvFile": "../Data/ORData1.csv"
       }
     },
     "pix_WE_OR_1": {
@@ -4397,7 +4397,7 @@
         "region": "West",
         "state": "OR",
         "stateFips": "41",
-        "csvFile": "Data/ORData1.csv"
+        "csvFile": "../Data/ORData1.csv"
       }
     },
     "hom_WE_OR_2": {
@@ -4409,7 +4409,7 @@
         "region": "West",
         "state": "OR",
         "stateFips": "41",
-        "csvFile": "Data/ORData2.csv"
+        "csvFile": "../Data/ORData2.csv"
       }
     },
     "pix_WE_OR_2": {
@@ -4421,7 +4421,7 @@
         "region": "West",
         "state": "OR",
         "stateFips": "41",
-        "csvFile": "Data/ORData2.csv"
+        "csvFile": "../Data/ORData2.csv"
       }
     },
     "hom_WE_OR_3": {
@@ -4433,7 +4433,7 @@
         "region": "West",
         "state": "OR",
         "stateFips": "41",
-        "csvFile": "Data/ORData3.csv"
+        "csvFile": "../Data/ORData3.csv"
       }
     },
     "pix_WE_OR_3": {
@@ -4445,7 +4445,7 @@
         "region": "West",
         "state": "OR",
         "stateFips": "41",
-        "csvFile": "Data/ORData3.csv"
+        "csvFile": "../Data/ORData3.csv"
       }
     },
     "hom_WE_OR_4": {
@@ -4457,7 +4457,7 @@
         "region": "West",
         "state": "OR",
         "stateFips": "41",
-        "csvFile": "Data/ORData4.csv"
+        "csvFile": "../Data/ORData4.csv"
       }
     },
     "pix_WE_OR_4": {
@@ -4469,7 +4469,7 @@
         "region": "West",
         "state": "OR",
         "stateFips": "41",
-        "csvFile": "Data/ORData4.csv"
+        "csvFile": "../Data/ORData4.csv"
       }
     },
     "hom_WE_UT_1": {
@@ -4481,7 +4481,7 @@
         "region": "West",
         "state": "UT",
         "stateFips": "49",
-        "csvFile": "Data/UTData1.csv"
+        "csvFile": "../Data/UTData1.csv"
       }
     },
     "pix_WE_UT_1": {
@@ -4493,7 +4493,7 @@
         "region": "West",
         "state": "UT",
         "stateFips": "49",
-        "csvFile": "Data/UTData1.csv"
+        "csvFile": "../Data/UTData1.csv"
       }
     },
     "hom_WE_UT_2": {
@@ -4505,7 +4505,7 @@
         "region": "West",
         "state": "UT",
         "stateFips": "49",
-        "csvFile": "Data/UTData2.csv"
+        "csvFile": "../Data/UTData2.csv"
       }
     },
     "pix_WE_UT_2": {
@@ -4517,7 +4517,7 @@
         "region": "West",
         "state": "UT",
         "stateFips": "49",
-        "csvFile": "Data/UTData2.csv"
+        "csvFile": "../Data/UTData2.csv"
       }
     },
     "hom_WE_UT_3": {
@@ -4529,7 +4529,7 @@
         "region": "West",
         "state": "UT",
         "stateFips": "49",
-        "csvFile": "Data/UTData3.csv"
+        "csvFile": "../Data/UTData3.csv"
       }
     },
     "pix_WE_UT_3": {
@@ -4541,7 +4541,7 @@
         "region": "West",
         "state": "UT",
         "stateFips": "49",
-        "csvFile": "Data/UTData3.csv"
+        "csvFile": "../Data/UTData3.csv"
       }
     },
     "hom_WE_UT_4": {
@@ -4553,7 +4553,7 @@
         "region": "West",
         "state": "UT",
         "stateFips": "49",
-        "csvFile": "Data/UTData4.csv"
+        "csvFile": "../Data/UTData4.csv"
       }
     },
     "pix_WE_UT_4": {
@@ -4565,7 +4565,7 @@
         "region": "West",
         "state": "UT",
         "stateFips": "49",
-        "csvFile": "Data/UTData4.csv"
+        "csvFile": "../Data/UTData4.csv"
       }
     },
     "hom_WE_WA_1": {
@@ -4577,7 +4577,7 @@
         "region": "West",
         "state": "WA",
         "stateFips": "53",
-        "csvFile": "Data/WAData1.csv"
+        "csvFile": "../Data/WAData1.csv"
       }
     },
     "pix_WE_WA_1": {
@@ -4589,7 +4589,7 @@
         "region": "West",
         "state": "WA",
         "stateFips": "53",
-        "csvFile": "Data/WAData1.csv"
+        "csvFile": "../Data/WAData1.csv"
       }
     },
     "hom_WE_WA_2": {
@@ -4601,7 +4601,7 @@
         "region": "West",
         "state": "WA",
         "stateFips": "53",
-        "csvFile": "Data/WAData2.csv"
+        "csvFile": "../Data/WAData2.csv"
       }
     },
     "pix_WE_WA_2": {
@@ -4613,7 +4613,7 @@
         "region": "West",
         "state": "WA",
         "stateFips": "53",
-        "csvFile": "Data/WAData2.csv"
+        "csvFile": "../Data/WAData2.csv"
       }
     },
     "hom_WE_WA_3": {
@@ -4625,7 +4625,7 @@
         "region": "West",
         "state": "WA",
         "stateFips": "53",
-        "csvFile": "Data/WAData3.csv"
+        "csvFile": "../Data/WAData3.csv"
       }
     },
     "pix_WE_WA_3": {
@@ -4637,7 +4637,7 @@
         "region": "West",
         "state": "WA",
         "stateFips": "53",
-        "csvFile": "Data/WAData3.csv"
+        "csvFile": "../Data/WAData3.csv"
       }
     },
     "hom_WE_WA_4": {
@@ -4649,7 +4649,7 @@
         "region": "West",
         "state": "WA",
         "stateFips": "53",
-        "csvFile": "Data/WAData4.csv"
+        "csvFile": "../Data/WAData4.csv"
       }
     },
     "pix_WE_WA_4": {
@@ -4661,7 +4661,7 @@
         "region": "West",
         "state": "WA",
         "stateFips": "53",
-        "csvFile": "Data/WAData4.csv"
+        "csvFile": "../Data/WAData4.csv"
       }
     },
     "hom_WE_WY_1": {
@@ -4673,7 +4673,7 @@
         "region": "West",
         "state": "WY",
         "stateFips": "56",
-        "csvFile": "Data/WYData1.csv"
+        "csvFile": "../Data/WYData1.csv"
       }
     },
     "pix_WE_WY_1": {
@@ -4685,7 +4685,7 @@
         "region": "West",
         "state": "WY",
         "stateFips": "56",
-        "csvFile": "Data/WYData1.csv"
+        "csvFile": "../Data/WYData1.csv"
       }
     },
     "hom_WE_WY_2": {
@@ -4697,7 +4697,7 @@
         "region": "West",
         "state": "WY",
         "stateFips": "56",
-        "csvFile": "Data/WYData2.csv"
+        "csvFile": "../Data/WYData2.csv"
       }
     },
     "pix_WE_WY_2": {
@@ -4709,7 +4709,7 @@
         "region": "West",
         "state": "WY",
         "stateFips": "56",
-        "csvFile": "Data/WYData2.csv"
+        "csvFile": "../Data/WYData2.csv"
       }
     },
     "hom_WE_WY_3": {
@@ -4721,7 +4721,7 @@
         "region": "West",
         "state": "WY",
         "stateFips": "56",
-        "csvFile": "Data/WYData3.csv"
+        "csvFile": "../Data/WYData3.csv"
       }
     },
     "pix_WE_WY_3": {
@@ -4733,7 +4733,7 @@
         "region": "West",
         "state": "WY",
         "stateFips": "56",
-        "csvFile": "Data/WYData3.csv"
+        "csvFile": "../Data/WYData3.csv"
       }
     },
     "hom_WE_WY_4": {
@@ -4745,7 +4745,7 @@
         "region": "West",
         "state": "WY",
         "stateFips": "56",
-        "csvFile": "Data/WYData4.csv"
+        "csvFile": "../Data/WYData4.csv"
       }
     },
     "pix_WE_WY_4": {
@@ -4757,7 +4757,7 @@
         "region": "West",
         "state": "WY",
         "stateFips": "56",
-        "csvFile": "Data/WYData4.csv"
+        "csvFile": "../Data/WYData4.csv"
       }
     }
   },
