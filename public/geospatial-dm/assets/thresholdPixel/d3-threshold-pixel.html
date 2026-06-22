@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pixel Map</title>
+<title>Decision Pixel Map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -39,7 +39,12 @@
     display: block;
     background: #fff;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    
   }
+  .county { stroke:#777; stroke-width:0.8; vector-effect:non-scaling-stroke; cursor:pointer; }
+  .county.on  { fill:#800000; }  /* allocate */
+  .county.off { fill:#e9e9e9; }  /* not allocate */
+
 
   #chart { max-width: 400px; }
   #legend { max-width: 140px; }
@@ -108,16 +113,50 @@
     pointer-events: none;
   }
 
+  .legend { 
+    position: relative;
+    margin-left: auto;
+    margin-top: 10px;
+    background:#fff; 
+    border:1px solid #e5e5e5;
+    border-radius:10px; 
+    padding:8px 10px; 
+    font-size:12px; 
+    color:#222; 
+    box-shadow:0 2px 10px rgba(0,0,0,0.05); 
+    width: fit-content;
+  }
+
+  .legend_chip { width:12px; 
+    height:12px; 
+    border-radius:3px; 
+    display:inline-block; 
+    vertical-align:middle; 
+    margin-right:6px; 
+    border:1px solid #777; 
+}
+  .legend_chip.on  { 
+    background:#800000; 
+    border-color:#800000; 
+}
+  .legend_chip.off { 
+    background:#e9e9e9; 
+    border-color:#aaa; }
+
+
+
 </style>
 </head>
 <body>
-
-<div class="wrap">
+    <div class="wrap">
   <!-- Map SVG -->
   <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
 
   <!--- Legend SVG (separate) -->
-  <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
+<div class="legend">
+    <div><span class="legend_chip on"></span> Above Threshold Poverty Rates</div>
+    <div style="margin-top:6px"><span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
+  </div>
 </div>
 
 <div id="selected-list" class="selected-panel" aria-live="polite"></div>
@@ -133,7 +172,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 const svgMap    = d3.select("#chart");
-const svgLegend = d3.select("#legend");
 
 const width = 400, height = 400;  
 const PIXEL = 3;
@@ -141,17 +179,10 @@ const MOE_Z = 1.645;
 const VALUE_MIN = 0, VALUE_MAX = 50;
 const MAX_SELECTIONS = 3;
 const REQUIRED_SELECTIONS = 3;
+const THRESHOLD = 15;
 
-//const longpal = ["#800026","#BD0026","#E31A1C","#FC4E2A","#FD8D3C","#FEB24C","#FED976","#FFE7A8","#FFF2CC","#FFF9E6"].reverse();
-//const color = d3.scaleLinear()
-  //.domain(d3.range(VALUE_MIN, VALUE_MAX + 1, (VALUE_MAX - VALUE_MIN) / (longpal.length - 1)))
-  //.range(longpal)
-  //.clamp(true);
-
-const color = d3.scaleSequential(d3.interpolateYlOrRd)
-    .domain([VALUE_MIN, VALUE_MAX])
-    .clamp(true);
-
+const ABOVE_COLOR = "#800000";
+const BELOW_COLOR = "#e9e9e9";
 
 function mulberry32(a){ return function(){ let t=a+=0x6D2B79F5; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; } }
 function randnFactory(rng){ let spare=null; return ()=>{ if(spare!==null){const v=spare; spare=null; return v;}
@@ -162,7 +193,6 @@ function sampleValue(pov, moe, randn){
   const x = pov + (sd>0 ? randn()*sd : 0);
   return Math.max(VALUE_MIN, Math.min(VALUE_MAX, x));
 }
-
 
 const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
 const stripTypeSuffix = (s) =>
@@ -331,7 +361,8 @@ function renderState(stateFips, csvFile) {
       path = d3.geoPath(projection);
       projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
       
-    
+      // For state outline, we can't use the TopoJSON state feature because coordinates don't match
+      // Create a merged boundary from all planning regions instead
       const mergedBoundary = {
         type: "FeatureCollection",
         features: stateCounties
@@ -391,24 +422,15 @@ function renderState(stateFips, csvFile) {
         const lonlat = projection.invert([x,y]);
         if (!lonlat) continue;
 
-        let rec = null, fips = null;
+        let rec = null;
         for (const f of stateCounties) {
-          if (d3.geoContains(f, lonlat)) { fips = String(f.id); rec = byFips.get(fips); break; }
+          if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
         }
         if (!rec) continue;
 
         const v = sampleValue(rec.pov, rec.moe, randn);
-        pixels.push({x, y, v, fips});
+        pixels.push({x, y, v});
       }
-    }
-    // THIS IS THE SORTED PIXEL MAP LOGIC
-    // Within each county, sort its sampled values in decreasing order and
-    // reassign them back to that county's pixels in raster order (largest
-    // value at the first pixel scanned, decreasing across/down from there).
-    const pixelsByFips = d3.group(pixels, d => d.fips);
-    for (const group of pixelsByFips.values()) {
-      const sortedValues = group.map(d => d.v).sort((a, b) => b - a);
-      group.forEach((d, i) => { d.v = sortedValues[i]; });
     }
 
     gPixels.attr("clip-path","url(#stateClip)")
@@ -419,7 +441,7 @@ function renderState(stateFips, csvFile) {
         .attr("y", d => d.y - PIXEL/2)
         .attr("width", PIXEL)
         .attr("height", PIXEL)
-        .attr("fill", d => color(d.v));
+        .attr("fill", d => d.v > THRESHOLD ? ABOVE_COLOR : BELOW_COLOR);
 
     let selectedCounties = [];
     const maxSelections = MAX_SELECTIONS;
@@ -580,53 +602,6 @@ function renderState(stateFips, csvFile) {
           }
         });
 
-    svgLegend.selectAll("*").remove(); // clear previous legend
-    const defsL = svgLegend.append("defs");
-
-    const LEGEND_LEFT  = 40;  
-    const LEGEND_TOP   = 40;  
-    const LEGEND_LONG  = 320; 
-    const LEGEND_THICK = 15;  
-    const lg = svgLegend.append("g")
-      .attr("class", "legend-right")
-      .attr("transform", `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
-      .style("pointer-events", "none");
-
-    // Vertical gradient (top -> bottom)
-    const grad = defsL.append("linearGradient")
-      .attr("id", "legendGrad")
-      .attr("x1", "0%").attr("x2", "0%")
-      .attr("y1", "100%").attr("y2", "0%");
-    for (let i = 0; i <= 100; i++) {
-      const t = i / 100;
-      grad.append("stop")
-        .attr("offset", `${i}%`)
-        .attr("stop-color", color(VALUE_MIN + t * (VALUE_MAX - VALUE_MIN)));
-    }
-
-    // Gradient bar
-    lg.append("rect")
-      .attr("width",  LEGEND_THICK)
-      .attr("height", LEGEND_LONG)
-      .attr("fill", "url(#legendGrad)")
-      .attr("rx", 3);
-
-    // Scale: top = max, bottom = min
-    const legendScale = d3.scaleLinear()
-      .domain([VALUE_MAX, VALUE_MIN])
-      .range([0, LEGEND_LONG]);
-
-    // Axis ticks to the right of bar
-    lg.append("g")
-      .attr("transform", `translate(${LEGEND_THICK}, 0)`)
-      .call(d3.axisRight(legendScale).ticks(5));
-
-    // Title
-    lg.append("text")
-      .attr("x", 0)
-      .attr("y", -12)
-      .attr("font-weight", 500)
-      .text("Poverty");
   })
   .catch(err => {
     console.error('Error loading data:', err);
