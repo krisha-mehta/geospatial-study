@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Exceedance Probability Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="../../../revisitUtilities/revisit-communicate.js"></script>
+
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background:#fff;
+    width: 650px;
+    height: 700px;
+  }
+
+  .wrap {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 760px;
+    height: 400px;
+  }
+
+svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  #map { max-width: 400px; }
+  #legend { max-width: 140px; }
+
+  .county { stroke:#777; stroke-width:0.8; vector-effect:non-scaling-stroke; cursor:pointer; }
+
+  .state-outline { fill:none;
+    stroke:#222;
+    stroke-width:1.2;
+    vector-effect:non-scaling-stroke;
+}
+
+  #county-message-box {
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+
+  .selected-panel {
+    max-width: 1000px;
+    margin: 30px auto 0;
+    padding: 0 12px 8px;
+    font-size: 14px;
+    color: #111;
+  }
+  .selected-panel .chips {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f2f6ff;
+    border: 1px solid #c9ddff;
+    color: #0b3d91;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .chip button.remove-chip {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #0b3d91;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 2px;
+  }
+  .chip button.remove-chip:focus-visible {
+    outline: 2px solid #0b5cff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .county.highlight {
+    stroke: #306de7 !important;
+    stroke-width: 2.5 !important;
+    pointer-events: none;
+  }
+
+  .county.got-right {
+    stroke: #4daf4a !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .county.got-wrong {
+    stroke: #377eb8 !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .county.missed {
+    stroke: #984ea3 !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .button-container {
+    max-width: 400px;
+    margin: 20px auto;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .submit-button {
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  }
+
+  .submit-button:hover:not(:disabled) {
+    background: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  }
+
+  .submit-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <svg id="map" viewBox="0 0 400 400" aria-label="Exceedance probability county map"></svg>
+    <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
+  </div>
+
+  <div id="selected-list" class="selected-panel" aria-live="polite"></div>
+
+  <div class="button-container">
+    <button id="submit-button" class="submit-button" disabled>Submit Answers</button>
+  </div>
+
+  <div id="submission-message" style="display: none; max-width: 800px; margin: 20px auto; padding: 20px; font-size: 15px; line-height: 1.6; color: #1f2937; background: #ffffff; border: 2px solid #000000; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+  </div>
+
+  <div id="county-message-box"
+     style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
+            background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
+            max-width:320px; font-size:16px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000;
+            position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;"></div>
+
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+const CONFIG = {
+  THRESHOLD: 15,
+  MOE_Z: 1.645,
+  MAX_SELECTIONS: 3,
+  REQUIRED_SELECTIONS: 3
+};
+
+document.addEventListener('click', (event) => {
+  const messageBox = document.getElementById('county-message-box');
+  const map = document.getElementById('map');
+  if (!messageBox.contains(event.target) && !map.contains(event.target) && messageBox.style.display === 'block') {
+    messageBox.style.display = 'none';
+  }
+});
+
+const svg = d3.select('#map');
+const svgLegend = d3.select('#legend');
+const gFill = svg.append('g');
+const gOutline = svg.append('g');
+
+const color = d3.scaleSequential(d3.interpolateYlOrRd)
+    .domain([0, 1])
+    .clamp(true);
+
+// --- Selected counties panel logic ---
+let selectedCounties = [];
+const maxSelections = CONFIG.MAX_SELECTIONS;
+let isSubmitted = false;
+
+function updateSubmitButton() {
+  const submitBtn = document.getElementById('submit-button');
+  if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS && !isSubmitted) {
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
+}
+
+function renderSelectedList() {
+  const panel = document.getElementById('selected-list');
+  const requiredSelections = CONFIG.REQUIRED_SELECTIONS;
+  const title = '<strong>Your selected counties:</strong>';
+  if (!selectedCounties.length) {
+    panel.innerHTML = `${title} <span style="color:#666;">None (need to select exactly ${requiredSelections})</span>`;
+    return;
+  }
+  const chips = selectedCounties.map(c => (
+    `<span class="chip" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">
+       <span>${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>
+       <button class="remove-chip" type="button" aria-label="Remove ${c}" title="Remove ${c}" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">&times;</button>
+     </span>`
+  )).join('');
+
+  let statusMessage = '';
+  if (selectedCounties.length < requiredSelections) {
+    statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
+  } else if (selectedCounties.length === requiredSelections) {
+    statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can submit your selected counties and see the solution.</div>`;
+  }
+
+  panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
+  updateSubmitButton();
+}
+
+document.addEventListener('click', (ev) => {
+  const btn = ev.target;
+  if (!(btn instanceof HTMLElement)) return;
+  if (!btn.classList.contains('remove-chip')) return;
+  const county = btn.getAttribute('data-county');
+  if (!county) return;
+  selectedCounties = selectedCounties.filter(c => c !== county);
+  state.selected = selectedCounties;
+
+  // Reset submitted state when removing a county
+  if (isSubmitted) {
+    isSubmitted = false;
+    d3.selectAll('.county').classed('got-right', false);
+    d3.selectAll('.county').classed('got-wrong', false);
+    d3.selectAll('.county').classed('missed', false);
+    document.getElementById('submission-message').style.display = 'none';
+  }
+
+  d3.selectAll('.county').classed('highlight', false);
+  if (selectedCounties.length < maxSelections) {
+    gFill.selectAll('.county').style('pointer-events', 'auto');
+  }
+  renderSelectedList();
+});
+
+document.addEventListener('mouseover', (ev) => {
+  const chip = ev.target.closest('.chip');
+  if (!chip) return;
+  const county = chip.getAttribute('data-county');
+  if (!county) return;
+  d3.selectAll('.county').classed('highlight', function() {
+    return d3.select(this).attr('data-county') === county;
+  });
+});
+document.addEventListener('mouseout', (ev) => {
+  const chip = ev.target.closest('.chip');
+  if (!chip) return;
+  d3.selectAll('.county').classed('highlight', false);
+});
+
+document.getElementById('submit-button').addEventListener('click', () => {
+  if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS && !isSubmitted) {
+    isSubmitted = true;
+
+    const correctAnswers = ['Kusilvak Census Area', 'Bethel Census Area', 'Yukon-Koyukuk Census Area'];
+
+    const gotRight = selectedCounties.filter(c => correctAnswers.includes(c));
+    const gotWrong = selectedCounties.filter(c => !correctAnswers.includes(c));
+    const missed = correctAnswers.filter(c => !selectedCounties.includes(c));
+
+    d3.selectAll('.county').classed('got-right', function() {
+      const countyName = d3.select(this).attr('data-county');
+      return gotRight.includes(countyName);
+    });
+
+    d3.selectAll('.county').classed('got-wrong', function() {
+      const countyName = d3.select(this).attr('data-county');
+      return gotWrong.includes(countyName);
+    });
+
+    d3.selectAll('.county').classed('missed', function() {
+      const countyName = d3.select(this).attr('data-county');
+      return missed.includes(countyName);
+    });
+
+    // Build the message
+    let messageHTML = '<div style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #065f46;">Solution</div>';
+
+    if (gotRight.length > 0) {
+      messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #4daf4a;">Counties you got right (shown in green strokes):</strong> ${gotRight.join(', ')}</div>`;
+    }
+
+    if (gotWrong.length > 0) {
+      messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #377eb8;">Counties you got wrong (shown in blue strokes):</strong> ${gotWrong.join(', ')}</div>`;
+    }
+
+    if (missed.length > 0) {
+      messageHTML += `<div style="margin-bottom: 10px;"><strong style="color: #984ea3;">Counties you missed (shown in purple strokes):</strong> ${missed.join(', ')}</div>`;
+    }
+    messageHTML += '<div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #d1d5db;"><strong>Important:</strong> This was a practice trial. In the actual experiment, you will not receive feedback on your answers.</div>';
+
+    messageHTML += '<div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #d1d5db;">After you finish reviewing the answers, click on the Next button to start the experiment.</div>';
+
+    document.getElementById('submission-message').innerHTML = messageHTML;
+    document.getElementById('submission-message').style.display = 'block';
+
+    // Post answers to Revisit
+    Revisit.postAnswers({ selectedCounty: selectedCounties });
+
+    updateSubmitButton();
+  }
+});
+
+const projection = d3.geoAlbers();
+const path = d3.geoPath(projection);
+
+const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
+const stripTypeSuffix = (s) => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "").replace(/\s+/g, " ").trim();
+
+function normalCdf(x, mean=0, sd=1){
+    const z=(x-mean)/(sd||1);
+    return 0.5 * (1 + erf(z/Math.SQRT2));
+}
+function erf(x){
+    const sign = Math.sign(x);
+    const a1=0.254829592,
+    a2=-0.284496736,
+    a3=1.421413741,
+    a4=-1.453152027,
+    a5=1.061405429,
+    p=0.3275911;
+  const t = 1/(1+p*Math.abs(x));
+  const y = 1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+   return sign*y;
+}
+
+let state = {
+  stateFips: null,
+  csvFile: null,
+  threshold: CONFIG.THRESHOLD,
+  moeZ: CONFIG.MOE_Z,
+  selected: [],
+  maxSel: CONFIG.MAX_SELECTIONS,
+  requiredSel: CONFIG.REQUIRED_SELECTIONS,
+  countyList: [],
+  byFips: new Map()
+};
+
+async function loadData(){
+
+  const results = await Promise.all([
+    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+    d3.csv(state.csvFile, d3.autoType)
+  ]);
+
+  const usTopo = results[0];
+  const csv = results[1];
+
+  const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+  const stateCounties = allCounties.filter(f => String(f.id).startsWith(state.stateFips));
+  const stateMesh = topojson.mesh(
+    usTopo, usTopo.objects.counties,
+    (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b
+  );
+
+  const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === state.stateFips);
+
+  const nameToFips = new Map();
+  for(const f of stateCounties){
+    const id = String(f.id);
+    const raw = f.properties?.name ?? '';
+    const base = norm(stripTypeSuffix(raw));
+    nameToFips.set(base, id);
+
+    if (/\bsaint\b/i.test(raw)){
+      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st'))), id);
+      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st.'))), id);
+    }
+    if (/\bst[.]?\b/i.test(raw)){
+      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/gi,'saint'))), id);
+    }
+  }
+
+  const byFips = new Map();
+  for(const r of csv){
+    const rawName = String(r.county ?? r.NAME ?? '').trim();
+    const key = norm(stripTypeSuffix(rawName));
+    const fips = nameToFips.get(key);
+    if (!fips) { console.warn('No FIPS for', rawName); continue; }
+    byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
+  }
+
+  projection.fitSize([400,400], {type:'FeatureCollection', features: stateCounties});
+
+  svg.selectAll('*').interrupt();
+  gFill.selectAll('*').remove();
+  gOutline.selectAll('*').remove();
+
+  gOutline.append('path').attr('class','state-outline').attr('d', path(stateFeature));
+
+  state.countyList = stateCounties;
+  state.byFips = byFips;
+
+  computeXprob();
+
+  // County paths — single uniform fill per county based on exceedance probability
+  gFill.selectAll('path.county')
+    .data(stateCounties, d=>String(d.id))
+    .join('path')
+      .attr('class','county')
+      .attr('d', d=>path(d))
+      .attr('data-fips', d=>String(d.id))
+      .attr('data-county', d=>byFips.get(String(d.id))?.name ?? String(d.id))
+      .attr('fill', d => {
+        const rec = byFips.get(String(d.id));
+        return rec ? color(rec.xprob) : '#ccc';
+      })
+      .style('cursor', 'pointer')
+      .on('click', function(event, d) {
+        const county = d3.select(this).attr('data-county');
+        const alreadySelected = selectedCounties.includes(county);
+        if (!alreadySelected) {
+          if (selectedCounties.length >= maxSelections) return;
+          showCountyMessageBox({
+            county,
+            onYes: () => {
+              selectedCounties.push(county);
+              state.selected = selectedCounties;
+
+              // Don't auto-post answers - wait for submit button
+
+              renderSelectedList();
+              if (selectedCounties.length === maxSelections) {
+                gFill.selectAll('.county')
+                  .filter(function() {
+                    return !selectedCounties.includes(d3.select(this).attr('data-county'));
+                  })
+                  .style('pointer-events', 'none');
+              }
+            },
+            onNo: () => {}
+          });
+        } else {
+
+          const box = document.getElementById('county-message-box');
+          const msg = `You have already selected this county to allocate resources.<br>To unselect, click on the <b>x</b> next to the county name below.`;
+          box.innerHTML = msg + `<br><br><button id='county-ok-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>OK</button>`;
+          box.style.display = 'block';
+          let countyFeature = null;
+          for (const f of stateCounties) {
+            const name = byFips.get(String(f.id))?.name ?? String(f.id);
+            if (name === county) { countyFeature = f; break; }
+          }
+          const svgEl = document.getElementById('map');
+          const svgRect = svgEl.getBoundingClientRect();
+          box.style.position = 'absolute';
+          if (countyFeature) {
+            const centroid = path.centroid(countyFeature);
+            box.style.left = (svgRect.left + centroid[0]) + 'px';
+            box.style.top  = (svgRect.top  + centroid[1]) + 'px';
+            box.style.transform = 'translate(-50%, 20px)';
+          } else {
+            box.style.left = (svgRect.left + 20) + 'px';
+            box.style.top  = (svgRect.top  + 20) + 'px';
+            box.style.transform = 'none';
+          }
+          box.style.zIndex = 1000;
+          document.getElementById('county-ok-btn').onclick = () => { box.style.display = 'none'; };
+        }
+      });
+
+  renderSelectedList();
+
+  if (selectedCounties.length < maxSelections) {
+    gFill.selectAll('.county').style('pointer-events', 'auto');
+  }
+
+  renderLegend();
+}
+
+function computeXprob(){
+  const t = state.threshold;
+  const z = state.moeZ;
+  for(const [fips, rec] of state.byFips){
+    const sd = (rec.moe ?? 0) / (z || 1.645);
+    rec.xprob = (!isFinite(sd) || sd <= 0)
+      ? (rec.pov >= t ? 1 : 0)
+      : (1 - normalCdf(t, rec.pov, sd));
+  }
+}
+
+function renderLegend(){
+  svgLegend.selectAll('*').remove();
+  const defsL = svgLegend.append('defs');
+
+  const LEGEND_LEFT = 40, LEGEND_TOP = 40, LEGEND_LONG = 320, LEGEND_THICK = 15;
+  const lg = svgLegend.append('g')
+    .attr('transform', `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
+    .style('pointer-events', 'none');
+
+  const grad = defsL.append('linearGradient')
+    .attr('id', 'legendGrad')
+    .attr('x1', '0%').attr('x2', '0%')
+    .attr('y1', '100%').attr('y2', '0%');
+  for (let i = 0; i <= 100; i++) {
+    const t = i / 100;
+    grad.append('stop').attr('offset', `${i}%`).attr('stop-color', color(t));
+  }
+
+  lg.append('rect')
+    .attr('width', LEGEND_THICK).attr('height', LEGEND_LONG)
+    .attr('fill', 'url(#legendGrad)').attr('rx', 3);
+
+  const legendScale = d3.scaleLinear().domain([1, 0]).range([0, LEGEND_LONG]);
+  lg.append('g')
+    .attr('transform', `translate(${LEGEND_THICK}, 0)`)
+    .call(d3.axisRight(legendScale).ticks(5, '.0%'));
+
+  lg.append('text')
+    .attr('x', 0).attr('y', -12)
+    .attr('font-weight', 500)
+    .text('Exceedance Probability');
+}
+
+function showCountyMessageBox({ county, onYes, onNo }) {
+  const box = document.getElementById("county-message-box");
+  const msg = `Do you want to allocate your resources to <b>${county}</b>?`;
+  box.innerHTML = msg + `<br><br><button id='county-yes-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>Yes</button> <button id='county-no-btn' style='background:#fff;color:#0077cc;border:1.5px solid #0077cc;border-radius:6px;padding:7px 18px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>No</button>`;
+  box.style.display = "block";
+
+  let countyFeature = null;
+  for (const f of state.countyList) {
+    const name = state.byFips.get(String(f.id))?.name ?? String(f.id);
+    if (name === county) { countyFeature = f; break; }
+  }
+  const svgEl = document.getElementById("map");
+  const svgRect = svgEl.getBoundingClientRect();
+  box.style.position = "absolute";
+  if (countyFeature) {
+    const centroid = path.centroid(countyFeature);
+    box.style.left = (svgRect.left + centroid[0]) + "px";
+    box.style.top  = (svgRect.top  + centroid[1]) + "px";
+    box.style.transform = "translate(-50%, 20px)";
+  } else {
+    box.style.left = (svgRect.left + 20) + "px";
+    box.style.top  = (svgRect.top  + 20) + "px";
+    box.style.transform = "none";
+  }
+  box.style.zIndex = 1000;
+
+  document.getElementById("county-yes-btn").onclick = () => { box.style.display = "none"; onYes(); };
+  document.getElementById("county-no-btn").onclick  = () => { box.style.display = "none"; onNo();  };
+}
+
+function renderState(stateFips, csvFile){
+  state.stateFips = String(stateFips);
+  state.csvFile = csvFile;
+  selectedCounties = [];
+  state.selected = selectedCounties;
+
+  loadData().catch(e=>{
+    console.error(e);
+    alert('Data load failed. Serve with a local web server and place the CSV next to this HTML file.');
+  });
+}
+
+Revisit.onDataReceive((data)=>{
+  const fips = "02";
+  const csv  = "../Data/AKData4.csv";
+  if (!fips || !csv){
+    console.warn('ReVISit data missing stateFips or csvFile');
+    return;
+  }
+  renderState(fips, csv);
+});
+});
+</script>
+</html>

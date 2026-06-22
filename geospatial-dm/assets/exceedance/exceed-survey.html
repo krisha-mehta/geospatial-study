@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Exceedance Probability Map Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="../../../revisitUtilities/revisit-communicate.js"></script>
+
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    width: 650px;
+    height: 850px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
+  }
+
+  .wrap {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 760px;
+    height: 400px;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  #map { max-width: 400px; }
+  #legend { max-width: 140px; }
+
+  .county { stroke: #777; stroke-width: 0.8; vector-effect: non-scaling-stroke; }
+  .state-outline { fill: none; stroke: #222; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+
+  .response-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 12px;
+  }
+
+  .response-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .response-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+
+  .response-textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .response-textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  .states-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 12px;
+  }
+
+  .states-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .states-select {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .states-select:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .states-select:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+  }
+
+  .selected-states {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .state-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #e0e7ff;
+    color: #3730a3;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .state-tag button {
+    background: none;
+    border: none;
+    color: #3730a3;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .state-tag button:hover {
+    color: #1e1b4b;
+  }
+
+  .selection-info {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 8px;
+  }
+
+  .survey-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    margin: 20px 0 10px 0;
+  }
+
+</style>
+</head>
+<body>
+
+<h1 class="survey-title">Survey Questionnaire</h1>
+
+<div class="wrap">
+  <svg id="map" viewBox="0 0 400 400" aria-label="Exceedance probability county map"></svg>
+  <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
+</div>
+
+<div class="response-container">
+  <label for="response-text" class="response-label">
+You have seen many example maps like the one above. How did you use the map to recommend counties that should receive financial assistance? Please describe your thought process in as much detail as possible.</label>
+  <textarea
+    id="response-text"
+    class="response-textarea"
+    placeholder="Type your response here..."
+    aria-label="Open response text box"></textarea>
+</div>
+
+<div class="states-container">
+  <label for="states-select" class="states-label">
+Which states are you familiar with or have lived in?</label>
+  <select id="states-select" class="states-select" aria-label="Select states you are familiar with">
+    <option value="">-- Select a state --</option>
+  </select>
+  <div id="selected-states" class="selected-states"></div>
+  <div id="selection-info" class="selection-info">0 states selected</div>
+</div>
+
+<script>
+
+const CONFIG = {
+  THRESHOLD: 15,
+  MOE_Z: 1.645
+};
+
+const svg = d3.select('#map');
+const svgLegend = d3.select('#legend');
+const gFill = svg.append('g');
+const gOutline = svg.append('g');
+
+const color = d3.scaleSequential(d3.interpolateYlOrRd)
+    .domain([0, 1])
+    .clamp(true);
+
+const projection = d3.geoEquirectangular();
+const path = d3.geoPath(projection);
+
+const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
+const stripTypeSuffix = (s) => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "").replace(/\s+/g, " ").trim();
+
+function normalCdf(x, mean=0, sd=1){
+    const z=(x-mean)/(sd||1);
+    return 0.5 * (1 + erf(z/Math.SQRT2));
+}
+function erf(x){
+    const sign = Math.sign(x);
+    const a1=0.254829592,
+    a2=-0.284496736,
+    a3=1.421413741,
+    a4=-1.453152027,
+    a5=1.061405429,
+    p=0.3275911;
+  const t = 1/(1+p*Math.abs(x));
+  const y = 1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+   return sign*y;
+}
+
+let stateCounties, byFips;
+
+function computeXprob(){
+  const t = CONFIG.THRESHOLD;
+  const z = CONFIG.MOE_Z;
+  for(const [fips, rec] of byFips){
+    const sd = (rec.moe ?? 0) / (z || 1.645);
+    rec.xprob = (!isFinite(sd) || sd <= 0)
+      ? (rec.pov >= t ? 1 : 0)
+      : (1 - normalCdf(t, rec.pov, sd));
+  }
+}
+
+function renderLegend(){
+  svgLegend.selectAll('*').remove();
+  const defsL = svgLegend.append('defs');
+
+  const LEGEND_LEFT = 40, LEGEND_TOP = 40, LEGEND_LONG = 320, LEGEND_THICK = 15;
+  const lg = svgLegend.append('g')
+    .attr('transform', `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
+    .style('pointer-events', 'none');
+
+  const grad = defsL.append('linearGradient')
+    .attr('id', 'legendGrad')
+    .attr('x1', '0%').attr('x2', '0%')
+    .attr('y1', '100%').attr('y2', '0%');
+  for (let i = 0; i <= 100; i++) {
+    const t = i / 100;
+    grad.append('stop').attr('offset', `${i}%`).attr('stop-color', color(t));
+  }
+
+  lg.append('rect')
+    .attr('width', LEGEND_THICK).attr('height', LEGEND_LONG)
+    .attr('fill', 'url(#legendGrad)').attr('rx', 3);
+
+  const legendScale = d3.scaleLinear().domain([1, 0]).range([0, LEGEND_LONG]);
+  lg.append('g')
+    .attr('transform', `translate(${LEGEND_THICK}, 0)`)
+    .call(d3.axisRight(legendScale).ticks(5, '.0%'));
+
+  lg.append('text')
+    .attr('x', 0).attr('y', -12)
+    .attr('font-weight', 500)
+    .text('Exceedance Probability');
+}
+
+function renderState(stateFips, csvFile) {
+  Promise.all([
+    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+    d3.csv(csvFile, d3.autoType)
+  ])
+  .then((results) => {
+    const usTopo = results[0];
+    const csv = results[1];
+
+    const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+    stateCounties = allCounties.filter(f => String(f.id).startsWith(stateFips));
+    const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === stateFips);
+
+    const nameToFipsMap = new Map();
+    for (const f of stateCounties) {
+      const id  = String(f.id);
+      const raw = f.properties?.name ?? "";
+      const base = norm(stripTypeSuffix(raw));
+      nameToFipsMap.set(base, id);
+
+      if (/\bsaint\b/i.test(raw)) {
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st"))), id);
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st."))), id);
+      }
+      if (/\bst[.]?\b/iu.test(raw)) {
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/giu, "saint"))), id);
+      }
+    }
+
+    byFips = new Map();
+    for (const r of csv) {
+      const rawName = String(r.county ?? r.NAME ?? "");
+      const key = norm(stripTypeSuffix(rawName));
+      const fips = nameToFipsMap.get(key);
+      if (fips) {
+        byFips.set(fips, { pov:+r.pov, moe:+r.moe, name: rawName });
+      } else {
+        console.warn(`No FIPS match for county name: "${rawName}" in state FIPS ${stateFips}`);
+      }
+    }
+
+    projection.fitSize([400, 400], {type:"FeatureCollection", features: stateCounties});
+
+    svg.selectAll('*').interrupt();
+    gFill.selectAll('*').remove();
+    gOutline.selectAll('*').remove();
+
+    gOutline.append('path')
+      .datum(stateFeature)
+      .attr('class', 'state-outline')
+      .attr('d', path);
+
+    computeXprob();
+
+    gFill.selectAll('path.county')
+      .data(stateCounties)
+      .join('path')
+        .attr('class', 'county')
+        .attr('d', path)
+        .attr('fill', d => {
+          const rec = byFips.get(String(d.id));
+          return rec ? color(rec.xprob) : '#ccc';
+        });
+
+    renderLegend();
+  })
+  .catch(err => {
+    console.error('Error loading data:', err);
+    alert("Data load failed: " + err.message + ". Check console for details.");
+  });
+}
+
+const stateFips = '08';
+const csvFile = '../Data/COData4.csv';
+renderState(stateFips, csvFile);
+
+const responseTextarea = document.getElementById('response-text');
+
+function postAllAnswers() {
+  const hasResponse = responseTextarea.value.trim().length > 0;
+  const hasStates = selectedStates.length > 0;
+  Revisit.postAnswers({
+    // Only mark the required field as filled when both questions are answered
+    exceedSurveyResponse: (hasResponse && hasStates) ? responseTextarea.value : '',
+    familiarStates: selectedStates,
+  });
+}
+
+responseTextarea.addEventListener('input', () => {
+  postAllAnswers();
+});
+
+Revisit.postAnswers({ exceedSurveyResponse: '', familiarStates: [] });
+
+// States selection functionality
+const US_STATES = [
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+  "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
+  "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
+  "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
+  "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
+  "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
+  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
+  "Wisconsin", "Wyoming"
+];
+
+let selectedStates = [];
+
+const statesSelect = document.getElementById('states-select');
+const selectedStatesContainer = document.getElementById('selected-states');
+const selectionInfo = document.getElementById('selection-info');
+
+function populateStatesDropdown() {
+  statesSelect.innerHTML = '<option value="">-- Select a state --</option>';
+
+  US_STATES.forEach(state => {
+    if (!selectedStates.includes(state)) {
+      const option = document.createElement('option');
+      option.value = state;
+      option.textContent = state;
+      statesSelect.appendChild(option);
+    }
+  });
+}
+
+function renderSelectedStates() {
+  selectedStatesContainer.innerHTML = '';
+
+  selectedStates.forEach(state => {
+    const tag = document.createElement('span');
+    tag.className = 'state-tag';
+    tag.innerHTML = `
+      ${state}
+      <button type="button" aria-label="Remove ${state}" data-state="${state}">&times;</button>
+    `;
+    selectedStatesContainer.appendChild(tag);
+  });
+
+  selectedStatesContainer.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const stateToRemove = btn.dataset.state;
+      removeState(stateToRemove);
+    });
+  });
+}
+
+function updateSelectionInfo() {
+  selectionInfo.textContent = `${selectedStates.length} state${selectedStates.length !== 1 ? 's' : ''} selected`;
+}
+
+function addState(state) {
+  if (state && !selectedStates.includes(state)) {
+    selectedStates.push(state);
+    populateStatesDropdown();
+    renderSelectedStates();
+    updateSelectionInfo();
+    postStatesAnswer();
+  }
+  statesSelect.value = '';
+}
+
+function removeState(state) {
+  selectedStates = selectedStates.filter(s => s !== state);
+  populateStatesDropdown();
+  renderSelectedStates();
+  updateSelectionInfo();
+  postStatesAnswer();
+}
+
+function postStatesAnswer() {
+  postAllAnswers();
+}
+
+statesSelect.addEventListener('change', (e) => {
+  addState(e.target.value);
+});
+
+
+populateStatesDropdown();
+updateSelectionInfo();
+</script>
+</body>
+</html>
