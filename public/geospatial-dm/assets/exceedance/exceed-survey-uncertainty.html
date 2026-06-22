@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Exceedance Probability Map Survey Uncertainty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="../../../revisitUtilities/revisit-communicate.js"></script>
+
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    width: 900px;
+    height: 600px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
+  }
+
+  .wrap {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .map-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    gap: 2px;
+  }
+
+  .map-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+
+  .county { stroke: #777; stroke-width: 0.8; vector-effect: non-scaling-stroke; }
+  .state-outline { fill: none; stroke: #222; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+
+  .legend-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 12px;
+  }
+
+  #exceed-legend, #choro-legend { width: 60px; }
+
+  .response-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 12px;
+  }
+
+  .response-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .response-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+
+  .response-textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .response-textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  .survey-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    margin: 20px 0 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="survey-title">Survey Questionnaire</h1>
+
+<div class="wrap">
+  <!-- Exceedance probability map column -->
+  <div class="map-col">
+    <div class="map-label">Exceedance Probability Map</div>
+    <svg id="exceed-map" viewBox="0 0 400 400" aria-label="Exceedance probability map of selected state"></svg>
+  </div>
+
+  <div class="map-col">
+    <div class="map-label">Choropleth Map</div>
+    <svg id="choropleth" viewBox="0 0 400 400" aria-label="Choropleth map of selected state"></svg>
+  </div>
+
+  <div class="legend-col">
+    <svg id="exceed-legend" viewBox="0 0 140 400" aria-label="Exceedance probability legend"></svg>
+    <svg id="choro-legend" viewBox="0 0 140 400" aria-label="Poverty rate legend"></svg>
+  </div>
+</div>
+
+<div class="response-container">
+  <label for="response-text" class="response-label">
+Above, you can see two maps based on the same underlying data. The map on the right shows estimated poverty rates only. The map on the left (the one you just used) shows estimated poverty rates along with uncertainty information. Which of the two maps would you prefer to use for making decisions like the one in this experiment? Please explain your choice.</label>
+  <textarea
+    id="response-text"
+    class="response-textarea"
+    placeholder="Type your response here..."
+    aria-label="Open response text box"></textarea>
+</div>
+
+<script>
+const CONFIG = {
+  THRESHOLD: 15,
+  MOE_Z: 1.645
+};
+
+const VALUE_MIN = 0, VALUE_MAX = 50;
+
+const svgExceed      = d3.select("#exceed-map");
+const svgChoropleth  = d3.select("#choropleth");
+const svgExceedLegend = d3.select("#exceed-legend");
+const svgChoroLegend  = d3.select("#choro-legend");
+
+// Exceedance probability scale (0-1)
+const exceedColor = d3.scaleSequential(d3.interpolateYlOrRd)
+  .domain([0, 1])
+  .clamp(true);
+
+// YlOrRd scale for choropleth (and its legend) — same as hop-survey-uncertainty.html
+const choroColor = d3.scaleSequential(d3.interpolateYlOrRd)
+  .domain([VALUE_MIN, VALUE_MAX])
+  .clamp(true);
+
+const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
+const stripTypeSuffix = s =>
+  s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "")
+   .replace(/\s+/g, " ").trim();
+
+const width = 400, height = 400;
+const projection = d3.geoEquirectangular();
+const path = d3.geoPath(projection);
+
+function normalCdf(x, mean=0, sd=1){
+    const z=(x-mean)/(sd||1);
+    return 0.5 * (1 + erf(z/Math.SQRT2));
+}
+function erf(x){
+    const sign = Math.sign(x);
+    const a1=0.254829592,
+    a2=-0.284496736,
+    a3=1.421413741,
+    a4=-1.453152027,
+    a5=1.061405429,
+    p=0.3275911;
+  const t = 1/(1+p*Math.abs(x));
+  const y = 1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+   return sign*y;
+}
+
+function computeXprob(byFips){
+  const t = CONFIG.THRESHOLD;
+  const z = CONFIG.MOE_Z;
+  for(const [fips, rec] of byFips){
+    const sd = (rec.moe ?? 0) / (z || 1.645);
+    rec.xprob = (!isFinite(sd) || sd <= 0)
+      ? (rec.pov >= t ? 1 : 0)
+      : (1 - normalCdf(t, rec.pov, sd));
+  }
+}
+
+let gFill, gOutline, stateCounties, byFips;
+
+async function loadData(stateFips, csvFile) {
+  const [usTopo, csv] = await Promise.all([
+    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+    d3.csv(csvFile, d3.autoType)
+  ]);
+
+  const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+  stateCounties = allCounties.filter(f => String(f.id).startsWith(stateFips));
+  const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features
+    .find(f => String(f.id) === stateFips);
+
+  projection.fitSize([width, height], { type: "FeatureCollection", features: stateCounties });
+
+  const nameToFipsMap = new Map();
+  for (const f of stateCounties) {
+    const id = String(f.id);
+    const raw = f.properties?.name ?? "";
+    const base = norm(stripTypeSuffix(raw));
+    nameToFipsMap.set(base, id);
+    if (/\bsaint\b/i.test(raw)) {
+      nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st"))), id);
+      nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st."))), id);
+    }
+    if (/\bst[.]?\b/iu.test(raw)) {
+      nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/giu, "saint"))), id);
+    }
+  }
+
+  byFips = new Map();
+  for (const r of csv) {
+    const rawName = String(r.county ?? r.NAME ?? "");
+    const key = norm(stripTypeSuffix(rawName));
+    const fips = nameToFipsMap.get(key);
+    if (fips) {
+      byFips.set(fips, { pov: +r.pov, moe: +r.moe, name: rawName });
+    } else {
+      console.warn(`No FIPS match for "${rawName}" in state ${stateFips}`);
+    }
+  }
+
+  computeXprob(byFips);
+
+  // Set up exceedance map SVG layers
+  svgExceed.selectAll("*").remove();
+  gFill    = svgExceed.append("g").attr("class", "fills");
+  gOutline = svgExceed.append("g").attr("class", "outlines");
+  gOutline.append("path")
+    .datum(stateFeature)
+    .attr("class", "state-outline")
+    .attr("d", path);
+
+  gFill.selectAll(".county")
+    .data(stateCounties)
+    .join("path")
+      .attr("class", "county")
+      .attr("d", path)
+      .attr("fill", d => {
+        const rec = byFips.get(String(d.id));
+        return rec ? exceedColor(rec.xprob) : "#ccc";
+      });
+
+  // Draw choropleth (pov values, YlOrRd) — same as hop-survey-uncertainty.html
+  svgChoropleth.selectAll("*").remove();
+  svgChoropleth.selectAll(".county-choro")
+    .data(stateCounties)
+    .join("path")
+      .attr("class", "county-choro")
+      .attr("d", path)
+      .attr("fill", d => {
+        const rec = byFips.get(String(d.id));
+        return rec ? choroColor(rec.pov) : "#ccc";
+      })
+      .attr("stroke", "#595959")
+      .attr("stroke-width", 0.8)
+      .attr("vector-effect", "non-scaling-stroke");
+  svgChoropleth.append("path")
+    .datum(stateFeature)
+    .attr("fill", "none")
+    .attr("stroke", "#595959")
+    .attr("stroke-width", 1)
+    .attr("vector-effect", "non-scaling-stroke")
+    .attr("d", path);
+
+  // Gradient legend for the exceedance probability map
+  svgExceedLegend.selectAll("*").remove();
+  const defsE = svgExceedLegend.append("defs");
+  {
+    const LEGEND_LEFT = 40, LEGEND_TOP = 40, LEGEND_LONG = 320, LEGEND_THICK = 15;
+    const lg = svgExceedLegend.append("g")
+      .attr("transform", `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
+      .style("pointer-events", "none");
+    const grad = defsE.append("linearGradient")
+      .attr("id", "exceedLegendGrad")
+      .attr("x1", "0%").attr("x2", "0%")
+      .attr("y1", "100%").attr("y2", "0%");
+    for (let i = 0; i <= 100; i++) {
+      const t = i / 100;
+      grad.append("stop")
+        .attr("offset", `${i}%`)
+        .attr("stop-color", exceedColor(t));
+    }
+    lg.append("rect")
+      .attr("width", LEGEND_THICK).attr("height", LEGEND_LONG)
+      .attr("fill", "url(#exceedLegendGrad)").attr("rx", 3);
+    const legendScale = d3.scaleLinear().domain([1, 0]).range([0, LEGEND_LONG]);
+    lg.append("g")
+      .attr("transform", `translate(${LEGEND_THICK}, 0)`)
+      .call(d3.axisRight(legendScale).ticks(5, '.0%'));
+    lg.append("text")
+      .attr("x", 0).attr("y", -12)
+      .attr("font-weight", 500).text("Exceedance Probability");
+  }
+
+  // Draw gradient legend for choropleth — same as hop-survey-uncertainty.html
+  svgChoroLegend.selectAll("*").remove();
+  const defsL = svgChoroLegend.append("defs");
+  const LEGEND_LEFT = 40, LEGEND_TOP = 40, LEGEND_LONG = 320, LEGEND_THICK = 15;
+  const lg = svgChoroLegend.append("g")
+    .attr("transform", `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
+    .style("pointer-events", "none");
+
+  const grad = defsL.append("linearGradient")
+    .attr("id", "choroLegendGrad")
+    .attr("x1", "0%").attr("x2", "0%")
+    .attr("y1", "100%").attr("y2", "0%");
+  for (let i = 0; i <= 100; i++) {
+    const t = i / 100;
+    grad.append("stop")
+      .attr("offset", `${i}%`)
+      .attr("stop-color", choroColor(VALUE_MIN + t * (VALUE_MAX - VALUE_MIN)));
+  }
+  lg.append("rect")
+    .attr("width", LEGEND_THICK).attr("height", LEGEND_LONG)
+    .attr("fill", "url(#choroLegendGrad)").attr("rx", 3);
+  const legendScale = d3.scaleLinear()
+    .domain([VALUE_MAX, VALUE_MIN]).range([0, LEGEND_LONG]);
+  lg.append("g")
+    .attr("transform", `translate(${LEGEND_THICK}, 0)`)
+    .call(d3.axisRight(legendScale).ticks(5));
+  lg.append("text")
+    .attr("x", 0).attr("y", -12)
+    .attr("font-weight", 500).text("Poverty");
+}
+
+function renderState(stateFips, csvFile) {
+  loadData(stateFips, csvFile).catch(e => {
+    console.error(e);
+    alert('Data load failed. Check console for details.');
+  });
+}
+
+let mapInitialized = false;
+
+Revisit.onDataReceive((data) => {
+  if (mapInitialized) return;
+  mapInitialized = true;
+  const fips = data['stateFips'] || "08";
+  const csv  = data['csvFile']   || "../Data/COData4.csv";
+  renderState(fips, csv);
+});
+
+setTimeout(() => {
+  if (!mapInitialized) {
+    mapInitialized = true;
+    renderState("08", "../Data/COData4.csv");
+  }
+}, 100);
+
+const responseTextarea = document.getElementById('response-text');
+
+Revisit.postAnswers({ exceedUncertaintySurveyResponse: '' });
+
+responseTextarea.addEventListener('input', () => {
+  Revisit.postAnswers({ exceedUncertaintySurveyResponse: responseTextarea.value });
+});
+</script>
+</body>
+</html>
