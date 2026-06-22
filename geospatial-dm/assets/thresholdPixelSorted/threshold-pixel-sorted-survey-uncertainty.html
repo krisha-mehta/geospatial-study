@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Decision Pixel Map</title>
+<title>Ordered Decision Pixel Map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -335,6 +335,15 @@ projection.fitSize([width, height], {type:"FeatureCollection", features: stateCo
         const v = sampleValue(rec.pov, rec.moe, randn);
         pixels.push({x, y, v, fips});
       }
+    }
+
+    // Within each county, sort its sampled values in decreasing order and
+    // reassign them back to that county's pixels in raster order (largest
+    // value at the first pixel scanned, decreasing across/down from there).
+    const pixelsByFips = d3.group(pixels, d => d.fips);
+    for (const group of pixelsByFips.values()) {
+      const sortedValues = group.map(d => d.v).sort((a, b) => b - a);
+      group.forEach((d, i) => { d.v = sortedValues[i]; });
     }
 
     gPixels.attr("clip-path","url(#stateClip)")
