@@ -130,6 +130,21 @@
           "type": "reactive"
         }
       ]
+    },
+    "svsup-map-d3": {
+      "type": "website",
+      "path": "geospatial-dm/assets/svsup/d3-svsup.html",
+      "instructionLocation": "aboveStimulus",
+      "response": [
+        {
+          "id": "selectedCounty",
+          "prompt": "Your selected answer:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
     }
   },
   "components": {
@@ -16311,6 +16326,2311 @@
         "stateFips": "56",
         "csvFile": "../Data/WYData4.csv"
       }
+    },
+    "svsup-intro": {
+      "type": "website",
+      "path": "geospatial-dm/assets/svsup/svsup-intro.html",
+      "response": []
+    },
+    "svsup-trial": {
+      "type": "website",
+      "path": "geospatial-dm/assets/svsup/svsup-trial.html",
+      "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instructionLocation": "aboveStimulus",
+      "response": [
+        {
+          "id": "selectedCounty",
+          "prompt": "Your selected answer:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
+    "svsup-survey": {
+      "type": "website",
+      "path": "geospatial-dm/assets/svsup/svsup-survey.html",
+      "response": [
+        {
+          "id": "svsupSurveyResponse",
+          "prompt": "Your response:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
+    "svsup-survey-uncertainty": {
+      "type": "website",
+      "path": "geospatial-dm/assets/svsup/svsup-survey-uncertainty.html",
+      "response": [
+        {
+          "id": "svsupUncertaintySurveyResponse",
+          "prompt": "Your response:",
+          "required": true,
+          "location": "belowStimulus",
+          "hidden": true,
+          "type": "reactive"
+        }
+      ]
+    },
+    "svs_NE_CT_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "../Data/CTData1.csv"
+      }
+    },
+    "svs_NE_CT_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "../Data/CTData2.csv"
+      }
+    },
+    "svs_NE_CT_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "../Data/CTData3.csv"
+      }
+    },
+    "svs_NE_CT_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "CT",
+        "stateFips": "09",
+        "csvFile": "../Data/CTData4.csv"
+      }
+    },
+    "svs_NE_ME_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "../Data/MEData1.csv"
+      }
+    },
+    "svs_NE_ME_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "../Data/MEData2.csv"
+      }
+    },
+    "svs_NE_ME_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "../Data/MEData3.csv"
+      }
+    },
+    "svs_NE_ME_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "ME",
+        "stateFips": "23",
+        "csvFile": "../Data/MEData4.csv"
+      }
+    },
+    "svs_NE_MA_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "../Data/MAData1.csv"
+      }
+    },
+    "svs_NE_MA_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "../Data/MAData2.csv"
+      }
+    },
+    "svs_NE_MA_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "../Data/MAData3.csv"
+      }
+    },
+    "svs_NE_MA_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "MA",
+        "stateFips": "25",
+        "csvFile": "../Data/MAData4.csv"
+      }
+    },
+    "svs_NE_NH_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "../Data/NHData1.csv"
+      }
+    },
+    "svs_NE_NH_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "../Data/NHData2.csv"
+      }
+    },
+    "svs_NE_NH_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "../Data/NHData3.csv"
+      }
+    },
+    "svs_NE_NH_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NH",
+        "stateFips": "33",
+        "csvFile": "../Data/NHData4.csv"
+      }
+    },
+    "svs_NE_RI_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "../Data/RIData1.csv"
+      }
+    },
+    "svs_NE_RI_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "../Data/RIData2.csv"
+      }
+    },
+    "svs_NE_RI_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "../Data/RIData3.csv"
+      }
+    },
+    "svs_NE_RI_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "RI",
+        "stateFips": "44",
+        "csvFile": "../Data/RIData4.csv"
+      }
+    },
+    "svs_NE_VT_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "../Data/VTData1.csv"
+      }
+    },
+    "svs_NE_VT_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "../Data/VTData2.csv"
+      }
+    },
+    "svs_NE_VT_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "../Data/VTData3.csv"
+      }
+    },
+    "svs_NE_VT_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "VT",
+        "stateFips": "50",
+        "csvFile": "../Data/VTData4.csv"
+      }
+    },
+    "svs_NE_NJ_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "../Data/NJData1.csv"
+      }
+    },
+    "svs_NE_NJ_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "../Data/NJData2.csv"
+      }
+    },
+    "svs_NE_NJ_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "../Data/NJData3.csv"
+      }
+    },
+    "svs_NE_NJ_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NJ",
+        "stateFips": "34",
+        "csvFile": "../Data/NJData4.csv"
+      }
+    },
+    "svs_NE_NY_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "../Data/NYData1.csv"
+      }
+    },
+    "svs_NE_NY_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "../Data/NYData2.csv"
+      }
+    },
+    "svs_NE_NY_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "../Data/NYData3.csv"
+      }
+    },
+    "svs_NE_NY_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "NY",
+        "stateFips": "36",
+        "csvFile": "../Data/NYData4.csv"
+      }
+    },
+    "svs_NE_PA_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "../Data/PAData1.csv"
+      }
+    },
+    "svs_NE_PA_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "../Data/PAData2.csv"
+      }
+    },
+    "svs_NE_PA_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "../Data/PAData3.csv"
+      }
+    },
+    "svs_NE_PA_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Northeast",
+        "state": "PA",
+        "stateFips": "42",
+        "csvFile": "../Data/PAData4.csv"
+      }
+    },
+    "svs_MW_IL_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "../Data/ILData1.csv"
+      }
+    },
+    "svs_MW_IL_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "../Data/ILData2.csv"
+      }
+    },
+    "svs_MW_IL_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "../Data/ILData3.csv"
+      }
+    },
+    "svs_MW_IL_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IL",
+        "stateFips": "17",
+        "csvFile": "../Data/ILData4.csv"
+      }
+    },
+    "svs_MW_IN_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "../Data/INData1.csv"
+      }
+    },
+    "svs_MW_IN_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "../Data/INData2.csv"
+      }
+    },
+    "svs_MW_IN_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "../Data/INData3.csv"
+      }
+    },
+    "svs_MW_IN_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IN",
+        "stateFips": "18",
+        "csvFile": "../Data/INData4.csv"
+      }
+    },
+    "svs_MW_IA_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "../Data/IAData1.csv"
+      }
+    },
+    "svs_MW_IA_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "../Data/IAData2.csv"
+      }
+    },
+    "svs_MW_IA_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "../Data/IAData3.csv"
+      }
+    },
+    "svs_MW_IA_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "IA",
+        "stateFips": "19",
+        "csvFile": "../Data/IAData4.csv"
+      }
+    },
+    "svs_MW_KS_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "../Data/KSData1.csv"
+      }
+    },
+    "svs_MW_KS_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "../Data/KSData2.csv"
+      }
+    },
+    "svs_MW_KS_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "../Data/KSData3.csv"
+      }
+    },
+    "svs_MW_KS_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "KS",
+        "stateFips": "20",
+        "csvFile": "../Data/KSData4.csv"
+      }
+    },
+    "svs_MW_MI_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "../Data/MIData1.csv"
+      }
+    },
+    "svs_MW_MI_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "../Data/MIData2.csv"
+      }
+    },
+    "svs_MW_MI_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "../Data/MIData3.csv"
+      }
+    },
+    "svs_MW_MI_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MI",
+        "stateFips": "26",
+        "csvFile": "../Data/MIData4.csv"
+      }
+    },
+    "svs_MW_MN_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "../Data/MNData1.csv"
+      }
+    },
+    "svs_MW_MN_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "../Data/MNData2.csv"
+      }
+    },
+    "svs_MW_MN_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "../Data/MNData3.csv"
+      }
+    },
+    "svs_MW_MN_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MN",
+        "stateFips": "27",
+        "csvFile": "../Data/MNData4.csv"
+      }
+    },
+    "svs_MW_MO_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "../Data/MOData1.csv"
+      }
+    },
+    "svs_MW_MO_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "../Data/MOData2.csv"
+      }
+    },
+    "svs_MW_MO_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "../Data/MOData3.csv"
+      }
+    },
+    "svs_MW_MO_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "MO",
+        "stateFips": "29",
+        "csvFile": "../Data/MOData4.csv"
+      }
+    },
+    "svs_MW_NE_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "../Data/NEData1.csv"
+      }
+    },
+    "svs_MW_NE_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "../Data/NEData2.csv"
+      }
+    },
+    "svs_MW_NE_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "../Data/NEData3.csv"
+      }
+    },
+    "svs_MW_NE_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "NE",
+        "stateFips": "31",
+        "csvFile": "../Data/NEData4.csv"
+      }
+    },
+    "svs_MW_ND_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "../Data/NDData1.csv"
+      }
+    },
+    "svs_MW_ND_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "../Data/NDData2.csv"
+      }
+    },
+    "svs_MW_ND_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "../Data/NDData3.csv"
+      }
+    },
+    "svs_MW_ND_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "ND",
+        "stateFips": "38",
+        "csvFile": "../Data/NDData4.csv"
+      }
+    },
+    "svs_MW_OH_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "../Data/OHData1.csv"
+      }
+    },
+    "svs_MW_OH_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "../Data/OHData2.csv"
+      }
+    },
+    "svs_MW_OH_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "../Data/OHData3.csv"
+      }
+    },
+    "svs_MW_OH_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "OH",
+        "stateFips": "39",
+        "csvFile": "../Data/OHData4.csv"
+      }
+    },
+    "svs_MW_SD_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "../Data/SDData1.csv"
+      }
+    },
+    "svs_MW_SD_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "../Data/SDData2.csv"
+      }
+    },
+    "svs_MW_SD_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "../Data/SDData3.csv"
+      }
+    },
+    "svs_MW_SD_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "SD",
+        "stateFips": "46",
+        "csvFile": "../Data/SDData4.csv"
+      }
+    },
+    "svs_MW_WI_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "../Data/WIData1.csv"
+      }
+    },
+    "svs_MW_WI_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "../Data/WIData2.csv"
+      }
+    },
+    "svs_MW_WI_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "../Data/WIData3.csv"
+      }
+    },
+    "svs_MW_WI_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "Midwest",
+        "state": "WI",
+        "stateFips": "55",
+        "csvFile": "../Data/WIData4.csv"
+      }
+    },
+    "svs_SO_AL_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "../Data/ALData1.csv"
+      }
+    },
+    "svs_SO_AL_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "../Data/ALData2.csv"
+      }
+    },
+    "svs_SO_AL_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "../Data/ALData3.csv"
+      }
+    },
+    "svs_SO_AL_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "AL",
+        "stateFips": "01",
+        "csvFile": "../Data/ALData4.csv"
+      }
+    },
+    "svs_SO_AR_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "../Data/ARData1.csv"
+      }
+    },
+    "svs_SO_AR_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "../Data/ARData2.csv"
+      }
+    },
+    "svs_SO_AR_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "../Data/ARData3.csv"
+      }
+    },
+    "svs_SO_AR_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "AR",
+        "stateFips": "05",
+        "csvFile": "../Data/ARData4.csv"
+      }
+    },
+    "svs_SO_FL_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "../Data/FLData1.csv"
+      }
+    },
+    "svs_SO_FL_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "../Data/FLData2.csv"
+      }
+    },
+    "svs_SO_FL_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "../Data/FLData3.csv"
+      }
+    },
+    "svs_SO_FL_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "FL",
+        "stateFips": "12",
+        "csvFile": "../Data/FLData4.csv"
+      }
+    },
+    "svs_SO_GA_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "../Data/GAData1.csv"
+      }
+    },
+    "svs_SO_GA_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "../Data/GAData2.csv"
+      }
+    },
+    "svs_SO_GA_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "../Data/GAData3.csv"
+      }
+    },
+    "svs_SO_GA_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "GA",
+        "stateFips": "13",
+        "csvFile": "../Data/GAData4.csv"
+      }
+    },
+    "svs_SO_KY_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "../Data/KYData1.csv"
+      }
+    },
+    "svs_SO_KY_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "../Data/KYData2.csv"
+      }
+    },
+    "svs_SO_KY_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "../Data/KYData3.csv"
+      }
+    },
+    "svs_SO_KY_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "KY",
+        "stateFips": "21",
+        "csvFile": "../Data/KYData4.csv"
+      }
+    },
+    "svs_SO_LA_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "../Data/LAData1.csv"
+      }
+    },
+    "svs_SO_LA_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "../Data/LAData2.csv"
+      }
+    },
+    "svs_SO_LA_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "../Data/LAData3.csv"
+      }
+    },
+    "svs_SO_LA_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "LA",
+        "stateFips": "22",
+        "csvFile": "../Data/LAData4.csv"
+      }
+    },
+    "svs_SO_MD_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "../Data/MDData1.csv"
+      }
+    },
+    "svs_SO_MD_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "../Data/MDData2.csv"
+      }
+    },
+    "svs_SO_MD_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "../Data/MDData3.csv"
+      }
+    },
+    "svs_SO_MD_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "MD",
+        "stateFips": "24",
+        "csvFile": "../Data/MDData4.csv"
+      }
+    },
+    "svs_SO_MS_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "../Data/MSData1.csv"
+      }
+    },
+    "svs_SO_MS_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "../Data/MSData2.csv"
+      }
+    },
+    "svs_SO_MS_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "../Data/MSData3.csv"
+      }
+    },
+    "svs_SO_MS_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "MS",
+        "stateFips": "28",
+        "csvFile": "../Data/MSData4.csv"
+      }
+    },
+    "svs_SO_NC_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "../Data/NCData1.csv"
+      }
+    },
+    "svs_SO_NC_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "../Data/NCData2.csv"
+      }
+    },
+    "svs_SO_NC_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "../Data/NCData3.csv"
+      }
+    },
+    "svs_SO_NC_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "NC",
+        "stateFips": "37",
+        "csvFile": "../Data/NCData4.csv"
+      }
+    },
+    "svs_SO_OK_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "../Data/OKData1.csv"
+      }
+    },
+    "svs_SO_OK_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "../Data/OKData2.csv"
+      }
+    },
+    "svs_SO_OK_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "../Data/OKData3.csv"
+      }
+    },
+    "svs_SO_OK_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "OK",
+        "stateFips": "40",
+        "csvFile": "../Data/OKData4.csv"
+      }
+    },
+    "svs_SO_SC_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "../Data/SCData1.csv"
+      }
+    },
+    "svs_SO_SC_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "../Data/SCData2.csv"
+      }
+    },
+    "svs_SO_SC_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "../Data/SCData3.csv"
+      }
+    },
+    "svs_SO_SC_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "SC",
+        "stateFips": "45",
+        "csvFile": "../Data/SCData4.csv"
+      }
+    },
+    "svs_SO_TN_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "../Data/TNData1.csv"
+      }
+    },
+    "svs_SO_TN_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "../Data/TNData2.csv"
+      }
+    },
+    "svs_SO_TN_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "../Data/TNData3.csv"
+      }
+    },
+    "svs_SO_TN_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "TN",
+        "stateFips": "47",
+        "csvFile": "../Data/TNData4.csv"
+      }
+    },
+    "svs_SO_TX_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "../Data/TXData1.csv"
+      }
+    },
+    "svs_SO_TX_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "../Data/TXData2.csv"
+      }
+    },
+    "svs_SO_TX_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "../Data/TXData3.csv"
+      }
+    },
+    "svs_SO_TX_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "TX",
+        "stateFips": "48",
+        "csvFile": "../Data/TXData4.csv"
+      }
+    },
+    "svs_SO_VA_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "../Data/VAData1.csv"
+      }
+    },
+    "svs_SO_VA_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "../Data/VAData2.csv"
+      }
+    },
+    "svs_SO_VA_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "../Data/VAData3.csv"
+      }
+    },
+    "svs_SO_VA_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "VA",
+        "stateFips": "51",
+        "csvFile": "../Data/VAData4.csv"
+      }
+    },
+    "svs_SO_WV_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "../Data/WVData1.csv"
+      }
+    },
+    "svs_SO_WV_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "../Data/WVData2.csv"
+      }
+    },
+    "svs_SO_WV_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "../Data/WVData3.csv"
+      }
+    },
+    "svs_SO_WV_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "South",
+        "state": "WV",
+        "stateFips": "54",
+        "csvFile": "../Data/WVData4.csv"
+      }
+    },
+    "svs_WE_AZ_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "../Data/AZData1.csv"
+      }
+    },
+    "svs_WE_AZ_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "../Data/AZData2.csv"
+      }
+    },
+    "svs_WE_AZ_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "../Data/AZData3.csv"
+      }
+    },
+    "svs_WE_AZ_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "AZ",
+        "stateFips": "04",
+        "csvFile": "../Data/AZData4.csv"
+      }
+    },
+    "svs_WE_CA_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "../Data/CAData1.csv"
+      }
+    },
+    "svs_WE_CA_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "../Data/CAData2.csv"
+      }
+    },
+    "svs_WE_CA_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "../Data/CAData3.csv"
+      }
+    },
+    "svs_WE_CA_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "CA",
+        "stateFips": "06",
+        "csvFile": "../Data/CAData4.csv"
+      }
+    },
+    "svs_WE_CO_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "../Data/COData1.csv"
+      }
+    },
+    "svs_WE_CO_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "../Data/COData2.csv"
+      }
+    },
+    "svs_WE_CO_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "../Data/COData3.csv"
+      }
+    },
+    "svs_WE_CO_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "CO",
+        "stateFips": "08",
+        "csvFile": "../Data/COData4.csv"
+      }
+    },
+    "svs_WE_ID_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "../Data/IDData1.csv"
+      }
+    },
+    "svs_WE_ID_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "../Data/IDData2.csv"
+      }
+    },
+    "svs_WE_ID_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "../Data/IDData3.csv"
+      }
+    },
+    "svs_WE_ID_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "ID",
+        "stateFips": "16",
+        "csvFile": "../Data/IDData4.csv"
+      }
+    },
+    "svs_WE_MT_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "../Data/MTData1.csv"
+      }
+    },
+    "svs_WE_MT_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "../Data/MTData2.csv"
+      }
+    },
+    "svs_WE_MT_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "../Data/MTData3.csv"
+      }
+    },
+    "svs_WE_MT_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "MT",
+        "stateFips": "30",
+        "csvFile": "../Data/MTData4.csv"
+      }
+    },
+    "svs_WE_NV_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "../Data/NVData1.csv"
+      }
+    },
+    "svs_WE_NV_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "../Data/NVData2.csv"
+      }
+    },
+    "svs_WE_NV_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "../Data/NVData3.csv"
+      }
+    },
+    "svs_WE_NV_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "NV",
+        "stateFips": "32",
+        "csvFile": "../Data/NVData4.csv"
+      }
+    },
+    "svs_WE_NM_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "../Data/NMData1.csv"
+      }
+    },
+    "svs_WE_NM_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "../Data/NMData2.csv"
+      }
+    },
+    "svs_WE_NM_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "../Data/NMData3.csv"
+      }
+    },
+    "svs_WE_NM_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "NM",
+        "stateFips": "35",
+        "csvFile": "../Data/NMData4.csv"
+      }
+    },
+    "svs_WE_OR_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "../Data/ORData1.csv"
+      }
+    },
+    "svs_WE_OR_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "../Data/ORData2.csv"
+      }
+    },
+    "svs_WE_OR_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "../Data/ORData3.csv"
+      }
+    },
+    "svs_WE_OR_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "OR",
+        "stateFips": "41",
+        "csvFile": "../Data/ORData4.csv"
+      }
+    },
+    "svs_WE_UT_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "../Data/UTData1.csv"
+      }
+    },
+    "svs_WE_UT_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "../Data/UTData2.csv"
+      }
+    },
+    "svs_WE_UT_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "../Data/UTData3.csv"
+      }
+    },
+    "svs_WE_UT_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "UT",
+        "stateFips": "49",
+        "csvFile": "../Data/UTData4.csv"
+      }
+    },
+    "svs_WE_WA_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "../Data/WAData1.csv"
+      }
+    },
+    "svs_WE_WA_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "../Data/WAData2.csv"
+      }
+    },
+    "svs_WE_WA_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "../Data/WAData3.csv"
+      }
+    },
+    "svs_WE_WA_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "WA",
+        "stateFips": "53",
+        "csvFile": "../Data/WAData4.csv"
+      }
+    },
+    "svs_WE_WY_1": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "../Data/WYData1.csv"
+      }
+    },
+    "svs_WE_WY_2": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "../Data/WYData2.csv"
+      }
+    },
+    "svs_WE_WY_3": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "../Data/WYData3.csv"
+      }
+    },
+    "svs_WE_WY_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "WY",
+        "stateFips": "56",
+        "csvFile": "../Data/WYData4.csv"
+      }
     }
   },
   "sequence": {
@@ -19876,6 +22196,514 @@
               },
               "exceed-survey",
               "exceed-survey-uncertainty"
+            ]
+          },
+          {
+            "order": "fixed",
+            "components": [
+              "svsup-intro",
+              "svsup-trial",
+              {
+                "order": "latinSquare",
+                "components": [
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_CT_1",
+                          "svs_NE_CT_2",
+                          "svs_NE_CT_3",
+                          "svs_NE_CT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_ME_1",
+                          "svs_NE_ME_2",
+                          "svs_NE_ME_3",
+                          "svs_NE_ME_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_MA_1",
+                          "svs_NE_MA_2",
+                          "svs_NE_MA_3",
+                          "svs_NE_MA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_NH_1",
+                          "svs_NE_NH_2",
+                          "svs_NE_NH_3",
+                          "svs_NE_NH_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_RI_1",
+                          "svs_NE_RI_2",
+                          "svs_NE_RI_3",
+                          "svs_NE_RI_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_VT_1",
+                          "svs_NE_VT_2",
+                          "svs_NE_VT_3",
+                          "svs_NE_VT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_NJ_1",
+                          "svs_NE_NJ_2",
+                          "svs_NE_NJ_3",
+                          "svs_NE_NJ_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_NY_1",
+                          "svs_NE_NY_2",
+                          "svs_NE_NY_3",
+                          "svs_NE_NY_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_NE_PA_1",
+                          "svs_NE_PA_2",
+                          "svs_NE_PA_3",
+                          "svs_NE_PA_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_IL_1",
+                          "svs_MW_IL_2",
+                          "svs_MW_IL_3",
+                          "svs_MW_IL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_IN_1",
+                          "svs_MW_IN_2",
+                          "svs_MW_IN_3",
+                          "svs_MW_IN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_IA_1",
+                          "svs_MW_IA_2",
+                          "svs_MW_IA_3",
+                          "svs_MW_IA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_KS_1",
+                          "svs_MW_KS_2",
+                          "svs_MW_KS_3",
+                          "svs_MW_KS_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_MI_1",
+                          "svs_MW_MI_2",
+                          "svs_MW_MI_3",
+                          "svs_MW_MI_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_MN_1",
+                          "svs_MW_MN_2",
+                          "svs_MW_MN_3",
+                          "svs_MW_MN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_MO_1",
+                          "svs_MW_MO_2",
+                          "svs_MW_MO_3",
+                          "svs_MW_MO_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_NE_1",
+                          "svs_MW_NE_2",
+                          "svs_MW_NE_3",
+                          "svs_MW_NE_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_ND_1",
+                          "svs_MW_ND_2",
+                          "svs_MW_ND_3",
+                          "svs_MW_ND_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_OH_1",
+                          "svs_MW_OH_2",
+                          "svs_MW_OH_3",
+                          "svs_MW_OH_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_SD_1",
+                          "svs_MW_SD_2",
+                          "svs_MW_SD_3",
+                          "svs_MW_SD_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_MW_WI_1",
+                          "svs_MW_WI_2",
+                          "svs_MW_WI_3",
+                          "svs_MW_WI_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_AL_1",
+                          "svs_SO_AL_2",
+                          "svs_SO_AL_3",
+                          "svs_SO_AL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_AR_1",
+                          "svs_SO_AR_2",
+                          "svs_SO_AR_3",
+                          "svs_SO_AR_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_FL_1",
+                          "svs_SO_FL_2",
+                          "svs_SO_FL_3",
+                          "svs_SO_FL_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_GA_1",
+                          "svs_SO_GA_2",
+                          "svs_SO_GA_3",
+                          "svs_SO_GA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_KY_1",
+                          "svs_SO_KY_2",
+                          "svs_SO_KY_3",
+                          "svs_SO_KY_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_LA_1",
+                          "svs_SO_LA_2",
+                          "svs_SO_LA_3",
+                          "svs_SO_LA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_MD_1",
+                          "svs_SO_MD_2",
+                          "svs_SO_MD_3",
+                          "svs_SO_MD_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_MS_1",
+                          "svs_SO_MS_2",
+                          "svs_SO_MS_3",
+                          "svs_SO_MS_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_NC_1",
+                          "svs_SO_NC_2",
+                          "svs_SO_NC_3",
+                          "svs_SO_NC_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_OK_1",
+                          "svs_SO_OK_2",
+                          "svs_SO_OK_3",
+                          "svs_SO_OK_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_SC_1",
+                          "svs_SO_SC_2",
+                          "svs_SO_SC_3",
+                          "svs_SO_SC_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_TN_1",
+                          "svs_SO_TN_2",
+                          "svs_SO_TN_3",
+                          "svs_SO_TN_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_TX_1",
+                          "svs_SO_TX_2",
+                          "svs_SO_TX_3",
+                          "svs_SO_TX_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_VA_1",
+                          "svs_SO_VA_2",
+                          "svs_SO_VA_3",
+                          "svs_SO_VA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_SO_WV_1",
+                          "svs_SO_WV_2",
+                          "svs_SO_WV_3",
+                          "svs_SO_WV_4"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "order": "latinSquare",
+                    "numSamples": 4,
+                    "components": [
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_AZ_1",
+                          "svs_WE_AZ_2",
+                          "svs_WE_AZ_3",
+                          "svs_WE_AZ_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_CA_1",
+                          "svs_WE_CA_2",
+                          "svs_WE_CA_3",
+                          "svs_WE_CA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_CO_1",
+                          "svs_WE_CO_2",
+                          "svs_WE_CO_3",
+                          "svs_WE_CO_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_ID_1",
+                          "svs_WE_ID_2",
+                          "svs_WE_ID_3",
+                          "svs_WE_ID_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_MT_1",
+                          "svs_WE_MT_2",
+                          "svs_WE_MT_3",
+                          "svs_WE_MT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_NV_1",
+                          "svs_WE_NV_2",
+                          "svs_WE_NV_3",
+                          "svs_WE_NV_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_NM_1",
+                          "svs_WE_NM_2",
+                          "svs_WE_NM_3",
+                          "svs_WE_NM_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_OR_1",
+                          "svs_WE_OR_2",
+                          "svs_WE_OR_3",
+                          "svs_WE_OR_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_UT_1",
+                          "svs_WE_UT_2",
+                          "svs_WE_UT_3",
+                          "svs_WE_UT_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_WA_1",
+                          "svs_WE_WA_2",
+                          "svs_WE_WA_3",
+                          "svs_WE_WA_4"
+                        ]
+                      },
+                      {
+                        "order": "latinSquare",
+                        "numSamples": 1,
+                        "components": [
+                          "svs_WE_WY_1",
+                          "svs_WE_WY_2",
+                          "svs_WE_WY_3",
+                          "svs_WE_WY_4"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "svsup-survey",
+              "svsup-survey-uncertainty"
             ]
           }
         ]

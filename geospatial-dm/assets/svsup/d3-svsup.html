@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shrinkage VSUP Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="../../../revisitUtilities/revisit-communicate.js"></script>
+
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
+    width: 650px;
+    height: 600px;
+  }
+
+  .wrap {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 760px;
+    height: 400px;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  #map { max-width: 400px; }
+  #legend { max-width: 140px; }
+
+  .county { stroke:#777; stroke-width:0.8; vector-effect:non-scaling-stroke; cursor:pointer; }
+
+  .state-outline { fill:none;
+    stroke:#222;
+    stroke-width:1.2;
+    vector-effect:non-scaling-stroke;
+  }
+
+  .legend {
+    position: relative;
+    margin-left: auto;
+    margin-top: 10px;
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:10px;
+    padding:8px 10px;
+    font-size:12px;
+    color:#222;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    width: fit-content;
+  }
+
+  #county-message-box {
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+
+  .selected-panel {
+    max-width: 400px;
+    margin: 30px auto 0;
+    padding: 0 12px 8px;
+    font-size: 14px;
+    color: #111;
+  }
+  .selected-panel .chips {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f2f6ff;
+    border: 1px solid #c9ddff;
+    color: #0b3d91;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .chip button.remove-chip {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #0b3d91;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 2px;
+  }
+  .county.highlight {
+    stroke: #306de7 !important;
+    stroke-width: 2.5 !important;
+    pointer-events: none;
+  }
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <svg id="map" viewBox="0 0 400 400" aria-label="Shrinkage VSUP county map"></svg>
+    <div class="legend">
+      <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
+    </div>
+  </div>
+
+  <div id="selected-list" class="selected-panel" aria-live="polite"></div>
+
+  <div id="county-message-box"
+     style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
+            background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
+            max-width:320px; font-size:16px; box-shadow:0 4px 18px rgba(0,0,0,0.18); z-index:1000;
+            position:absolute; transition:box-shadow 0.2s,transform 0.2s; opacity:0.92;"></div>
+
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+const CONFIG = {
+  MOE_Z: 1.645,
+  VALUE_MIN: 0,
+  VALUE_MAX: 50,
+  MAX_SELECTIONS: 3,
+  REQUIRED_SELECTIONS: 3
+};
+
+document.addEventListener('click', (event) => {
+  const messageBox = document.getElementById('county-message-box');
+  const map = document.getElementById('map');
+  if (!messageBox.contains(event.target) && !map.contains(event.target) && messageBox.style.display === 'block') {
+    messageBox.style.display = 'none';
+  }
+});
+
+const svg = d3.select('#map');
+const svgLegend = d3.select('#legend');
+const gFill = svg.append('g');
+const gBorders = svg.append('g');
+const gOutline = svg.append('g');
+
+const color = d3.scaleSequential(d3.interpolateYlOrRd)
+    .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
+    .clamp(true);
+
+let selectedCounties = [];
+const maxSelections = CONFIG.MAX_SELECTIONS;
+
+function renderSelectedList() {
+  const panel = document.getElementById('selected-list');
+  const requiredSelections = CONFIG.REQUIRED_SELECTIONS;
+  const title = '<strong>Your selected counties:</strong>';
+  if (!selectedCounties.length) {
+    panel.innerHTML = `${title} <span style="color:#666;">None (need to select exactly ${requiredSelections})</span>`;
+    return;
+  }
+  const chips = selectedCounties.map(c => (
+    `<span class="chip" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">
+       <span>${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>
+       <button class="remove-chip" type="button" aria-label="Remove ${c}" title="Remove ${c}" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">&times;</button>
+     </span>`
+  )).join('');
+
+  let statusMessage = '';
+  if (selectedCounties.length < requiredSelections) {
+    statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
+  } else if (selectedCounties.length === requiredSelections) {
+    statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can proceed to the next step.</div>`;
+  }
+
+  panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
+}
+
+document.addEventListener('click', (ev) => {
+  const btn = ev.target;
+  if (!(btn instanceof HTMLElement)) return;
+  if (!btn.classList.contains('remove-chip')) return;
+  const county = btn.getAttribute('data-county');
+  if (!county) return;
+  selectedCounties = selectedCounties.filter(c => c !== county);
+  state.selected = selectedCounties;
+
+  if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
+    Revisit.postAnswers({ selectedCounty: selectedCounties });
+    saveTrialToSession(selectedCounties);
+  }
+
+  d3.selectAll('.county').classed('highlight', false);
+  if (selectedCounties.length < maxSelections) {
+    gFill.selectAll('.county').style('pointer-events', 'auto');
+  }
+  renderSelectedList();
+});
+
+document.addEventListener('mouseover', (ev) => {
+  const chip = ev.target.closest('.chip');
+  if (!chip) return;
+  const county = chip.getAttribute('data-county');
+  if (!county) return;
+  d3.selectAll('.county').classed('highlight', function() {
+    return d3.select(this).attr('data-county') === county;
+  });
+});
+document.addEventListener('mouseout', (ev) => {
+  const chip = ev.target.closest('.chip');
+  if (!chip) return;
+  d3.selectAll('.county').classed('highlight', false);
+});
+
+const projection = d3.geoEquirectangular();
+const path = d3.geoPath(projection);
+
+const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
+const stripTypeSuffix = (s) => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "").replace(/\s+/g, " ").trim();
+
+let state = {
+  stateFips: null,
+  csvFile: null,
+  moeZ: CONFIG.MOE_Z,
+  selected: [],
+  maxSel: CONFIG.MAX_SELECTIONS,
+  requiredSel: CONFIG.REQUIRED_SELECTIONS,
+  countyList: [],
+  byFips: new Map()
+};
+
+async function loadData(){
+  const isConnecticut = state.stateFips === '09';
+
+  const dataPromises = isConnecticut
+    ? [
+        d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+        d3.csv(state.csvFile, d3.autoType),
+        d3.json('../Connecticut_Planning_Region_WGS84_fast.geojson')
+      ]
+    : [
+        d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+        d3.csv(state.csvFile, d3.autoType)
+      ];
+
+  const results = await Promise.all(dataPromises);
+  const usTopo = results[0];
+  const csv = results[1];
+  const ctPlanningRegions = isConnecticut ? results[2] : null;
+
+  let stateCounties, stateMesh;
+
+  if (isConnecticut && ctPlanningRegions) {
+    stateCounties = ctPlanningRegions.features;
+    const boundaries = [];
+    for (const feature of stateCounties) {
+      if (feature.geometry.type === 'Polygon') {
+        boundaries.push(feature.geometry.coordinates[0]);
+      } else if (feature.geometry.type === 'MultiPolygon') {
+        feature.geometry.coordinates.forEach(poly => boundaries.push(poly[0]));
+      }
+    }
+    stateMesh = {
+      type: "MultiLineString",
+      coordinates: boundaries
+    };
+  } else {
+    const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+    stateCounties = allCounties.filter(f => String(f.id).startsWith(state.stateFips));
+    stateMesh = topojson.mesh(
+      usTopo, usTopo.objects.counties,
+      (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b
+    );
+  }
+
+  const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === state.stateFips);
+
+  const addCTRegionMapping = (nameToFips, id, regPlanOrg, shortName) => {
+    if (regPlanOrg) {
+      nameToFips.set(norm(regPlanOrg), id);
+      const withoutCOG = regPlanOrg.replace(/\s*(Council of Governments|Regional Council of Governments)\s*$/gi, '').trim();
+      nameToFips.set(norm(withoutCOG), id);
+    }
+    if (shortName) {
+      nameToFips.set(norm(shortName), id);
+    }
+
+    const csvMappings = {
+      'CRCOG': 'Capitol',
+      'CTMetro': 'Greater Bridgeport',
+      'RiverCOG': 'Lower Connecticut River Valley',
+      'Naugatuck Valley': 'Naugatuck Valley',
+      'NECCOG': 'Northeastern Connecticut',
+      'Northwest Hills': 'Northwest Hills',
+      'SCRCOG': 'South Central Connecticut',
+      'SECCOG': 'Southeastern Connecticut',
+      'Western CT': 'Western Connecticut'
+    };
+
+    if (csvMappings[shortName]) {
+      nameToFips.set(norm(csvMappings[shortName]), id);
+    }
+  };
+
+  const nameToFips = new Map();
+  for(const f of stateCounties){
+    const id = String(f.id);
+
+    if (isConnecticut && ctPlanningRegions) {
+      const regPlanOrg = f.properties?.REGPLANORG || "";
+      const shortName = f.properties?.SHORT_NAME || "";
+      addCTRegionMapping(nameToFips, id, regPlanOrg, shortName);
+    } else {
+      const raw = f.properties?.name ?? '';
+      const base = norm(stripTypeSuffix(raw));
+      nameToFips.set(base, id);
+
+      if (/\bsaint\b/i.test(raw)){
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st'))), id);
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st.'))), id);
+      }
+      if (/\bst[.]?\b/i.test(raw)){
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/gi,'saint'))), id);
+      }
+    }
+  }
+
+  const byFips = new Map();
+  for(const r of csv){
+    const rawName = String(r.county ?? r.NAME ?? '').trim();
+    const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
+    const fips = nameToFips.get(key);
+    if (!fips) { console.warn('No FIPS for', rawName); continue; }
+    byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
+  }
+
+  projection.fitSize([400,400], {type:'FeatureCollection', features: stateCounties});
+
+  svg.selectAll('*').interrupt();
+  gFill.selectAll('*').remove();
+  gBorders.selectAll('*').remove();
+  gOutline.selectAll('*').remove();
+
+  if (isConnecticut && ctPlanningRegions) {
+    const mergedBoundary = { type: "FeatureCollection", features: stateCounties };
+    gOutline.append('path')
+      .attr('class','state-outline')
+      .attr('d', path(mergedBoundary));
+  } else {
+    gOutline.append('path')
+      .datum(stateFeature)
+      .attr('class','state-outline')
+      .attr('d', path);
+  }
+
+  gBorders.append('path')
+    .attr('d', path(stateMesh))
+    .attr('fill','none').attr('stroke','#666').attr('stroke-width',0.8)
+    .attr('vector-effect','non-scaling-stroke');
+
+  state.countyList = stateCounties;
+  state.byFips = byFips;
+
+  computeShrinkage();
+  renderCounties();
+  renderLegend();
+
+  if (selectedCounties.length < maxSelections) {
+    gFill.selectAll('.county').style('pointer-events', 'auto');
+  }
+}
+
+// Empirical-Bayes shrinkage: each county's poverty estimate is pulled toward
+// the mean of all displayed counties (theta), with the pull strength governed
+// by the ratio of observation variance (from the margin of error) to the
+// across-county variance (tau2). Higher-uncertainty counties shrink more.
+function computeShrinkage(){
+  const z = state.moeZ || 1.645;
+  const records = Array.from(state.byFips.values());
+  const n = records.length;
+  if (n === 0) return;
+
+  const theta = d3.mean(records, d => d.pov);
+  const tau2 = d3.mean(records, d => (d.pov - theta) ** 2);
+
+  for (const rec of records){
+    const se = (rec.moe ?? 0) / z;
+    if (!(tau2 > 0) || !isFinite(tau2)) {
+      rec.povAdj = theta;
+    } else if (!(se > 0) || !isFinite(se)) {
+      rec.povAdj = rec.pov;
+    } else {
+      const priorPrecision = 1 / tau2;
+      const obsPrecision = 1 / (se * se);
+      rec.povAdj = (priorPrecision * theta + obsPrecision * rec.pov) / (priorPrecision + obsPrecision);
+    }
+  }
+}
+
+function renderCounties(){
+  gFill.selectAll('path.county')
+    .data(state.countyList, d=>String(d.id))
+    .join('path')
+      .attr('class','county')
+      .attr('d', d=>path(d))
+      .attr('data-fips', d=>String(d.id))
+      .attr('data-county', d=>state.byFips.get(String(d.id))?.name ?? String(d.id))
+      .attr('fill', d => {
+        const rec = state.byFips.get(String(d.id));
+        return rec ? color(rec.povAdj) : '#ccc';
+      })
+      .style('cursor', 'pointer')
+      .on('click', function(event, d) {
+        const county = d3.select(this).attr('data-county');
+        const alreadySelected = selectedCounties.includes(county);
+        if (!alreadySelected) {
+          if (selectedCounties.length >= maxSelections) return;
+          showCountyMessageBox({
+            county,
+            onYes: () => {
+              selectedCounties.push(county);
+              state.selected = selectedCounties;
+
+              if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
+                Revisit.postAnswers({ selectedCounty: selectedCounties });
+                saveTrialToSession(selectedCounties);
+              }
+
+              renderSelectedList();
+              if (selectedCounties.length === maxSelections) {
+                gFill.selectAll('.county')
+                  .filter(function() {
+                    return !selectedCounties.includes(d3.select(this).attr('data-county'));
+                  })
+                  .style('pointer-events', 'none');
+              }
+            },
+            onNo: () => {}
+          });
+        } else {
+
+          const box = document.getElementById('county-message-box');
+          const msg = `You have already selected this county to allocate resources.<br>To unselect, click on the <b>x</b> next to the county name below.`;
+          box.innerHTML = msg + `<br><br><button id='county-ok-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>OK</button>`;
+          box.style.display = 'block';
+          let countyFeature = null;
+          for (const f of state.countyList) {
+            const name = state.byFips.get(String(f.id))?.name ?? String(f.id);
+            if (name === county) { countyFeature = f; break; }
+          }
+          const svgEl = document.getElementById('map');
+          const svgRect = svgEl.getBoundingClientRect();
+          box.style.position = 'absolute';
+          if (countyFeature) {
+            const centroid = path.centroid(countyFeature);
+            box.style.left = (svgRect.left + centroid[0]) + 'px';
+            box.style.top  = (svgRect.top  + centroid[1]) + 'px';
+            box.style.transform = 'translate(-50%, 20px)';
+          } else {
+            box.style.left = (svgRect.left + 20) + 'px';
+            box.style.top  = (svgRect.top  + 20) + 'px';
+            box.style.transform = 'none';
+          }
+          box.style.zIndex = 1000;
+          document.getElementById('county-ok-btn').onclick = () => { box.style.display = 'none'; };
+        }
+      });
+
+  renderSelectedList();
+}
+
+function renderLegend(){
+  svgLegend.selectAll('*').remove();
+  const defsL = svgLegend.append('defs');
+
+  const LEGEND_LEFT  = 40;
+  const LEGEND_TOP   = 40;
+  const LEGEND_LONG  = 320;
+  const LEGEND_THICK = 15;
+  const lg = svgLegend.append('g')
+    .attr('class', 'legend-right')
+    .attr('transform', `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
+    .style('pointer-events', 'none');
+
+  const grad = defsL.append('linearGradient')
+    .attr('id', 'legendGrad')
+    .attr('x1', '0%').attr('x2', '0%')
+    .attr('y1', '100%').attr('y2', '0%');
+  for (let i = 0; i <= 100; i++) {
+    const t = i / 100;
+    grad.append('stop')
+      .attr('offset', `${i}%`)
+      .attr('stop-color', color(CONFIG.VALUE_MIN + t * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN)));
+  }
+
+  lg.append('rect')
+    .attr('width',  LEGEND_THICK)
+    .attr('height', LEGEND_LONG)
+    .attr('fill', 'url(#legendGrad)')
+    .attr('rx', 3);
+
+  const legendScale = d3.scaleLinear()
+    .domain([CONFIG.VALUE_MAX, CONFIG.VALUE_MIN])
+    .range([0, LEGEND_LONG]);
+
+  lg.append('g')
+    .attr('transform', `translate(${LEGEND_THICK}, 0)`)
+    .call(d3.axisRight(legendScale).ticks(5));
+
+  lg.append('text')
+    .attr('x', 0)
+    .attr('y', -12)
+    .attr('font-weight', 500)
+    .text('Shrunk Poverty Rate');
+}
+
+function showCountyMessageBox({ county, onYes, onNo }) {
+  const box = document.getElementById("county-message-box");
+  const msg = `Do you want to allocate your resources to <b>${county}</b>?`;
+  box.innerHTML = msg + `<br><br><button id='county-yes-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>Yes</button> <button id='county-no-btn' style='background:#fff;color:#0077cc;border:1.5px solid #0077cc;border-radius:6px;padding:7px 18px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>No</button>`;
+  box.style.display = "block";
+
+  let countyFeature = null;
+  for (const f of state.countyList) {
+    const name = state.byFips.get(String(f.id))?.name ?? String(f.id);
+    if (name === county) { countyFeature = f; break; }
+  }
+  const svgEl = document.getElementById("map");
+  const svgRect = svgEl.getBoundingClientRect();
+  box.style.position = "absolute";
+  if (countyFeature) {
+    const centroid = path.centroid(countyFeature);
+    box.style.left = (svgRect.left + centroid[0]) + "px";
+    box.style.top  = (svgRect.top  + centroid[1]) + "px";
+    box.style.transform = "translate(-50%, 20px)";
+  } else {
+    box.style.left = (svgRect.left + 20) + "px";
+    box.style.top  = (svgRect.top  + 20) + "px";
+    box.style.transform = "none";
+  }
+  box.style.zIndex = 1000;
+
+  document.getElementById("county-yes-btn").onclick = () => { box.style.display = "none"; onYes(); };
+  document.getElementById("county-no-btn").onclick  = () => { box.style.display = "none"; onNo();  };
+}
+
+function renderState(stateFips, csvFile){
+  state.stateFips = String(stateFips);
+  state.csvFile = csvFile;
+  selectedCounties = [];
+  state.selected = selectedCounties;
+
+  loadData().catch(e=>{
+    console.error(e);
+    alert('Data load failed. Serve with a local web server and place the CSV next to this HTML file.');
+  });
+}
+
+function saveTrialToSession(counties) {
+  try {
+    const trialId = new URLSearchParams(window.location.search).get('trialid');
+    if (!trialId) return;
+    sessionStorage.setItem('trial_' + trialId, JSON.stringify(counties));
+    const order = JSON.parse(sessionStorage.getItem('trial_order') || '[]');
+    if (!order.includes(trialId)) {
+      order.push(trialId);
+      sessionStorage.setItem('trial_order', JSON.stringify(order));
+    }
+  } catch (e) { /* sessionStorage unavailable */ }
+}
+
+Revisit.onDataReceive((data)=>{
+  const fips = data['stateFips'];
+  const csv  = data['csvFile'];
+  if (!fips || !csv){
+    console.warn('ReVISit data missing stateFips or csvFile');
+    return;
+  }
+  renderState(fips, csv);
+});
+});
+</script>
+</html>
