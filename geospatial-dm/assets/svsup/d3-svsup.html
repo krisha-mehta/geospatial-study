@@ -122,7 +122,8 @@ const CONFIG = {
   VALUE_MIN: 0,
   VALUE_MAX: 50,
   MAX_SELECTIONS: 3,
-  REQUIRED_SELECTIONS: 3
+  REQUIRED_SELECTIONS: 3,
+  SHRINKAGE_SCALE: 2 // >1 = less shrinkage, <1 = more shrinkage
 };
 
 document.addEventListener('click', (event) => {
@@ -377,7 +378,7 @@ function computeShrinkage(){
   if (n === 0) return;
 
   const theta = 15;
-  const tau2 = d3.mean(records, d => (d.pov - theta) ** 2);
+  const tau2 = d3.mean(records, d => (d.pov - theta) ** 2) * CONFIG.SHRINKAGE_SCALE;
 
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
