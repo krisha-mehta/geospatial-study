@@ -381,10 +381,11 @@ async function loadData(){
   }
 }
 
-// Empirical-Bayes shrinkage: each county's poverty estimate is pulled toward
+// Here is the main logic for svsup. Each county's poverty estimate is pulled toward
 // the mean of all displayed counties (theta), with the pull strength governed
 // by the ratio of observation variance (from the margin of error) to the
-// across-county variance (tau2). Higher-uncertainty counties shrink more.
+// across-county variance (tau2). Higher-uncertainty counties shrink more,
+// while low uncertainty counties stay close to their original estimates.
 function computeShrinkage(){
   const z = state.moeZ || 1.645;
   const records = Array.from(state.byFips.values());

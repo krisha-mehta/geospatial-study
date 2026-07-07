@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Animated Pixel Map Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="../../../revisitUtilities/revisit-communicate.js"></script>
+
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    width: 650px;
+    height: 850px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
+  }
+
+  .wrap {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 760px;
+    height: 400px;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  #chart { max-width: 400px; }
+  #legend { max-width: 140px; }
+
+  .response-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 12px;
+  }
+
+  .response-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .response-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+
+  .response-textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .response-textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  .states-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 12px;
+  }
+
+  .states-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .states-select {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .states-select:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .states-select:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+  }
+
+  .selected-states {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .state-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #e0e7ff;
+    color: #3730a3;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .state-tag button {
+    background: none;
+    border: none;
+    color: #3730a3;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .state-tag button:hover {
+    color: #1e1b4b;
+  }
+
+  .selection-info {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 8px;
+  }
+
+  .survey-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    margin: 20px 0 10px 0;
+  }
+
+</style>
+</head>
+<body>
+
+<h1 class="survey-title">Survey Questionnaire</h1>
+
+<div class="wrap">
+  <svg id="chart" viewBox="0 0 400 400" aria-label="Animated pixel map of selected state"></svg>
+  <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
+</div>
+
+<div class="response-container">
+  <label for="response-text" class="response-label">
+You have seen many example maps like the one above. How did you use the map to recommend counties that should receive financial assistance? Please describe your thought process in as much detail as possible.</label>
+  <textarea
+    id="response-text"
+    class="response-textarea"
+    placeholder="Type your response here..."
+    aria-label="Open response text box"></textarea>
+</div>
+
+<div class="states-container">
+  <label for="states-select" class="states-label">
+Which states are you familiar with or have lived in?</label>
+  <select id="states-select" class="states-select" aria-label="Select states you are familiar with">
+    <option value="">-- Select a state --</option>
+  </select>
+  <div id="selected-states" class="selected-states"></div>
+  <div id="selection-info" class="selection-info">0 states selected</div>
+</div>
+
+<script>
+
+const CONFIG = {
+  MOE_Z: 1.645,
+  N_FRAMES: 50,
+  FPS: 2.5,
+  VALUE_MIN: 0,
+  VALUE_MAX: 50,
+  PIXEL: 3
+};
+
+const color = d3.scaleSequential(d3.interpolateYlOrRd)
+  .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
+  .clamp(true);
+
+function mulberry32(a) {
+  return function() {
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function randnFactory(rng) {
+  let spare = null;
+  return () => {
+    if (spare !== null) { const v = spare; spare = null; return v; }
+    let u = 0, v = 0, s = 0;
+    do { u = rng() * 2 - 1; v = rng() * 2 - 1; s = u * u + v * v; } while (s === 0 || s >= 1);
+    const m = Math.sqrt(-2 * Math.log(s) / s);
+    spare = v * m;
+    return u * m;
+  };
+}
+function sampleValue(pov, moe, randn) {
+  const sd = (moe ?? 0) / CONFIG.MOE_Z;
+  const x = pov + (sd > 0 ? randn() * sd : 0);
+  return Math.max(CONFIG.VALUE_MIN, Math.min(CONFIG.VALUE_MAX, x));
+}
+
+const norm = s => (s || "").normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+const stripTypeSuffix = s =>
+  s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "")
+   .replace(/\s+/g, " ").trim();
+
+const svgMap    = d3.select("#chart");
+const svgLegend = d3.select("#legend");
+const defsMap   = svgMap.append("defs");
+const gPixels   = svgMap.append("g").attr("class", "pixels");
+const gState    = svgMap.append("g").attr("class", "state");
+const gCounties = svgMap.append("g").attr("class", "counties");
+
+let projection = d3.geoEquirectangular();
+let path = d3.geoPath(projection);
+
+let state = { frame: 0, frameValues: [] };
+
+function renderFrame(k) {
+  const frameIdx = (k % CONFIG.N_FRAMES + CONFIG.N_FRAMES) % CONFIG.N_FRAMES;
+  state.frame = frameIdx;
+  const vals = state.frameValues[frameIdx];
+  gPixels.selectAll("rect").attr("fill", (d, i) => color(vals[i]));
+}
+
+let lastTick = 0;
+function loop(ts) {
+  const interval = 1000 / CONFIG.FPS;
+  if (ts - lastTick >= interval) {
+    lastTick = ts;
+    renderFrame(state.frame + 1);
+  }
+  requestAnimationFrame(loop);
+}
+
+let loopStarted = false;
+function startLoopOnce() { if (!loopStarted) { loopStarted = true; requestAnimationFrame(loop); } }
+
+function renderState(stateFips, csvFile) {
+  Promise.all([
+    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+    d3.csv(csvFile, d3.autoType)
+  ])
+  .then((results) => {
+    const usTopo = results[0];
+    const csv = results[1];
+    const width = 400, height = 400;
+
+    gPixels.selectAll("*").remove();
+    gState.selectAll("*").remove();
+    gCounties.selectAll("*").remove();
+    defsMap.selectAll("*").remove();
+
+    const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+    const stateCounties = allCounties.filter(f => String(f.id).startsWith(stateFips));
+    const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === stateFips);
+
+    const nameToFipsMap = new Map();
+    for (const f of stateCounties) {
+      const id = String(f.id);
+      const raw = f.properties?.name ?? "";
+      nameToFipsMap.set(norm(stripTypeSuffix(raw)), id);
+      if (/\bsaint\b/i.test(raw)) {
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st"))), id);
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi, "st."))), id);
+      }
+      if (/\bst[.]?\b/iu.test(raw)) {
+        nameToFipsMap.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/giu, "saint"))), id);
+      }
+    }
+
+    const byFips = new Map();
+    for (const r of csv) {
+      const rawName = String(r.county ?? r.NAME ?? "");
+      const key = norm(stripTypeSuffix(rawName));
+      const fips = nameToFipsMap.get(key);
+      if (fips) {
+        byFips.set(fips, { pov: +r.pov, moe: +r.moe, name: rawName });
+      } else {
+        console.warn(`No FIPS match for county name: "${rawName}" in state FIPS ${stateFips}`);
+      }
+    }
+
+    projection = d3.geoEquirectangular();
+    path = d3.geoPath(projection);
+    projection.fitSize([width, height], { type: "FeatureCollection", features: stateCounties });
+
+    defsMap.append("clipPath").attr("id", "stateClip")
+      .append("path").attr("d", path(stateFeature));
+    gState.append("path")
+      .attr("d", path(stateFeature))
+      .attr("fill", "none").attr("stroke", "#595959").attr("stroke-width", 1)
+      .attr("vector-effect", "non-scaling-stroke");
+    gCounties.append("path")
+      .attr("d", path(topojson.mesh(usTopo, usTopo.objects.counties,
+        (a, b) => String(a.id).startsWith(stateFips) && String(b.id).startsWith(stateFips) && a !== b)))
+      .attr("fill", "none").attr("stroke", "#595959").attr("stroke-width", 1)
+      .attr("vector-effect", "non-scaling-stroke");
+
+    const pixels = [];
+    for (let y = CONFIG.PIXEL / 2; y < height; y += CONFIG.PIXEL) {
+      for (let x = CONFIG.PIXEL / 2; x < width; x += CONFIG.PIXEL) {
+        const lonlat = projection.invert([x, y]);
+        if (!lonlat) continue;
+        let rec = null;
+        for (const f of stateCounties) {
+          if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
+        }
+        if (!rec) continue;
+        pixels.push({ x, y, pov: rec.pov, moe: rec.moe });
+      }
+    }
+
+    const rng = mulberry32(42);
+    const randn = randnFactory(rng);
+    const frameValues = [];
+    for (let k = 0; k < CONFIG.N_FRAMES; k++) {
+      const vals = new Float32Array(pixels.length);
+      for (let i = 0; i < pixels.length; i++) {
+        vals[i] = sampleValue(pixels[i].pov, pixels[i].moe, randn);
+      }
+      frameValues.push(vals);
+    }
+    state.frameValues = frameValues;
+    state.frame = 0;
+
+    gPixels.attr("clip-path", "url(#stateClip)")
+      .selectAll("rect")
+      .data(pixels)
+      .join("rect")
+        .attr("x", d => d.x - CONFIG.PIXEL / 2)
+        .attr("y", d => d.y - CONFIG.PIXEL / 2)
+        .attr("width", CONFIG.PIXEL)
+        .attr("height", CONFIG.PIXEL)
+        .attr("fill", (d, i) => color(frameValues[0][i]));
+
+    gCounties.selectAll(".county")
+      .data(stateCounties)
+      .join("path")
+        .attr("class", "county")
+        .attr("d", path)
+        .attr("fill", "transparent")
+        .attr("stroke", "none");
+
+    svgLegend.selectAll("*").remove();
+    const defsL = svgLegend.append("defs");
+    const LEGEND_LEFT = 40, LEGEND_TOP = 40, LEGEND_LONG = 320, LEGEND_THICK = 15;
+    const lg = svgLegend.append("g")
+      .attr("class", "legend-right")
+      .attr("transform", `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
+      .style("pointer-events", "none");
+    const grad = defsL.append("linearGradient")
+      .attr("id", "legendGrad")
+      .attr("x1", "0%").attr("x2", "0%")
+      .attr("y1", "100%").attr("y2", "0%");
+    for (let i = 0; i <= 100; i++) {
+      const t = i / 100;
+      grad.append("stop")
+        .attr("offset", `${i}%`)
+        .attr("stop-color", color(CONFIG.VALUE_MIN + t * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN)));
+    }
+    lg.append("rect")
+      .attr("width", LEGEND_THICK).attr("height", LEGEND_LONG)
+      .attr("fill", "url(#legendGrad)").attr("rx", 3);
+    const legendScale = d3.scaleLinear().domain([CONFIG.VALUE_MAX, CONFIG.VALUE_MIN]).range([0, LEGEND_LONG]);
+    lg.append("g")
+      .attr("transform", `translate(${LEGEND_THICK}, 0)`)
+      .call(d3.axisRight(legendScale).ticks(5));
+    lg.append("text")
+      .attr("x", 0).attr("y", -12)
+      .attr("font-weight", 500)
+      .text("Poverty");
+
+    startLoopOnce();
+  })
+  .catch(err => {
+    console.error('Error loading data:', err);
+    alert("Data load failed: " + err.message + ". Check console for details.");
+  });
+}
+
+const stateFips = '08';
+const csvFile = '../Data/COData4.csv';
+renderState(stateFips, csvFile);
+
+const responseTextarea = document.getElementById('response-text');
+
+function postAllAnswers() {
+  const hasResponse = responseTextarea.value.trim().length > 0;
+  const hasStates = selectedStates.length > 0;
+  Revisit.postAnswers({
+    // Only mark the required field as filled when both questions are answered
+    pixelSurveyResponse: (hasResponse && hasStates) ? responseTextarea.value : '',
+    familiarStates: selectedStates,
+  });
+}
+
+responseTextarea.addEventListener('input', () => {
+  postAllAnswers();
+});
+
+Revisit.postAnswers({ pixelSurveyResponse: '', familiarStates: [] });
+
+// States selection functionality
+const US_STATES = [
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+  "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
+  "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
+  "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
+  "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
+  "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
+  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
+  "Wisconsin", "Wyoming"
+];
+
+let selectedStates = [];
+
+const statesSelect = document.getElementById('states-select');
+const selectedStatesContainer = document.getElementById('selected-states');
+const selectionInfo = document.getElementById('selection-info');
+
+function populateStatesDropdown() {
+  statesSelect.innerHTML = '<option value="">-- Select a state --</option>';
+
+  US_STATES.forEach(state => {
+    if (!selectedStates.includes(state)) {
+      const option = document.createElement('option');
+      option.value = state;
+      option.textContent = state;
+      statesSelect.appendChild(option);
+    }
+  });
+}
+
+function renderSelectedStates() {
+  selectedStatesContainer.innerHTML = '';
+
+  selectedStates.forEach(state => {
+    const tag = document.createElement('span');
+    tag.className = 'state-tag';
+    tag.innerHTML = `
+      ${state}
+      <button type="button" aria-label="Remove ${state}" data-state="${state}">&times;</button>
+    `;
+    selectedStatesContainer.appendChild(tag);
+  });
+
+  selectedStatesContainer.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const stateToRemove = btn.dataset.state;
+      removeState(stateToRemove);
+    });
+  });
+}
+
+function updateSelectionInfo() {
+  selectionInfo.textContent = `${selectedStates.length} state${selectedStates.length !== 1 ? 's' : ''} selected`;
+}
+
+function addState(state) {
+  if (state && !selectedStates.includes(state)) {
+    selectedStates.push(state);
+    populateStatesDropdown();
+    renderSelectedStates();
+    updateSelectionInfo();
+    postStatesAnswer();
+  }
+  statesSelect.value = '';
+}
+
+function removeState(state) {
+  selectedStates = selectedStates.filter(s => s !== state);
+  populateStatesDropdown();
+  renderSelectedStates();
+  updateSelectionInfo();
+  postStatesAnswer();
+}
+
+function postStatesAnswer() {
+  postAllAnswers();
+}
+
+statesSelect.addEventListener('change', (e) => {
+  addState(e.target.value);
+});
+
+
+populateStatesDropdown();
+updateSelectionInfo();
+</script>
+</body>
+</html>

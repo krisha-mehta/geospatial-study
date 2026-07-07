@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  body {
+    margin: 0 auto;
+    max-width: 650px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1f2937;
+    background: #fff;
+    padding: 20px;
+  }
+  .legend {
+    margin: 16px 0;
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:10px;
+    padding:8px 10px;
+    font-size:13px;
+    color:#222;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    width: fit-content;
+  }
+  .legend-bar {
+    width: 220px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid #aaa;
+    margin: 6px 0 4px;
+    background: linear-gradient(to right, #ffffcc, #ffeda0, #fed976, #feb24c, #fd8d3c, #fc4e2a, #e31a1c, #bd0026, #800026);
+  }
+  .legend-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #555;
+    width: 220px;
+  }
+</style>
+</head>
+<body>
+<p>On each trial you will view a map of a different state. In each map, the counties are divided into a grid of pixels. Each pixel continuously animates through a series of frames: on every frame, the pixel's color is re-sampled independently from a model of survey data for its county. Counties with precise estimates look consistently colored across frames; counties with imprecise estimates show pixels that flicker between many different colors.</p>
+
+<div class="legend">
+  <div class="legend-bar"></div>
+  <div class="legend-labels"><span>0% poverty</span><span>50%+ poverty</span></div>
+</div>
+
+<p><strong>Your task is to recommend the three counties</strong> in each state that you think most urgently need additional resources. The state legislature has defined counties with urgent need as exceeding a poverty rate of 15% with 90% confidence based on available data. <strong>You can maximize your bonus by only choosing counties that qualify.</strong></p>
+
+<p>Click a county on the map to recommend it for resource allocation. The list of counties you select will appear at the bottom of the map. To locate a selected county, hover over its name in the list to highlight the matching area on the map. To deselect a county, click on the cross sign next to the name of that county.</p>
+</body>
+</html>
