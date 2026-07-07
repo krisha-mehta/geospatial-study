@@ -57,17 +57,11 @@
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
 
-  .legend-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-    gap: 12px;
-  }
-
-  #legend { width: 60px; }
+  #legend { width: 60px; flex-shrink: 0; align-self: center; }
 
   .legend {
+    margin-top: 6px;
+    align-self: center;
     background:#fff;
     border:1px solid #e5e5e5;
     border-radius:10px;
@@ -147,18 +141,16 @@
   <div class="map-col">
     <div class="map-label">Decision Pixel Map</div>
     <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
+    <div class="legend">
+      <div><span class="legend_chip on"></span> Above Threshold Poverty Rates</div>
+      <div style="margin-top:6px"><span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
+    </div>
   </div>
   <div class="map-col">
     <div class="map-label">Choropleth Map</div>
     <svg id="choropleth" viewBox="0 0 400 400" aria-label="Choropleth map of selected state"></svg>
   </div>
-  <div class="legend-col">
-    <div class="legend">
-      <div><span class="legend_chip on"></span> Above Threshold Poverty Rates</div>
-      <div style="margin-top:6px"><span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
-    </div>
-    <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
-  </div>
+  <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
 </div>
 
 <div class="response-container">
