@@ -18,7 +18,7 @@
   * { box-sizing: border-box; }
   body {
     margin: 0 auto;
-    width: 900px;
+    width: 1200px;
     height: 600px;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: #fff;
@@ -41,6 +41,13 @@
     gap: 2px;
   }
 
+  .map-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
   .map-label {
     font-size: 13px;
     font-weight: 600;
@@ -60,8 +67,8 @@
   .county { stroke: #777; stroke-width: 0.8; vector-effect: non-scaling-stroke; }
   .state-outline { fill: none; stroke: #222; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
 
-  #exceed-legend { width: 60px; flex-shrink: 0; align-self: center; margin-top: 6px; }
-  #choro-legend { width: 60px; flex-shrink: 0; align-self: center; }
+  #exceed-map, #choropleth { flex: 1 1 0; min-width: 0; width: auto; }
+  #exceed-legend, #choro-legend { width: 60px; flex-shrink: 0; align-self: center; }
 
   .response-container {
     max-width: 600px;
@@ -115,16 +122,19 @@
   <!-- Exceedance probability map column -->
   <div class="map-col">
     <div class="map-label">Exceedance Probability Map</div>
-    <svg id="exceed-map" viewBox="0 0 400 400" aria-label="Exceedance probability map of selected state"></svg>
-    <svg id="exceed-legend" viewBox="0 0 140 400" aria-label="Exceedance probability legend"></svg>
+    <div class="map-row">
+      <svg id="exceed-map" viewBox="0 0 400 400" aria-label="Exceedance probability map of selected state"></svg>
+      <svg id="exceed-legend" viewBox="0 0 140 400" aria-label="Exceedance probability legend"></svg>
+    </div>
   </div>
 
   <div class="map-col">
     <div class="map-label">Choropleth Map</div>
-    <svg id="choropleth" viewBox="0 0 400 400" aria-label="Choropleth map of selected state"></svg>
+    <div class="map-row">
+      <svg id="choropleth" viewBox="0 0 400 400" aria-label="Choropleth map of selected state"></svg>
+      <svg id="choro-legend" viewBox="0 0 140 400" aria-label="Poverty rate legend"></svg>
+    </div>
   </div>
-
-  <svg id="choro-legend" viewBox="0 0 140 400" aria-label="Poverty rate legend"></svg>
 </div>
 
 <div class="response-container">
