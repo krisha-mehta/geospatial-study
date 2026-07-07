@@ -41,7 +41,7 @@
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     
   }
-  .county { stroke:#777; stroke-width:0.8; vector-effect:non-scaling-stroke; cursor:pointer; }
+  .county { stroke:#1c1b1b; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; }
   .county.on  { fill:#9b1c1c; }  /* allocate */
   .county.off { fill:#e9e9e9; }  /* not allocate */
 
@@ -375,8 +375,8 @@ function renderState(stateFips, csvFile) {
       gState.append("path")
         .attr("d", path(mergedBoundary))
         .attr("fill","none")
-        .attr("stroke","#595959")
-        .attr("stroke-width",1)
+        .attr("stroke","#1c1b1b")
+        .attr("stroke-width",1.5)
         .attr("vector-effect","non-scaling-stroke");
     } else {
       // For other states, use the standard geographic projection
@@ -391,8 +391,8 @@ function renderState(stateFips, csvFile) {
       gState.append("path")
         .attr("d", path(stateFeature))
         .attr("fill","none")
-        .attr("stroke","#595959")
-        .attr("stroke-width",1)
+        .attr("stroke","#1c1b1b")
+        .attr("stroke-width",1.5)
         .attr("vector-effect","non-scaling-stroke");
     }
 
@@ -400,8 +400,8 @@ function renderState(stateFips, csvFile) {
     gCounties.append("path")
       .attr("d", path(stateMesh))
       .attr("fill","none")
-      .attr("stroke","#595959")
-      .attr("stroke-width",1)
+      .attr("stroke","#1c1b1b")
+      .attr("stroke-width",1.2)
       .attr("vector-effect","non-scaling-stroke");
 
     // Labels 

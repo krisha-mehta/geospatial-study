@@ -44,11 +44,11 @@
   #map { max-width: 400px; }
   #legend { max-width: 140px; }
 
-  .county { stroke:#777; stroke-width:0.8; vector-effect:non-scaling-stroke; cursor:pointer; }
+  .county { stroke:#1c1b1b; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; }
 
   .state-outline { fill:none;
-    stroke:#222;
-    stroke-width:1.2;
+    stroke:#1c1b1b;
+    stroke-width:1.5;
     vector-effect:non-scaling-stroke;
   }
 
@@ -368,7 +368,7 @@ async function loadData(){
 
   gBorders.append('path')
     .attr('d', path(stateMesh))
-    .attr('fill','none').attr('stroke','#666').attr('stroke-width',0.8)
+    .attr('fill','none').attr('stroke','#1c1b1b').attr('stroke-width',1.2)
     .attr('vector-effect','non-scaling-stroke');
 
   state.countyList = stateCounties;

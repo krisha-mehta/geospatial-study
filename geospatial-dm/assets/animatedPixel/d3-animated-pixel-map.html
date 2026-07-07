@@ -428,7 +428,7 @@ async function loadData(stateFips, csvFile) {
       .append("path").attr("d", path(mergedBoundary));
     gState.append("path")
       .attr("d", path(mergedBoundary))
-      .attr("fill", "none").attr("stroke", "#595959").attr("stroke-width", 1)
+      .attr("fill", "none").attr("stroke", "#1c1b1b").attr("stroke-width", 1.5)
       .attr("vector-effect", "non-scaling-stroke");
   } else {
     projection = d3.geoEquirectangular();
@@ -438,13 +438,13 @@ async function loadData(stateFips, csvFile) {
       .append("path").attr("d", path(stateFeature));
     gState.append("path")
       .attr("d", path(stateFeature))
-      .attr("fill", "none").attr("stroke", "#595959").attr("stroke-width", 1)
+      .attr("fill", "none").attr("stroke", "#1c1b1b").attr("stroke-width", 1.5)
       .attr("vector-effect", "non-scaling-stroke");
   }
 
   gCounties.append("path")
     .attr("d", path(stateMesh))
-    .attr("fill", "none").attr("stroke", "#595959").attr("stroke-width", 1)
+    .attr("fill", "none").attr("stroke", "#1c1b1b").attr("stroke-width", 1.2)
     .attr("vector-effect", "non-scaling-stroke");
 
   // Build pixel array (positions + county data)

@@ -326,12 +326,12 @@ function renderState(stateFips, csvFile) {
       .append("path").attr("d", path(stateFeature));
     gState.append("path")
       .attr("d", path(stateFeature))
-      .attr("fill", "none").attr("stroke", "#595959").attr("stroke-width", 1)
+      .attr("fill", "none").attr("stroke", "#1c1b1b").attr("stroke-width", 1.5)
       .attr("vector-effect", "non-scaling-stroke");
     gCounties.append("path")
       .attr("d", path(topojson.mesh(usTopo, usTopo.objects.counties,
         (a, b) => String(a.id).startsWith(stateFips) && String(b.id).startsWith(stateFips) && a !== b)))
-      .attr("fill", "none").attr("stroke", "#595959").attr("stroke-width", 1)
+      .attr("fill", "none").attr("stroke", "#1c1b1b").attr("stroke-width", 1.2)
       .attr("vector-effect", "non-scaling-stroke");
 
     const pixels = [];
