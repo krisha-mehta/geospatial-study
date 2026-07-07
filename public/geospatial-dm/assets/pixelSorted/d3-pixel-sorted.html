@@ -344,8 +344,8 @@ function renderState(stateFips, csvFile) {
       gState.append("path")
         .attr("d", path(mergedBoundary))
         .attr("fill","none")
-        .attr("stroke","#595959")
-        .attr("stroke-width",1)
+        .attr("stroke","#1c1b1b")
+        .attr("stroke-width",1.5)
         .attr("vector-effect","non-scaling-stroke");
     } else {
       // For other states, use the standard geographic projection
@@ -360,8 +360,8 @@ function renderState(stateFips, csvFile) {
       gState.append("path")
         .attr("d", path(stateFeature))
         .attr("fill","none")
-        .attr("stroke","#595959")
-        .attr("stroke-width",1)
+        .attr("stroke","#1c1b1b")
+        .attr("stroke-width",1.5)
         .attr("vector-effect","non-scaling-stroke");
     }
 
@@ -369,8 +369,8 @@ function renderState(stateFips, csvFile) {
     gCounties.append("path")
       .attr("d", path(stateMesh))
       .attr("fill","none")
-      .attr("stroke","#595959")
-      .attr("stroke-width",1)
+      .attr("stroke","#1c1b1b")
+      .attr("stroke-width",1.2)
       .attr("vector-effect","non-scaling-stroke");
 
     // Labels 
