@@ -160,6 +160,65 @@
     margin-top: 8px;
   }
 
+  .demo-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 12px;
+  }
+
+  .demo-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #111;
+    cursor: pointer;
+  }
+
+  .radio-option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #2563eb;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .self-describe-input {
+    margin-left: 4px;
+    padding: 6px 10px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
+    flex: 1;
+    max-width: 220px;
+    transition: border-color 0.2s;
+  }
+
+  .self-describe-input:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .self-describe-input:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+  }
+
   .survey-title {
     font-size: 24px;
     font-weight: 700;
@@ -197,6 +256,34 @@ Which states are you familiar with or have lived in?</label>
   </select>
   <div id="selected-states" class="selected-states"></div>
   <div id="selection-info" class="selection-info">0 states selected</div>
+</div>
+
+<div class="demo-container">
+  <label class="demo-label" id="age-label">What is your age?</label>
+  <div class="radio-group" role="radiogroup" aria-labelledby="age-label">
+    <label class="radio-option"><input type="radio" name="age-response" value="18–24"> 18–24</label>
+    <label class="radio-option"><input type="radio" name="age-response" value="25–34"> 25–34</label>
+    <label class="radio-option"><input type="radio" name="age-response" value="35–44"> 35–44</label>
+    <label class="radio-option"><input type="radio" name="age-response" value="45–54"> 45–54</label>
+    <label class="radio-option"><input type="radio" name="age-response" value="55–64"> 55–64</label>
+    <label class="radio-option"><input type="radio" name="age-response" value="65 or older"> 65 or older</label>
+    <label class="radio-option"><input type="radio" name="age-response" value="Prefer not to say"> Prefer not to say</label>
+  </div>
+</div>
+
+<div class="demo-container">
+  <label class="demo-label" id="gender-label">What is your gender?</label>
+  <div class="radio-group" role="radiogroup" aria-labelledby="gender-label">
+    <label class="radio-option"><input type="radio" name="gender-response" value="Woman"> Woman</label>
+    <label class="radio-option"><input type="radio" name="gender-response" value="Man"> Man</label>
+    <label class="radio-option"><input type="radio" name="gender-response" value="Non-binary"> Non-binary</label>
+    <label class="radio-option">
+      <input type="radio" name="gender-response" value="Prefer to self-describe" id="gender-self-describe-radio">
+      Prefer to self-describe:
+      <input type="text" id="gender-self-describe-input" class="self-describe-input" placeholder="Please describe" disabled aria-label="Self-described gender">
+    </label>
+    <label class="radio-option"><input type="radio" name="gender-response" value="Prefer not to say"> Prefer not to say</label>
+  </div>
 </div>
 
 <script>
@@ -367,10 +454,14 @@ const responseTextarea = document.getElementById('response-text');
 function postAllAnswers() {
   const hasResponse = responseTextarea.value.trim().length > 0;
   const hasStates = selectedStates.length > 0;
+  const hasAge = selectedAge.length > 0;
+  const hasGender = selectedGender.length > 0;
   Revisit.postAnswers({
-    // Only mark the required field as filled when both questions are answered
-    svsupSurveyResponse: (hasResponse && hasStates) ? responseTextarea.value : '',
+    // Only mark the required field as filled when all questions are answered
+    svsupSurveyResponse: (hasResponse && hasStates && hasAge && hasGender) ? responseTextarea.value : '',
     familiarStates: selectedStates,
+    ageResponse: selectedAge,
+    genderResponse: selectedGender,
   });
 }
 
@@ -378,7 +469,42 @@ responseTextarea.addEventListener('input', () => {
   postAllAnswers();
 });
 
-Revisit.postAnswers({ svsupSurveyResponse: '', familiarStates: [] });
+let selectedAge = '';
+let selectedGender = '';
+
+document.querySelectorAll('input[name="age-response"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    selectedAge = radio.value;
+    postAllAnswers();
+  });
+});
+
+const genderSelfDescribeRadio = document.getElementById('gender-self-describe-radio');
+const genderSelfDescribeInput = document.getElementById('gender-self-describe-input');
+
+document.querySelectorAll('input[name="gender-response"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    if (radio.value === 'Prefer to self-describe') {
+      genderSelfDescribeInput.disabled = false;
+      genderSelfDescribeInput.focus();
+      selectedGender = genderSelfDescribeInput.value.trim();
+    } else {
+      genderSelfDescribeInput.disabled = true;
+      genderSelfDescribeInput.value = '';
+      selectedGender = radio.value;
+    }
+    postAllAnswers();
+  });
+});
+
+genderSelfDescribeInput.addEventListener('input', () => {
+  if (genderSelfDescribeRadio.checked) {
+    selectedGender = genderSelfDescribeInput.value.trim();
+    postAllAnswers();
+  }
+});
+
+Revisit.postAnswers({ svsupSurveyResponse: '', familiarStates: [], ageResponse: '', genderResponse: '' });
 
 // States selection functionality
 const US_STATES = [
