@@ -60,15 +60,8 @@
   .county { stroke: #777; stroke-width: 0.8; vector-effect: non-scaling-stroke; }
   .state-outline { fill: none; stroke: #222; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
 
-  .legend-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-    gap: 12px;
-  }
-
-  #exceed-legend, #choro-legend { width: 60px; }
+  #exceed-legend { width: 60px; flex-shrink: 0; align-self: center; margin-top: 6px; }
+  #choro-legend { width: 60px; flex-shrink: 0; align-self: center; }
 
   .response-container {
     max-width: 600px;
@@ -123,6 +116,7 @@
   <div class="map-col">
     <div class="map-label">Exceedance Probability Map</div>
     <svg id="exceed-map" viewBox="0 0 400 400" aria-label="Exceedance probability map of selected state"></svg>
+    <svg id="exceed-legend" viewBox="0 0 140 400" aria-label="Exceedance probability legend"></svg>
   </div>
 
   <div class="map-col">
@@ -130,10 +124,7 @@
     <svg id="choropleth" viewBox="0 0 400 400" aria-label="Choropleth map of selected state"></svg>
   </div>
 
-  <div class="legend-col">
-    <svg id="exceed-legend" viewBox="0 0 140 400" aria-label="Exceedance probability legend"></svg>
-    <svg id="choro-legend" viewBox="0 0 140 400" aria-label="Poverty rate legend"></svg>
-  </div>
+  <svg id="choro-legend" viewBox="0 0 140 400" aria-label="Poverty rate legend"></svg>
 </div>
 
 <div class="response-container">
@@ -316,9 +307,11 @@ async function loadData(stateFips, csvFile) {
     lg.append("g")
       .attr("transform", `translate(${LEGEND_THICK}, 0)`)
       .call(d3.axisRight(legendScale).ticks(5, '.0%'));
-    lg.append("text")
-      .attr("x", 0).attr("y", -12)
-      .attr("font-weight", 500).text("Exceedance Probability");
+    const legendTitle = lg.append("text")
+      .attr("x", 0)
+      .attr("font-weight", 500);
+    legendTitle.append("tspan").attr("x", 0).attr("y", -26).text("Exceedance");
+    legendTitle.append("tspan").attr("x", 0).attr("y", -14).text("Probability");
   }
 
   // Draw gradient legend for choropleth — same as hop-survey-uncertainty.html

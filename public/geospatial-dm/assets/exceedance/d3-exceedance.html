@@ -52,20 +52,6 @@
     vector-effect:non-scaling-stroke;
   }
 
-  .legend {
-    position: relative;
-    margin-left: auto;
-    margin-top: 10px;
-    background:#fff;
-    border:1px solid #e5e5e5;
-    border-radius:10px;
-    padding:8px 10px;
-    font-size:12px;
-    color:#222;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
-    width: fit-content;
-  }
-
   #county-message-box {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
@@ -116,9 +102,7 @@
 <body>
   <div class="wrap">
     <svg id="map" viewBox="0 0 400 400" aria-label="Exceedance probability county map"></svg>
-    <div class="legend">
-      <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
-    </div>
+    <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
   </div>
 
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
@@ -520,11 +504,11 @@ function renderLegend(){
     .attr('transform', `translate(${LEGEND_THICK}, 0)`)
     .call(d3.axisRight(legendScale).ticks(5, '.0%'));
 
-  lg.append('text')
+  const legendTitle = lg.append('text')
     .attr('x', 0)
-    .attr('y', -12)
-    .attr('font-weight', 500)
-    .text('Exceedance Probability');
+    .attr('font-weight', 500);
+  legendTitle.append('tspan').attr('x', 0).attr('y', -26).text('Exceedance');
+  legendTitle.append('tspan').attr('x', 0).attr('y', -14).text('Probability');
 }
 
 function showCountyMessageBox({ county, onYes, onNo }) {
