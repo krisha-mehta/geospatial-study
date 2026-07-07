@@ -312,7 +312,7 @@ const stripTypeSuffix = (s) => s.replace(/\b(county|parish|borough|census area|m
 let stateCounties, byFips;
 
 // Empirical-Bayes shrinkage: each county's poverty estimate is pulled toward
-// the mean of all displayed counties (theta), with the pull strength governed
+// a fixed reference point (theta = 15), with the pull strength governed
 // by the ratio of observation variance (from the margin of error) to the
 // across-county variance (tau2). Higher-uncertainty counties shrink more.
 function computeShrinkage(){
@@ -321,7 +321,7 @@ function computeShrinkage(){
   const n = records.length;
   if (n === 0) return;
 
-  const theta = d3.mean(records, d => d.pov);
+  const theta = 15;
   const tau2 = d3.mean(records, d => (d.pov - theta) ** 2);
 
   for (const rec of records){
