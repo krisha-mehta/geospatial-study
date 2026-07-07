@@ -280,8 +280,9 @@ function renderLegend(){
 
   const legendTitle = lg.append('text')
     .attr('x', 0)
-    .attr('font-weight', 500);
-  legendTitle.append('tspan').attr('x', 0).attr('y', -26).text('Exceedance');
+    .attr('font-weight', 500)
+    .attr('font-size', 11);
+  legendTitle.append('tspan').attr('x', 0).attr('y', -30).text('Exceedance');
   legendTitle.append('tspan').attr('x', 0).attr('y', -14).text('Probability');
 }
 
