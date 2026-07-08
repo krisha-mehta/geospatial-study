@@ -23,7 +23,7 @@
     "sidebar": false,
     "urlParticipantIdParam": "PROLIFIC_PID",
     "studyEndMsg": "**Thank you for completing the study. Please click on this link to return to Prolific: [https://app.prolific.com/submissions/complete?cc=CX30VVKS](https://app.prolific.com/submissions/complete?cc=CX30VVKS)**",
-    "numSequences": 40
+    "numSequences": 8
   },
   "baseComponents": {
     "pixel-map-d3": {
