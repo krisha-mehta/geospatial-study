@@ -222,8 +222,19 @@ let state = {
   maxSel: CONFIG.MAX_SELECTIONS,
   requiredSel: CONFIG.REQUIRED_SELECTIONS,
   countyList: [],
-  byFips: new Map()
+  byFips: new Map(),
+  theta: null
 };
+
+// Grand mean poverty rate across all counties of all states (excluding Alaska,
+// which is reserved for the practice trial), fetched once and cached.
+let globalThetaPromise = null;
+function getGlobalTheta() {
+  if (!globalThetaPromise) {
+    globalThetaPromise = d3.csv('../Data/AllStatesPov.csv', d3.autoType).then(rows => d3.mean(rows, d => d.pov));
+  }
+  return globalThetaPromise;
+}
 
 async function loadData(){
   const isConnecticut = state.stateFips === '09';
@@ -239,7 +250,8 @@ async function loadData(){
         d3.csv(state.csvFile, d3.autoType)
       ];
 
-  const results = await Promise.all(dataPromises);
+  const [results, theta] = await Promise.all([Promise.all(dataPromises), getGlobalTheta()]);
+  state.theta = theta;
   const usTopo = results[0];
   const csv = results[1];
   const ctPlanningRegions = isConnecticut ? results[2] : null;
@@ -367,17 +379,18 @@ async function loadData(){
 }
 
 // Here is the main logic for svsup. Each county's poverty estimate is pulled toward
-// a fixed reference point (theta = 15), with the pull strength governed
-// by the ratio of observation variance (from the margin of error) to the
-// across-county variance (tau2). Higher-uncertainty counties shrink more,
-// while low uncertainty counties stay close to their original estimates.
+// a fixed reference point (theta = the grand mean poverty rate across all counties
+// of all states, excluding Alaska), with the pull strength governed by the ratio of
+// observation variance (from the margin of error) to the across-county variance (tau2).
+// Higher-uncertainty counties shrink more, while low uncertainty counties stay close
+// to their original estimates.
 function computeShrinkage(){
   const z = state.moeZ || 1.645;
   const records = Array.from(state.byFips.values());
   const n = records.length;
   if (n === 0) return;
 
-  const theta = 15;
+  const theta = state.theta;
   const tau2 = d3.mean(records, d => (d.pov - theta) ** 2) * CONFIG.SHRINKAGE_SCALE;
 
   for (const rec of records){

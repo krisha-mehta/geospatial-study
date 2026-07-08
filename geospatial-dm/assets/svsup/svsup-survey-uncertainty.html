@@ -179,17 +179,27 @@ const width = 400, height = 400;
 const projection = d3.geoEquirectangular();
 const path = d3.geoPath(projection);
 
+// Grand mean poverty rate across all counties of all states (excluding Alaska,
+// which is reserved for the practice trial), fetched once and cached.
+let globalThetaPromise = null;
+function getGlobalTheta() {
+  if (!globalThetaPromise) {
+    globalThetaPromise = d3.csv('../Data/AllStatesPov.csv', d3.autoType).then(rows => d3.mean(rows, d => d.pov));
+  }
+  return globalThetaPromise;
+}
+
 // Empirical-Bayes shrinkage: each county's poverty estimate is pulled toward
-// a fixed reference point (theta = 15), with the pull strength governed
-// by the ratio of observation variance (from the margin of error) to the
-// across-county variance (tau2). Higher-uncertainty counties shrink more.
-function computeShrinkage(byFips){
+// a fixed reference point (theta = the grand mean poverty rate across all counties
+// of all states, excluding Alaska), with the pull strength governed by the ratio of
+// observation variance (from the margin of error) to the across-county variance (tau2).
+// Higher-uncertainty counties shrink more.
+function computeShrinkage(byFips, theta){
   const z = CONFIG.MOE_Z;
   const records = Array.from(byFips.values());
   const n = records.length;
   if (n === 0) return;
 
-  const theta = 15;
   const tau2 = d3.mean(records, d => (d.pov - theta) ** 2) * CONFIG.SHRINKAGE_SCALE;
 
   for (const rec of records){
@@ -209,9 +219,12 @@ function computeShrinkage(byFips){
 let gFill, gOutline, stateCounties, byFips;
 
 async function loadData(stateFips, csvFile) {
-  const [usTopo, csv] = await Promise.all([
-    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
-    d3.csv(csvFile, d3.autoType)
+  const [[usTopo, csv], theta] = await Promise.all([
+    Promise.all([
+      d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+      d3.csv(csvFile, d3.autoType)
+    ]),
+    getGlobalTheta()
   ]);
 
   const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
@@ -248,7 +261,7 @@ async function loadData(stateFips, csvFile) {
     }
   }
 
-  computeShrinkage(byFips);
+  computeShrinkage(byFips, theta);
 
   // Set up shrinkage VSUP map SVG layers
   svgSvsup.selectAll("*").remove();
