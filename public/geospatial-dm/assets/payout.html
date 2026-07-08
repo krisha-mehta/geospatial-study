@@ -217,7 +217,7 @@ const normCounty = s => norm(stripType(s));
 
 
 function parseTrialId(id) {
-  const m = id.match(/^(pix|hom)_[A-Z]{2}_([A-Z]{2})_(\d+)$/);
+  const m = id.match(/^(pix|hom|anim|exc|spix|svs|tpix|tpxs)_[A-Z]{2}_([A-Z]{2})_(\d+)$/);
   if (!m) return null;
   return { stateAbbr: m[2], trialVersion: m[3] };
 }
