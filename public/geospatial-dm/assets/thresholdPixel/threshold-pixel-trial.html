@@ -186,7 +186,7 @@
 <div id="selected-list" class="selected-panel" aria-live="polite"></div>
 
 <div class="button-container">
-  <button id="submit-button" class="submit-button" disabled>Next</button>
+  <button id="submit-button" class="submit-button" disabled>Submit Answer</button>
 </div>
 
 <div id="submission-message" style="display: none; max-width: 800px; margin: 20px auto; padding: 20px; font-size: 15px; line-height: 1.6; color: #1f2937; background: #ffffff; border: 2px solid #000000; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
@@ -407,7 +407,7 @@ function renderState(stateFips, csvFile) {
       if (selectedCounties.length < requiredSelections) {
         statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
       } else if (selectedCounties.length === requiredSelections) {
-        statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can proceed to the next step.</div>`;
+        statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can submit your selected counties and see the solution.</div>`;
       }
 
       panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
