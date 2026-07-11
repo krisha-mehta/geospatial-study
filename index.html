@@ -35,7 +35,17 @@
     <link rel="stylesheet" crossorigin href="/geospatial-study/assets/index-D4TIUorx.css">
   </head>
   <body style="margin: 0;">
+    <div id="desktop-only-notice" style="display:none; font-family: sans-serif; text-align:center; padding: 4rem 1rem;">
+      <h2>Desktop Only</h2>
+      <p>This study is only available on a desktop or laptop computer. Please revisit this link on a desktop device.</p>
+    </div>
     <div id="root"></div>
+    <script>
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.getElementById('desktop-only-notice').style.display = 'block';
+        document.getElementById('root').style.display = 'none';
+      }
+    </script>
   </body>
 </html>
 
