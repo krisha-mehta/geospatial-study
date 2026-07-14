@@ -296,7 +296,7 @@ function renderState(stateFips, csvFile) {
     }
 
     // Use Albers projection which properly handles Alaska's Aleutian Islands crossing the antimeridian
-    projection = d3.geoAlbers();
+    projection = d3.geoEquirectangular();
     path = d3.geoPath(projection);
     projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
     
