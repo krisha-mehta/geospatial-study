@@ -180,6 +180,37 @@
     margin: 20px 0 10px 0;
   }
 
+  .choose-map-btn {
+    margin-top: 0;
+    padding: 8px 16px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    background: #fff;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+
+  .choose-map-btn:hover {
+    border-color: #2563eb;
+  }
+
+  .choose-map-btn.selected {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+  }
+
+  .map-choice-info {
+    font-size: 13px;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 3px;
+  }
+
 </style>
 </head>
 <body>
@@ -189,14 +220,17 @@
 <div class="wrap">
   <div class="map-col">
     <div class="map-label">Pixel Map</div>
-    <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
+    <svg id="chart" viewBox="0 0 400 300" aria-label="Pixel map of selected state"></svg>
+    <button type="button" class="choose-map-btn" id="choose-pixel" data-map="pixel">Choose This Map</button>
   </div>
   <div class="map-col">
     <div class="map-label">Choropleth Map</div>
-    <svg id="choropleth" viewBox="0 0 400 400" aria-label="Choropleth map of selected state"></svg>
+    <svg id="choropleth" viewBox="0 0 400 300" aria-label="Choropleth map of selected state"></svg>
+    <button type="button" class="choose-map-btn" id="choose-choropleth" data-map="choropleth">Choose This Map</button>
   </div>
   <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
 </div>
+<div class="map-choice-info">Please select the map you would prefer to use for making decisions.</div>
 
 <div class="response-container">
   <label for="response-text" class="response-label">
@@ -216,7 +250,7 @@ const svgMap        = d3.select("#chart");
 const svgChoropleth = d3.select("#choropleth");
 const svgLegend     = d3.select("#legend");
 
-const width = 400, height = 400;  
+const width = 400, height = 300;  
 const PIXEL = 3;
 const MOE_Z = 1.645;
 const VALUE_MIN = 0, VALUE_MAX = 50;
@@ -454,11 +488,19 @@ const csvFile = '../Data/COData4.csv';
 renderState(stateFips, csvFile);
 
 const responseTextarea = document.getElementById('response-text');
+const chooseButtons = document.querySelectorAll('.choose-map-btn');
 
-Revisit.postAnswers({ pixelUncertaintySurveyResponse: '' });
+Revisit.postAnswers({ pixelUncertaintySurveyResponse: '', mapChoice: '' });
 
 responseTextarea.addEventListener('input', () => {
   Revisit.postAnswers({ pixelUncertaintySurveyResponse: responseTextarea.value });
+});
+
+chooseButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    chooseButtons.forEach(b => b.classList.toggle('selected', b === btn));
+    Revisit.postAnswers({ mapChoice: btn.dataset.map });
+  });
 });
 </script>
 </body>
