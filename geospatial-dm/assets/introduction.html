@@ -107,10 +107,6 @@
   }
 
   .example {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
     background: #f9fafb;
     border: 1px solid #e5e7eb;
     border-left: 4px solid #9ca3af;
@@ -123,11 +119,17 @@
 
   .example .counts {
     font-size: 14px;
+    font-weight: 600;
     color: #4b5563;
+    margin-bottom: 4px;
+  }
+
+  .example .calc {
+    font-size: 15px;
+    color: #374151;
   }
 
   .example .result {
-    font-size: 17px;
     font-weight: 700;
     white-space: nowrap;
     color: #111827;
@@ -140,6 +142,12 @@
   }
 
   strong { color: #111827; }
+
+  hr.divider {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    margin: 32px 0;
+  }
 
   /* Scroll-reveal */
   .reveal {
@@ -184,12 +192,23 @@
   <p>You will receive an additional bonus of $0.10 for each correct county they recommend that meets these criteria and lose $0.05 for every county they recommend that does not meet the criteria. You can maximize your bonus by only recommending counties that qualify.</p>
 </section>
 
+<hr class="divider" />
+
+<section class="reveal">
+  <h2>Payment Structure</h2>
+  <p>You will be compensated $4.00 for completing this study via Prolific. Additionally, you can earn a performance-based bonus.</p>
+</section>
+
 <section class="reveal">
   <h2>Bonus Structure</h2>
   <p>Your bonus will be calculated as:</p>
   <div class="formula">Bonus = ($0.10 &times; correct answers) &minus; ($0.05 &times; incorrect answers)</div>
 
   <div class="limits">
+     <div>
+      <div class="label">Minimum bonus</div>
+      <div class="value">$0.00</div>
+    </div>
     <div>
       <div class="label">Maximum bonus</div>
       <div class="value">$4.80</div>
@@ -197,10 +216,6 @@
     <div>
       <div class="label">Maximum payment</div>
       <div class="value">$8.80</div>
-    </div>
-    <div>
-      <div class="label">Minimum bonus</div>
-      <div class="value">$0.00</div>
     </div>
   </div>
   <p class="note">Your bonus cannot be negative.</p>
@@ -210,23 +225,23 @@
   <h4>Bonus Examples</h4>
   <div class="example-grid">
     <div class="example">
-      <span class="counts">40 correct, 8 incorrect</span>
-      <span class="result">$3.60</span>
+      <div class="counts">40 correct, 8 incorrect</div>
+      <div class="calc">Bonus = (40 &times; $0.10) &minus; (8 &times; $0.05) = <span class="result">$3.60</span></div>
     </div>
     <div class="example zero">
-      <span class="counts">10 correct, 38 incorrect</span>
-      <span class="result">$0.00</span>
+      <div class="counts">10 correct, 38 incorrect</div>
+      <div class="calc">Bonus = (10 &times; $0.10) &minus; (38 &times; $0.05) = <span class="result">$0.00</span></div>
+      <p class="note">The bonus cannot be negative.</p>
     </div>
     <div class="example">
-      <span class="counts">24 correct, 24 incorrect</span>
-      <span class="result">$1.20</span>
+      <div class="counts">24 correct, 24 incorrect</div>
+      <div class="calc">Bonus = (24 &times; $0.10) &minus; (24 &times; $0.05) = <span class="result">$1.20</span></div>
     </div>
     <div class="example best">
-      <span class="counts">48 correct, 0 incorrect</span>
-      <span class="result">$4.80</span>
+      <div class="counts">48 correct, 0 incorrect</div>
+      <div class="calc">Bonus = (48 &times; $0.10) = <span class="result">$4.80 maximum bonus</span></div>
     </div>
   </div>
-  <p class="note">The bonus can never be negative &mdash; even with many incorrect recommendations, the lowest possible bonus is $0.00.</p>
 </section>
 
 <script>
