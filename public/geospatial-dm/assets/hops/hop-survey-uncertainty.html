@@ -129,6 +129,37 @@
     text-align: center;
     margin: 20px 0 10px 0;
   }
+
+  .choose-map-btn {
+    margin-top: 0;
+    padding: 8px 16px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    background: #fff;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+
+  .choose-map-btn:hover {
+    border-color: #2563eb;
+  }
+
+  .choose-map-btn.selected {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+  }
+
+  .map-choice-info {
+    font-size: 13px;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 3px;
+  }
 </style>
 </head>
 <body>
@@ -139,20 +170,23 @@
   <!-- HOP map column -->
   <div class="map-col">
     <div class="map-label">HOP Map</div>
-    <svg id="hop-map" viewBox="0 0 400 400" aria-label="HOP map of selected state"></svg>
+    <svg id="hop-map" viewBox="0 0 400 300" aria-label="HOP map of selected state"></svg>
     <div class="hop-legend">
       <div><span class="legend_chip on"></span> Above Threshold Poverty Rates</div>
       <div style="margin-top:6px"><span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
     </div>
+    <button type="button" class="choose-map-btn" id="choose-pixel" data-map="hop">Choose This Map</button>
   </div>
 
   <div class="map-col">
     <div class="map-label">Choropleth Map</div>
-    <svg id="choropleth" viewBox="0 0 400 400" aria-label="Choropleth map of selected state"></svg>
+    <svg id="choropleth" viewBox="0 0 400 300" aria-label="Choropleth map of selected state"></svg>
+    <button type="button" class="choose-map-btn" id="choose-choropleth" data-map="choropleth">Choose This Map</button>
   </div>
 
   <svg id="choro-legend" viewBox="0 0 140 400" aria-label="Poverty rate legend"></svg>
 </div>
+<div class="map-choice-info">Please select the map you would prefer to use for making decisions.</div>
 
 <div class="response-container">
   <label for="response-text" class="response-label">
@@ -189,7 +223,7 @@ const stripTypeSuffix = s =>
   s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "")
    .replace(/\s+/g, " ").trim();
 
-const width = 400, height = 400;
+const width = 400, height = 300;
 const projection = d3.geoEquirectangular();
 const path = d3.geoPath(projection);
 
@@ -354,11 +388,19 @@ setTimeout(() => {
 }, 100);
 
 const responseTextarea = document.getElementById('response-text');
+const chooseButtons = document.querySelectorAll('.choose-map-btn');
 
-Revisit.postAnswers({ hopUncertaintySurveyResponse: '' });
+Revisit.postAnswers({ hopUncertaintySurveyResponse: '', mapChoice: '' });
 
 responseTextarea.addEventListener('input', () => {
   Revisit.postAnswers({ hopUncertaintySurveyResponse: responseTextarea.value });
+});
+
+chooseButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    chooseButtons.forEach(b => b.classList.toggle('selected', b === btn));
+    Revisit.postAnswers({ mapChoice: btn.dataset.map });
+  });
 });
 </script>
 </body>
