@@ -171,7 +171,7 @@
     "pixel-trial": {
       "type": "website",
       "path": "geospatial-dm/assets/pixel/pixel-practice-trial.html",
-      "instruction": "<h2>Before starting the experiment, please take a moment to practice the task. </h2><p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<h3>Before starting the experiment, please take a moment to practice the task. </h3><p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -248,7 +248,7 @@
     "sorted-pixel-trial": {
       "type": "website",
       "path": "geospatial-dm/assets/pixelSorted/sorted-pixel-trial.html",
-      "instruction": "<h2>Before starting the experiment, please take a moment to practice the task.</h2> <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<h3>Before starting the experiment, please take a moment to practice the task.</h3> <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -320,7 +320,7 @@
     "hop-trial": {
       "type": "website",
       "path": "geospatial-dm/assets/hops/hop-practice-trial.html",
-      "instruction": "<h2>Before starting the experiment, please take a moment to practice the task.</h2> <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<h3>Before starting the experiment, please take a moment to practice the task.</h3> <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -7143,7 +7143,7 @@
     "animated-pixel-trial": {
       "type": "website",
       "path": "geospatial-dm/assets/animatedPixel/animated-pixel-trial.html",
-      "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<h3>Before starting the experiment, please take a moment to practice the task.</h3><p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -9420,7 +9420,7 @@
     "threshold-pixel-trial": {
       "type": "website",
       "path": "geospatial-dm/assets/thresholdPixel/threshold-pixel-trial.html",
-      "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<h3>Before starting the experiment, please take a moment to practice the task.</h3><p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -11725,7 +11725,7 @@
     "threshold-pixel-sorted-trial": {
       "type": "website",
       "path": "geospatial-dm/assets/thresholdPixelSorted/threshold-pixel-sorted-trial.html",
-      "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<h3>Before starting the experiment, please take a moment to practice the task.</h3><p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -14030,7 +14030,7 @@
     "exceed-trial": {
       "type": "website",
       "path": "geospatial-dm/assets/exceedance/exceed-practice-trial.html",
-      "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<h3>Before starting the experiment, please take a moment to practice the task.</h3><p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
@@ -16335,7 +16335,7 @@
     "svsup-trial": {
       "type": "website",
       "path": "geospatial-dm/assets/svsup/svsup-trial.html",
-      "instruction": "Before starting the experiment, please take a moment to practice the task. <p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<h3>Before starting the experiment, please take a moment to practice the task.</h3><p><strong>Recall:</strong> Your task is to recommend counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "instructionLocation": "aboveStimulus",
       "response": [
         {
