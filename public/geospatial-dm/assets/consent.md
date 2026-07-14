@@ -17,7 +17,7 @@ your participation will remain anonymous and your responses will
 not be used to identify you. In the unlikely event of a security breach, your responses and participation in the study could be uncovered, however, we are not collecting data on any sensitive topics. We use data encryption and password protection to minimize this risk.
 
 #### Benefits to research participants and others
-There may be no direct benefit to reserach participants.
+There may be no direct benefit to research participants.
 The possible benefits include exposure to interesting data
 visualization, along with helping inform the
 development of future data exploration platforms.
