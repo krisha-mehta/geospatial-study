@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Introduction</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0 auto;
+    max-width: 700px;
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: #1f2937;
+    background: #fff;
+    padding: 32px 20px 60px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: #111827;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: #111827;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 6px;
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin: 0 0 12px;
+  }
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  section {
+    margin-bottom: 36px;
+  }
+
+  .callout {
+    background: #fff7ed;
+    border-left: 4px solid #f59e0b;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+
+  .formula {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 16px 20px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin: 16px 0;
+  }
+
+  .limits {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+
+  .limits div {
+    flex: 1 1 200px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: center;
+  }
+
+  .limits .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #6b7280;
+    margin-bottom: 4px;
+  }
+
+  .limits .value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .example-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .example {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #9ca3af;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+
+  .example.best { border-left-color: #16a34a; }
+  .example.zero { border-left-color: #dc2626; }
+
+  .example .counts {
+    font-size: 14px;
+    color: #4b5563;
+  }
+
+  .example .result {
+    font-size: 17px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #111827;
+  }
+
+  .note {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 6px;
+  }
+
+  strong { color: #111827; }
+
+  /* Scroll-reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="reveal">
+  <h1>Introduction</h1>
+  <p>Welcome, and thank you for participating in our study.</p>
+</section>
+
+<section class="reveal">
+  <h2>Study Description</h2>
+  <p>In this study, you will play the role of a consultant for different states in the US making recommendations about resource allocation.</p>
+  <p>You will base your judgments in this fictional scenario on a series of maps. You&rsquo;ve been asked to help state governments allocate limited financial resources to specific counties in order to support children living in poverty.</p>
+  <p>To make your recommendations, you will review maps showing the estimated poverty rate for children under 18 in each county. Because these data are estimates from a survey, they are inherently uncertain. Estimates in some counties are more reliable than others. The maps provide information about the poverty estimate for each county and its uncertainty.</p>
+</section>
+
+<section class="reveal">
+  <p>States must decide carefully which counties should receive support.</p>
+  <div class="callout">
+    <strong>Counties are only considered eligible for aid if there is a 90% chance that the poverty rate exceeds a threshold of 15%.</strong>
+  </div>
+  <p>You will receive an additional bonus of $0.10 for each correct county they recommend that meets these criteria and lose $0.05 for every county they recommend that does not meet the criteria. You can maximize your bonus by only recommending counties that qualify.</p>
+</section>
+
+<section class="reveal">
+  <h2>Bonus Structure</h2>
+  <p>Your bonus will be calculated as:</p>
+  <div class="formula">Bonus = ($0.10 &times; correct answers) &minus; ($0.05 &times; incorrect answers)</div>
+
+  <div class="limits">
+    <div>
+      <div class="label">Maximum bonus</div>
+      <div class="value">$4.80</div>
+    </div>
+    <div>
+      <div class="label">Maximum payment</div>
+      <div class="value">$8.80</div>
+    </div>
+    <div>
+      <div class="label">Minimum bonus</div>
+      <div class="value">$0.00</div>
+    </div>
+  </div>
+  <p class="note">Your bonus cannot be negative.</p>
+</section>
+
+<section class="reveal">
+  <h4>Bonus Examples</h4>
+  <div class="example-grid">
+    <div class="example">
+      <span class="counts">40 correct, 8 incorrect</span>
+      <span class="result">$3.60</span>
+    </div>
+    <div class="example zero">
+      <span class="counts">10 correct, 38 incorrect</span>
+      <span class="result">$0.00</span>
+    </div>
+    <div class="example">
+      <span class="counts">24 correct, 24 incorrect</span>
+      <span class="result">$1.20</span>
+    </div>
+    <div class="example best">
+      <span class="counts">48 correct, 0 incorrect</span>
+      <span class="result">$4.80</span>
+    </div>
+  </div>
+  <p class="note">The bonus can never be negative &mdash; even with many incorrect recommendations, the lowest possible bonus is $0.00.</p>
+</section>
+
+<script>
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

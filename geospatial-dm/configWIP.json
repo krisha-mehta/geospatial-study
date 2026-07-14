@@ -149,8 +149,8 @@
   },
   "components": {
     "introduction": {
-      "type": "markdown",
-      "path": "geospatial-dm/assets/introduction.md",
+      "type": "website",
+      "path": "geospatial-dm/assets/introduction.html",
       "response": []
     },
     "hop-intro": {
