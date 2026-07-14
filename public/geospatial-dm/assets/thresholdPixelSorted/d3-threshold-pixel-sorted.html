@@ -113,6 +113,11 @@
     pointer-events: none;
   }
 
+  .county-interactive.hover-highlight {
+    stroke: #306de7 !important;
+    stroke-width: 2 !important;
+  }
+
   .legend { 
     position: relative;
     margin-left: auto;
@@ -557,6 +562,12 @@ function renderState(stateFips, csvFile) {
         .attr("stroke", "none")
         .attr("data-county", d => byFips.get(String(d.id))?.name ?? String(d.id))
         .style("cursor", "pointer")
+        .on("mouseover", function(event, d) {
+          d3.select(this).classed("hover-highlight", true);
+        })
+        .on("mouseout", function(event, d) {
+          d3.select(this).classed("hover-highlight", false);
+        })
         .on("click", function(event, d) {
           const county = d3.select(this).attr("data-county");
           if (!selectedCounties.includes(county)) {

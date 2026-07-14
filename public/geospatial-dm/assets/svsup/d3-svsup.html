@@ -97,6 +97,11 @@
     pointer-events: none;
   }
 
+  .county.hover-highlight {
+    stroke: #306de7 !important;
+    stroke-width: 2 !important;
+  }
+
 </style>
 </head>
 <body>
@@ -420,6 +425,12 @@ function renderCounties(){
         return rec ? color(rec.povAdj) : '#ccc';
       })
       .style('cursor', 'pointer')
+      .on('mouseover', function(event, d) {
+        d3.select(this).classed('hover-highlight', true);
+      })
+      .on('mouseout', function(event, d) {
+        d3.select(this).classed('hover-highlight', false);
+      })
       .on('click', function(event, d) {
         const county = d3.select(this).attr('data-county');
         const alreadySelected = selectedCounties.includes(county);
