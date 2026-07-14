@@ -176,7 +176,7 @@ const gState    = svgMap.append("g").attr("class","state");
 const gCounties = svgMap.append("g").attr("class","counties");
 //const gLabels   = svgMap.append("g").attr("class","labels");
 
-let projection = d3.geoEquirectangular();
+let projection = d3.geoAlbers();
 let path = d3.geoPath(projection);
 
 document.addEventListener('click', (event) => {
@@ -349,7 +349,7 @@ function renderState(stateFips, csvFile) {
         .attr("vector-effect","non-scaling-stroke");
     } else {
       // For other states, use the standard geographic projection
-      projection = d3.geoEquirectangular();
+      projection = d3.geoAlbers();
       path = d3.geoPath(projection);
       projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
       
