@@ -16,7 +16,7 @@ Your bonus will be calculated as:
 
 **Bonus = ($0.10 × correct answers) − ($0.05 × incorrect answers)**
 
-You can earn a **maximum bonus of $4.80 and a maximum payment of $8.80.**
+You can earn a **maximum bonus of $4.80 and a maximum payment of $9.80.**
 
 **The minimum bonus is $0.00**, so your bonus cannot be negative.
 
