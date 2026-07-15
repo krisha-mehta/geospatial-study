@@ -498,17 +498,26 @@ renderState(stateFips, csvFile);
 
 const responseTextarea = document.getElementById('response-text');
 const chooseButtons = document.querySelectorAll('.choose-map-btn');
+let selectedMapChoice = '';
 
-Revisit.postAnswers({ pixelUncertaintySurveyResponse: '', mapChoice: '' });
+function postAllAnswers() {
+  Revisit.postAnswers({
+    pixelUncertaintySurveyResponse: responseTextarea.value,
+    mapChoice: selectedMapChoice,
+  });
+}
+
+postAllAnswers();
 
 responseTextarea.addEventListener('input', () => {
-  Revisit.postAnswers({ pixelUncertaintySurveyResponse: responseTextarea.value });
+  postAllAnswers();
 });
 
 chooseButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     chooseButtons.forEach(b => b.classList.toggle('selected', b === btn));
-    Revisit.postAnswers({ mapChoice: btn.dataset.map });
+    selectedMapChoice = btn.dataset.map;
+    postAllAnswers();
   });
 });
 </script>
