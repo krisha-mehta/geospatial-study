@@ -42,7 +42,7 @@
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
   #map { max-width: 400px; }
-  #legend { max-width: 140px; }
+  #legend { max-width: 200px; }
 
   .county { stroke:#1c1b1b; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; }
 
@@ -107,7 +107,7 @@
 <body>
   <div class="wrap">
     <svg id="map" viewBox="0 0 400 400" aria-label="Shrinkage VSUP county map"></svg>
-    <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
+    <svg id="legend" viewBox="0 0 200 240" aria-label="Legend"></svg>
   </div>
 
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
@@ -241,6 +241,23 @@ function getGlobalTheta() {
 // to a standard error the same way per-county observation error is (moe / z),
 // rather than an empirical across-county variance.
 const GLOBAL_TAU_MOE = 6;
+const SHRINKAGE_FACTOR = 8;
+
+function getTau2(z) {
+  const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
+  return tauSe * tauSe;
+}
+
+// Shared empirical-Bayes shrinkage formula, used both for actual county data
+// (computeShrinkage) and for coloring the bivariate cone legend at arbitrary
+// (value, standard error) pairs.
+function shrinkValue(rawValue, se, theta, tau2) {
+  if (!(tau2 > 0) || !isFinite(tau2)) return theta;
+  if (!(se > 0) || !isFinite(se)) return rawValue;
+  const priorPrecision = 1 / tau2;
+  const obsPrecision = 1 / (se * se);
+  return (priorPrecision * theta + obsPrecision * rawValue) / (priorPrecision + obsPrecision);
+}
 
 async function loadData(){
   const isConnecticut = state.stateFips === '09';
@@ -397,21 +414,11 @@ function computeShrinkage(){
   if (n === 0) return;
 
   const theta = state.theta;
-  const SHRINKAGE_FACTOR = 0.5;
-  const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
-  const tau2 = tauSe * tauSe;
+  const tau2 = getTau2(z);
 
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
-    if (!(tau2 > 0) || !isFinite(tau2)) {
-      rec.povAdj = theta;
-    } else if (!(se > 0) || !isFinite(se)) {
-      rec.povAdj = rec.pov;
-    } else {
-      const priorPrecision = 1 / tau2;
-      const obsPrecision = 1 / (se * se);
-      rec.povAdj = (priorPrecision * theta + obsPrecision * rec.pov) / (priorPrecision + obsPrecision);
-    }
+    rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
   }
 }
 
@@ -493,50 +500,106 @@ function renderCounties(){
   renderSelectedList();
 }
 
+// Bivariate "cone" VSUP legend: angle encodes raw poverty rate, radius encodes
+// standard error (uncertainty), and each cell's fill is the shrunk value that
+// combination of (rawValue, se) would produce via shrinkValue() — the same
+// formula computeShrinkage() applies to real county data. The apex (radius 0)
+// sits at maximum uncertainty, where every angle converges toward theta; the
+// outer arc (radius = OUTER_RADIUS) sits at se = 0, showing fully unshrunk
+// colors across the value range.
 function renderLegend(){
   svgLegend.selectAll('*').remove();
-  const defsL = svgLegend.append('defs');
 
-  const LEGEND_LEFT  = 40;
-  const LEGEND_TOP   = 40;
-  const LEGEND_LONG  = 320;
-  const LEGEND_THICK = 15;
-  const lg = svgLegend.append('g')
-    .attr('class', 'legend-right')
-    .attr('transform', `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
-    .style('pointer-events', 'none');
+  const z = state.moeZ || CONFIG.MOE_Z;
+  const theta = state.theta;
+  const tau2 = getTau2(z);
 
-  const grad = defsL.append('linearGradient')
-    .attr('id', 'legendGrad')
-    .attr('x1', '0%').attr('x2', '0%')
-    .attr('y1', '100%').attr('y2', '0%');
-  for (let i = 0; i <= 100; i++) {
-    const t = i / 100;
-    grad.append('stop')
-      .attr('offset', `${i}%`)
-      .attr('stop-color', color(CONFIG.VALUE_MIN + t * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN)));
+  const N_VALUE_BINS = 40;
+  const N_SE_BINS = 40;
+  const SE_MIN = 0;
+  const SE_MAX = 20;
+  const SWEEP_DEG = 70;
+  const OUTER_RADIUS = 135;
+  const APEX = { x: 100, y: 200 };
+
+  const sweepRad = SWEEP_DEG * Math.PI / 180;
+  const angleScale = d3.scaleLinear()
+      .domain([0, N_VALUE_BINS])
+      .range([-sweepRad / 2, sweepRad / 2]);
+  const valueAtBin = i => CONFIG.VALUE_MIN + (i + 0.5) / N_VALUE_BINS * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN);
+  const seAtRadius = r => SE_MAX - (r / OUTER_RADIUS) * (SE_MAX - SE_MIN);
+
+  const cells = [];
+  for (let i = 0; i < N_VALUE_BINS; i++) {
+    const rawValue = valueAtBin(i);
+    for (let j = 0; j < N_SE_BINS; j++) {
+      const rInner = j * (OUTER_RADIUS / N_SE_BINS);
+      const rOuter = (j + 1) * (OUTER_RADIUS / N_SE_BINS);
+      const se = seAtRadius((rInner + rOuter) / 2);
+      cells.push({
+        startAngle: angleScale(i),
+        endAngle: angleScale(i + 1),
+        innerRadius: rInner,
+        outerRadius: rOuter,
+        fill: color(shrinkValue(rawValue, se, theta, tau2))
+      });
+    }
   }
 
-  lg.append('rect')
-    .attr('width',  LEGEND_THICK)
-    .attr('height', LEGEND_LONG)
-    .attr('fill', 'url(#legendGrad)')
-    .attr('rx', 3);
+  const arcGen = d3.arc();
+  const gCone = svgLegend.append('g')
+      .attr('transform', `translate(${APEX.x}, ${APEX.y})`)
+      .style('pointer-events', 'none');
 
-  const legendScale = d3.scaleLinear()
-    .domain([CONFIG.VALUE_MAX, CONFIG.VALUE_MIN])
-    .range([0, LEGEND_LONG]);
+  gCone.selectAll('path')
+    .data(cells)
+    .join('path')
+      .attr('d', arcGen)
+      .attr('fill', d => d.fill);
 
-  lg.append('g')
-    .attr('transform', `translate(${LEGEND_THICK}, 0)`)
-    .call(d3.axisRight(legendScale).ticks(5));
+  // Value ticks along the outer arc.
+  const valueToAngle = d3.scaleLinear()
+      .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
+      .range([-sweepRad / 2, sweepRad / 2]);
+  const valueTicks = d3.scaleLinear().domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX]).ticks(5);
+  gCone.selectAll('.value-tick')
+    .data(valueTicks)
+    .join('text')
+      .attr('class', 'value-tick')
+      .attr('font-size', 9)
+      .attr('text-anchor', 'middle')
+      .attr('x', d => (OUTER_RADIUS + 10) * Math.sin(valueToAngle(d)))
+      .attr('y', d => -(OUTER_RADIUS + 10) * Math.cos(valueToAngle(d)))
+      .text(d => d);
 
-  const legendTitle = lg.append('text')
-    .attr('x', 0)
+  // Standard-error ticks along the fan's left edge.
+  const seTickRadii = d3.range(0, N_SE_BINS + 1, N_SE_BINS / 4).map(j => j * (OUTER_RADIUS / N_SE_BINS));
+  const edgeAngle = -sweepRad / 2;
+  gCone.selectAll('.se-tick')
+    .data(seTickRadii)
+    .join('text')
+      .attr('class', 'se-tick')
+      .attr('font-size', 9)
+      .attr('text-anchor', 'end')
+      .attr('x', d => d * Math.sin(edgeAngle) - 4)
+      .attr('y', d => -d * Math.cos(edgeAngle) + 3)
+      .text(d => seAtRadius(d).toFixed(0));
+
+  svgLegend.append('text')
+    .attr('x', 100)
+    .attr('y', 20)
     .attr('font-weight', 500)
-    .attr('font-size', 11);
-  legendTitle.append('tspan').attr('x', 0).attr('y', -26).text('Shrunk Poverty');
-  legendTitle.append('tspan').attr('x', 0).attr('y', -14).text('Rate');
+    .attr('font-size', 11)
+    .attr('text-anchor', 'middle')
+    .text('Shrunk Poverty Rate');
+
+  svgLegend.append('text')
+    .attr('x', 100)
+    .attr('y', 34)
+    .attr('font-size', 9)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#666')
+    .text('angle: raw rate · radius: standard error');
 }
 
 function showCountyMessageBox({ county, onYes, onNo }) {
