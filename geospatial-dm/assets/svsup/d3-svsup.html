@@ -124,11 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const CONFIG = {
   MOE_Z: 1.645,
-  VALUE_MIN: 0,
-  VALUE_MAX: 50,
+  VALUE_MIN: 15,
+  VALUE_MAX: 40,
   MAX_SELECTIONS: 3,
-  REQUIRED_SELECTIONS: 3,
-  SHRINKAGE_SCALE: 15 // >1 = less shrinkage, <1 = more shrinkage
+  REQUIRED_SELECTIONS: 3
 };
 
 document.addEventListener('click', (event) => {
@@ -231,15 +230,17 @@ let state = {
   theta: null
 };
 
-// Grand mean poverty rate across all counties of all states (excluding Alaska,
-// which is reserved for the practice trial), fetched once and cached.
-let globalThetaPromise = null;
+// Fixed shrinkage target: a domain-chosen reference poverty rate, rather than
+// an empirical grand mean across counties.
+const GLOBAL_THETA = 15;
 function getGlobalTheta() {
-  if (!globalThetaPromise) {
-    globalThetaPromise = d3.csv('../Data/AllStatesPov.csv', d3.autoType).then(rows => d3.mean(rows, d => d.pov));
-  }
-  return globalThetaPromise;
+  return GLOBAL_THETA;
 }
+
+// Fixed prior uncertainty (tau2): treated as a margin of error of 6 converted
+// to a standard error the same way per-county observation error is (moe / z),
+// rather than an empirical across-county variance.
+const GLOBAL_TAU_MOE = 6;
 
 async function loadData(){
   const isConnecticut = state.stateFips === '09';
@@ -384,9 +385,9 @@ async function loadData(){
 }
 
 // Here is the main logic for svsup. Each county's poverty estimate is pulled toward
-// a fixed reference point (theta = the grand mean poverty rate across all counties
-// of all states, excluding Alaska), with the pull strength governed by the ratio of
-// observation variance (from the margin of error) to the across-county variance (tau2).
+// a fixed reference point (theta = GLOBAL_THETA, a fixed reference poverty rate),
+// with the pull strength governed by the ratio of observation variance (from the
+// margin of error) to a fixed prior variance (tau2, from GLOBAL_TAU_MOE).
 // Higher-uncertainty counties shrink more, while low uncertainty counties stay close
 // to their original estimates.
 function computeShrinkage(){
@@ -396,7 +397,9 @@ function computeShrinkage(){
   if (n === 0) return;
 
   const theta = state.theta;
-  const tau2 = d3.mean(records, d => (d.pov - theta) ** 2) * CONFIG.SHRINKAGE_SCALE;
+  const SHRINKAGE_FACTOR = 2.5;
+  const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
+  const tau2 = tauSe * tauSe;
 
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
