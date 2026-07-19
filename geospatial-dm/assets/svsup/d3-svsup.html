@@ -397,7 +397,7 @@ function computeShrinkage(){
   if (n === 0) return;
 
   const theta = state.theta;
-  const SHRINKAGE_FACTOR = 2.5;
+  const SHRINKAGE_FACTOR = 4;
   const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
   const tau2 = tauSe * tauSe;
 
