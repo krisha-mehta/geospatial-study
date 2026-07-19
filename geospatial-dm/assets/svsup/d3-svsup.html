@@ -241,7 +241,7 @@ function getGlobalTheta() {
 // to a standard error the same way per-county observation error is (moe / z),
 // rather than an empirical across-county variance.
 const GLOBAL_TAU_MOE = 8;
-const SHRINKAGE_FACTOR = 8;
+const SHRINKAGE_FACTOR = 2;
 
 function getTau2(z) {
   const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
