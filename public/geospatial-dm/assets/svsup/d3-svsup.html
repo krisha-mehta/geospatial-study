@@ -501,8 +501,9 @@ function renderLegend(){
   const theta = state.theta;
   const tau2 = getTau2(z);
 
-  const N_VALUE_BINS = 2;
-  const N_SE_BINS = 2;
+  const N_VALUE_BINS = 4;
+  const N_SE_BINS = 4; //Krisha: make this about 40 so that it appears smmoth 
+  // 40 works and renders without any delay
   const SE_MIN = 0;
   const SE_MAX = 20;
   const SWEEP_DEG = 70;
