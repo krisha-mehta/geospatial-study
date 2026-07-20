@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const CONFIG = {
   MOE_Z: 1.645,
-  VALUE_MIN: 15,
-  VALUE_MAX: 40,
+  VALUE_MIN: 10,
+  VALUE_MAX: 50,
   MAX_SELECTIONS: 3,
   REQUIRED_SELECTIONS: 3
 };
@@ -237,9 +237,6 @@ function getGlobalTheta() {
   return GLOBAL_THETA;
 }
 
-// Fixed prior uncertainty (tau2): treated as a margin of error of 6 converted
-// to a standard error the same way per-county observation error is (moe / z),
-// rather than an empirical across-county variance.
 const GLOBAL_TAU_MOE = 8;
 const SHRINKAGE_FACTOR = 4;
 
@@ -248,9 +245,6 @@ function getTau2(z) {
   return tauSe * tauSe;
 }
 
-// Shared empirical-Bayes shrinkage formula, used both for actual county data
-// (computeShrinkage) and for coloring the bivariate cone legend at arbitrary
-// (value, standard error) pairs.
 function shrinkValue(rawValue, se, theta, tau2) {
   if (!(tau2 > 0) || !isFinite(tau2)) return theta;
   if (!(se > 0) || !isFinite(se)) return rawValue;
