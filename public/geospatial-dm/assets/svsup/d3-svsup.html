@@ -241,7 +241,7 @@ function getGlobalTheta() {
 // to a standard error the same way per-county observation error is (moe / z),
 // rather than an empirical across-county variance.
 const GLOBAL_TAU_MOE = 8;
-const SHRINKAGE_FACTOR = 2;
+const SHRINKAGE_FACTOR = 4;
 
 function getTau2(z) {
   const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
@@ -500,13 +500,6 @@ function renderCounties(){
   renderSelectedList();
 }
 
-// Bivariate "cone" VSUP legend: angle encodes raw poverty rate, radius encodes
-// standard error (uncertainty), and each cell's fill is the shrunk value that
-// combination of (rawValue, se) would produce via shrinkValue() — the same
-// formula computeShrinkage() applies to real county data. The apex (radius 0)
-// sits at maximum uncertainty, where every angle converges toward theta; the
-// outer arc (radius = OUTER_RADIUS) sits at se = 0, showing fully unshrunk
-// colors across the value range.
 function renderLegend(){
   svgLegend.selectAll('*').remove();
 
