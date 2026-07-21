@@ -505,7 +505,7 @@ function renderLegend(){
   const N_SE_BINS = 4; //Krisha: make this about 40 so that it appears smmoth 
   // 40 works and renders without any delay
   const SE_MIN = 0;
-  const SE_MAX = 20;
+  const SE_MAX = 20; // need to check if this is right (could be less)
   const SWEEP_DEG = 70;
   const OUTER_RADIUS = 135;
   const APEX = { x: 100, y: 200 };
@@ -545,7 +545,6 @@ function renderLegend(){
       .attr('d', arcGen)
       .attr('fill', d => d.fill);
 
-  // Value ticks along the outer arc.
   const valueToAngle = d3.scaleLinear()
       .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
       .range([-sweepRad / 2, sweepRad / 2]);
