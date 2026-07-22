@@ -442,8 +442,10 @@ let selectedMapChoice = '';
 
 function postAllAnswers() {
   Revisit.postAnswers({
-    thresholdPixelUncertaintySurveyResponse: responseTextarea.value,
-    mapChoice: selectedMapChoice,
+    thresholdPixelUncertaintySurveyResponse: {
+      response: responseTextarea.value,
+      mapChoice: selectedMapChoice,
+    },
   });
 }
 

@@ -432,8 +432,10 @@ let selectedMapChoice = '';
 
 function postAllAnswers() {
   Revisit.postAnswers({
-    svsupUncertaintySurveyResponse: responseTextarea.value,
-    mapChoice: selectedMapChoice,
+    svsupUncertaintySurveyResponse: {
+      response: responseTextarea.value,
+      mapChoice: selectedMapChoice,
+    },
   });
 }
 
