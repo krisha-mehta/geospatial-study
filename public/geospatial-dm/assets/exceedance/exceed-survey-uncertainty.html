@@ -420,8 +420,10 @@ let selectedMapChoice = '';
 
 function postAllAnswers() {
   Revisit.postAnswers({
-    exceedUncertaintySurveyResponse: responseTextarea.value,
-    mapChoice: selectedMapChoice,
+    exceedUncertaintySurveyResponse: {
+      response: responseTextarea.value,
+      mapChoice: selectedMapChoice,
+    },
   });
 }
 

@@ -223,14 +223,6 @@
           "location": "belowStimulus",
           "hidden": true,
           "type": "reactive"
-        },
-        {
-          "id": "mapChoice",
-          "prompt": "Preferred map:",
-          "required": true,
-          "location": "belowStimulus",
-          "hidden": true,
-          "type": "reactive"
         }
       ]
     },
@@ -241,14 +233,6 @@
         {
           "id": "pixelUncertaintySurveyResponse",
           "prompt": "Your response:",
-          "required": true,
-          "location": "belowStimulus",
-          "hidden": true,
-          "type": "reactive"
-        },
-        {
-          "id": "mapChoice",
-          "prompt": "Preferred map:",
           "required": true,
           "location": "belowStimulus",
           "hidden": true,
@@ -302,14 +286,6 @@
           "location": "belowStimulus",
           "hidden": true,
           "type": "reactive"
-        },
-        {
-          "id": "mapChoice",
-          "prompt": "Preferred map:",
-          "required": true,
-          "location": "belowStimulus",
-          "hidden": true,
-          "type": "reactive"
         }
       ]
     },
@@ -320,14 +296,6 @@
         {
           "id": "hopUncertaintySurveyResponse",
           "prompt": "Your response:",
-          "required": true,
-          "location": "belowStimulus",
-          "hidden": true,
-          "type": "reactive"
-        },
-        {
-          "id": "mapChoice",
-          "prompt": "Preferred map:",
           "required": true,
           "location": "belowStimulus",
           "hidden": true,
@@ -9490,14 +9458,6 @@
           "location": "belowStimulus",
           "hidden": true,
           "type": "reactive"
-        },
-        {
-          "id": "mapChoice",
-          "prompt": "Preferred map:",
-          "required": true,
-          "location": "belowStimulus",
-          "hidden": true,
-          "type": "reactive"
         }
       ]
     },
@@ -11799,14 +11759,6 @@
         {
           "id": "thresholdPixelUncertaintySurveyResponse",
           "prompt": "Your response:",
-          "required": true,
-          "location": "belowStimulus",
-          "hidden": true,
-          "type": "reactive"
-        },
-        {
-          "id": "mapChoice",
-          "prompt": "Preferred map:",
           "required": true,
           "location": "belowStimulus",
           "hidden": true,
@@ -14116,14 +14068,6 @@
           "location": "belowStimulus",
           "hidden": true,
           "type": "reactive"
-        },
-        {
-          "id": "mapChoice",
-          "prompt": "Preferred map:",
-          "required": true,
-          "location": "belowStimulus",
-          "hidden": true,
-          "type": "reactive"
         }
       ]
     },
@@ -16425,14 +16369,6 @@
         {
           "id": "svsupUncertaintySurveyResponse",
           "prompt": "Your response:",
-          "required": true,
-          "location": "belowStimulus",
-          "hidden": true,
-          "type": "reactive"
-        },
-        {
-          "id": "mapChoice",
-          "prompt": "Preferred map:",
           "required": true,
           "location": "belowStimulus",
           "hidden": true,

@@ -393,8 +393,10 @@ let selectedMapChoice = '';
 
 function postAllAnswers() {
   Revisit.postAnswers({
-    hopUncertaintySurveyResponse: responseTextarea.value,
-    mapChoice: selectedMapChoice,
+    hopUncertaintySurveyResponse: {
+      response: responseTextarea.value,
+      mapChoice: selectedMapChoice,
+    },
   });
 }
 
