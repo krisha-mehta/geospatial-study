@@ -238,7 +238,7 @@ function getGlobalTheta() {
 }
 
 const GLOBAL_TAU_MOE = 6;
-const SHRINKAGE_FACTOR = 2;
+const SHRINKAGE_FACTOR = 2.5;
 
 function getTau2(z) {
   const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
@@ -501,8 +501,8 @@ function renderLegend(){
   const theta = state.theta;
   const tau2 = getTau2(z);
 
-  const N_VALUE_BINS = 4;
-  const N_SE_BINS = 4; //Krisha: make this about 40 so that it appears smmoth 
+  const N_VALUE_BINS = 40;
+  const N_SE_BINS = 40; //Krisha: make this about 40 so that it appears smmoth 
   // 40 works and renders without any delay
   const SE_MIN = 0;
   const SE_MAX = 25; // need to check if this is right (could be less)
