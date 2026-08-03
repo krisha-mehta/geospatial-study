@@ -183,8 +183,7 @@ Above, you can see two maps based on the same underlying data. The map on the ri
 
 <script>
 const CONFIG = {
-  MOE_Z: 1.645,
-  SHRINKAGE_SCALE: 15 // >1 = less shrinkage, <1 = more shrinkage
+  MOE_Z: 1.645
 };
 
 const VALUE_MIN = 0, VALUE_MAX = 50;
@@ -213,40 +212,46 @@ const width = 400, height = 300;
 const projection = d3.geoEquirectangular();
 const path = d3.geoPath(projection);
 
-// Grand mean poverty rate across all counties of all states (excluding Alaska,
-// which is reserved for the practice trial), fetched once and cached.
-let globalThetaPromise = null;
+// Fixed shrinkage target: a domain-chosen reference poverty rate, rather than
+// an empirical grand mean across counties.
+const GLOBAL_THETA = 14.5;
 function getGlobalTheta() {
-  if (!globalThetaPromise) {
-    globalThetaPromise = d3.csv('../Data/AllStatesPov.csv', d3.autoType).then(rows => d3.mean(rows, d => d.pov));
-  }
-  return globalThetaPromise;
+  return GLOBAL_THETA;
 }
 
-// Empirical-Bayes shrinkage: each county's poverty estimate is pulled toward
-// a fixed reference point (theta = the grand mean poverty rate across all counties
-// of all states, excluding Alaska), with the pull strength governed by the ratio of
-// observation variance (from the margin of error) to the across-county variance (tau2).
-// Higher-uncertainty counties shrink more.
+const GLOBAL_TAU_MOE = 6;
+const SHRINKAGE_FACTOR = 2.5;
+
+function getTau2(z) {
+  const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
+  return tauSe * tauSe;
+}
+
+function shrinkValue(rawValue, se, theta, tau2) {
+  if (!(tau2 > 0) || !isFinite(tau2)) return theta;
+  if (!(se > 0) || !isFinite(se)) return rawValue;
+  const priorPrecision = 1 / tau2;
+  const obsPrecision = 1 / (se * se);
+  return (priorPrecision * theta + obsPrecision * rawValue) / (priorPrecision + obsPrecision);
+}
+
+// Here is the main logic for svsup. Each county's poverty estimate is pulled toward
+// a fixed reference point (theta = GLOBAL_THETA, a fixed reference poverty rate),
+// with the pull strength governed by the ratio of observation variance (from the
+// margin of error) to a fixed prior variance (tau2, from GLOBAL_TAU_MOE).
+// Higher-uncertainty counties shrink more, while low uncertainty counties stay close
+// to their original estimates.
 function computeShrinkage(byFips, theta){
   const z = CONFIG.MOE_Z;
   const records = Array.from(byFips.values());
   const n = records.length;
   if (n === 0) return;
 
-  const tau2 = d3.mean(records, d => (d.pov - theta) ** 2) * CONFIG.SHRINKAGE_SCALE;
+  const tau2 = getTau2(z);
 
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
-    if (!(tau2 > 0) || !isFinite(tau2)) {
-      rec.povAdj = theta;
-    } else if (!(se > 0) || !isFinite(se)) {
-      rec.povAdj = rec.pov;
-    } else {
-      const priorPrecision = 1 / tau2;
-      const obsPrecision = 1 / (se * se);
-      rec.povAdj = (priorPrecision * theta + obsPrecision * rec.pov) / (priorPrecision + obsPrecision);
-    }
+    rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
   }
 }
 
