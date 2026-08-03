@@ -144,7 +144,7 @@ const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
 const color = d3.scaleSequential(d3.interpolateYlOrRd)
-    .domain([0.4, 1])
+    .domain([0.0, 1])
     .clamp(true);
 
 let selectedCounties = [];
@@ -494,7 +494,7 @@ function renderLegend(){
     .attr('id', 'legendGrad')
     .attr('x1', '0%').attr('x2', '0%')
     .attr('y1', '100%').attr('y2', '0%');
-  const LEGEND_MIN = 0.4;
+  const LEGEND_MIN = 0.0;
   for (let i = 0; i <= 100; i++) {
     const t = i / 100;
     grad.append('stop')
