@@ -42,7 +42,7 @@
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
   #map { max-width: 400px; }
-  #legend { max-width: 140px; }
+  #legend { max-width: 200px; }
 
   .county { stroke: #1c1b1b; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
   .state-outline { fill: none; stroke: #1c1b1b; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
@@ -262,7 +262,7 @@
 
 <div class="wrap">
   <svg id="map" viewBox="0 0 400 400" aria-label="Shrinkage VSUP county map"></svg>
-  <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
+  <svg id="legend" viewBox="0 0 200 240" aria-label="Legend"></svg>
 </div>
 
 <div class="response-container">
@@ -318,8 +318,8 @@ Which states are you familiar with or have lived in?</label>
 
 const CONFIG = {
   MOE_Z: 1.645,
-  VALUE_MIN: 0,
-  VALUE_MAX: 50
+  VALUE_MIN: 3,
+  VALUE_MAX: 25
 };
 
 const svg = d3.select('#map');
@@ -382,39 +382,97 @@ function computeShrinkage(theta){
   }
 }
 
-function renderLegend(){
+function renderLegend(theta){
   svgLegend.selectAll('*').remove();
-  const defsL = svgLegend.append('defs');
 
-  const LEGEND_LEFT = 40, LEGEND_TOP = 40, LEGEND_LONG = 320, LEGEND_THICK = 15;
-  const lg = svgLegend.append('g')
-    .attr('transform', `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
-    .style('pointer-events', 'none');
+  const z = CONFIG.MOE_Z;
+  const tau2 = getTau2(z);
 
-  const grad = defsL.append('linearGradient')
-    .attr('id', 'legendGrad')
-    .attr('x1', '0%').attr('x2', '0%')
-    .attr('y1', '100%').attr('y2', '0%');
-  for (let i = 0; i <= 100; i++) {
-    const t = i / 100;
-    grad.append('stop').attr('offset', `${i}%`).attr('stop-color', color(CONFIG.VALUE_MIN + t * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN)));
+  const N_VALUE_BINS = 40;
+  const N_SE_BINS = 40;
+  const SE_MIN = 0;
+  const SE_MAX = 25;
+  const SWEEP_DEG = 70;
+  const OUTER_RADIUS = 135;
+  const APEX = { x: 100, y: 200 };
+
+  const sweepRad = SWEEP_DEG * Math.PI / 180;
+  const angleScale = d3.scaleLinear()
+      .domain([0, N_VALUE_BINS])
+      .range([-sweepRad / 2, sweepRad / 2]);
+  const valueAtBin = i => CONFIG.VALUE_MIN + (i + 0.5) / N_VALUE_BINS * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN);
+  const seAtRadius = r => SE_MAX - (r / OUTER_RADIUS) * (SE_MAX - SE_MIN);
+
+  const cells = [];
+  for (let i = 0; i < N_VALUE_BINS; i++) {
+    const rawValue = valueAtBin(i);
+    for (let j = 0; j < N_SE_BINS; j++) {
+      const rInner = j * (OUTER_RADIUS / N_SE_BINS);
+      const rOuter = (j + 1) * (OUTER_RADIUS / N_SE_BINS);
+      const se = seAtRadius((rInner + rOuter) / 2);
+      cells.push({
+        startAngle: angleScale(i),
+        endAngle: angleScale(i + 1),
+        innerRadius: rInner,
+        outerRadius: rOuter,
+        fill: color(shrinkValue(rawValue, se, theta, tau2))
+      });
+    }
   }
 
-  lg.append('rect')
-    .attr('width', LEGEND_THICK).attr('height', LEGEND_LONG)
-    .attr('fill', 'url(#legendGrad)').attr('rx', 3);
+  const arcGen = d3.arc();
+  const gCone = svgLegend.append('g')
+      .attr('transform', `translate(${APEX.x}, ${APEX.y})`)
+      .style('pointer-events', 'none');
 
-  const legendScale = d3.scaleLinear().domain([CONFIG.VALUE_MAX, CONFIG.VALUE_MIN]).range([0, LEGEND_LONG]);
-  lg.append('g')
-    .attr('transform', `translate(${LEGEND_THICK}, 0)`)
-    .call(d3.axisRight(legendScale).ticks(5));
+  gCone.selectAll('path')
+    .data(cells)
+    .join('path')
+      .attr('d', arcGen)
+      .attr('fill', d => d.fill);
 
-  const legendTitle = lg.append('text')
-    .attr('x', 0)
+  const valueToAngle = d3.scaleLinear()
+      .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
+      .range([-sweepRad / 2, sweepRad / 2]);
+  const valueTicks = d3.scaleLinear().domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX]).ticks(5);
+  gCone.selectAll('.value-tick')
+    .data(valueTicks)
+    .join('text')
+      .attr('class', 'value-tick')
+      .attr('font-size', 9)
+      .attr('text-anchor', 'middle')
+      .attr('x', d => (OUTER_RADIUS + 10) * Math.sin(valueToAngle(d)))
+      .attr('y', d => -(OUTER_RADIUS + 10) * Math.cos(valueToAngle(d)))
+      .text(d => d);
+
+  // Standard-error ticks along the fan's left edge.
+  const seTickRadii = d3.range(0, N_SE_BINS + 1, N_SE_BINS / 4).map(j => j * (OUTER_RADIUS / N_SE_BINS));
+  const edgeAngle = -sweepRad / 2;
+  gCone.selectAll('.se-tick')
+    .data(seTickRadii)
+    .join('text')
+      .attr('class', 'se-tick')
+      .attr('font-size', 9)
+      .attr('text-anchor', 'end')
+      .attr('x', d => d * Math.sin(edgeAngle) - 4)
+      .attr('y', d => -d * Math.cos(edgeAngle) + 3)
+      .text(d => seAtRadius(d).toFixed(0));
+
+  svgLegend.append('text')
+    .attr('x', 100)
+    .attr('y', 20)
     .attr('font-weight', 500)
-    .attr('font-size', 11);
-  legendTitle.append('tspan').attr('x', 0).attr('y', -26).text('Shrunk Poverty');
-  legendTitle.append('tspan').attr('x', 0).attr('y', -14).text('Rate');
+    .attr('font-size', 11)
+    .attr('text-anchor', 'middle')
+    .text('Shrunk Poverty Rate');
+
+  svgLegend.append('text')
+    .attr('x', 100)
+    .attr('y', 34)
+    .attr('font-size', 9)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#666')
+    .text('angle: raw rate · radius: standard error');
 }
 
 function renderState(stateFips, csvFile) {
@@ -484,7 +542,7 @@ function renderState(stateFips, csvFile) {
           return rec ? color(rec.povAdj) : '#ccc';
         });
 
-    renderLegend();
+    renderLegend(theta);
   })
   .catch(err => {
     console.error('Error loading data:', err);
