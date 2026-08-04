@@ -18658,10 +18658,10 @@
                         "order": "latinSquare",
                         "numSamples": 1,
                         "components": [
-                          ["hom_NE_CT_1", "hom_NE_MA_2", "hom_NE_ME_3"],
-                          ["hom_NE_CT_2", "hom_NE_MA_3", "hom_NE_ME_4"],
-                          ["hom_NE_CT_3", "hom_NE_MA_4", "hom_NE_ME_1"],
-                          ["hom_NE_CT_4", "hom_NE_MA_1", "hom_NE_ME_2"]
+                          { "order": "fixed", "components": ["hom_NE_CT_1", "hom_NE_MA_2", "hom_NE_ME_3"] },
+                          { "order": "fixed", "components": ["hom_NE_CT_2", "hom_NE_MA_3", "hom_NE_ME_4"] },
+                          { "order": "fixed", "components": ["hom_NE_CT_3", "hom_NE_MA_4", "hom_NE_ME_1"] },
+                          { "order": "fixed", "components": ["hom_NE_CT_4", "hom_NE_MA_1", "hom_NE_ME_2"] }
                         ]
                       },
                       {
