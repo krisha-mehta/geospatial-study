@@ -226,16 +226,8 @@ let state = {
   maxSel: CONFIG.MAX_SELECTIONS,
   requiredSel: CONFIG.REQUIRED_SELECTIONS,
   countyList: [],
-  byFips: new Map(),
-  theta: null
+  byFips: new Map()
 };
-
-// Fixed shrinkage target: a domain-chosen reference poverty rate, rather than
-// an empirical grand mean across counties.
-const GLOBAL_THETA = 14.5;
-function getGlobalTheta() {
-  return GLOBAL_THETA;
-}
 
 const GLOBAL_TAU_MOE = 6;
 const SHRINKAGE_FACTOR = 2.5;
@@ -245,12 +237,26 @@ function getTau2(z) {
   return tauSe * tauSe;
 }
 
-function shrinkValue(rawValue, se, theta, tau2) {
-  if (!(tau2 > 0) || !isFinite(tau2)) return theta;
-  if (!(se > 0) || !isFinite(se)) return rawValue;
-  const priorPrecision = 1 / tau2;
-  const obsPrecision = 1 / (se * se);
-  return (priorPrecision * theta + obsPrecision * rawValue) / (priorPrecision + obsPrecision);
+// Value-suppressing uncertainty palette: hue comes from the raw value alone
+// (single-hue Reds scale), and uncertainty is layered on separately by blending
+// that color toward white. The blend fraction is the same weight the raw value
+// would get pulled by in a Bayesian shrinkage toward a fixed reference (governed
+// by the ratio of observation variance, from the margin of error, to a fixed
+// prior variance, tau2) — high-SE counties wash out toward white, low-SE
+// counties stay fully saturated.
+function colorForValue(rawValue, se, tau2) {
+  const baseColor = color(rawValue);
+  let whiteBlend;
+  if (!(tau2 > 0) || !isFinite(tau2)) {
+    whiteBlend = 1;
+  } else if (!(se > 0) || !isFinite(se)) {
+    whiteBlend = 0;
+  } else {
+    const priorPrecision = 1 / tau2;
+    const obsPrecision = 1 / (se * se);
+    whiteBlend = priorPrecision / (priorPrecision + obsPrecision);
+  }
+  return d3.interpolateRgb(baseColor, '#ffffff')(whiteBlend);
 }
 
 async function loadData(){
@@ -267,8 +273,7 @@ async function loadData(){
         d3.csv(state.csvFile, d3.autoType)
       ];
 
-  const [results, theta] = await Promise.all([Promise.all(dataPromises), getGlobalTheta()]);
-  state.theta = theta;
+  const results = await Promise.all(dataPromises);
   const usTopo = results[0];
   const csv = results[1];
   const ctPlanningRegions = isConnecticut ? results[2] : null;
@@ -395,24 +400,23 @@ async function loadData(){
   }
 }
 
-// Here is the main logic for svsup. Each county's poverty estimate is pulled toward
-// a fixed reference point (theta = GLOBAL_THETA, a fixed reference poverty rate),
-// with the pull strength governed by the ratio of observation variance (from the
-// margin of error) to a fixed prior variance (tau2, from GLOBAL_TAU_MOE).
-// Higher-uncertainty counties shrink more, while low uncertainty counties stay close
-// to their original estimates.
+// Here is the main logic for svsup. Each county's fill color is computed from its
+// raw poverty rate (hue, via the single-hue Reds scale) and its uncertainty (how far
+// that color is blended toward white), with the blend strength governed by the ratio
+// of observation variance (from the margin of error) to a fixed prior variance
+// (tau2, from GLOBAL_TAU_MOE). Higher-uncertainty counties wash out toward white,
+// while low-uncertainty counties stay close to their raw color.
 function computeShrinkage(){
   const z = state.moeZ || 1.645;
   const records = Array.from(state.byFips.values());
   const n = records.length;
   if (n === 0) return;
 
-  const theta = state.theta;
   const tau2 = getTau2(z);
 
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
-    rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
+    rec.displayColor = colorForValue(rec.pov, se, tau2);
   }
 }
 
@@ -426,7 +430,7 @@ function renderCounties(){
       .attr('data-county', d=>state.byFips.get(String(d.id))?.name ?? String(d.id))
       .attr('fill', d => {
         const rec = state.byFips.get(String(d.id));
-        return rec ? color(rec.povAdj) : '#ccc';
+        return rec ? rec.displayColor : '#ccc';
       })
       .style('cursor', 'pointer')
       .on('mouseover', function(event, d) {
@@ -498,7 +502,6 @@ function renderLegend(){
   svgLegend.selectAll('*').remove();
 
   const z = state.moeZ || CONFIG.MOE_Z;
-  const theta = state.theta;
   const tau2 = getTau2(z);
 
   const N_VALUE_BINS = 3;
@@ -529,7 +532,7 @@ function renderLegend(){
         endAngle: angleScale(i + 1),
         innerRadius: rInner,
         outerRadius: rOuter,
-        fill: color(shrinkValue(rawValue, se, theta, tau2))
+        fill: colorForValue(rawValue, se, tau2)
       });
     }
   }
@@ -578,7 +581,7 @@ function renderLegend(){
     .attr('font-weight', 500)
     .attr('font-size', 11)
     .attr('text-anchor', 'middle')
-    .text('Shrunk Poverty Rate');
+    .text('Poverty Rate');
 
   svgLegend.append('text')
     .attr('x', 100)
