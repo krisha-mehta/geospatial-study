@@ -520,11 +520,10 @@ function renderLegend(){
   const theta = state.theta;
   const tau2 = getTau2(z);
 
-  const N_VALUE_BINS = 6;
-  const N_SE_BINS = 6; //Krisha: make this about 40 so that it appears smmoth 
-  // 40 works and renders without any delay
-  const SE_MIN = 0;
-  const SE_MAX = 25; // need to check if this is right (could be less)
+  const N_VALUE_BINS = 60;
+const N_SE_BINS = 40;
+const SE_MIN = 0;
+const SE_MAX = 12;
   const SWEEP_DEG = 70;
   const OUTER_RADIUS = 135;
   const APEX = { x: 100, y: 200 };
