@@ -23,7 +23,7 @@
     "sidebar": false,
     "urlParticipantIdParam": "PROLIFIC_PID",
     "studyEndMsg": "**Thank you for completing the study. Please click on this link to return to Prolific: [https://app.prolific.com/submissions/complete?cc=CX30VVKS](https://app.prolific.com/submissions/complete?cc=CX30VVKS)**",
-    "numSequences": 8
+    "numSequences": 800
   },
   "baseComponents": {
     "pixel-map-d3": {
@@ -375,7 +375,7 @@
     "hom_NE_CT_1": {
       "baseComponent": "hom-map-d3",
       "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "parameters": {
         "condition": "hops",
         "region": "Northeast",
@@ -14074,7 +14074,7 @@
     "exc_NE_CT_1": {
       "baseComponent": "exceedance-map-d3",
       "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "parameters": {
         "condition": "exceedance",
         "region": "Northeast",
@@ -16379,7 +16379,7 @@
     "svs_NE_CT_1": {
       "baseComponent": "svsup-map-d3",
       "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "parameters": {
         "condition": "svsup",
         "region": "Northeast",
