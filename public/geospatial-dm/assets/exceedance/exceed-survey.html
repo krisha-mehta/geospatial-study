@@ -326,7 +326,7 @@ const svgLegend = d3.select('#legend');
 const gFill = svg.append('g');
 const gOutline = svg.append('g');
 
-const color = d3.scaleSequential(d3.interpolateYlOrRd)
+const color = d3.scaleSequential(d3.interpolateReds)
     .domain([0, 1])
     .clamp(true);
 

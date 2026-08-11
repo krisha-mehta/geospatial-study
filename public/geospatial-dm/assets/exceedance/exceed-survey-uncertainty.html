@@ -195,7 +195,7 @@ const svgExceedLegend = d3.select("#exceed-legend");
 const svgChoroLegend  = d3.select("#choro-legend");
 
 // Exceedance probability scale (0-1)
-const exceedColor = d3.scaleSequential(d3.interpolateYlOrRd)
+const exceedColor = d3.scaleSequential(d3.interpolateReds)
   .domain([0, 1])
   .clamp(true);
 

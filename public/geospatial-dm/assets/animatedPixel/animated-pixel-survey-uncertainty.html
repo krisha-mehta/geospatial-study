@@ -185,7 +185,7 @@ const CONFIG = {
   MOE_Z: 1.645,
   N_FRAMES: 50,
   FPS: 2.5,
-  PIXEL: 3
+  PIXEL: 2
 };
 
 const VALUE_MIN = 0, VALUE_MAX = 50;
@@ -195,11 +195,11 @@ const svgChoropleth  = d3.select("#choropleth");
 const svgPixelLegend = d3.select("#pixel-legend");
 const svgChoroLegend = d3.select("#choro-legend");
 
-const pixelColor = d3.scaleSequential(d3.interpolateYlOrRd)
+const pixelColor = d3.scaleSequential(d3.interpolateReds)
   .domain([VALUE_MIN, VALUE_MAX])
   .clamp(true);
 
-const choroColor = d3.scaleSequential(d3.interpolateYlOrRd)
+const choroColor = d3.scaleSequential(d3.interpolateReds)
   .domain([VALUE_MIN, VALUE_MAX])
   .clamp(true);
 
