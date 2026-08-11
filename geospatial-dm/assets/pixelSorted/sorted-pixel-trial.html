@@ -192,7 +192,7 @@ const svgMap    = d3.select("#chart");
 const svgLegend = d3.select("#legend");
 
 const width = 400, height = 400;  
-const PIXEL = 3;
+const PIXEL = 2;
 const MOE_Z = 1.645;
 const VALUE_MIN = 0, VALUE_MAX = 50;
 const MAX_SELECTIONS = 3;
@@ -204,7 +204,7 @@ const REQUIRED_SELECTIONS = 3;
   //.range(longpal)
   //.clamp(true);
 
-const color = d3.scaleSequential(d3.interpolateYlOrRd)
+const color = d3.scaleSequential(d3.interpolateReds)
     .domain([VALUE_MIN, VALUE_MAX])
     .clamp(true);
 

@@ -322,7 +322,7 @@ const CONFIG = {
   PIXEL: 3
 };
 
-const color = d3.scaleSequential(d3.interpolateYlOrRd)
+const color = d3.scaleSequential(d3.interpolateReds)
   .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
   .clamp(true);
 
