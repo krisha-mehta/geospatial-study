@@ -148,6 +148,18 @@
     }
   },
   "components": {
+    "attention-check-HI":{
+      "baseComponent": "pixel-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "pixel",
+        "region": "West",
+        "state": "CT",
+        "stateFips": "15",
+        "csvFile": "../HIData.csv"
+      }
+    },
     "introduction": {
       "type": "website",
       "path": "geospatial-dm/assets/introduction.html",
@@ -19108,6 +19120,7 @@
             "components": [
               "pixel-intro",
               "pixel-trial",
+              "attention-check-HI",
               {
                 "order": "latinSquare",
                 "components": [
