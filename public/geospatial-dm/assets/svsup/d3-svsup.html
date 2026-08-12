@@ -144,9 +144,10 @@ const gFill = svg.append('g');
 const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
-const color = d3.scaleSequential(t => d3.interpolateReds(RAMP_FLOOR + (1-RAMP_FLOOR)*t))
-    .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX]);
-    
+const color = d3.scaleSequential(d3.interpolateReds)
+    .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
+    .clamp(true);
+
 let selectedCounties = [];
 const maxSelections = CONFIG.MAX_SELECTIONS;
 
@@ -235,11 +236,9 @@ const GLOBAL_THETA = 14.5;
 function getGlobalTheta() {
   return GLOBAL_THETA;
 }
-// median moe = 4.8, rounding to 5
-const GLOBAL_TAU_MOE = 5;
-const SHRINKAGE_FACTOR = 3;
-const MAX_WASH     = 0.85;       // never reach pure white
-const RAMP_FLOOR   = 0.15;
+
+const GLOBAL_TAU_MOE = 6;
+const SHRINKAGE_FACTOR = 2.5;
 
 function getTau2(z) {
   const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
@@ -252,25 +251,6 @@ function shrinkValue(rawValue, se, theta, tau2) {
   const priorPrecision = 1 / tau2;
   const obsPrecision = 1 / (se * se);
   return (priorPrecision * theta + obsPrecision * rawValue) / (priorPrecision + obsPrecision);
-}
-
-// On top of shrinking the value itself, also fade the resulting color toward grey
-// as uncertainty rises, using the same precision-ratio weight as the value shrinkage.
-// This makes high-SE counties/legend cells harder to visually distinguish from each
-// other, on top of their values already being pulled toward the reference.
-function washForUncertainty(baseColor, se, tau2) {
-  let wash;
-  if (!(tau2 > 0) || !isFinite(tau2)) {
-    console.error('[svsup] invalid tau2', tau2);
-    wash = 1;
-  } else if (!(se > 0) || !isFinite(se)) {
-    wash = 0;
-  } else {
-    const priorPrecision = 1 / tau2;
-    const obsPrecision = 1 / (se * se);
-    wash = priorPrecision / (priorPrecision + obsPrecision);
-  }
-  return d3.interpolateLab(baseColor, '#ffffff')(wash);
 }
 
 async function loadData(){
@@ -433,7 +413,6 @@ function computeShrinkage(){
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
     rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
-    rec.displayColor = washForUncertainty(color(rec.povAdj), se, tau2);
   }
 }
 
@@ -447,7 +426,7 @@ function renderCounties(){
       .attr('data-county', d=>state.byFips.get(String(d.id))?.name ?? String(d.id))
       .attr('fill', d => {
         const rec = state.byFips.get(String(d.id));
-        return rec ? rec.displayColor : '#ccc';
+        return rec ? color(rec.povAdj) : '#ccc';
       })
       .style('cursor', 'pointer')
       .on('mouseover', function(event, d) {
@@ -522,13 +501,14 @@ function renderLegend(){
   const theta = state.theta;
   const tau2 = getTau2(z);
 
-const N_VALUE_BINS = 5;
-const N_SE_BINS = 5;
-const SE_MIN = 0;
-const SE_MAX = 10;
-const SWEEP_DEG = 70;
-const OUTER_RADIUS = 135;
-const APEX = { x: 100, y: 200 };
+  const N_VALUE_BINS = 40;
+  const N_SE_BINS = 40; //Krisha: make this about 40 so that it appears smmoth 
+  // 40 works and renders without any delay
+  const SE_MIN = 0;
+  const SE_MAX = 25; // need to check if this is right (could be less)
+  const SWEEP_DEG = 70;
+  const OUTER_RADIUS = 135;
+  const APEX = { x: 100, y: 200 };
 
   const sweepRad = SWEEP_DEG * Math.PI / 180;
   const angleScale = d3.scaleLinear()
@@ -549,7 +529,7 @@ const APEX = { x: 100, y: 200 };
         endAngle: angleScale(i + 1),
         innerRadius: rInner,
         outerRadius: rOuter,
-        fill: washForUncertainty(color(shrinkValue(rawValue, se, theta, tau2)), se, tau2)
+        fill: color(shrinkValue(rawValue, se, theta, tau2))
       });
     }
   }
