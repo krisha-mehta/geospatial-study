@@ -145,7 +145,7 @@ const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
 const SIGMA_MAX = 7.60;
-  const MAX_WASH   = 0.85;   // cap short of pure white
+  const MAX_WASH   = 0.30;   // cap short of pure white
   const RAMP_FLOOR = 0.15; 
 
 const color = d3.scaleSequential(
@@ -239,8 +239,6 @@ let state = {
   theta: null
 };
 
-// Fixed shrinkage target: a domain-chosen reference poverty rate, rather than
-// an empirical grand mean across counties.
 const GLOBAL_THETA = 14.5;
 function getGlobalTheta() {
   return GLOBAL_THETA;
