@@ -147,8 +147,8 @@ const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
 const SIGMA_MAX = 7.60;
-  const MAX_WASH   = 0.30;   // cap short of pure white
-  const RAMP_FLOOR = 0.15; 
+  const MAX_WASH   = 0.50;   
+  const RAMP_FLOOR = 0.25; 
 
 const color = d3.scaleSequential(
     t => d3.interpolateReds(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
@@ -557,9 +557,13 @@ function renderLegend(){
       .attr('fill', d => d.fill);
 
   const valueToAngle = d3.scaleLinear()
-      .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
-      .range([-sweepRad / 2, sweepRad / 2]);
-  const valueTicks = d3.scaleLinear().domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX]).ticks(5);
+    .domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX])
+    .range([-sweepRad / 2, sweepRad / 2]);
+
+const valueTicks = d3.scaleLinear()
+    .domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX])
+    .ticks(5);
+
   gCone.selectAll('.value-tick')
     .data(valueTicks)
     .join('text')
