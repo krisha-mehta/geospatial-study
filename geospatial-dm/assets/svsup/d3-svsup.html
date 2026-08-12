@@ -1,4 +1,3 @@
-<!--THIS IS THE OLD FILE, LATEST IS CALLED RECENT-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,6 +126,8 @@ const CONFIG = {
   MOE_Z: 1.645,
   VALUE_MIN: 3,
   VALUE_MAX: 25,
+  RAW_MIN: 3,
+  RAW_MAX: 30,
   MAX_SELECTIONS: 3,
   REQUIRED_SELECTIONS: 3
 };
@@ -145,9 +146,29 @@ const gFill = svg.append('g');
 const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
-const color = d3.scaleSequential(d3.interpolateReds)
-    .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
-    .clamp(true);
+const SIGMA_MAX = 12;
+const RAMP_FLOOR = 0.15; 
+
+const color = d3.scaleSequential(
+    t => d3.interpolateReds(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
+  ).domain([3, 30])
+
+const HUE          = 28.3;   // hue angle of #b2182b
+const C_MAX        = 66;     // chroma at maximum poverty
+const L_MIN        = 60;     // lightness when fully certain
+const L_MAX        = 84;     // lightness at maximum uncertainty
+const CHROMA_LOSS  = 0.65;   // chroma retained at max uncertainty = 35%
+
+function vsupColor(pov, sigma) {
+  const p = Math.max(0, Math.min(1,
+    (pov - CONFIG.RAW_MIN) / (CONFIG.RAW_MAX - CONFIG.RAW_MIN)));
+  const u = Math.max(0, Math.min(1, sigma / SIGMA_MAX));
+
+  const lightness = L_MIN + u * (L_MAX - L_MIN);
+  const chroma    = C_MAX * p * (1 - CHROMA_LOSS * u);
+
+  return d3.hcl(HUE, chroma, lightness).formatHex();
+}
 
 let selectedCounties = [];
 const maxSelections = CONFIG.MAX_SELECTIONS;
@@ -231,8 +252,6 @@ let state = {
   theta: null
 };
 
-// Fixed shrinkage target: a domain-chosen reference poverty rate, rather than
-// an empirical grand mean across counties.
 const GLOBAL_THETA = 14.5;
 function getGlobalTheta() {
   return GLOBAL_THETA;
@@ -252,24 +271,6 @@ function shrinkValue(rawValue, se, theta, tau2) {
   const priorPrecision = 1 / tau2;
   const obsPrecision = 1 / (se * se);
   return (priorPrecision * theta + obsPrecision * rawValue) / (priorPrecision + obsPrecision);
-}
-
-// On top of shrinking the value itself, also fade the resulting color toward grey
-// as uncertainty rises, using the same precision-ratio weight as the value shrinkage.
-// This makes high-SE counties/legend cells harder to visually distinguish from each
-// other, on top of their values already being pulled toward the reference.
-function blendTowardGrey(baseColor, se, tau2) {
-  let greyBlend;
-  if (!(tau2 > 0) || !isFinite(tau2)) {
-    greyBlend = 1;
-  } else if (!(se > 0) || !isFinite(se)) {
-    greyBlend = 0;
-  } else {
-    const priorPrecision = 1 / tau2;
-    const obsPrecision = 1 / (se * se);
-    greyBlend = priorPrecision / (priorPrecision + obsPrecision);
-  }
-  return d3.interpolateRgb(baseColor, '#999999')(greyBlend);
 }
 
 async function loadData(){
@@ -431,8 +432,8 @@ function computeShrinkage(){
 
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
+    rec.sigma = se;
     rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
-    rec.displayColor = blendTowardGrey(color(rec.povAdj), se, tau2);
   }
 }
 
@@ -446,7 +447,7 @@ function renderCounties(){
       .attr('data-county', d=>state.byFips.get(String(d.id))?.name ?? String(d.id))
       .attr('fill', d => {
         const rec = state.byFips.get(String(d.id));
-        return rec ? rec.displayColor : '#ccc';
+        return rec ? vsupColor(rec.povAdj, rec.sigma) : '#ccc';     
       })
       .style('cursor', 'pointer')
       .on('mouseover', function(event, d) {
@@ -521,10 +522,12 @@ function renderLegend(){
   const theta = state.theta;
   const tau2 = getTau2(z);
 
-  const N_VALUE_BINS = 60;
-const N_SE_BINS = 40;
-const SE_MIN = 0;
-const SE_MAX = 12;
+  const N_VALUE_BINS = 40;
+  const N_SE_BINS = 40; //Krisha: make this about 40 so that it appears smmoth 
+  // 40 works and renders without any delay
+  const SE_MIN = 0;
+  const SE_MAX = SIGMA_MAX;
+   
   const SWEEP_DEG = 70;
   const OUTER_RADIUS = 135;
   const APEX = { x: 100, y: 200 };
@@ -533,7 +536,7 @@ const SE_MAX = 12;
   const angleScale = d3.scaleLinear()
       .domain([0, N_VALUE_BINS])
       .range([-sweepRad / 2, sweepRad / 2]);
-  const valueAtBin = i => CONFIG.VALUE_MIN + (i + 0.5) / N_VALUE_BINS * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN);
+  const valueAtBin = i => CONFIG.RAW_MIN + (i + 0.5) / N_VALUE_BINS * (CONFIG.RAW_MAX - CONFIG.RAW_MIN);
   const seAtRadius = r => SE_MAX - (r / OUTER_RADIUS) * (SE_MAX - SE_MIN);
 
   const cells = [];
@@ -548,7 +551,7 @@ const SE_MAX = 12;
         endAngle: angleScale(i + 1),
         innerRadius: rInner,
         outerRadius: rOuter,
-        fill: blendTowardGrey(color(shrinkValue(rawValue, se, theta, tau2)), se, tau2)
+        fill: vsupColor(shrinkValue(rawValue, se, theta, tau2), se)
       });
     }
   }
@@ -565,9 +568,13 @@ const SE_MAX = 12;
       .attr('fill', d => d.fill);
 
   const valueToAngle = d3.scaleLinear()
-      .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
-      .range([-sweepRad / 2, sweepRad / 2]);
-  const valueTicks = d3.scaleLinear().domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX]).ticks(5);
+    .domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX])
+    .range([-sweepRad / 2, sweepRad / 2]);
+
+const valueTicks = d3.scaleLinear()
+    .domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX])
+    .ticks(5);
+
   gCone.selectAll('.value-tick')
     .data(valueTicks)
     .join('text')
@@ -605,7 +612,7 @@ const SE_MAX = 12;
     .attr('font-size', 9)
     .attr('text-anchor', 'middle')
     .attr('fill', '#666')
-    .text('angle: raw rate · radius: standard error');
+    .text('angle: pov rate · radius: standard error');
 }
 
 function showCountyMessageBox({ county, onYes, onNo }) {
