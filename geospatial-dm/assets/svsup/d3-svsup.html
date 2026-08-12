@@ -144,9 +144,13 @@ const gFill = svg.append('g');
 const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
+const SIGMA_MAX = 7.60;
+  const MAX_WASH   = 0.85;   // cap short of pure white
+  const RAMP_FLOOR = 0.15; 
+
 const color = d3.scaleSequential(
     t => d3.interpolateReds(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
-  ).domain([5, 20]);  
+  ).domain([3, 25]);  
 
 function washForUncertainty(baseColor, sigma) {
   const u = Math.min(1, sigma / SIGMA_MAX) * MAX_WASH;
@@ -511,11 +515,9 @@ function renderLegend(){
   const N_SE_BINS = 40; //Krisha: make this about 40 so that it appears smmoth 
   // 40 works and renders without any delay
   const SE_MIN = 0;
-  const SIGMA_MAX = 7.60;
-  const SE_MAX = SIGMA_MAX; 
+  const SE_MAX = SIGMA_MAX;
+   
   const SWEEP_DEG = 70;
-  const MAX_WASH   = 0.85;   // cap short of pure white
-  const RAMP_FLOOR = 0.15;   // skip near-white start of Reds, buys headroom
   const OUTER_RADIUS = 135;
   const APEX = { x: 100, y: 200 };
 
