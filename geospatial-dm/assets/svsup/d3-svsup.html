@@ -126,8 +126,8 @@ const CONFIG = {
   MOE_Z: 1.645,
   VALUE_MIN: 3,
   VALUE_MAX: 25,
-  RAW_MIN: 4,
-  RAW_MAX: 50,
+  RAW_MIN: 3,
+  RAW_MAX: 30,
   MAX_SELECTIONS: 3,
   REQUIRED_SELECTIONS: 3
 };
@@ -615,7 +615,7 @@ const valueTicks = d3.scaleLinear()
     .attr('font-size', 9)
     .attr('text-anchor', 'middle')
     .attr('fill', '#666')
-    .text('angle: raw rate · radius: standard error');
+    .text('angle: pov rate · radius: standard error');
 }
 
 function showCountyMessageBox({ county, onYes, onNo }) {
