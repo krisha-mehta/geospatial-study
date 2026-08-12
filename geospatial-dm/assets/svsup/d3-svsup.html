@@ -159,8 +159,8 @@ function washForUncertainty(baseColor, sigma) {
   const lab = d3.lab(baseColor);
 
   // 0 = retain original color
-  // 0.7 = remove up to 70% of chroma at maximum uncertainty
-  const MAX_DESATURATION = 0.70;
+  // 0.85 = remove up to 85% of chroma at maximum uncertainty
+  const MAX_DESATURATION = 0.85;
 
   const chromaRetention = 1 - u * MAX_DESATURATION;
 
@@ -523,8 +523,8 @@ function renderLegend(){
   const theta = state.theta;
   const tau2 = getTau2(z);
 
-  const N_VALUE_BINS = 4;
-  const N_SE_BINS = 4; //Krisha: make this about 40 so that it appears smmoth 
+  const N_VALUE_BINS = 40;
+  const N_SE_BINS = 40; //Krisha: make this about 40 so that it appears smmoth 
   // 40 works and renders without any delay
   const SE_MIN = 0;
   const SE_MAX = SIGMA_MAX;
