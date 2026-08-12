@@ -144,7 +144,7 @@ const gFill = svg.append('g');
 const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
-const color = d3.scaleSequential(d3.interpolateYlOrRd)
+const color = d3.scaleSequential(d3.interpolateReds)
     .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
     .clamp(true);
 
@@ -237,8 +237,8 @@ function getGlobalTheta() {
   return GLOBAL_THETA;
 }
 
-const GLOBAL_TAU_MOE = 6;
-const SHRINKAGE_FACTOR = 2.5;
+const GLOBAL_TAU_MOE = 5;
+const SHRINKAGE_FACTOR = 2;
 
 function getTau2(z) {
   const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
