@@ -144,9 +144,14 @@ const gFill = svg.append('g');
 const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
-const color = d3.scaleSequential(d3.interpolateReds)
-    .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
-    .clamp(true);
+const color = d3.scaleSequential(
+    t => d3.interpolateReds(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
+  ).domain([5, 20]);  
+
+function washForUncertainty(baseColor, sigma) {
+  const u = Math.min(1, sigma / SIGMA_MAX) * MAX_WASH;
+  return d3.interpolateLab(baseColor, '#ffffff')(u);
+}
 
 let selectedCounties = [];
 const maxSelections = CONFIG.MAX_SELECTIONS;
@@ -412,6 +417,7 @@ function computeShrinkage(){
 
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
+    rec.sigma = se;
     rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
   }
 }
@@ -426,7 +432,7 @@ function renderCounties(){
       .attr('data-county', d=>state.byFips.get(String(d.id))?.name ?? String(d.id))
       .attr('fill', d => {
         const rec = state.byFips.get(String(d.id));
-        return rec ? color(rec.povAdj) : '#ccc';
+        return rec ? washForUncertainty(color(rec.povAdj), rec.sigma) : '#ccc';     
       })
       .style('cursor', 'pointer')
       .on('mouseover', function(event, d) {
@@ -505,8 +511,11 @@ function renderLegend(){
   const N_SE_BINS = 40; //Krisha: make this about 40 so that it appears smmoth 
   // 40 works and renders without any delay
   const SE_MIN = 0;
-  const SE_MAX = 12; // need to check if this is right (could be less)
+  const SIGMA_MAX = 7.60;
+  const SE_MAX = SIGMA_MAX; 
   const SWEEP_DEG = 70;
+  const MAX_WASH   = 0.85;   // cap short of pure white
+  const RAMP_FLOOR = 0.15;   // skip near-white start of Reds, buys headroom
   const OUTER_RADIUS = 135;
   const APEX = { x: 100, y: 200 };
 
@@ -529,7 +538,7 @@ function renderLegend(){
         endAngle: angleScale(i + 1),
         innerRadius: rInner,
         outerRadius: rOuter,
-        fill: color(shrinkValue(rawValue, se, theta, tau2))
+        fill: washForUncertainty(color(shrinkValue(rawValue, se, theta, tau2)), se)
       });
     }
   }
