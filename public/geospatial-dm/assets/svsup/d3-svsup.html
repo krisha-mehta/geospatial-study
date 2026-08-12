@@ -156,8 +156,21 @@ const color = d3.scaleSequential(
   .clamp(true);;  
 
 function washForUncertainty(baseColor, sigma) {
-  const u = Math.min(1, sigma / SIGMA_MAX) * MAX_WASH;
-  return d3.interpolateLab(baseColor, '#ffffff')(u);
+  const u = Math.min(1, sigma / SIGMA_MAX);
+
+  const lab = d3.lab(baseColor);
+
+  // 0 = retain original color
+  // 0.7 = remove up to 70% of chroma at maximum uncertainty
+  const MAX_DESATURATION = 0.70;
+
+  const chromaRetention = 1 - u * MAX_DESATURATION;
+
+  return d3.lab(
+    lab.l,                       // preserve lightness
+    lab.a * chromaRetention,
+    lab.b * chromaRetention
+  ).formatHex();
 }
 
 let selectedCounties = [];
