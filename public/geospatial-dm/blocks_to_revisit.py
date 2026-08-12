@@ -1,72 +1,3 @@
-"""
-blocks_to_revisit.py
-====================
-
-Turns the block sets from generate_blocks.py into the `sequence` section of the
-reVISit study config.
-
-------------------------------------------------------------------------------
-WHY THIS STEP EXISTS
-------------------------------------------------------------------------------
-reVISit has no "pre-specified block list" feature. Blocks have to be expressed
-in its own nesting, and only one shape enforces what we want:
-
-    region block:  { "order": "latinSquare", "numSamples": 1,
-                     "components": [ ...one entry per block... ] }
-    block:         { "order": "fixed",
-                     "components": [ 4 component names, L1..L4 ] }
-
-`numSamples: 1` makes reVISit pop one entry from that block's Latin square, so
-each participant receives exactly one block per region. Because the square is
-balanced, each block is handed out exactly once per sweep of the set.
-
-Two traps this shape avoids:
-
-  - The region block must be `latinSquare`, never `fixed`. reVISit applies
-    `slice(0, numSamples)` to the component list, so `fixed` + `numSamples: 1`
-    would hand every participant the first block, forever.
-  - Blocks are `fixed`, not `latinSquare`. A `fixed` block registers no Latin
-    square path, so it cannot fall out of step with its siblings. Order inside
-    a block is unobservable anyway -- shuffleSequenceToAvoidConsecutiveRegions
-    re-shuffles all 16 trials before display.
-
-------------------------------------------------------------------------------
-BLOCK SETS ARE SHARED ACROSS CONDITIONS
-------------------------------------------------------------------------------
-One block set per region, reused by all 8 conditions with only the component
-prefix swapped (hom_ / pix_ / spix_ / ...). Condition is the between-subjects
-manipulation, so holding the stimulus pool identical means a difference between
-conditions cannot be attributed to one group drawing a different mix of
-state/difficulty combinations.
-
-This is set-level matching, not participant-level: each condition's region block
-owns its own Latin square and pops independently, so participant i in one
-condition does not line up with participant i in another. Participant-level
-matching is not reachable through config alone.
-
-------------------------------------------------------------------------------
-USAGE
-------------------------------------------------------------------------------
-    python generate_blocks.py --k 1 --seed 1           # -> blocks.csv
-    python blocks_to_revisit.py --blocks blocks.csv \\
-        --in configWIP.json --out configLatinRect.json
-
-blocks.csv is the handoff and the archival record of which blocks the study
-actually used. This script only reads it -- it does no generation and takes no
-seed, so the config can never disagree with the CSV sitting next to it.
-
-Only `sequence` is rewritten. Component definitions, baseComponents,
-studyMetadata and uiConfig are copied through untouched.
-
-`--num-sequences` is optional and OVERRIDES uiConfig.numSequences. Omit it and
-the input's value is preserved -- numSequences is a uiConfig setting, not part
-of the block structure, so this script has no business changing it silently.
-It is sanity-checked either way, because whether the design works depends on the
-relationship between the two: participants per condition is numSequences divided
-by the number of conditions, and that has to clear the largest block set several
-times over or no sweep completes and exposure never balances.
-"""
-
 import argparse
 import csv
 import json
@@ -189,10 +120,6 @@ def main():
             f"e.g. {sorted(set(missing))[:5]}. Check CENSUS_REGIONS against the "
             f"states that actually have stimuli.")
 
-    # numSequences is a uiConfig setting, not part of the block structure, so it
-    # is left alone unless explicitly overridden. It is sanity-checked either way:
-    # participants per condition must clear the largest block set several times
-    # over, or no sweep completes and exposure never balances.
     if args.num_sequences is not None:
         config["uiConfig"]["numSequences"] = args.num_sequences
 
