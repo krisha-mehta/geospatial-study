@@ -144,7 +144,7 @@ const gFill = svg.append('g');
 const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
-const color = d3.scaleSequential(d3.interpolateReds)
+const color = d3.scaleSequential(d3.interpolateYlOrRd)
     .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
     .clamp(true);
 
