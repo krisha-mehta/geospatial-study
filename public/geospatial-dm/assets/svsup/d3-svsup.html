@@ -126,6 +126,8 @@ const CONFIG = {
   MOE_Z: 1.645,
   VALUE_MIN: 3,
   VALUE_MAX: 25,
+  RAW_MIN: 4,
+  RAW_MAX: 50,
   MAX_SELECTIONS: 3,
   REQUIRED_SELECTIONS: 3
 };
@@ -523,7 +525,7 @@ function renderLegend(){
   const angleScale = d3.scaleLinear()
       .domain([0, N_VALUE_BINS])
       .range([-sweepRad / 2, sweepRad / 2]);
-  const valueAtBin = i => CONFIG.VALUE_MIN + (i + 0.5) / N_VALUE_BINS * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN);
+  const valueAtBin = i => CONFIG.RAW_MIN + (i + 0.5) / N_VALUE_BINS * (CONFIG.RAW_MAX - CONFIG.RAW_MIN);
   const seAtRadius = r => SE_MAX - (r / OUTER_RADIUS) * (SE_MAX - SE_MIN);
 
   const cells = [];
