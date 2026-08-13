@@ -148,7 +148,7 @@ const gOutline = svg.append('g');
 
 const SIGMA_MAX  = 12;
 const RAMP_FLOOR = 0.25;          // skip YlOrRd's near-white yellow end
-const MAX_DESATURATION = 0.85;    // chroma removed at maximum uncertainty
+//const MAX_DESATURATION = 0.85;    // chroma removed at maximum uncertainty
 
 const color = d3.scaleSequential(
     t => d3.interpolateYlOrRd(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
@@ -156,9 +156,7 @@ const color = d3.scaleSequential(
 
 function vsupColor(pov, sigma) {
   const u = Math.max(0, Math.min(1, sigma / SIGMA_MAX));
-  const c = d3.hcl(color(pov));            // value  -> lightness + hue
-  c.c *= (1 - u * MAX_DESATURATION);       // uncertainty -> chroma only
-  return c.formatHex();
+  return d3.interpolateRgb(color(pov), '#ffffff')(0.75 * u);   // alpha 1 -> 0.25
 }
 
 let selectedCounties = [];
