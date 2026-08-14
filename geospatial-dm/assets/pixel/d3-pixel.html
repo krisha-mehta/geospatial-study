@@ -326,7 +326,7 @@ function renderState(stateFips, csvFile) {
         byFips.set(fips, { pov:+r.pov, moe:+r.moe, name: rawName });
       } else {
         if (isConnecticut) {
-          // Debug: show what keys are available
+          // Debug show what keys are available
           console.warn(`No FIPS match for county name: "${rawName}" (normalized: "${key}") in state FIPS ${stateFips}`);
           console.warn('Available keys:', Array.from(nameToFipsMap.keys()));
         } else {
@@ -335,24 +335,23 @@ function renderState(stateFips, csvFile) {
       }
     }
 
-    // For Connecticut with projected coordinates, use identity projection
+    // For Connecticut, the planning-region GeoJSON is already WGS84 lon/lat,
+    // so it can share the standard projection path with other states.
     if (isConnecticut && ctPlanningRegions) {
-      // The GeoJSON uses EPSG:2234 (Connecticut State Plane) with coordinates in feet
-      // We need to use an identity projection and fit it to the SVG
-      projection = d3.geoIdentity().reflectY(true);
+      projection = d3.geoEquirectangular();
       path = d3.geoPath(projection);
       projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
-      
-      // For state outline, we can't use the TopoJSON state feature because coordinates don't match
+
+      // For state outline, we can't use the TopoJSON state feature because it's counties, not planning regions
       // Create a merged boundary from all planning regions instead
       const mergedBoundary = {
         type: "FeatureCollection",
         features: stateCounties
       };
-      
+
       defsMap.append("clipPath").attr("id","stateClip")
         .append("path").attr("d", path(mergedBoundary));
-        
+
       // State outline - use the union of all planning regions
       gState.append("path")
         .attr("d", path(mergedBoundary))
@@ -361,7 +360,6 @@ function renderState(stateFips, csvFile) {
         .attr("stroke-width",1.5)
         .attr("vector-effect","non-scaling-stroke");
     } else {
-      // For other states, use the standard geographic projection
       projection = d3.geoEquirectangular();
       path = d3.geoPath(projection);
       projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
