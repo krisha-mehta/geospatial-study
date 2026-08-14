@@ -3,22 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HOP Map</title>
+<title>Shrinkage VSUP Map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="../../../revisitUtilities/revisit-communicate.js"></script>
 
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  body { 
+  body {
     margin: 0 auto;
-    font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
-    background:#fff; 
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
     width: 650px;
     height: 600px;
   }
@@ -33,7 +34,7 @@
     height: 400px;
   }
 
-svg {
+  svg {
     width: 100%;
     height: auto;
     display: block;
@@ -41,34 +42,17 @@ svg {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
   #map { max-width: 400px; }
-  #legend { max-width: 140px; }
+  #legend { max-width: 200px; }
 
-  /* county fills for HOM */
   .county { stroke:#1c1b1b; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; }
-  .county.on  { fill:#9b1c1c; }  /* allocate */
-  .county.off { fill:#e9e9e9; }  /* not allocate */
 
-  .state-outline { fill:none; 
-    stroke:#1c1b1b; 
-    stroke-width:1.5; 
-    vector-effect:non-scaling-stroke; 
-}
-
-
-  .legend { 
-    position: relative;
-    margin-left: auto;
-    margin-top: 10px;
-    background:#fff; 
-    border:1px solid #e5e5e5;
-    border-radius:10px; 
-    padding:8px 10px; 
-    font-size:12px; 
-    color:#222; 
-    box-shadow:0 2px 10px rgba(0,0,0,0.05); 
-    width: fit-content;
+  .state-outline { fill:none;
+    stroke:#1c1b1b;
+    stroke-width:1.5;
+    vector-effect:non-scaling-stroke;
   }
-   #county-message-box {
+
+  #county-message-box {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
 
@@ -107,11 +91,6 @@ svg {
     cursor: pointer;
     padding: 0 2px;
   }
-  .chip button.remove-chip:focus-visible {
-    outline: 2px solid #0b5cff;
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
   .county.highlight {
     stroke: #306de7 !important;
     stroke-width: 2.5 !important;
@@ -123,95 +102,16 @@ svg {
     stroke-width: 2 !important;
   }
 
-  .legend_chip { width:12px; 
-    height:12px; 
-    border-radius:3px; 
-    display:inline-block; 
-    vertical-align:middle; 
-    margin-right:6px; 
-    border:1px solid #777; 
-}
-  .legend_chip.on  { 
-    background:#9b1c1c; 
-    border-color:#9b1c1c; 
-}
-  .legend_chip.off { 
-    background:#e9e9e9; 
-    border-color:#aaa; }
-
-  /* Progress bar styles */
-  .progress-container {
-    position: relative;
-    margin: 20px auto 10px auto;
-    font-size: 12px;
-    color: #222;
-    max-width: 400px;
-    text-align: left;
-  }
-  
-  .progress-bar {
-    width: 50%;
-    height: 8px;
-    background: #e9e9e9;
-    border-radius: 4px;
-    margin: 8px 0 4px;
-    overflow: hidden;
-  }
-  
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #306de7 0%, #0b5cff 100%);
-    border-radius: 4px;
-    transition: width 0.1s ease-out;
-    width: 0%;
-  }
-  
-  .progress-text {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 500;
-  }
-
-@media (max-width: 400px) {
-    .wrap { flex-direction: column; align-items: center; max-width: 400px; }
-    .progress-container { 
-      left: 10px; 
-      right: 10px; 
-      transform: none; 
-      min-width: auto; 
-    }
-    #legend { max-width: 400px; }
-    
-  }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <svg id="map" viewBox="0 0 400 400" aria-label="HOM county map"></svg>
-   <!--<div id="legend"><span class="legend_chip on"></span> Above Threshold Poverty Rates &nbsp; <span class="legend_chip off"></span> Below Threshold Poverty Rates</div>-->
-   <div class="legend">
-    <div><span class="legend_chip on"></span> Above Threshold Poverty Rates</div>
-    <div style="margin-top:6px"><span class="legend_chip off"></span> Below Threshold Poverty Rates</div>
+    <svg id="map" viewBox="0 0 400 400" aria-label="Shrinkage VSUP county map"></svg>
+    <svg id="legend" viewBox="0 0 200 240" aria-label="Legend"></svg>
   </div>
-  </div>
-  <div id="progress-container" class="progress-container" style="display: none;">
-     <div class="progress-text">
-    <!--<span>Animation Progress</span> -->
-      <span id="frame-counter">Frame 1 / 50</span>
-    </div>
-    <div class="progress-bar">
-      <div id="progress-fill" class="progress-fill"></div>
-    </div>
-   <!-- <div style="margin-top: 4px; font-size: 11px; color: #666; text-align: center;">
-      <span id="frames-remaining">49 frames remaining in cycle</span>
-      <span style="margin-left: 10px; color: #888;">● Continuous loop</span>
-    </div>-->
-  </div>
+
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
-  
-  
-  
+
   <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
             background:linear-gradient(135deg,rgba(247,251,255,0.85) 80%,rgba(227,242,253,0.85) 100%);
@@ -223,13 +123,13 @@ svg {
 document.addEventListener('DOMContentLoaded', () => {
 
 const CONFIG = {
-  THRESHOLD: 15,
   MOE_Z: 1.645,
-  N_FRAMES: 50,
-  FPS: 2.5,
+  VALUE_MIN: 3,
+  VALUE_MAX: 25,
+  RAW_MIN: 3,
+  RAW_MAX: 30,
   MAX_SELECTIONS: 3,
-  REQUIRED_SELECTIONS: 3,
-  RNG_SEED: 42
+  REQUIRED_SELECTIONS: 3
 };
 
 document.addEventListener('click', (event) => {
@@ -240,12 +140,36 @@ document.addEventListener('click', (event) => {
   }
 });
 
-
-
 const svg = d3.select('#map');
+const svgLegend = d3.select('#legend');
 const gFill = svg.append('g');
 const gBorders = svg.append('g');
 const gOutline = svg.append('g');
+
+const SIGMA_MAX = 12;
+const RAMP_FLOOR = 0.15; 
+
+const color = d3.scaleSequential(
+    t => d3.interpolateReds(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
+  ).domain([3, 30])
+
+function washForUncertainty(baseColor, sigma) {
+  const u = Math.min(1, sigma / SIGMA_MAX);
+
+  const lab = d3.lab(baseColor);
+
+  // 0 = retain original color
+  // 0.85 = remove up to 85% of chroma at maximum uncertainty
+  const MAX_DESATURATION = 0.85;
+
+  const chromaRetention = 1 - u * MAX_DESATURATION;
+
+  return d3.lab(
+    lab.l,                       // preserve lightness
+    lab.a * chromaRetention,
+    lab.b * chromaRetention
+  ).formatHex();
+}
 
 let selectedCounties = [];
 const maxSelections = CONFIG.MAX_SELECTIONS;
@@ -264,14 +188,14 @@ function renderSelectedList() {
        <button class="remove-chip" type="button" aria-label="Remove ${c}" title="Remove ${c}" data-county="${c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">&times;</button>
      </span>`
   )).join('');
-  
+
   let statusMessage = '';
   if (selectedCounties.length < requiredSelections) {
     statusMessage = `<div style="margin-top: 8px; color: #d97706; font-size: 13px;">You need to select exactly ${requiredSelections} counties. Currently selected: ${selectedCounties.length}</div>`;
   } else if (selectedCounties.length === requiredSelections) {
     statusMessage = `<div style="margin-top: 8px; color: #059669; font-size: 13px;">✓ You have selected exactly ${requiredSelections} counties. You can proceed to the next step.</div>`;
   }
-  
+
   panel.innerHTML = `${title}<div class="chips">${chips}</div>${statusMessage}`;
 }
 
@@ -283,10 +207,10 @@ document.addEventListener('click', (ev) => {
   if (!county) return;
   selectedCounties = selectedCounties.filter(c => c !== county);
   state.selected = selectedCounties;
-  
-  // Only post answers when exactly the required number of counties are selected
+
   if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
-    Revisit.postAnswers({ selectedCounty: selectedCounties });
+    Revisit.postAnswers({ selectedCounty: selectedCounties,
+      selectedFips: selectedCounties.map(c => __labelToFips.get(c) ?? null) });
     saveTrialToSession(selectedCounties);
   }
 
@@ -315,57 +239,55 @@ document.addEventListener('mouseout', (ev) => {
 const projection = d3.geoEquirectangular();
 const path = d3.geoPath(projection);
 
-
 const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
+/* __fips_join__ */
+const __isCity = f => Number(String(f).slice(-3)) >= 500;
+const __nameCounts = rows => { const m = new Map();
+  for (const r of rows) { const n = String(r.county ?? r.NAME ?? '').trim();
+    m.set(n, (m.get(n) || 0) + 1); } return m; };
+const __label = (f, name, counts) => ((counts.get(name) || 0) > 1)
+  ? name + (__isCity(f) ? ' city' : ' County') : name;
+const __labelToFips = new Map();
+let __CNT = new Map();
 const stripTypeSuffix = (s) => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "").replace(/\s+/g, " ").trim();
 
-function mulberry32(a){ return function(){ let t=a+=0x6D2B79F5; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; }; }
-function hashStr(str){ let h=2166136261; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h = Math.imul(h, 16777619); } return h>>>0; }
-
-// Normal CDF via erf approximation
-function normalCdf(x, mean=0, sd=1){ 
-    const z=(x-mean)/(sd||1); 
-    return 0.5 * (1 + erf(z/Math.SQRT2)); 
-}
-function erf(x){ 
-    const sign = Math.sign(x); 
-    const a1=0.254829592, 
-    a2=-0.284496736, 
-    a3=1.421413741, 
-    a4=-1.453152027, 
-    a5=1.061405429, 
-    p=0.3275911;
-  const t = 1/(1+p*Math.abs(x)); 
-  const y = 1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
-   return sign*y; 
-}
-
-
 let state = {
-  stateFips: null,          
-  csvFile: null,            
-  threshold: CONFIG.THRESHOLD,
+  stateFips: null,
+  csvFile: null,
   moeZ: CONFIG.MOE_Z,
-  fps: CONFIG.FPS,
-  nFrames: CONFIG.N_FRAMES,
-  frame: 0,
   selected: [],
   maxSel: CONFIG.MAX_SELECTIONS,
   requiredSel: CONFIG.REQUIRED_SELECTIONS,
-  rngSeed: CONFIG.RNG_SEED,
-  draws: [],
   countyList: [],
   byFips: new Map(),
-  animationStarted: false,
-  totalFramesShown: 0
+  theta: null
 };
 
+const GLOBAL_THETA = 14.5;
+function getGlobalTheta() {
+  return GLOBAL_THETA;
+}
+
+const GLOBAL_TAU_MOE = 5;
+const SHRINKAGE_FACTOR = 3;
+
+function getTau2(z) {
+  const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
+  return tauSe * tauSe;
+}
+
+function shrinkValue(rawValue, se, theta, tau2) {
+  if (!(tau2 > 0) || !isFinite(tau2)) return theta;
+  if (!(se > 0) || !isFinite(se)) return rawValue;
+  const priorPrecision = 1 / tau2;
+  const obsPrecision = 1 / (se * se);
+  return (priorPrecision * theta + obsPrecision * rawValue) / (priorPrecision + obsPrecision);
+}
 
 async function loadData(){
-  // Check if this is Connecticut (FIPS = 09)
   const isConnecticut = state.stateFips === '09';
-  
-  const dataPromises = isConnecticut 
+
+  const dataPromises = isConnecticut
     ? [
         d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
         d3.csv(state.csvFile, d3.autoType),
@@ -375,16 +297,16 @@ async function loadData(){
         d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
         d3.csv(state.csvFile, d3.autoType)
       ];
-  
-  const results = await Promise.all(dataPromises);
+
+  const [results, theta] = await Promise.all([Promise.all(dataPromises), getGlobalTheta()]);
+  state.theta = theta;
   const usTopo = results[0];
   const csv = results[1];
   const ctPlanningRegions = isConnecticut ? results[2] : null;
 
   let stateCounties, stateMesh;
-  
+
   if (isConnecticut && ctPlanningRegions) {
-    // For Connecticut, use planning regions
     stateCounties = ctPlanningRegions.features;
     const boundaries = [];
     for (const feature of stateCounties) {
@@ -406,24 +328,19 @@ async function loadData(){
       (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b
     );
   }
-  
+
   const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === state.stateFips);
 
-  // Create a helper to add multiple name variations for CT planning regions
   const addCTRegionMapping = (nameToFips, id, regPlanOrg, shortName) => {
-    // Add full REGPLANORG name
     if (regPlanOrg) {
       nameToFips.set(norm(regPlanOrg), id);
-      // Remove "Council of Governments" suffix
       const withoutCOG = regPlanOrg.replace(/\s*(Council of Governments|Regional Council of Governments)\s*$/gi, '').trim();
       nameToFips.set(norm(withoutCOG), id);
     }
-    // Add SHORT_NAME
     if (shortName) {
       nameToFips.set(norm(shortName), id);
     }
-    
-    // Add specific CSV name mappings for CT planning regions
+
     const csvMappings = {
       'CRCOG': 'Capitol',
       'CTMetro': 'Greater Bridgeport',
@@ -435,7 +352,7 @@ async function loadData(){
       'SECCOG': 'Southeastern Connecticut',
       'Western CT': 'Western Connecticut'
     };
-    
+
     if (csvMappings[shortName]) {
       nameToFips.set(norm(csvMappings[shortName]), id);
     }
@@ -444,18 +361,16 @@ async function loadData(){
   const nameToFips = new Map();
   for(const f of stateCounties){
     const id = String(f.id);
-    
+
     if (isConnecticut && ctPlanningRegions) {
-      // For CT planning regions, use special mapping
       const regPlanOrg = f.properties?.REGPLANORG || "";
       const shortName = f.properties?.SHORT_NAME || "";
       addCTRegionMapping(nameToFips, id, regPlanOrg, shortName);
     } else {
-      // For counties, use name property
       const raw = f.properties?.name ?? '';
       const base = norm(stripTypeSuffix(raw));
       nameToFips.set(base, id);
-      
+
       if (/\bsaint\b/i.test(raw)){
         nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st'))), id);
         nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st.'))), id);
@@ -467,19 +382,26 @@ async function loadData(){
   }
 
   const byFips = new Map();
+  __CNT = __nameCounts(csv);
+  __labelToFips.clear();
   for(const r of csv){
     const rawName = String(r.county ?? r.NAME ?? '').trim();
     const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
-    /* __fips_join__ */
-    const __csvFips = (r.fips === undefined || r.fips === null || String(r.fips).trim() === '')
+    const __raw = (r.fips === undefined || r.fips === null || String(r.fips).trim() === '')
       ? null : String(r.fips).trim().padStart(5, '0');
-    const __dupName = __csvFips ? false
-      : csv.filter(x => String(x.county ?? x.NAME ?? '').trim() === rawName).length > 1;
-    if (__dupName) console.error('[fips-join] "' + rawName + '" occurs more than once in '
-      + 'this state and the data file has no fips column - refusing to guess.');
-    const fips = __csvFips || (__dupName ? undefined : nameToFips.get(key));
+    let fips;
+    if (__raw) { fips = __raw; }
+    else if ((__CNT.get(rawName) || 0) > 1) {
+      console.error('[fips-join] "' + rawName + '" occurs ' + __CNT.get(rawName) +
+        'x in this state and the data file has no fips column - refusing to guess.');
+      fips = undefined;
+    } else { fips = nameToFips.get(key); }
     if (!fips) { console.warn('No FIPS for', rawName); continue; }
-    byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
+    if (byFips.has(fips)) console.error('[fips-join] duplicate fips ' + fips +
+      ' (' + rawName + ') - a row is being overwritten.');
+    { const __lbl = __label(fips, rawName, __CNT);
+      __labelToFips.set(__lbl, fips);
+      byFips.set(fips, { pov: +r.pov, moe: +r.moe, name: __lbl, fips }); }
   }
 
   projection.fitSize([400,400], {type:'FeatureCollection', features: stateCounties});
@@ -489,20 +411,69 @@ async function loadData(){
   gBorders.selectAll('*').remove();
   gOutline.selectAll('*').remove();
 
-  gOutline.append('path').attr('class','state-outline').attr('d', path(stateFeature));
+  if (isConnecticut && ctPlanningRegions) {
+    const mergedBoundary = { type: "FeatureCollection", features: stateCounties };
+    gOutline.append('path')
+      .attr('class','state-outline')
+      .attr('d', path(mergedBoundary));
+  } else {
+    gOutline.append('path')
+      .datum(stateFeature)
+      .attr('class','state-outline')
+      .attr('d', path);
+  }
+
   gBorders.append('path')
     .attr('d', path(stateMesh))
     .attr('fill','none').attr('stroke','#1c1b1b').attr('stroke-width',1.2)
     .attr('vector-effect','non-scaling-stroke');
 
-  // County paths
+  state.countyList = stateCounties;
+  state.byFips = byFips;
+
+  computeShrinkage();
+  renderCounties();
+  renderLegend();
+
+  if (selectedCounties.length < maxSelections) {
+    gFill.selectAll('.county').style('pointer-events', 'auto');
+  }
+}
+
+// Here is the main logic for svsup. Each county's poverty estimate is pulled toward
+// a fixed reference point (theta = GLOBAL_THETA, a fixed reference poverty rate),
+// with the pull strength governed by the ratio of observation variance (from the
+// margin of error) to a fixed prior variance (tau2, from GLOBAL_TAU_MOE).
+// Higher-uncertainty counties shrink more, while low uncertainty counties stay close
+// to their original estimates.
+function computeShrinkage(){
+  const z = state.moeZ || 1.645;
+  const records = Array.from(state.byFips.values());
+  const n = records.length;
+  if (n === 0) return;
+
+  const theta = state.theta;
+  const tau2 = getTau2(z);
+
+  for (const rec of records){
+    const se = (rec.moe ?? 0) / z;
+    rec.sigma = se;
+    rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
+  }
+}
+
+function renderCounties(){
   gFill.selectAll('path.county')
-    .data(stateCounties, d=>String(d.id))
+    .data(state.countyList, d=>String(d.id))
     .join('path')
-      .attr('class','county off')
+      .attr('class','county')
       .attr('d', d=>path(d))
       .attr('data-fips', d=>String(d.id))
-      .attr('data-county', d=>byFips.get(String(d.id))?.name ?? String(d.id))
+      .attr('data-county', d=>state.byFips.get(String(d.id))?.name ?? String(d.id))
+      .attr('fill', d => {
+        const rec = state.byFips.get(String(d.id));
+        return rec ? washForUncertainty(color(rec.povAdj), rec.sigma) : '#ccc';     
+      })
       .style('cursor', 'pointer')
       .on('mouseover', function(event, d) {
         d3.select(this).classed('hover-highlight', true);
@@ -520,12 +491,13 @@ async function loadData(){
             onYes: () => {
               selectedCounties.push(county);
               state.selected = selectedCounties;
-              
+
               if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
-                Revisit.postAnswers({ selectedCounty: selectedCounties });
+                Revisit.postAnswers({ selectedCounty: selectedCounties,
+                  selectedFips: selectedCounties.map(c => __labelToFips.get(c) ?? null) });
                 saveTrialToSession(selectedCounties);
               }
-              
+
               renderSelectedList();
               if (selectedCounties.length === maxSelections) {
                 gFill.selectAll('.county')
@@ -538,14 +510,14 @@ async function loadData(){
             onNo: () => {}
           });
         } else {
-          
+
           const box = document.getElementById('county-message-box');
           const msg = `You have already selected this county to allocate resources.<br>To unselect, click on the <b>x</b> next to the county name below.`;
           box.innerHTML = msg + `<br><br><button id='county-ok-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>OK</button>`;
           box.style.display = 'block';
           let countyFeature = null;
-          for (const f of stateCounties) {
-            const name = byFips.get(String(f.id))?.name ?? String(f.id);
+          for (const f of state.countyList) {
+            const name = state.byFips.get(String(f.id))?.name ?? String(f.id);
             if (name === county) { countyFeature = f; break; }
           }
           const svgEl = document.getElementById('map');
@@ -567,29 +539,106 @@ async function loadData(){
       });
 
   renderSelectedList();
-
-
-
-  state.countyList = stateCounties;
-  state.byFips = byFips;
-  if (selectedCounties.length < maxSelections) {
-    gFill.selectAll('.county').style('pointer-events', 'auto');
-  }
-
-  computeXprob();
-  regenerateDraws();
-  renderFrame(0, true);
 }
 
-function computeXprob(){
-  const t = state.threshold;
-  const z = state.moeZ;
-  for(const [fips, rec] of state.byFips){
-    const sd = (rec.moe ?? 0) / (z || 1.645);
-    rec.xprob = (!isFinite(sd) || sd <= 0)
-      ? (rec.pov >= t ? 1 : 0)
-      : (1 - normalCdf(t, rec.pov, sd));
+function renderLegend(){
+  svgLegend.selectAll('*').remove();
+
+  const z = state.moeZ || CONFIG.MOE_Z;
+  const theta = state.theta;
+  const tau2 = getTau2(z);
+
+  const N_VALUE_BINS = 40;
+  const N_SE_BINS = 40; //Krisha: make this about 40 so that it appears smmoth 
+  // 40 works and renders without any delay
+  const SE_MIN = 0;
+  const SE_MAX = SIGMA_MAX;
+   
+  const SWEEP_DEG = 70;
+  const OUTER_RADIUS = 135;
+  const APEX = { x: 100, y: 200 };
+
+  const sweepRad = SWEEP_DEG * Math.PI / 180;
+  const angleScale = d3.scaleLinear()
+      .domain([0, N_VALUE_BINS])
+      .range([-sweepRad / 2, sweepRad / 2]);
+  const valueAtBin = i => CONFIG.RAW_MIN + (i + 0.5) / N_VALUE_BINS * (CONFIG.RAW_MAX - CONFIG.RAW_MIN);
+  const seAtRadius = r => SE_MAX - (r / OUTER_RADIUS) * (SE_MAX - SE_MIN);
+
+  const cells = [];
+  for (let i = 0; i < N_VALUE_BINS; i++) {
+    const rawValue = valueAtBin(i);
+    for (let j = 0; j < N_SE_BINS; j++) {
+      const rInner = j * (OUTER_RADIUS / N_SE_BINS);
+      const rOuter = (j + 1) * (OUTER_RADIUS / N_SE_BINS);
+      const se = seAtRadius((rInner + rOuter) / 2);
+      cells.push({
+        startAngle: angleScale(i),
+        endAngle: angleScale(i + 1),
+        innerRadius: rInner,
+        outerRadius: rOuter,
+        fill: washForUncertainty(color(shrinkValue(rawValue, se, theta, tau2)), se)
+      });
+    }
   }
+
+  const arcGen = d3.arc();
+  const gCone = svgLegend.append('g')
+      .attr('transform', `translate(${APEX.x}, ${APEX.y})`)
+      .style('pointer-events', 'none');
+
+  gCone.selectAll('path')
+    .data(cells)
+    .join('path')
+      .attr('d', arcGen)
+      .attr('fill', d => d.fill);
+
+  const valueToAngle = d3.scaleLinear()
+    .domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX])
+    .range([-sweepRad / 2, sweepRad / 2]);
+
+const valueTicks = d3.scaleLinear()
+    .domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX])
+    .ticks(5);
+
+  gCone.selectAll('.value-tick')
+    .data(valueTicks)
+    .join('text')
+      .attr('class', 'value-tick')
+      .attr('font-size', 9)
+      .attr('text-anchor', 'middle')
+      .attr('x', d => (OUTER_RADIUS + 10) * Math.sin(valueToAngle(d)))
+      .attr('y', d => -(OUTER_RADIUS + 10) * Math.cos(valueToAngle(d)))
+      .text(d => d);
+
+  // Standard-error ticks along the fan's left edge.
+  const seTickRadii = d3.range(0, N_SE_BINS + 1, N_SE_BINS / 4).map(j => j * (OUTER_RADIUS / N_SE_BINS));
+  const edgeAngle = -sweepRad / 2;
+  gCone.selectAll('.se-tick')
+    .data(seTickRadii)
+    .join('text')
+      .attr('class', 'se-tick')
+      .attr('font-size', 9)
+      .attr('text-anchor', 'end')
+      .attr('x', d => d * Math.sin(edgeAngle) - 4)
+      .attr('y', d => -d * Math.cos(edgeAngle) + 3)
+      .text(d => seAtRadius(d).toFixed(0));
+
+  svgLegend.append('text')
+    .attr('x', 100)
+    .attr('y', 20)
+    .attr('font-weight', 500)
+    .attr('font-size', 11)
+    .attr('text-anchor', 'middle')
+    .text('Shrunk Poverty Rate');
+
+  svgLegend.append('text')
+    .attr('x', 100)
+    .attr('y', 34)
+    .attr('font-size', 9)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#666')
+    .text('angle: pov rate · radius: standard error');
 }
 
 function showCountyMessageBox({ county, onYes, onNo }) {
@@ -622,107 +671,13 @@ function showCountyMessageBox({ county, onYes, onNo }) {
   document.getElementById("county-no-btn").onclick  = () => { box.style.display = "none"; onNo();  };
 }
 
-function regenerateDraws(){
-  state.nFrames = CONFIG.N_FRAMES;
-  state.fps = CONFIG.FPS;
-  const seed = state.rngSeed = Math.abs(((+new Date()) & 0xffffffff) ^ hashStr(state.stateFips + '|' + state.csvFile + '|' + state.threshold));
-  const rng0 = mulberry32(seed);
-  const ids = state.countyList.map(f=>String(f.id));
-  const frames = [];
-  for(let k=0;k<state.nFrames;k++){
-    const m = new Map();
-    for(const fips of ids){
-      const p = state.byFips.get(fips)?.xprob ?? 0;
-      m.set(fips, rng0() < p ? 1 : 0);
-    }
-    frames.push(m);
-  }
-  state.draws = frames;
-  state.frame = 0;
-}
-
-function updateProgressBar() {
-  const progressContainer = document.getElementById('progress-container');
-  const progressFill = document.getElementById('progress-fill');
-  const frameCounter = document.getElementById('frame-counter');
-  const framesRemaining = document.getElementById('frames-remaining');
-  
-  if (!state.animationStarted) return;
-  
-  const currentFrame = state.frame + 1; // 1-based for display
-  const totalFrames = state.nFrames;
-  const remaining = totalFrames - currentFrame;
-  const progressPercent = (currentFrame / totalFrames) * 100;
-  
-  progressFill.style.width = progressPercent + '%';
-  frameCounter.textContent = `Frame ${currentFrame} / ${totalFrames}`;
-  
-  /*if (remaining > 0) {
-    framesRemaining.textContent = `${remaining} frames remaining in cycle`;
-  } else {
-    framesRemaining.textContent = 'Cycle complete - restarting...';
-  } */
-  
-  // Show progress bar when animation starts
-  progressContainer.style.display = 'block';
-}
-
-function renderFrame(k){
-  const nextFrame = (k % state.nFrames + state.nFrames) % state.nFrames;
-  
-  // If we've completed a full cycle, briefly show completion message
-  if (state.frame === state.nFrames - 1 && nextFrame === 0) {
-    // Reset progress bar to 0 for the new cycle
-    setTimeout(() => {
-      updateProgressBar();
-    }, 100);
-  }
-  
-  state.frame = nextFrame;
-  const frame = state.draws[state.frame];
-  gFill.selectAll('path.county')
-    .classed('on', d => frame.get(String(d.id)) === 1)
-    .classed('off', d => frame.get(String(d.id)) !== 1);
-    
-  
-  updateProgressBar();
-}
-
-let lastTick = 0;
-function loop(ts){
-  const interval = 1000 / (state.fps || CONFIG.FPS);
-  if (ts - lastTick >= interval){ 
-    lastTick = ts; 
-    
-   
-    if (!state.animationStarted) {
-      state.animationStarted = true;
-      updateProgressBar();
-    }
-    
-    renderFrame(state.frame+1); 
-  }
-  requestAnimationFrame(loop);
-}
-
-
-let loopStarted = false;
-function startLoopOnce(){ if (!loopStarted){ loopStarted = true; requestAnimationFrame(loop); } }
-
-
 function renderState(stateFips, csvFile){
   state.stateFips = String(stateFips);
   state.csvFile = csvFile;
   selectedCounties = [];
   state.selected = selectedCounties;
-  state.animationStarted = false;
-  state.totalFramesShown = 0;
-  
- 
-  const progressContainer = document.getElementById('progress-container');
-  progressContainer.style.display = 'none';
-  
-  loadData().then(startLoopOnce).catch(e=>{
+
+  loadData().catch(e=>{
     console.error(e);
     alert('Data load failed. Serve with a local web server and place the CSV next to this HTML file.');
   });

@@ -286,7 +286,8 @@ document.addEventListener('click', (ev) => {
   
   // Only post answers when exactly the required number of counties are selected
   if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
-    Revisit.postAnswers({ selectedCounty: selectedCounties });
+    Revisit.postAnswers({ selectedCounty: selectedCounties,
+      selectedFips: selectedCounties.map(c => __labelToFips.get(c) ?? null) });
     saveTrialToSession(selectedCounties);
   }
 
@@ -317,6 +318,15 @@ const path = d3.geoPath(projection);
 
 
 const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
+/* __fips_join__ */
+const __isCity = f => Number(String(f).slice(-3)) >= 500;
+const __nameCounts = rows => { const m = new Map();
+  for (const r of rows) { const n = String(r.county ?? r.NAME ?? '').trim();
+    m.set(n, (m.get(n) || 0) + 1); } return m; };
+const __label = (f, name, counts) => ((counts.get(name) || 0) > 1)
+  ? name + (__isCity(f) ? ' city' : ' County') : name;
+const __labelToFips = new Map();
+let __CNT = new Map();
 const stripTypeSuffix = (s) => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "").replace(/\s+/g, " ").trim();
 
 function mulberry32(a){ return function(){ let t=a+=0x6D2B79F5; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; }; }
@@ -467,19 +477,26 @@ async function loadData(){
   }
 
   const byFips = new Map();
+  __CNT = __nameCounts(csv);
+  __labelToFips.clear();
   for(const r of csv){
     const rawName = String(r.county ?? r.NAME ?? '').trim();
     const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
-    /* __fips_join__ */
-    const __csvFips = (r.fips === undefined || r.fips === null || String(r.fips).trim() === '')
+    const __raw = (r.fips === undefined || r.fips === null || String(r.fips).trim() === '')
       ? null : String(r.fips).trim().padStart(5, '0');
-    const __dupName = __csvFips ? false
-      : csv.filter(x => String(x.county ?? x.NAME ?? '').trim() === rawName).length > 1;
-    if (__dupName) console.error('[fips-join] "' + rawName + '" occurs more than once in '
-      + 'this state and the data file has no fips column - refusing to guess.');
-    const fips = __csvFips || (__dupName ? undefined : nameToFips.get(key));
+    let fips;
+    if (__raw) { fips = __raw; }
+    else if ((__CNT.get(rawName) || 0) > 1) {
+      console.error('[fips-join] "' + rawName + '" occurs ' + __CNT.get(rawName) +
+        'x in this state and the data file has no fips column - refusing to guess.');
+      fips = undefined;
+    } else { fips = nameToFips.get(key); }
     if (!fips) { console.warn('No FIPS for', rawName); continue; }
-    byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
+    if (byFips.has(fips)) console.error('[fips-join] duplicate fips ' + fips +
+      ' (' + rawName + ') - a row is being overwritten.');
+    { const __lbl = __label(fips, rawName, __CNT);
+      __labelToFips.set(__lbl, fips);
+      byFips.set(fips, { pov: +r.pov, moe: +r.moe, name: __lbl, fips }); }
   }
 
   projection.fitSize([400,400], {type:'FeatureCollection', features: stateCounties});
@@ -522,7 +539,8 @@ async function loadData(){
               state.selected = selectedCounties;
               
               if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
-                Revisit.postAnswers({ selectedCounty: selectedCounties });
+                Revisit.postAnswers({ selectedCounty: selectedCounties,
+                  selectedFips: selectedCounties.map(c => __labelToFips.get(c) ?? null) });
                 saveTrialToSession(selectedCounties);
               }
               

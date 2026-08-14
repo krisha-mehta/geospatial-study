@@ -1,0 +1,273 @@
+state,fips,county,moe
+MD,24001,Allegany,3.1
+MD,24003,Anne Arundel,1.0
+MD,24005,Baltimore,1.1
+MD,24009,Calvert,1.6
+MD,24011,Caroline,4.4
+MD,24013,Carroll,1.0
+MD,24015,Cecil,3.2
+MD,24017,Charles,1.7
+MD,24019,Dorchester,6.5
+MD,24021,Frederick,1.2
+MD,24023,Garrett,3.9
+MD,24025,Harford,1.6
+MD,24027,Howard,1.3
+MD,24029,Kent,4.7
+MD,24031,Montgomery,0.8
+MD,24033,Prince George's,1.1
+MD,24035,Queen Anne's,2.4
+MD,24037,St. Mary's,2.4
+MD,24039,Somerset,7.7
+MD,24041,Talbot,4.4
+MD,24043,Washington,2.4
+MD,24045,Wicomico,3.4
+MD,24047,Worcester,3.1
+MD,24510,Baltimore,1.9
+MO,29001,Adair,4.3
+MO,29003,Andrew,3.0
+MO,29005,Atchison,6.7
+MO,29007,Audrain,7.2
+MO,29009,Barry,6.0
+MO,29011,Barton,7.0
+MO,29013,Bates,6.6
+MO,29015,Benton,8.3
+MO,29017,Bollinger,9.4
+MO,29019,Boone,2.7
+MO,29021,Buchanan,4.1
+MO,29023,Butler,5.4
+MO,29025,Caldwell,6.1
+MO,29027,Callaway,5.3
+MO,29029,Camden,4.7
+MO,29031,Cape Girardeau,3.4
+MO,29033,Carroll,5.2
+MO,29035,Carter,14.1
+MO,29037,Cass,1.9
+MO,29039,Cedar,8.0
+MO,29041,Chariton,6.4
+MO,29043,Christian,3.2
+MO,29045,Clark,9.8
+MO,29047,Clay,2.0
+MO,29049,Clinton,5.6
+MO,29051,Cole,2.4
+MO,29053,Cooper,4.6
+MO,29055,Crawford,5.0
+MO,29057,Dade,7.1
+MO,29059,Dallas,10.2
+MO,29061,Daviess,5.5
+MO,29063,DeKalb,4.1
+MO,29065,Dent,6.6
+MO,29067,Douglas,8.4
+MO,29069,Dunklin,5.3
+MO,29071,Franklin,1.8
+MO,29073,Gasconade,6.4
+MO,29075,Gentry,6.0
+MO,29077,Greene,1.7
+MO,29079,Grundy,4.9
+MO,29081,Harrison,8.2
+MO,29083,Henry,5.1
+MO,29085,Hickory,8.7
+MO,29087,Holt,5.9
+MO,29089,Howard,6.3
+MO,29091,Howell,6.4
+MO,29093,Iron,7.9
+MO,29095,Jackson,1.4
+MO,29097,Jasper,3.8
+MO,29099,Jefferson,1.6
+MO,29101,Johnson,2.5
+MO,29103,Knox,7.3
+MO,29105,Laclede,7.0
+MO,29107,Lafayette,3.2
+MO,29109,Lawrence,4.4
+MO,29111,Lewis,7.4
+MO,29113,Lincoln,3.2
+MO,29115,Linn,7.5
+MO,29117,Livingston,3.9
+MO,29119,McDonald,5.7
+MO,29121,Macon,4.1
+MO,29123,Madison,7.8
+MO,29125,Maries,9.3
+MO,29127,Marion,4.9
+MO,29129,Mercer,15.2
+MO,29131,Miller,7.4
+MO,29133,Mississippi,8.1
+MO,29135,Moniteau,5.8
+MO,29137,Monroe,7.2
+MO,29139,Montgomery,5.8
+MO,29141,Morgan,8.4
+MO,29143,New Madrid,4.6
+MO,29145,Newton,4.3
+MO,29147,Nodaway,4.8
+MO,29149,Oregon,10.0
+MO,29151,Osage,4.5
+MO,29153,Ozark,10.1
+MO,29155,Pemiscot,7.1
+MO,29157,Perry,5.1
+MO,29159,Pettis,4.1
+MO,29161,Phelps,4.2
+MO,29163,Pike,7.4
+MO,29165,Platte,2.5
+MO,29167,Polk,4.6
+MO,29169,Pulaski,4.1
+MO,29171,Putnam,16.1
+MO,29173,Ralls,4.7
+MO,29175,Randolph,6.3
+MO,29177,Ray,4.3
+MO,29179,Reynolds,9.8
+MO,29181,Ripley,6.0
+MO,29183,St. Charles,0.9
+MO,29185,St. Clair,4.4
+MO,29186,Ste. Genevieve,5.8
+MO,29187,St. Francois,4.4
+MO,29189,St. Louis,1.0
+MO,29195,Saline,4.4
+MO,29197,Schuyler,3.4
+MO,29199,Scotland,3.3
+MO,29201,Scott,3.8
+MO,29203,Shannon,7.5
+MO,29205,Shelby,7.3
+MO,29207,Stoddard,5.9
+MO,29209,Stone,5.2
+MO,29211,Sullivan,7.1
+MO,29213,Taney,4.7
+MO,29215,Texas,5.9
+MO,29217,Vernon,7.6
+MO,29219,Warren,6.4
+MO,29221,Washington,7.7
+MO,29223,Wayne,12.6
+MO,29225,Webster,5.7
+MO,29227,Worth,17.7
+MO,29229,Wright,10.1
+MO,29510,St. Louis,2.9
+VA,51001,Accomack,5.3
+VA,51003,Albemarle,2.3
+VA,51005,Alleghany,7.2
+VA,51007,Amelia,7.4
+VA,51009,Amherst,4.7
+VA,51011,Appomattox,5.9
+VA,51013,Arlington,1.6
+VA,51015,Augusta,3.9
+VA,51017,Bath,21.8
+VA,51019,Bedford,4.7
+VA,51021,Bland,12.3
+VA,51023,Botetourt,3.6
+VA,51025,Brunswick,10.0
+VA,51027,Buchanan,7.5
+VA,51029,Buckingham,5.9
+VA,51031,Campbell,3.0
+VA,51033,Caroline,7.1
+VA,51035,Carroll,6.7
+VA,51036,Charles City,6.8
+VA,51037,Charlotte,7.0
+VA,51041,Chesterfield,1.1
+VA,51043,Clarke,4.2
+VA,51045,Craig,12.7
+VA,51047,Culpeper,3.9
+VA,51049,Cumberland,6.0
+VA,51051,Dickenson,9.1
+VA,51053,Dinwiddie,5.2
+VA,51057,Essex,10.8
+VA,51059,Fairfax,0.7
+VA,51061,Fauquier,2.1
+VA,51063,Floyd,5.3
+VA,51065,Fluvanna,5.2
+VA,51067,Franklin,4.7
+VA,51069,Frederick,2.0
+VA,51071,Giles,5.4
+VA,51073,Gloucester,4.9
+VA,51075,Goochland,2.4
+VA,51077,Grayson,8.0
+VA,51079,Greene,5.9
+VA,51081,Greensville,12.5
+VA,51083,Halifax,4.3
+VA,51085,Hanover,1.6
+VA,51087,Henrico,1.7
+VA,51089,Henry,4.7
+VA,51091,Highland,11.5
+VA,51093,Isle of Wight,4.1
+VA,51095,James City,2.7
+VA,51097,King and Queen,10.4
+VA,51099,King George,4.0
+VA,51101,King William,5.1
+VA,51103,Lancaster,8.5
+VA,51105,Lee,10.1
+VA,51107,Loudoun,0.8
+VA,51109,Louisa,4.1
+VA,51111,Lunenburg,6.9
+VA,51113,Madison,6.6
+VA,51115,Mathews,15.0
+VA,51117,Mecklenburg,5.9
+VA,51119,Middlesex,4.3
+VA,51121,Montgomery,3.6
+VA,51125,Nelson,7.1
+VA,51127,New Kent,2.6
+VA,51131,Northampton,8.8
+VA,51133,Northumberland,12.3
+VA,51135,Nottoway,5.2
+VA,51137,Orange,5.7
+VA,51139,Page,3.7
+VA,51141,Patrick,5.2
+VA,51143,Pittsylvania,3.8
+VA,51145,Powhatan,3.8
+VA,51147,Prince Edward,6.8
+VA,51149,Prince George,4.0
+VA,51153,Prince William,1.2
+VA,51155,Pulaski,5.4
+VA,51157,Rappahannock,8.8
+VA,51159,Richmond,3.2
+VA,51161,Roanoke,2.3
+VA,51163,Rockbridge,7.0
+VA,51165,Rockingham,2.4
+VA,51167,Russell,5.9
+VA,51169,Scott,5.7
+VA,51171,Shenandoah,5.1
+VA,51173,Smyth,6.9
+VA,51175,Southampton,4.4
+VA,51177,Spotsylvania,2.4
+VA,51179,Stafford,1.6
+VA,51181,Surry,10.5
+VA,51183,Sussex,9.4
+VA,51185,Tazewell,5.2
+VA,51187,Warren,5.1
+VA,51191,Washington,3.1
+VA,51193,Westmoreland,7.9
+VA,51195,Wise,6.1
+VA,51197,Wythe,6.9
+VA,51199,York,1.7
+VA,51510,Alexandria,2.9
+VA,51520,Bristol,8.1
+VA,51530,Buena Vista,16.8
+VA,51540,Charlottesville,5.6
+VA,51550,Chesapeake,1.8
+VA,51570,Colonial Heights,6.0
+VA,51580,Covington,13.7
+VA,51590,Danville,7.0
+VA,51595,Emporia,13.5
+VA,51600,Fairfax,4.4
+VA,51610,Falls Church,1.2
+VA,51620,Franklin,11.3
+VA,51630,Fredericksburg,9.1
+VA,51640,Galax,11.1
+VA,51650,Hampton,3.4
+VA,51660,Harrisonburg,4.9
+VA,51670,Hopewell,7.3
+VA,51678,Lexington,13.6
+VA,51680,Lynchburg,4.1
+VA,51683,Manassas,2.9
+VA,51685,Manassas Park,6.9
+VA,51690,Martinsville,9.2
+VA,51700,Newport News,2.8
+VA,51710,Norfolk,2.7
+VA,51720,Norton,21.7
+VA,51730,Petersburg,8.7
+VA,51735,Poquoson,5.1
+VA,51740,Portsmouth,4.3
+VA,51750,Radford,7.6
+VA,51760,Richmond,3.7
+VA,51770,Roanoke,4.5
+VA,51775,Salem,5.9
+VA,51790,Staunton,3.8
+VA,51800,Suffolk,3.0
+VA,51810,Virginia Beach,1.4
+VA,51820,Waynesboro,6.4
+VA,51830,Williamsburg,7.1
+VA,51840,Winchester,5.7
