@@ -19,7 +19,7 @@
   body {
     margin: 0 auto;
     width: 900px;
-    height: 600px;
+    min-height: 600px;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     background: #fff;
   }
@@ -57,7 +57,7 @@
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
 
-  .county { stroke: #1c1b1b; stroke-width: 1.0; vector-effect: non-scaling-stroke; }
+  .county { stroke: #1c1b1b; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
   .state-outline { fill: none; stroke: #1c1b1b; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
 
   .legend-col {
@@ -314,7 +314,7 @@ async function loadData(stateFips, csvFile) {
   gCounties.append("path")
     .attr("d", path(topojson.mesh(usTopo, usTopo.objects.counties,
       (a, b) => String(a.id).startsWith(stateFips) && String(b.id).startsWith(stateFips) && a !== b)))
-    .attr("fill", "none").attr("stroke", "#1c1b1b").attr("stroke-width", 1.0)
+    .attr("fill", "none").attr("stroke", "#1c1b1b").attr("stroke-width", 1.2)
     .attr("vector-effect", "non-scaling-stroke");
 
   const pixels = [];
@@ -366,7 +366,7 @@ async function loadData(stateFips, csvFile) {
         return rec ? choroColor(rec.pov) : "#ccc";
       })
       .attr("stroke", "#1c1b1b")
-      .attr("stroke-width", 1.0)
+      .attr("stroke-width", 1.2)
       .attr("vector-effect", "non-scaling-stroke");
   svgChoropleth.append("path")
     .datum(stateFeature)
