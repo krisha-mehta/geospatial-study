@@ -157,7 +157,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../Data/HIData.csv"
+        "csvFile": "../HIData.csv"
       }
     },
     "pix_WE_HI_4":{
