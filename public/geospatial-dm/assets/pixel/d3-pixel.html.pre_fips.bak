@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sorted Pixel Map</title>
+<title>Pixel Map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -119,7 +119,7 @@
 
 <div class="wrap">
   <!-- Map SVG -->
-  <svg id="chart" viewBox="0 0 400 400" aria-label="Sorted pixel map of selected state"></svg>
+  <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
 
   <!--- Legend SVG (separate) -->
   <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
@@ -314,14 +314,7 @@ function renderState(stateFips, csvFile) {
     for (const r of csv) {
       const rawName = String(r.county ?? r.NAME ?? "");
       const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
-      /* __fips_join__ */
-      const __csvFips = (r.fips === undefined || r.fips === null || String(r.fips).trim() === '')
-        ? null : String(r.fips).trim().padStart(5, '0');
-      const __dupName = __csvFips ? false
-        : csv.filter(x => String(x.county ?? x.NAME ?? '').trim() === rawName).length > 1;
-      if (__dupName) console.error('[fips-join] "' + rawName + '" occurs more than once in '
-        + 'this state and the data file has no fips column - refusing to guess.');
-      const fips = __csvFips || (__dupName ? undefined : nameToFipsMap.get(key));
+      const fips = nameToFipsMap.get(key);
       if (fips) {
         byFips.set(fips, { pov:+r.pov, moe:+r.moe, name: rawName });
       } else {
@@ -343,7 +336,8 @@ function renderState(stateFips, csvFile) {
       path = d3.geoPath(projection);
       projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
       
-    
+      // For state outline, we can't use the TopoJSON state feature because coordinates don't match
+      // Create a merged boundary from all planning regions instead
       const mergedBoundary = {
         type: "FeatureCollection",
         features: stateCounties
@@ -403,24 +397,15 @@ function renderState(stateFips, csvFile) {
         const lonlat = projection.invert([x,y]);
         if (!lonlat) continue;
 
-        let rec = null, fips = null;
+        let rec = null;
         for (const f of stateCounties) {
-          if (d3.geoContains(f, lonlat)) { fips = String(f.id); rec = byFips.get(fips); break; }
+          if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
         }
         if (!rec) continue;
 
         const v = sampleValue(rec.pov, rec.moe, randn);
-        pixels.push({x, y, v, fips});
+        pixels.push({x, y, v});
       }
-    }
-    // THIS IS THE SORTED PIXEL MAP LOGIC
-    // Within each county, sort its sampled values in decreasing order and
-    // reassign them back to that county's pixels in raster order (largest
-    // value at the first pixel scanned, decreasing across/down from there).
-    const pixelsByFips = d3.group(pixels, d => d.fips);
-    for (const group of pixelsByFips.values()) {
-      const sortedValues = group.map(d => d.v).sort((a, b) => b - a);
-      group.forEach((d, i) => { d.v = sortedValues[i]; });
     }
 
     gPixels.attr("clip-path","url(#stateClip)")

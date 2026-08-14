@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sorted Pixel Map</title>
+<title>Pixel Map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -119,7 +119,7 @@
 
 <div class="wrap">
   <!-- Map SVG -->
-  <svg id="chart" viewBox="0 0 400 400" aria-label="Sorted pixel map of selected state"></svg>
+  <svg id="chart" viewBox="0 0 400 400" aria-label="Pixel map of selected state"></svg>
 
   <!--- Legend SVG (separate) -->
   <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
@@ -170,6 +170,15 @@ function sampleValue(pov, moe, randn){
 
 
 const norm = s => (s||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().trim();
+/* __fips_join__ */
+const __isCity = f => Number(String(f).slice(-3)) >= 500;
+const __nameCounts = rows => { const m = new Map();
+  for (const r of rows) { const n = String(r.county ?? r.NAME ?? '').trim();
+    m.set(n, (m.get(n) || 0) + 1); } return m; };
+const __label = (f, name, counts) => ((counts.get(name) || 0) > 1)
+  ? name + (__isCity(f) ? ' city' : ' County') : name;
+const __labelToFips = new Map();
+let __CNT = new Map();
 const stripTypeSuffix = (s) =>
   s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi, "")
    .replace(/\s+/g, " ")
@@ -311,19 +320,26 @@ function renderState(stateFips, csvFile) {
     }
 
     const byFips = new Map();
+    __CNT = __nameCounts(csv);
+    __labelToFips.clear();
     for (const r of csv) {
       const rawName = String(r.county ?? r.NAME ?? "");
       const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
-      /* __fips_join__ */
-      const __csvFips = (r.fips === undefined || r.fips === null || String(r.fips).trim() === '')
+      const __raw = (r.fips === undefined || r.fips === null || String(r.fips).trim() === '')
         ? null : String(r.fips).trim().padStart(5, '0');
-      const __dupName = __csvFips ? false
-        : csv.filter(x => String(x.county ?? x.NAME ?? '').trim() === rawName).length > 1;
-      if (__dupName) console.error('[fips-join] "' + rawName + '" occurs more than once in '
-        + 'this state and the data file has no fips column - refusing to guess.');
-      const fips = __csvFips || (__dupName ? undefined : nameToFipsMap.get(key));
+      let fips;
+      if (__raw) { fips = __raw; }
+      else if ((__CNT.get(rawName) || 0) > 1) {
+        console.error('[fips-join] "' + rawName + '" occurs ' + __CNT.get(rawName) +
+          'x in this state and the data file has no fips column - refusing to guess.');
+        fips = undefined;
+      } else { fips = nameToFipsMap.get(key); }
       if (fips) {
-        byFips.set(fips, { pov:+r.pov, moe:+r.moe, name: rawName });
+        if (byFips.has(fips)) console.error('[fips-join] duplicate fips ' + fips +
+          ' (' + rawName + ') - a row is being overwritten.');
+        { const __lbl = __label(fips, rawName, __CNT);
+          __labelToFips.set(__lbl, fips);
+          byFips.set(fips, { pov: +r.pov, moe: +r.moe, name: __lbl, fips }); }
       } else {
         if (isConnecticut) {
           // Debug: show what keys are available
@@ -343,7 +359,8 @@ function renderState(stateFips, csvFile) {
       path = d3.geoPath(projection);
       projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
       
-    
+      // For state outline, we can't use the TopoJSON state feature because coordinates don't match
+      // Create a merged boundary from all planning regions instead
       const mergedBoundary = {
         type: "FeatureCollection",
         features: stateCounties
@@ -403,24 +420,15 @@ function renderState(stateFips, csvFile) {
         const lonlat = projection.invert([x,y]);
         if (!lonlat) continue;
 
-        let rec = null, fips = null;
+        let rec = null;
         for (const f of stateCounties) {
-          if (d3.geoContains(f, lonlat)) { fips = String(f.id); rec = byFips.get(fips); break; }
+          if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
         }
         if (!rec) continue;
 
         const v = sampleValue(rec.pov, rec.moe, randn);
-        pixels.push({x, y, v, fips});
+        pixels.push({x, y, v});
       }
-    }
-    // THIS IS THE SORTED PIXEL MAP LOGIC
-    // Within each county, sort its sampled values in decreasing order and
-    // reassign them back to that county's pixels in raster order (largest
-    // value at the first pixel scanned, decreasing across/down from there).
-    const pixelsByFips = d3.group(pixels, d => d.fips);
-    for (const group of pixelsByFips.values()) {
-      const sortedValues = group.map(d => d.v).sort((a, b) => b - a);
-      group.forEach((d, i) => { d.v = sortedValues[i]; });
     }
 
     gPixels.attr("clip-path","url(#stateClip)")
@@ -473,7 +481,8 @@ function renderState(stateFips, csvFile) {
       
       // Only post answers when exactly the required number of counties are selected
       if (selectedCounties.length === REQUIRED_SELECTIONS) {
-        Revisit.postAnswers({ selectedCounty: selectedCounties });
+        Revisit.postAnswers({ selectedCounty: selectedCounties,
+          selectedFips: selectedCounties.map(c => __labelToFips.get(c) ?? null) });
         saveTrialToSession(selectedCounties);
       }
       
@@ -555,7 +564,8 @@ function renderState(stateFips, csvFile) {
                 
                 // Only post answers when exactly the required number of counties are selected
                 if (selectedCounties.length === REQUIRED_SELECTIONS) {
-                  Revisit.postAnswers({ selectedCounty: selectedCounties });
+                  Revisit.postAnswers({ selectedCounty: selectedCounties,
+                    selectedFips: selectedCounties.map(c => __labelToFips.get(c) ?? null) });
                   saveTrialToSession(selectedCounties);
                 }
                 

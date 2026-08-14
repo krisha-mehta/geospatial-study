@@ -470,14 +470,7 @@ async function loadData(){
   for(const r of csv){
     const rawName = String(r.county ?? r.NAME ?? '').trim();
     const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
-    /* __fips_join__ */
-    const __csvFips = (r.fips === undefined || r.fips === null || String(r.fips).trim() === '')
-      ? null : String(r.fips).trim().padStart(5, '0');
-    const __dupName = __csvFips ? false
-      : csv.filter(x => String(x.county ?? x.NAME ?? '').trim() === rawName).length > 1;
-    if (__dupName) console.error('[fips-join] "' + rawName + '" occurs more than once in '
-      + 'this state and the data file has no fips column - refusing to guess.');
-    const fips = __csvFips || (__dupName ? undefined : nameToFips.get(key));
+    const fips = nameToFips.get(key);
     if (!fips) { console.warn('No FIPS for', rawName); continue; }
     byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
   }
