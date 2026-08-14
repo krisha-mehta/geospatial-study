@@ -146,28 +146,17 @@ const gFill = svg.append('g');
 const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
-const SIGMA_MAX = 12;
-const RAMP_FLOOR = 0.00; 
+const SIGMA_MAX  = 12;
+const RAMP_FLOOR = 0.25;          // skip YlOrRd's near-white yellow end
+//const MAX_DESATURATION = 0.85;    // chroma removed at maximum uncertainty
 
 const color = d3.scaleSequential(
-    t => d3.interpolateReds(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
-  ).domain([3, 30])
-
-const HUE          = 29.3;   // hue angle of #b2182b
-const C_MAX        = 66;     // chroma at maximum poverty
-const L_MIN        = 55;     // lightness when fully certain
-const L_MAX        = 84;     // lightness at maximum uncertainty
-const CHROMA_LOSS  = 0.65;   // chroma retained at max uncertainty = 35%
+    t => d3.interpolateYlOrRd(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
+  ).domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX]).clamp(true);
 
 function vsupColor(pov, sigma) {
-  const p = Math.max(0, Math.min(1,
-    (pov - CONFIG.RAW_MIN) / (CONFIG.RAW_MAX - CONFIG.RAW_MIN)));
   const u = Math.max(0, Math.min(1, sigma / SIGMA_MAX));
-
-  const lightness = L_MIN + u * (L_MAX - L_MIN);
-  const chroma    = C_MAX * p * (1 - CHROMA_LOSS * u);
-
-  return d3.hcl(HUE, chroma, lightness).formatHex();
+  return d3.interpolateRgb(color(pov), '#ffffff')(0.75 * u);   // alpha 1 -> 0.25
 }
 
 let selectedCounties = [];
