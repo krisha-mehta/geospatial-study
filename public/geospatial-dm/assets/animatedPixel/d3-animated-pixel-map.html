@@ -432,7 +432,7 @@ async function loadData(stateFips, csvFile) {
 
   // Set up projection
   if (isConnecticut && ctPlanningRegions) {
-    projection = d3.geoIdentity().reflectY(true);
+    projection = d3.geoEquirectangular();
     path = d3.geoPath(projection);
     projection.fitSize([width, height], { type: "FeatureCollection", features: stateCounties });
     const mergedBoundary = { type: "FeatureCollection", features: stateCounties };

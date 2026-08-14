@@ -335,15 +335,14 @@ function renderState(stateFips, csvFile) {
       }
     }
 
-    // For Connecticut with projected coordinates, use identity projection
+    // For Connecticut, the planning-region GeoJSON is already WGS84 lon/lat,
+    // so it can share the standard projection path with other states.
     if (isConnecticut && ctPlanningRegions) {
-      // The GeoJSON uses EPSG:2234 (Connecticut State Plane) with coordinates in feet
-      // We need to use an identity projection and fit it to the SVG
-      projection = d3.geoIdentity().reflectY(true);
+      projection = d3.geoEquirectangular();
       path = d3.geoPath(projection);
       projection.fitSize([width, height], {type:"FeatureCollection", features: stateCounties});
-      
-    
+
+      // For state outline, we can't use the TopoJSON state feature because it's counties, not planning regions
       const mergedBoundary = {
         type: "FeatureCollection",
         features: stateCounties
