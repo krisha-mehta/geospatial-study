@@ -184,6 +184,66 @@
         "csvFile": "../HIData.csv"
       }
     },
+    "exc_WE_HI_4": {
+      "baseComponent": "exceedance-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "exceedance",
+        "region": "West",
+        "state": "HI",
+        "stateFips": "15",
+        "csvFile": "../HIData.csv"
+      }
+    },
+    "svs_WE_HI_4": {
+      "baseComponent": "svsup-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "svsup",
+        "region": "West",
+        "state": "HI",
+        "stateFips": "15",
+        "csvFile": "../HIData.csv"
+      }
+    },
+    "hom_WE_HI_4": {
+      "baseComponent": "hom-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "hops",
+        "region": "West",
+        "state": "HI",
+        "stateFips": "15",
+        "csvFile": "../HIData.csv"
+      }
+    },
+    "anim_WE_HI_4": {
+      "baseComponent": "animated-pixel-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {                                 
+        "condition": "animated-pixel",
+        "region": "West",
+        "state": "HI",
+        "stateFips": "15",
+        "csvFile": "../HIData.csv"                                                                              
+      }
+    },
+    "spix_WE_HI_4": {
+      "baseComponent": "sorted-pixel-map-d3",
+      "type": "website",
+      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
+      "parameters": {
+        "condition": "sorted-pixel",
+        "region": "West",
+        "state": "HI",
+        "stateFips": "15",
+        "csvFile": "../HIData.csv"
+      }
+    },
     "introduction": {
       "type": "website",
       "path": "geospatial-dm/assets/introduction.html",
@@ -18683,6 +18743,7 @@
             "components": [
               "hop-intro",
               "hop-trial",
+              "hom_WE_HI_4",
               {
                 "order": "latinSquare",
                 "components": [
@@ -19606,6 +19667,7 @@
             "components": [
               "sorted-pixel-intro",
               "sorted-pixel-trial",
+              "spix_WE_HI_4",
               {
                 "order": "latinSquare",
                 "components": [
@@ -20067,6 +20129,7 @@
             "components": [
               "animated-pixel-intro",
               "animated-pixel-trial",
+              "anim_WE_HI_4",
               {
                 "order": "latinSquare",
                 "components": [
@@ -21452,6 +21515,7 @@
             "components": [
               "exceed-intro",
               "exceed-trial",
+              "exc_WE_HI_4",
               {
                 "order": "latinSquare",
                 "components": [
@@ -21913,6 +21977,7 @@
             "components": [
               "svsup-intro",
               "svsup-trial",
+              "svs_WE_HI_4",
               {
                 "order": "latinSquare",
                 "components": [
