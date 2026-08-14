@@ -187,19 +187,27 @@ const CONFIG = {
   MOE_Z: 1.645
 };
 
-const VALUE_MIN = 3, VALUE_MAX = 25;
+const RAW_MIN = 3, RAW_MAX = 30;
+const VALUE_MIN = 0, VALUE_MAX = 50;
 
 const svgSvsup       = d3.select("#svsup-map");
 const svgChoropleth  = d3.select("#choropleth");
 const svgSvsupLegend = d3.select("#svsup-legend");
 const svgChoroLegend = d3.select("#choro-legend");
 
-// Shrinkage-adjusted poverty rate scale (0-50), and the raw choropleth scale — same domain so
-// only the shrinkage adjustment (not the color scale) differs between the two maps.
-const svsupColor = d3.scaleSequential(d3.interpolateYlOrRd)
-  .domain([VALUE_MIN, VALUE_MAX])
-  .clamp(true);
+const SIGMA_MAX  = 12;
+const RAMP_FLOOR = 0.25;          // skip YlOrRd's near-white yellow end
 
+const color = d3.scaleSequential(
+    t => d3.interpolateYlOrRd(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
+  ).domain([RAW_MIN, RAW_MAX]).clamp(true);
+
+function svsupColor(pov, sigma) {
+  const u = Math.max(0, Math.min(1, sigma / SIGMA_MAX));
+  return d3.interpolateRgb(color(pov), '#ffffff')(0.75 * u);   // alpha 1 -> 0.25
+}
+
+// Raw choropleth scale keeps its own original domain, independent of the svsup color scale.
 const choroColor = d3.scaleSequential(d3.interpolateYlOrRd)
   .domain([VALUE_MIN, VALUE_MAX])
   .clamp(true);
@@ -220,8 +228,8 @@ function getGlobalTheta() {
   return GLOBAL_THETA;
 }
 
-const GLOBAL_TAU_MOE = 6;
-const SHRINKAGE_FACTOR = 2.5;
+const GLOBAL_TAU_MOE = 5;
+const SHRINKAGE_FACTOR = 3;
 
 function getTau2(z) {
   const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
@@ -252,6 +260,7 @@ function computeShrinkage(byFips, theta){
 
   for (const rec of records){
     const se = (rec.moe ?? 0) / z;
+    rec.sigma = se;
     rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
   }
 }
@@ -319,7 +328,7 @@ async function loadData(stateFips, csvFile) {
       .attr("d", path)
       .attr("fill", d => {
         const rec = byFips.get(String(d.id));
-        return rec ? svsupColor(rec.povAdj) : "#ccc";
+        return rec ? svsupColor(rec.povAdj, rec.sigma) : "#ccc";
       });
 
   // Draw choropleth (raw pov values, YlOrRd) — same as hop-survey-uncertainty.html
@@ -353,7 +362,7 @@ async function loadData(stateFips, csvFile) {
     const N_VALUE_BINS = 40;
     const N_SE_BINS = 40;
     const SE_MIN = 0;
-    const SE_MAX = 25;
+    const SE_MAX = SIGMA_MAX;
     const SWEEP_DEG = 70;
     const OUTER_RADIUS = 135;
     const APEX = { x: 100, y: 200 };
@@ -362,7 +371,7 @@ async function loadData(stateFips, csvFile) {
     const angleScale = d3.scaleLinear()
         .domain([0, N_VALUE_BINS])
         .range([-sweepRad / 2, sweepRad / 2]);
-    const valueAtBin = i => VALUE_MIN + (i + 0.5) / N_VALUE_BINS * (VALUE_MAX - VALUE_MIN);
+    const valueAtBin = i => RAW_MIN + (i + 0.5) / N_VALUE_BINS * (RAW_MAX - RAW_MIN);
     const seAtRadius = r => SE_MAX - (r / OUTER_RADIUS) * (SE_MAX - SE_MIN);
 
     const cells = [];
@@ -377,7 +386,7 @@ async function loadData(stateFips, csvFile) {
           endAngle: angleScale(i + 1),
           innerRadius: rInner,
           outerRadius: rOuter,
-          fill: svsupColor(shrinkValue(rawValue, se, theta, tau2))
+          fill: svsupColor(shrinkValue(rawValue, se, theta, tau2), se)
         });
       }
     }
@@ -394,9 +403,9 @@ async function loadData(stateFips, csvFile) {
         .attr("fill", d => d.fill);
 
     const valueToAngle = d3.scaleLinear()
-        .domain([VALUE_MIN, VALUE_MAX])
+        .domain([RAW_MIN, RAW_MAX])
         .range([-sweepRad / 2, sweepRad / 2]);
-    const valueTicks = d3.scaleLinear().domain([VALUE_MIN, VALUE_MAX]).ticks(5);
+    const valueTicks = d3.scaleLinear().domain([RAW_MIN, RAW_MAX]).ticks(5);
     gCone.selectAll(".value-tick")
       .data(valueTicks)
       .join("text")
