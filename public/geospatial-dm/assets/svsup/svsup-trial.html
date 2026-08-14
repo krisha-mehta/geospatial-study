@@ -18,8 +18,8 @@
   * { box-sizing: border-box; }
   body {
     margin: 0 auto;
-    font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    background:#fff;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
     width: 650px;
     height: 700px;
   }
@@ -34,7 +34,7 @@
     height: 400px;
   }
 
-svg {
+  svg {
     width: 100%;
     height: auto;
     display: block;
@@ -42,7 +42,7 @@ svg {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   }
   #map { max-width: 400px; }
-  #legend { max-width: 140px; }
+  #legend { max-width: 200px; }
 
   .county { stroke:#1c1b1b; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; }
 
@@ -50,7 +50,7 @@ svg {
     stroke:#1c1b1b;
     stroke-width:1.5;
     vector-effect:non-scaling-stroke;
-}
+  }
 
   #county-message-box {
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -91,15 +91,15 @@ svg {
     cursor: pointer;
     padding: 0 2px;
   }
-  .chip button.remove-chip:focus-visible {
-    outline: 2px solid #0b5cff;
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
   .county.highlight {
     stroke: #306de7 !important;
     stroke-width: 2.5 !important;
     pointer-events: none;
+  }
+
+  .county.hover-highlight {
+    stroke: #306de7 !important;
+    stroke-width: 2 !important;
   }
 
   .county.got-right {
@@ -155,7 +155,7 @@ svg {
 <body>
   <div class="wrap">
     <svg id="map" viewBox="0 0 400 400" aria-label="Shrinkage VSUP county map"></svg>
-    <svg id="legend" viewBox="0 0 140 400" aria-label="Legend"></svg>
+    <svg id="legend" viewBox="0 0 200 240" aria-label="Legend"></svg>
   </div>
 
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
@@ -179,11 +179,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const CONFIG = {
   MOE_Z: 1.645,
-  VALUE_MIN: 0,
-  VALUE_MAX: 50,
+  VALUE_MIN: 3,
+  VALUE_MAX: 25,
+  RAW_MIN: 3,
+  RAW_MAX: 30,
   MAX_SELECTIONS: 3,
-  REQUIRED_SELECTIONS: 3,
-  SHRINKAGE_SCALE: 15 // >1 = less shrinkage, <1 = more shrinkage
+  REQUIRED_SELECTIONS: 3
 };
 
 document.addEventListener('click', (event) => {
@@ -197,11 +198,20 @@ document.addEventListener('click', (event) => {
 const svg = d3.select('#map');
 const svgLegend = d3.select('#legend');
 const gFill = svg.append('g');
+const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
-const color = d3.scaleSequential(d3.interpolateYlOrRd)
-    .domain([CONFIG.VALUE_MIN, CONFIG.VALUE_MAX])
-    .clamp(true);
+const SIGMA_MAX  = 12;
+const RAMP_FLOOR = 0.25;          // skip YlOrRd's near-white yellow end
+
+const color = d3.scaleSequential(
+    t => d3.interpolateYlOrRd(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
+  ).domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX]).clamp(true);
+
+function vsupColor(pov, sigma) {
+  const u = Math.max(0, Math.min(1, sigma / SIGMA_MAX));
+  return d3.interpolateRgb(color(pov), '#ffffff')(0.75 * u);   // alpha 1 -> 0.25
+}
 
 // --- Selected counties panel logic ---
 let selectedCounties = [];
@@ -331,6 +341,7 @@ document.getElementById('submit-button').addEventListener('click', () => {
 
     // Post answers to Revisit
     Revisit.postAnswers({ selectedCounty: selectedCounties });
+    saveTrialToSession(selectedCounties);
 
     updateSubmitButton();
   }
@@ -354,59 +365,80 @@ let state = {
   theta: null
 };
 
-// Grand mean poverty rate across all counties of all states (excluding Alaska,
-// which is reserved for the practice trial), fetched once and cached.
-let globalThetaPromise = null;
+const GLOBAL_THETA = 14.5;
 function getGlobalTheta() {
-  if (!globalThetaPromise) {
-    globalThetaPromise = d3.csv('../Data/AllStatesPov.csv', d3.autoType).then(rows => d3.mean(rows, d => d.pov));
-  }
-  return globalThetaPromise;
+  return GLOBAL_THETA;
+}
+
+const GLOBAL_TAU_MOE = 5;
+const SHRINKAGE_FACTOR = 3;
+
+function getTau2(z) {
+  const tauSe = (GLOBAL_TAU_MOE / z) * SHRINKAGE_FACTOR;
+  return tauSe * tauSe;
+}
+
+function shrinkValue(rawValue, se, theta, tau2) {
+  if (!(tau2 > 0) || !isFinite(tau2)) return theta;
+  if (!(se > 0) || !isFinite(se)) return rawValue;
+  const priorPrecision = 1 / tau2;
+  const obsPrecision = 1 / (se * se);
+  return (priorPrecision * theta + obsPrecision * rawValue) / (priorPrecision + obsPrecision);
 }
 
 async function loadData(){
+  const isConnecticut = state.stateFips === '09';
 
-  const [results, theta] = await Promise.all([
-    Promise.all([
-      d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
-      d3.csv(state.csvFile, d3.autoType)
-    ]),
-    getGlobalTheta()
-  ]);
+  const dataPromises = isConnecticut
+    ? [
+        d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+        d3.csv(state.csvFile, d3.autoType),
+        d3.json('../Connecticut_Planning_Region_WGS84_fast.geojson')
+      ]
+    : [
+        d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+        d3.csv(state.csvFile, d3.autoType)
+      ];
+
+  const [results, theta] = await Promise.all([Promise.all(dataPromises), getGlobalTheta()]);
   state.theta = theta;
-
   const usTopo = results[0];
   const csv = results[1];
+  const ctPlanningRegions = isConnecticut ? results[2] : null;
 
-  const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
-  const stateCounties = allCounties.filter(f => String(f.id).startsWith(state.stateFips));
-  const stateMesh = topojson.mesh(
-    usTopo, usTopo.objects.counties,
-    (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b
-  );
+  let stateCounties, stateMesh;
+
+  
+    const allCounties = topojson.feature(usTopo, usTopo.objects.counties).features;
+    stateCounties = allCounties.filter(f => String(f.id).startsWith(state.stateFips));
+    stateMesh = topojson.mesh(
+      usTopo, usTopo.objects.counties,
+      (a,b)=> String(a.id).startsWith(state.stateFips) && String(b.id).startsWith(state.stateFips) && a!==b
+    );
+  
 
   const stateFeature = topojson.feature(usTopo, usTopo.objects.states).features.find(f => String(f.id) === state.stateFips);
 
   const nameToFips = new Map();
   for(const f of stateCounties){
     const id = String(f.id);
-    const raw = f.properties?.name ?? '';
-    const base = norm(stripTypeSuffix(raw));
-    nameToFips.set(base, id);
+      const raw = f.properties?.name ?? '';
+      const base = norm(stripTypeSuffix(raw));
+      nameToFips.set(base, id);
 
-    if (/\bsaint\b/i.test(raw)){
-      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st'))), id);
-      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st.'))), id);
-    }
-    if (/\bst[.]?\b/i.test(raw)){
-      nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/gi,'saint'))), id);
-    }
+      if (/\bsaint\b/i.test(raw)){
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st'))), id);
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bsaint\b/gi,'st.'))), id);
+      }
+      if (/\bst[.]?\b/i.test(raw)){
+        nameToFips.set(norm(stripTypeSuffix(raw.replace(/\bst[.]?\b/gi,'saint'))), id);
+      }
   }
 
   const byFips = new Map();
   for(const r of csv){
     const rawName = String(r.county ?? r.NAME ?? '').trim();
-    const key = norm(stripTypeSuffix(rawName));
+    const key = isConnecticut ? norm(rawName) : norm(stripTypeSuffix(rawName));
     const fips = nameToFips.get(key);
     if (!fips) { console.warn('No FIPS for', rawName); continue; }
     byFips.set(fips, { name: rawName, pov:+r.pov, moe:+r.moe });
@@ -416,28 +448,73 @@ async function loadData(){
 
   svg.selectAll('*').interrupt();
   gFill.selectAll('*').remove();
+  gBorders.selectAll('*').remove();
   gOutline.selectAll('*').remove();
 
-  gOutline.append('path').attr('class','state-outline').attr('d', path(stateFeature));
+    gOutline.append('path')
+      .datum(stateFeature)
+      .attr('class','state-outline')
+      .attr('d', path);
+  
+
+  gBorders.append('path')
+    .attr('d', path(stateMesh))
+    .attr('fill','none').attr('stroke','#1c1b1b').attr('stroke-width',1.2)
+    .attr('vector-effect','non-scaling-stroke');
 
   state.countyList = stateCounties;
   state.byFips = byFips;
 
   computeShrinkage();
+  renderCounties();
+  renderLegend();
 
-  // County paths — single uniform fill per county based on shrinkage-adjusted poverty rate
+  if (selectedCounties.length < maxSelections) {
+    gFill.selectAll('.county').style('pointer-events', 'auto');
+  }
+}
+
+// Here is the main logic for svsup. Each county's poverty estimate is pulled toward
+// a fixed reference point (theta = GLOBAL_THETA, a fixed reference poverty rate),
+// with the pull strength governed by the ratio of observation variance (from the
+// margin of error) to a fixed prior variance (tau2, from GLOBAL_TAU_MOE).
+// Higher-uncertainty counties shrink more, while low uncertainty counties stay close
+// to their original estimates.
+function computeShrinkage(){
+  const z = state.moeZ || 1.645;
+  const records = Array.from(state.byFips.values());
+  const n = records.length;
+  if (n === 0) return;
+
+  const theta = state.theta;
+  const tau2 = getTau2(z);
+
+  for (const rec of records){
+    const se = (rec.moe ?? 0) / z;
+    rec.sigma = se;
+    rec.povAdj = shrinkValue(rec.pov, se, theta, tau2);
+  }
+}
+
+function renderCounties(){
   gFill.selectAll('path.county')
-    .data(stateCounties, d=>String(d.id))
+    .data(state.countyList, d=>String(d.id))
     .join('path')
       .attr('class','county')
       .attr('d', d=>path(d))
       .attr('data-fips', d=>String(d.id))
-      .attr('data-county', d=>byFips.get(String(d.id))?.name ?? String(d.id))
+      .attr('data-county', d=>state.byFips.get(String(d.id))?.name ?? String(d.id))
       .attr('fill', d => {
-        const rec = byFips.get(String(d.id));
-        return rec ? color(rec.povAdj) : '#ccc';
+        const rec = state.byFips.get(String(d.id));
+        return rec ? vsupColor(rec.povAdj, rec.sigma) : '#ccc';
       })
       .style('cursor', 'pointer')
+      .on('mouseover', function(event, d) {
+        d3.select(this).classed('hover-highlight', true);
+      })
+      .on('mouseout', function(event, d) {
+        d3.select(this).classed('hover-highlight', false);
+      })
       .on('click', function(event, d) {
         const county = d3.select(this).attr('data-county');
         const alreadySelected = selectedCounties.includes(county);
@@ -448,7 +525,6 @@ async function loadData(){
             onYes: () => {
               selectedCounties.push(county);
               state.selected = selectedCounties;
-
 
               renderSelectedList();
               if (selectedCounties.length === maxSelections) {
@@ -468,8 +544,8 @@ async function loadData(){
           box.innerHTML = msg + `<br><br><button id='county-ok-btn' style='background:#0077cc;color:#fff;border:none;border-radius:6px;padding:7px 18px;margin-right:10px;cursor:pointer;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.2s;'>OK</button>`;
           box.style.display = 'block';
           let countyFeature = null;
-          for (const f of stateCounties) {
-            const name = byFips.get(String(f.id))?.name ?? String(f.id);
+          for (const f of state.countyList) {
+            const name = state.byFips.get(String(f.id))?.name ?? String(f.id);
             if (name === county) { countyFeature = f; break; }
           }
           const svgEl = document.getElementById('map');
@@ -495,71 +571,105 @@ async function loadData(){
   if (selectedCounties.length < maxSelections) {
     gFill.selectAll('.county').style('pointer-events', 'auto');
   }
-
-  renderLegend();
-}
-
-// Empirical-Bayes shrinkage: each county's poverty estimate is pulled toward
-// a fixed reference point (theta = the grand mean poverty rate across all counties
-// of all states, excluding Alaska), with the pull strength governed by the ratio of
-// observation variance (from the margin of error) to the across-county variance (tau2).
-// Higher-uncertainty counties shrink more.
-function computeShrinkage(){
-  const z = state.moeZ || 1.645;
-  const records = Array.from(state.byFips.values());
-  const n = records.length;
-  if (n === 0) return;
-
-  const theta = state.theta;
-  const tau2 = d3.mean(records, d => (d.pov - theta) ** 2) * CONFIG.SHRINKAGE_SCALE;
-
-  for (const rec of records){
-    const se = (rec.moe ?? 0) / z;
-    if (!(tau2 > 0) || !isFinite(tau2)) {
-      rec.povAdj = theta;
-    } else if (!(se > 0) || !isFinite(se)) {
-      rec.povAdj = rec.pov;
-    } else {
-      const priorPrecision = 1 / tau2;
-      const obsPrecision = 1 / (se * se);
-      rec.povAdj = (priorPrecision * theta + obsPrecision * rec.pov) / (priorPrecision + obsPrecision);
-    }
-  }
 }
 
 function renderLegend(){
   svgLegend.selectAll('*').remove();
-  const defsL = svgLegend.append('defs');
 
-  const LEGEND_LEFT = 40, LEGEND_TOP = 40, LEGEND_LONG = 320, LEGEND_THICK = 15;
-  const lg = svgLegend.append('g')
-    .attr('transform', `translate(${LEGEND_LEFT}, ${LEGEND_TOP})`)
-    .style('pointer-events', 'none');
+  const z = state.moeZ || CONFIG.MOE_Z;
+  const theta = state.theta;
+  const tau2 = getTau2(z);
 
-  const grad = defsL.append('linearGradient')
-    .attr('id', 'legendGrad')
-    .attr('x1', '0%').attr('x2', '0%')
-    .attr('y1', '100%').attr('y2', '0%');
-  for (let i = 0; i <= 100; i++) {
-    const t = i / 100;
-    grad.append('stop').attr('offset', `${i}%`).attr('stop-color', color(CONFIG.VALUE_MIN + t * (CONFIG.VALUE_MAX - CONFIG.VALUE_MIN)));
+  const N_VALUE_BINS = 40;
+  const N_SE_BINS = 40;
+  const SE_MIN = 0;
+  const SE_MAX = SIGMA_MAX;
+
+  const SWEEP_DEG = 70;
+  const OUTER_RADIUS = 135;
+  const APEX = { x: 100, y: 200 };
+
+  const sweepRad = SWEEP_DEG * Math.PI / 180;
+  const angleScale = d3.scaleLinear()
+      .domain([0, N_VALUE_BINS])
+      .range([-sweepRad / 2, sweepRad / 2]);
+  const valueAtBin = i => CONFIG.RAW_MIN + (i + 0.5) / N_VALUE_BINS * (CONFIG.RAW_MAX - CONFIG.RAW_MIN);
+  const seAtRadius = r => SE_MAX - (r / OUTER_RADIUS) * (SE_MAX - SE_MIN);
+
+  const cells = [];
+  for (let i = 0; i < N_VALUE_BINS; i++) {
+    const rawValue = valueAtBin(i);
+    for (let j = 0; j < N_SE_BINS; j++) {
+      const rInner = j * (OUTER_RADIUS / N_SE_BINS);
+      const rOuter = (j + 1) * (OUTER_RADIUS / N_SE_BINS);
+      const se = seAtRadius((rInner + rOuter) / 2);
+      cells.push({
+        startAngle: angleScale(i),
+        endAngle: angleScale(i + 1),
+        innerRadius: rInner,
+        outerRadius: rOuter,
+        fill: vsupColor(shrinkValue(rawValue, se, theta, tau2), se)
+      });
+    }
   }
 
-  lg.append('rect')
-    .attr('width', LEGEND_THICK).attr('height', LEGEND_LONG)
-    .attr('fill', 'url(#legendGrad)').attr('rx', 3);
+  const arcGen = d3.arc();
+  const gCone = svgLegend.append('g')
+      .attr('transform', `translate(${APEX.x}, ${APEX.y})`)
+      .style('pointer-events', 'none');
 
-  const legendScale = d3.scaleLinear().domain([CONFIG.VALUE_MAX, CONFIG.VALUE_MIN]).range([0, LEGEND_LONG]);
-  lg.append('g')
-    .attr('transform', `translate(${LEGEND_THICK}, 0)`)
-    .call(d3.axisRight(legendScale).ticks(5));
+  gCone.selectAll('path')
+    .data(cells)
+    .join('path')
+      .attr('d', arcGen)
+      .attr('fill', d => d.fill);
 
-  const legendTitle = lg.append('text')
-    .attr('x', 0)
+  const valueToAngle = d3.scaleLinear()
+    .domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX])
+    .range([-sweepRad / 2, sweepRad / 2]);
+
+const valueTicks = d3.scaleLinear()
+    .domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX])
+    .ticks(5);
+
+  gCone.selectAll('.value-tick')
+    .data(valueTicks)
+    .join('text')
+      .attr('class', 'value-tick')
+      .attr('font-size', 9)
+      .attr('text-anchor', 'middle')
+      .attr('x', d => (OUTER_RADIUS + 10) * Math.sin(valueToAngle(d)))
+      .attr('y', d => -(OUTER_RADIUS + 10) * Math.cos(valueToAngle(d)))
+      .text(d => d);
+
+  // Standard-error ticks along the fan's left edge.
+  const seTickRadii = d3.range(0, N_SE_BINS + 1, N_SE_BINS / 4).map(j => j * (OUTER_RADIUS / N_SE_BINS));
+  const edgeAngle = -sweepRad / 2;
+  gCone.selectAll('.se-tick')
+    .data(seTickRadii)
+    .join('text')
+      .attr('class', 'se-tick')
+      .attr('font-size', 9)
+      .attr('text-anchor', 'end')
+      .attr('x', d => d * Math.sin(edgeAngle) - 4)
+      .attr('y', d => -d * Math.cos(edgeAngle) + 3)
+      .text(d => seAtRadius(d).toFixed(0));
+
+  svgLegend.append('text')
+    .attr('x', 100)
+    .attr('y', 20)
     .attr('font-weight', 500)
-    .attr('font-size', 11);
-  legendTitle.append('tspan').attr('x', 0).attr('y', -26).text('Shrunk Poverty');
-  legendTitle.append('tspan').attr('x', 0).attr('y', -14).text('Rate');
+    .attr('font-size', 11)
+    .attr('text-anchor', 'middle')
+    .text('Shrunk Poverty Rate');
+
+  svgLegend.append('text')
+    .attr('x', 100)
+    .attr('y', 34)
+    .attr('font-size', 9)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#666')
+    .text('angle: pov rate · radius: standard error');
 }
 
 function showCountyMessageBox({ county, onYes, onNo }) {
@@ -602,6 +712,19 @@ function renderState(stateFips, csvFile){
     console.error(e);
     alert('Data load failed. Serve with a local web server and place the CSV next to this HTML file.');
   });
+}
+
+function saveTrialToSession(counties) {
+  try {
+    const trialId = new URLSearchParams(window.location.search).get('trialid');
+    if (!trialId) return;
+    sessionStorage.setItem('trial_' + trialId, JSON.stringify(counties));
+    const order = JSON.parse(sessionStorage.getItem('trial_order') || '[]');
+    if (!order.includes(trialId)) {
+      order.push(trialId);
+      sessionStorage.setItem('trial_order', JSON.stringify(order));
+    }
+  } catch (e) { /* sessionStorage unavailable */ }
 }
 
 Revisit.onDataReceive((data)=>{
