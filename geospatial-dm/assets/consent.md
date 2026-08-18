@@ -8,7 +8,7 @@ We are inviting you to take part in a research study. Please read the entire con
 ask questions, and take time to understand the study before you make any decision.
 
 #### Purpose of the Study
-This study aims to investigate how visualization can support reasoning about uncertainty in data presented on maps. You will be shown fictional data in a realistic scenario and asked to make resource allocation decisions. We compare performance across different display conditions to learn about how to best design visualizations to support decision-making.
+This study aims to investigate how visualization can support reasoning about uncertainty in data presented using maps. You will be shown fictional data in a realistic scenario and asked to make resource allocation decisions. We compare performance across different display conditions to learn about how to best design visualizations to support decision-making.
 
 
 #### Risks to study participants
