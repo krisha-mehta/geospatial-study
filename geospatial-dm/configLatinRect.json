@@ -23,7 +23,7 @@
     "sidebar": false,
     "urlParticipantIdParam": "PROLIFIC_PID",
     "studyEndMsg": "**Thank you for completing the study. Please click on this link to return to Prolific: [https://app.prolific.com/submissions/complete?cc=C14L4UFM](https://app.prolific.com/submissions/complete?cc=C14L4UFM)**",
-    "numSequences": 800
+    "numSequences": 816
   },
   "baseComponents": {
     "pixel-map-d3": {
@@ -157,7 +157,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../HIData.csv"
+        "csvFile": "../HIData4.csv"
       }
     },
     "pix_WE_HI_4":{
@@ -169,7 +169,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../HIData.csv"
+        "csvFile": "../HIData4.csv"
       }
     },
     "tpxs_WE_HI_4":{
@@ -181,7 +181,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../HIData.csv"
+        "csvFile": "../HIData4.csv"
       }
     },
     "exc_WE_HI_4": {
@@ -193,7 +193,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../HIData.csv"
+        "csvFile": "../HIData4.csv"
       }
     },
     "svs_WE_HI_4": {
@@ -205,7 +205,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../HIData.csv"
+        "csvFile": "../HIData4.csv"
       }
     },
     "hom_WE_HI_4": {
@@ -217,7 +217,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../HIData.csv"
+        "csvFile": "../HIData4.csv"
       }
     },
     "anim_WE_HI_4": {
@@ -229,7 +229,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../HIData.csv"                                                                              
+        "csvFile": "../HIData4.csv"                                                                              
       }
     },
     "spix_WE_HI_4": {
@@ -241,7 +241,7 @@
         "region": "West",
         "state": "HI",
         "stateFips": "15",
-        "csvFile": "../HIData.csv"
+        "csvFile": "../HIData4.csv"
       }
     },
     "introduction": {
