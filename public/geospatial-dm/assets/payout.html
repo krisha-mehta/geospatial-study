@@ -215,7 +215,7 @@ const norm = s => (s||'').normalize('NFD').replace(/\p{Diacritic}/gu,'').toLower
 const stripType = s => s.replace(/\b(county|parish|borough|census area|municipio|municipality)\b/gi,'').replace(/\s+/g,' ').trim();
 const normCounty = s => norm(stripType(s));
 
-
+// trialVersion is task Diff
 function parseTrialId(id) {
   const m = id.match(/^(pix|hom|anim|exc|spix|svs|tpix|tpxs)_[A-Z]{2}_([A-Z]{2})_(\d+)$/);
   if (!m) return null;
