@@ -203,14 +203,8 @@ svg {
     <div class="progress-bar">
       <div id="progress-fill" class="progress-fill"></div>
     </div>
-   <!-- <div style="margin-top: 4px; font-size: 11px; color: #666; text-align: center;">
-      <span id="frames-remaining">49 frames remaining in cycle</span>
-      <span style="margin-left: 10px; color: #888;">● Continuous loop</span>
-    </div>-->
   </div>
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
-  
-  
   
   <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
@@ -239,8 +233,6 @@ document.addEventListener('click', (event) => {
     messageBox.style.display = 'none';
   }
 });
-
-
 
 const svg = d3.select('#map');
 const gFill = svg.append('g');
