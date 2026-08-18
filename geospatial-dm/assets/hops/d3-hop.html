@@ -203,14 +203,8 @@ svg {
     <div class="progress-bar">
       <div id="progress-fill" class="progress-fill"></div>
     </div>
-   <!-- <div style="margin-top: 4px; font-size: 11px; color: #666; text-align: center;">
-      <span id="frames-remaining">49 frames remaining in cycle</span>
-      <span style="margin-left: 10px; color: #888;">● Continuous loop</span>
-    </div>-->
   </div>
   <div id="selected-list" class="selected-panel" aria-live="polite"></div>
-  
-  
   
   <div id="county-message-box"
      style="display:none; margin:0; padding:18px 22px; border:2px solid #0077cc; border-radius:14px;
@@ -240,8 +234,6 @@ document.addEventListener('click', (event) => {
   }
 });
 
-
-
 const svg = d3.select('#map');
 const gFill = svg.append('g');
 const gBorders = svg.append('g');
@@ -249,6 +241,14 @@ const gOutline = svg.append('g');
 
 let selectedCounties = [];
 const maxSelections = CONFIG.MAX_SELECTIONS;
+function syncAnswers() {
+  const complete = selectedCounties.length === CONFIG.REQUIRED_SELECTIONS;
+  // Post [] while incomplete: reVISit's reactive validator only rejects an EMPTY
+  // array, so posting a 2-item array would leave the Next button enabled.
+  Revisit.postAnswers({ selectedCounty: complete ? selectedCounties.slice() : [] });
+  if (complete) saveTrialToSession(selectedCounties);
+  else clearTrialFromSession();
+}
 
 function renderSelectedList() {
   const panel = document.getElementById('selected-list');
@@ -283,12 +283,7 @@ document.addEventListener('click', (ev) => {
   if (!county) return;
   selectedCounties = selectedCounties.filter(c => c !== county);
   state.selected = selectedCounties;
-  
-  // Only post answers when exactly the required number of counties are selected
-  if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
-    Revisit.postAnswers({ selectedCounty: selectedCounties });
-    saveTrialToSession(selectedCounties);
-  }
+  syncAnswers();
 
   d3.selectAll('.county').classed('highlight', false);
   if (selectedCounties.length < maxSelections) {
@@ -521,11 +516,7 @@ async function loadData(){
               selectedCounties.push(county);
               state.selected = selectedCounties;
               
-              if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
-                Revisit.postAnswers({ selectedCounty: selectedCounties });
-                saveTrialToSession(selectedCounties);
-              }
-              
+              syncAnswers();
               renderSelectedList();
               if (selectedCounties.length === maxSelections) {
                 gFill.selectAll('.county')
@@ -726,6 +717,14 @@ function renderState(stateFips, csvFile){
     console.error(e);
     alert('Data load failed. Serve with a local web server and place the CSV next to this HTML file.');
   });
+}
+
+function clearTrialFromSession() {
+  try {
+    const trialId = new URLSearchParams(window.location.search).get('trialid');
+    if (!trialId) return;
+    sessionStorage.removeItem('trial_' + trialId);
+  } catch (e) { /* sessionStorage unavailable */ }
 }
 
 function saveTrialToSession(counties) {
