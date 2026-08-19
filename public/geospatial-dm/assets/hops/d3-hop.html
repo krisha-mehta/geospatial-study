@@ -222,9 +222,7 @@ const CONFIG = {
   N_FRAMES: 50,
   FPS: 2.5,
   MAX_SELECTIONS: 3,
-  REQUIRED_SELECTIONS: 3,
-  RNG_SEED: 42
-};
+  REQUIRED_SELECTIONS: 3};
 
 document.addEventListener('click', (event) => {
   const messageBox = document.getElementById('county-message-box');
@@ -347,7 +345,6 @@ let state = {
   selected: [],
   maxSel: CONFIG.MAX_SELECTIONS,
   requiredSel: CONFIG.REQUIRED_SELECTIONS,
-  rngSeed: CONFIG.RNG_SEED,
   draws: [],
   countyList: [],
   byFips: new Map(),
@@ -617,7 +614,7 @@ function showCountyMessageBox({ county, onYes, onNo }) {
 function regenerateDraws(){
   state.nFrames = CONFIG.N_FRAMES;
   state.fps = CONFIG.FPS;
-  const seed = state.rngSeed = Math.abs(((+new Date()) & 0xffffffff) ^ hashStr(state.stateFips + '|' + state.csvFile + '|' + state.threshold));
+  const seed = Math.abs(((+new Date()) & 0xffffffff) ^ hashStr(state.stateFips + '|' + state.csvFile + '|' + state.threshold));
   const rng0 = mulberry32(seed);
   const ids = state.countyList.map(f=>String(f.id));
   const frames = [];
