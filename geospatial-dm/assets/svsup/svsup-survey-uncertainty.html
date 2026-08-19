@@ -196,7 +196,7 @@ const svgSvsupLegend = d3.select("#svsup-legend");
 const svgChoroLegend = d3.select("#choro-legend");
 
 const SIGMA_MAX  = 12;
-const RAMP_FLOOR = 0.30;          // skip YlOrRd's near-white yellow end
+const RAMP_FLOOR = 0.25;          // skip YlOrRd's near-white yellow end
 
 const color = d3.scaleSequential(
     t => d3.interpolateYlOrRd(RAMP_FLOOR + t * (1 - RAMP_FLOOR))

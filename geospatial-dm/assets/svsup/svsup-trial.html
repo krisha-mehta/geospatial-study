@@ -182,7 +182,7 @@ const CONFIG = {
   MU_MIN: 5,
   MU_MAX: 22,
   RAW_MIN: 4.5,
-  RAW_MAX: 25,
+  RAW_MAX: 30,
   MAX_SELECTIONS: 3,
   REQUIRED_SELECTIONS: 3
 };
@@ -202,7 +202,7 @@ const gBorders = svg.append('g');
 const gOutline = svg.append('g');
 
 const SIGMA_MAX  = 12;
-const RAMP_FLOOR = 0.30;          // skip YlOrRd's near-white yellow end
+const RAMP_FLOOR = 0.25;          // skip YlOrRd's near-white yellow end
 
 const color = d3.scaleSequential(
     t => d3.interpolateYlOrRd(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
