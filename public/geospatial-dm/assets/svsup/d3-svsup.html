@@ -152,7 +152,7 @@ const RAMP_FLOOR = 0.30;          // skip YlOrRd's near-white yellow end
 
 const color = d3.scaleSequential(
     t => d3.interpolateYlOrRd(RAMP_FLOOR + t * (1 - RAMP_FLOOR))
-  ).domain([CONFIG.RAW_MIN, CONFIG.RAW_MAX]).clamp(true);
+  ).domain([CONFIG.MU_MIN, CONFIG.MU_MAX]).clamp(true);
 
 function vsupColor(pov, sigma) {
   const u = Math.max(0, Math.min(1, sigma / SIGMA_MAX));
