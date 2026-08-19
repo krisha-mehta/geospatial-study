@@ -547,6 +547,7 @@ function renderState(stateFips, csvFile) {
             showCountyMessageBox({
               county,
               onYes: () => {
+                if (selectedCounties.includes(county) || selectedCounties.length >= maxSelections) return;
                 selectedCounties.push(county);
                 
                 syncAnswers();

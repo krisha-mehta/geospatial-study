@@ -459,6 +459,15 @@ function renderState(stateFips, csvFile) {
     let selectedCounties = [];
     const maxSelections = MAX_SELECTIONS;
 
+    function syncAnswers() {
+      const complete = selectedCounties.length === REQUIRED_SELECTIONS;
+      // Post [] while incomplete: reVISit's reactive validator only rejects an EMPTY
+      // array, so posting a 2-item array would leave the Next button enabled.
+      Revisit.postAnswers({ selectedCounty: complete ? selectedCounties.slice() : [] });
+      if (complete) saveTrialToSession(selectedCounties);
+      else clearTrialFromSession();
+    }
+
     function renderSelectedList() {
       const panel = document.getElementById('selected-list');
       const requiredSelections = REQUIRED_SELECTIONS;
@@ -494,11 +503,7 @@ function renderState(stateFips, csvFile) {
       if (!county) return;
       selectedCounties = selectedCounties.filter(c => c !== county);
       
-      // Only post answers when exactly the required number of counties are selected
-      if (selectedCounties.length === REQUIRED_SELECTIONS) {
-        Revisit.postAnswers({ selectedCounty: selectedCounties });
-        saveTrialToSession(selectedCounties);
-      }
+      syncAnswers();
       
       d3.selectAll('.county-interactive').classed('highlight', false);
       if (selectedCounties.length < maxSelections) {
@@ -574,13 +579,10 @@ function renderState(stateFips, csvFile) {
             showCountyMessageBox({
               county,
               onYes: () => {
+                if (selectedCounties.includes(county) || selectedCounties.length >= maxSelections) return;
                 selectedCounties.push(county);
                 
-                // Only post answers when exactly the required number of counties are selected
-                if (selectedCounties.length === REQUIRED_SELECTIONS) {
-                  Revisit.postAnswers({ selectedCounty: selectedCounties });
-                  saveTrialToSession(selectedCounties);
-                }
+                syncAnswers();
                 
                 renderSelectedList();
                 if (selectedCounties.length === maxSelections) {
@@ -630,6 +632,14 @@ function renderState(stateFips, csvFile) {
   });
 }
 
+
+function clearTrialFromSession() {
+  try {
+    const trialId = new URLSearchParams(window.location.search).get('trialid');
+    if (!trialId) return;
+    sessionStorage.removeItem('trial_' + trialId);
+  } catch (e) { /* sessionStorage unavailable */ }
+}
 
 function saveTrialToSession(counties) {
   try {
