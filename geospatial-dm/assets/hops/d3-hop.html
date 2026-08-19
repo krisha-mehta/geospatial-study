@@ -513,6 +513,7 @@ async function loadData(){
           showCountyMessageBox({
             county,
             onYes: () => {
+              if (selectedCounties.includes(county) || selectedCounties.length >= maxSelections) return;
               selectedCounties.push(county);
               state.selected = selectedCounties;
               

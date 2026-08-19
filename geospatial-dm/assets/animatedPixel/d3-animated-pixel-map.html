@@ -220,6 +220,15 @@ let path = d3.geoPath(projection);
 
 let selectedCounties = [];
 
+function syncAnswers() {
+  const complete = selectedCounties.length === CONFIG.REQUIRED_SELECTIONS;
+  // Post [] while incomplete: reVISit's reactive validator only rejects an EMPTY
+  // array, so posting a 2-item array would leave the Next button enabled.
+  Revisit.postAnswers({ selectedCounty: complete ? selectedCounties.slice() : [] });
+  if (complete) saveTrialToSession(selectedCounties);
+  else clearTrialFromSession();
+}
+
 let state = {
   frame: 0,
   frameValues: [],
@@ -266,10 +275,7 @@ document.addEventListener('click', (ev) => {
   if (!county) return;
   selectedCounties = selectedCounties.filter(c => c !== county);
 
-  if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
-    Revisit.postAnswers({ selectedCounty: selectedCounties });
-    saveTrialToSession(selectedCounties);
-  }
+  syncAnswers();
 
   d3.selectAll('.county-interactive').classed('highlight', false);
   if (selectedCounties.length < CONFIG.MAX_SELECTIONS) {
@@ -549,11 +555,9 @@ async function loadData(stateFips, csvFile) {
           showCountyMessageBox({
             county,
             onYes: () => {
+              if (selectedCounties.includes(county) || selectedCounties.length >= CONFIG.MAX_SELECTIONS) return;
               selectedCounties.push(county);
-              if (selectedCounties.length === CONFIG.REQUIRED_SELECTIONS) {
-                Revisit.postAnswers({ selectedCounty: selectedCounties });
-                saveTrialToSession(selectedCounties);
-              }
+              syncAnswers();
               renderSelectedList();
               if (selectedCounties.length === CONFIG.MAX_SELECTIONS) {
                 gCounties.selectAll(".county-interactive")
@@ -633,6 +637,14 @@ function renderState(stateFips, csvFile) {
       console.error('Error loading data:', err);
       alert("Data load failed: " + err.message + ". Check console for details.");
     });
+}
+
+function clearTrialFromSession() {
+  try {
+    const trialId = new URLSearchParams(window.location.search).get('trialid');
+    if (!trialId) return;
+    sessionStorage.removeItem('trial_' + trialId);
+  } catch (e) { /* sessionStorage unavailable */ }
 }
 
 function saveTrialToSession(counties) {
