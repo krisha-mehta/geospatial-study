@@ -523,13 +523,13 @@ projection.fitSize([width, height], {type:"FeatureCollection", features: stateCo
 
     lg.append("g")
       .attr("transform", `translate(${LEGEND_THICK}, 0)`)
-      .call(d3.axisRight(legendScale).ticks(5));
+      .call(d3.axisRight(legendScale).ticks(5).tickFormat(d => d + "%"));
 
     lg.append("text")
       .attr("x", 0)
       .attr("y", -12)
-      .attr("font-weight", 500)
-      .text("Poverty");
+      .attr("font-weight", 400)
+      .text("Poverty Rate (%)");
   })
   .catch(err => {
     console.error('Error loading data:', err);
