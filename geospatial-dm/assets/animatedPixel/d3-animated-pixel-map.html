@@ -487,7 +487,11 @@ async function loadData(stateFips, csvFile) {
   }
 
   // Pre-compute all N_FRAMES independent pixel samplings
-  const seed = Math.abs(((+new Date()) & 0xffffffff) ^ hashStr(stateFips + '|' + csvFile));
+  // Same derivation as the four static pixel conditions, so this stimulus draws from the
+  // identical stream: frame 0 reproduces the static pixel map exactly, and frames 1..49
+  // are further independent realisations of the same county distributions.
+  const BASE_SEED = 42;
+  const seed = (BASE_SEED ^ hashStr(stateFips + '|' + csvFile)) >>> 0;
   const rng = mulberry32(seed);
   const randn = randnFactory(rng);
   const frameValues = [];
