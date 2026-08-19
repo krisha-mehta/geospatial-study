@@ -243,7 +243,12 @@ function syncAnswers() {
   const complete = selectedCounties.length === CONFIG.REQUIRED_SELECTIONS;
   // Post [] while incomplete: reVISit's reactive validator only rejects an EMPTY
   // array, so posting a 2-item array would leave the Next button enabled.
-  Revisit.postAnswers({ selectedCounty: complete ? selectedCounties.slice() : [] });
+  // rngSeed: hops is the only condition whose display differs per participant, so log the
+  // seed to make each trial's 50 frames exactly reconstructable after the fact.
+  Revisit.postAnswers({
+    selectedCounty: complete ? selectedCounties.slice() : [],
+    rngSeed: state.rngSeed,
+  });
   if (complete) saveTrialToSession(selectedCounties);
   else clearTrialFromSession();
 }
@@ -614,7 +619,7 @@ function showCountyMessageBox({ county, onYes, onNo }) {
 function regenerateDraws(){
   state.nFrames = CONFIG.N_FRAMES;
   state.fps = CONFIG.FPS;
-  const seed = Math.abs(((+new Date()) & 0xffffffff) ^ hashStr(state.stateFips + '|' + state.csvFile + '|' + state.threshold));
+  const seed = state.rngSeed = Math.abs(((+new Date()) & 0xffffffff) ^ hashStr(state.stateFips + '|' + state.csvFile + '|' + state.threshold));
   const rng0 = mulberry32(seed);
   const ids = state.countyList.map(f=>String(f.id));
   const frames = [];
