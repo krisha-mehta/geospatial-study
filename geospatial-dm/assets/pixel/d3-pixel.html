@@ -397,6 +397,9 @@ function renderState(stateFips, csvFile) {
     const rng = mulberry32(42);
     const randn = randnFactory(rng);
     const pixels = [];
+    // Screen-space bounding boxes, so the scan below can skip counties that
+    // cannot contain the point. Output is identical; only the speed changes.
+    const countyBoxes = stateCounties.map(f => ({ f, b: path.bounds(f) }));
 
     for (let y = PIXEL/2; y < height; y += PIXEL) {
       for (let x = PIXEL/2; x < width; x += PIXEL) {
@@ -404,7 +407,9 @@ function renderState(stateFips, csvFile) {
         if (!lonlat) continue;
 
         let rec = null;
-        for (const f of stateCounties) {
+        for (const { f, b } of countyBoxes) {
+          // cheap reject: a point inside a polygon is inside its projected bbox
+          if (x < b[0][0]-1 || x > b[1][0]+1 || y < b[0][1]-1 || y > b[1][1]+1) continue;
           if (d3.geoContains(f, lonlat)) { rec = byFips.get(String(f.id)); break; }
         }
         if (!rec) continue;
