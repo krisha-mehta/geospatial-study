@@ -397,6 +397,8 @@ projection.fitSize([width, height], {type:"FeatureCollection", features: stateCo
     const rng = mulberry32(42);
     const randn = randnFactory(rng);
     const pixels = [];
+    const countyBoxes = stateCounties.map(f => ({ f, b: path.bounds(f) }));
+
 
     for (let y = PIXEL/2; y < height; y += PIXEL) {
       for (let x = PIXEL/2; x < width; x += PIXEL) {
