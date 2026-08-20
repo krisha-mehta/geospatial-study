@@ -430,15 +430,20 @@ function renderState(stateFips, csvFile) {
       }
     }
 
+    const pixelsByColour = new Map();
+    for (const p of pixels) {
+      const c = color(p.v);
+      let subpaths = pixelsByColour.get(c);
+      if (!subpaths) pixelsByColour.set(c, subpaths = []);
+      subpaths.push(`M${p.x - PIXEL/2} ${p.y - PIXEL/2}h${PIXEL}v${PIXEL}h-${PIXEL}z`);
+    }
+
     gPixels.attr("clip-path","url(#stateClip)")
-      .selectAll("rect")
-      .data(pixels)
-      .join("rect")
-        .attr("x", d => d.x - PIXEL/2)
-        .attr("y", d => d.y - PIXEL/2)
-        .attr("width", PIXEL)
-        .attr("height", PIXEL)
-        .attr("fill", d => color(d.v));
+      .selectAll("path")
+      .data([...pixelsByColour])
+      .join("path")
+        .attr("d", d => d[1].join(""))
+        .attr("fill", d => d[0]);
 
     let selectedCounties = [];
     const maxSelections = MAX_SELECTIONS;
