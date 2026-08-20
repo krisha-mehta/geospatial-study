@@ -404,7 +404,9 @@ projection.fitSize([width, height], {type:"FeatureCollection", features: stateCo
         if (!lonlat) continue;
 
         let rec = null, fips = null;
-        for (const f of stateCounties) {
+        for (const { f, b } of countyBoxes) {
+          // cheap reject: a point inside a polygon is inside its projected bbox
+          if (x < b[0][0]-1 || x > b[1][0]+1 || y < b[0][1]-1 || y > b[1][1]+1) continue;
           if (d3.geoContains(f, lonlat)) { fips = String(f.id); rec = byFips.get(fips); break; }
         }
         if (!rec) continue;
