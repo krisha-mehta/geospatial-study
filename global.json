@@ -6,7 +6,7 @@
   ],
   "configs": {
     "geospatial-dm":{
-      "path": "geospatial-dm/configLatinRect.json"
+      "path": "geospatial-dm/configSequences147.json"
     }
   }
 }
