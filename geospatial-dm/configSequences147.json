@@ -480,18 +480,6 @@
         "csvFile": "../Data/CTData1.csv"
       }
     },
-    "pix_NE_CT_1": {
-      "baseComponent": "pixel-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
-      "parameters": {
-        "condition": "pixel",
-        "region": "Northeast",
-        "state": "CT",
-        "stateFips": "09",
-        "csvFile": "../Data/CTData1.csv"
-      }
-    },
     "spix_NE_CT_1": {
       "baseComponent": "sorted-pixel-map-d3",
       "type": "website",
@@ -540,18 +528,6 @@
         "csvFile": "../Data/CTData2.csv"
       }
     },
-    "hom_NE_CT_3": {
-      "baseComponent": "hom-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
-      "parameters": {
-        "condition": "hops",
-        "region": "Northeast",
-        "state": "CT",
-        "stateFips": "09",
-        "csvFile": "../Data/CTData3.csv"
-      }
-    },
     "pix_NE_CT_3": {
       "baseComponent": "pixel-map-d3",
       "type": "website",
@@ -582,18 +558,6 @@
       "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
       "parameters": {
         "condition": "hops",
-        "region": "Northeast",
-        "state": "CT",
-        "stateFips": "09",
-        "csvFile": "../Data/CTData4.csv"
-      }
-    },
-    "pix_NE_CT_4": {
-      "baseComponent": "pixel-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
-      "parameters": {
-        "condition": "pixel",
         "region": "Northeast",
         "state": "CT",
         "stateFips": "09",
@@ -660,18 +624,6 @@
         "csvFile": "../Data/MEData2.csv"
       }
     },
-    "pix_NE_ME_2": {
-      "baseComponent": "pixel-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
-      "parameters": {
-        "condition": "pixel",
-        "region": "Northeast",
-        "state": "ME",
-        "stateFips": "23",
-        "csvFile": "../Data/MEData2.csv"
-      }
-    },
     "spix_NE_ME_2": {
       "baseComponent": "sorted-pixel-map-d3",
       "type": "website",
@@ -682,18 +634,6 @@
         "state": "ME",
         "stateFips": "23",
         "csvFile": "../Data/MEData2.csv"
-      }
-    },
-    "hom_NE_ME_3": {
-      "baseComponent": "hom-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
-      "parameters": {
-        "condition": "hops",
-        "region": "Northeast",
-        "state": "ME",
-        "stateFips": "23",
-        "csvFile": "../Data/MEData3.csv"
       }
     },
     "pix_NE_ME_3": {
@@ -718,18 +658,6 @@
         "state": "ME",
         "stateFips": "23",
         "csvFile": "../Data/MEData3.csv"
-      }
-    },
-    "hom_NE_ME_4": {
-      "baseComponent": "hom-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
-      "parameters": {
-        "condition": "hops",
-        "region": "Northeast",
-        "state": "ME",
-        "stateFips": "23",
-        "csvFile": "../Data/MEData4.csv"
       }
     },
     "pix_NE_ME_4": {
@@ -15031,30 +14959,7 @@
         "csvFile": "../Data/NDData4.csv"
       }
     },
-    "exc_MW_OH_1": {
-      "baseComponent": "exceedance-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
-      "parameters": {
-        "condition": "exceedance",
-        "region": "Midwest",
-        "state": "OH",
-        "stateFips": "39",
-        "csvFile": "../Data/OHData1.csv"
-      }
-    },
-    "exc_MW_OH_2": {
-      "baseComponent": "exceedance-map-d3",
-      "type": "website",
-      "instruction": "<p><strong>Recall:</strong> Your task is to recommend three counties to receive financial assistance to respond to acute poverty. Counties qualify if there is a 90% chance that the poverty rate exceeds a threshold of 15%. Maximize your bonus by recommending only qualifying counties. Click on the map below to select counties to recommend. Counties you click appear in a list at the bottom of the page. You can click counties in that list to locate them in the map or remove them from your recommendations. You must choose exactly three counties before moving on.</p>",
-      "parameters": {
-        "condition": "exceedance",
-        "region": "Midwest",
-        "state": "OH",
-        "stateFips": "39",
-        "csvFile": "../Data/OHData2.csv"
-      }
-    },
+
     "exc_MW_OH_3": {
       "baseComponent": "exceedance-map-d3",
       "type": "website",
