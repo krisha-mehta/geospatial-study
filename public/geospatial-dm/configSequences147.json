@@ -23,7 +23,7 @@
     "sidebar": false,
     "urlParticipantIdParam": "PROLIFIC_PID",
     "studyEndMsg": "**Thank you for completing the study. Please click on this link to return to Prolific: [https://app.prolific.com/submissions/complete?cc=C14L4UFM](https://app.prolific.com/submissions/complete?cc=C14L4UFM)**",
-    "numSequences": 4
+    "numSequences": 2
   },
   "baseComponents": {
     "pixel-map-d3": {
@@ -18760,58 +18760,6 @@
               "tpix_WE_NM_4",
               "tpix_WE_AZ_1",
               "tpix_SO_GA_2",
-              "threshold-pixel-survey",
-              "threshold-pixel-survey-uncertainty"
-            ]
-          },
-          {
-            "order": "fixed",
-            "components": [
-              "threshold-pixel-intro",
-              "threshold-pixel-trial",
-              "tpix_NE_PA_1",
-              "tpix_WE_CO_4",
-              "tpix_WE_MT_1",
-              "tpix_NE_NH_4",
-              "tpix_MW_OH_1",
-              "tpix_WE_NM_2",
-              "tpix_SO_LA_4",
-              "tpix_WE_CA_3",
-              "tpix_WE_HI_4",
-              "tpix_MW_ND_3",
-              "tpix_MW_WI_2",
-              "tpix_MW_IL_4",
-              "tpix_SO_TN_3",
-              "tpix_NE_VT_2",
-              "tpix_SO_FL_1",
-              "tpix_SO_VA_2",
-              "tpix_NE_ME_3",
-              "threshold-pixel-survey",
-              "threshold-pixel-survey-uncertainty"
-            ]
-          },
-          {
-            "order": "fixed",
-            "components": [
-              "threshold-pixel-intro",
-              "threshold-pixel-trial",
-              "tpix_SO_MS_1",
-              "tpix_NE_VT_1",
-              "tpix_MW_MI_4",
-              "tpix_MW_KS_1",
-              "tpix_SO_KY_4",
-              "tpix_WE_HI_4",
-              "tpix_NE_NJ_4",
-              "tpix_SO_AL_3",
-              "tpix_WE_MT_1",
-              "tpix_NE_ME_2",
-              "tpix_MW_MO_3",
-              "tpix_NE_NY_3",
-              "tpix_WE_NM_2",
-              "tpix_WE_CO_4",
-              "tpix_MW_OH_2",
-              "tpix_WE_CA_3",
-              "tpix_SO_MD_2",
               "threshold-pixel-survey",
               "threshold-pixel-survey-uncertainty"
             ]
