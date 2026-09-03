@@ -23,7 +23,7 @@
     "sidebar": false,
     "urlParticipantIdParam": "PROLIFIC_PID",
     "studyEndMsg": "**Thank you for completing the study. Please click on this link to return to Prolific: [https://app.prolific.com/submissions/complete?cc=C14L4UFM](https://app.prolific.com/submissions/complete?cc=C14L4UFM)**",
-    "numSequences": 1
+    "numSequences": 2
   },
   "baseComponents": {
     "pixel-map-d3": {
@@ -18741,27 +18741,53 @@
           {
             "order": "fixed",
             "components": [
-              "svsup-intro",
-              "svsup-trial",
-              "svs_SO_NC_2",
-              "svs_NE_NJ_3",
-              "svs_WE_OR_3",
-              "svs_WE_HI_4",
-              "svs_NE_ME_1",
-              "svs_MW_IN_1",
-              "svs_NE_RI_4",
-              "svs_SO_SC_4",
-              "svs_WE_WA_4",
-              "svs_NE_MA_2",
-              "svs_MW_OH_4",
-              "svs_MW_KS_2",
-              "svs_WE_NM_1",
-              "svs_MW_SD_3",
-              "svs_SO_KY_3",
-              "svs_SO_VA_1",
-              "svs_WE_UT_2",
-              "svsup-survey",
-              "svsup-survey-uncertainty"
+              "hop-intro",
+              "hop-trial",
+              "hom_WE_HI_4",
+              "hom_NE_MA_4",
+              "hom_MW_IN_1",
+              "hom_SO_MD_3",
+              "hom_WE_NV_3",
+              "hom_NE_VT_3",
+              "hom_WE_UT_1",
+              "hom_MW_OH_4",
+              "hom_WE_MT_2",
+              "hom_MW_KS_2",
+              "hom_SO_GA_2",
+              "hom_NE_CT_2",
+              "hom_SO_TX_1",
+              "hom_MW_SD_3",
+              "hom_WE_AZ_4",
+              "hom_NE_RI_1",
+              "hom_SO_MS_4",
+              "hop-survey",
+              "hop-survey-uncertainty"
+            ]
+          },
+          {
+            "order": "fixed",
+            "components": [
+              "hop-intro",
+              "hop-trial",
+              "hom_MW_IL_4",
+              "hom_NE_MA_4",
+              "hom_WE_NM_1",
+              "hom_SO_KY_2",
+              "hom_NE_VT_3",
+              "hom_WE_WA_4",
+              "hom_WE_OR_3",
+              "hom_SO_WV_4",
+              "hom_MW_ND_3",
+              "hom_SO_AR_1",
+              "hom_NE_CT_2",
+              "hom_NE_RI_1",
+              "hom_MW_OH_1",
+              "hom_WE_HI_4",
+              "hom_MW_WI_2",
+              "hom_SO_VA_3",
+              "hom_WE_UT_2",
+              "hop-survey",
+              "hop-survey-uncertainty"
             ]
           }
         ]
