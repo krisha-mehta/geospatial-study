@@ -1,4 +1,4 @@
-*PI: Krisha Mehta (krisha@uchicago.edu), University of Chicago*
+*PI: anonymous*
 
 *Title of Research Study: Uncertainty Visualizations for Geospatial Decision-Making*
 
@@ -26,7 +26,7 @@ development of future data exploration platforms.
 Records of your participation in this study will be held
 confidential so far as permitted by law. However, the study
 investigators, the sponsor or its designee and, under certain
-circumstances, the University of Chicago Institutional
+circumstances, [institute redacted] Institutional
 Review Board (IRB) will be able to inspect and have access to
 this data. Any publication or presentation of the data will not
 identify you. 
@@ -40,7 +40,7 @@ Bonus = $0.10 × correct answers − $0.05 × incorrect answers
 #### Contact
 For more information about this research or about the rights of
 research participants, or in case of research-related injury,
-contact:  Krisha Mehta (krisha@uchicago.edu). 
+contact:  anonymous. 
 Contact the Institutional Review Board (IRB) if you have questions regarding your rights as a research participant. Also, contact the IRB if you have questions, complaints or concerns which you do not feel you can discuss with the investigator. 
 
 Your participation in this research is voluntary.
