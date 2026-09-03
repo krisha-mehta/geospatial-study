@@ -1,7 +1,7 @@
 # geospatial-dm — Study Directory README
 
 **Study:** Uncertainty Visualizations for Geospatial Decision-Making
-**Authors:** Krisha Mehta, Julia Koschinsky, Alex Kale (University of Chicago)
+**Authors:** Anonymous
 **Platform:** [reVISit](https://revisit.dev/)
 
 ---

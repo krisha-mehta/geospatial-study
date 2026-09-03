@@ -4,18 +4,16 @@
     "title": "Uncertainty Visualizations for Geospatial Decision-Making Study",
     "version": "pilot",
     "authors": [
-      "Krisha Mehta",
-      "Julia Koschinsky",
-      "Alex Kale"
+      "anonymous"
     ],
     "date": "2025-08-29",
     "description": "This study investigates how different uncertainty representations influence decision-making",
     "organizations": [
-      "University of Chicago"
+      "anonymous"
     ]
   },
   "uiConfig": {
-    "contactEmail": "krisha@uchicago.edu",
+    "contactEmail": "anonymous",
     "helpTextPath": "geospatial-dm/assets/help.md",
     "logoPath": "revisitAssets/dcl_logo.png",
     "withProgressBar": true,
